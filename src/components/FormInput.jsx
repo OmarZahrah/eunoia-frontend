@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const FormRow = ({
+const FormInput = ({
   label,
   type,
   name,
@@ -23,7 +23,7 @@ const FormRow = ({
     </Wrapper>
   );
 };
-export default FormRow;
+export default FormInput;
 
 const Wrapper = styled.div`
   label {

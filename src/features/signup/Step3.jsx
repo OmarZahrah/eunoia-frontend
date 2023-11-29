@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import FormInput from "../../components/FormRow";
+import FormInput from "../../components/FormInput";
 import { IoImageOutline } from "react-icons/io5";
 import { MdAdd } from "react-icons/md";
 import { useState } from "react";

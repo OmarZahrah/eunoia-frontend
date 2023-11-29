@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import FormInput from "../../components/FormRow";
+import FormInput from "../../components/FormInput";
 
 const Step1 = () => {
   return (

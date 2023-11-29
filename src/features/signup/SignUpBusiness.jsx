@@ -28,7 +28,6 @@ const SignUpBusiness = () => {
         </div>
         <div className="buttons">
           <Button
-            type="transparent"
             onClick={handleBack}
             color="green"
             background="transparent"
