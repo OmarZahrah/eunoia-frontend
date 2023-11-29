@@ -8,7 +8,7 @@ import GlobalStyles from "./assets/styles/GlobalStyles";
 import { SignUpProvider } from "./context/SignUpContext";
 import SignUpUser from "./features/signup/SignUpUser";
 import SignUpBusiness from "./features/signup/SignUpBusiness";
-import { CreateAccount } from "./features/signup/CreateAccount";
+import CreateAccount from "./features/signup/CreatAccount";
 
 function App() {
   return (

@@ -1,12 +1,10 @@
 import styled from "styled-components";
 import FormInput from "../../components/FormInput";
+import { FaApple } from "react-icons/fa";
 
 const Step1 = () => {
   return (
     <Wrapper>
-      {/* <header>
-        <h2 className="step-title">Personal Details</h2>
-      </header> */}
       <div className="inputs">
         <FormInput
           label="name"

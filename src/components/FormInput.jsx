@@ -12,14 +12,16 @@ const FormInput = ({
   return (
     <Wrapper>
       <label htmlFor="">
-        {label} {required && <span>*</span>}
+        {label} {required && label && <span className="required">*</span>}
       </label>
-      <input
-        type={type}
-        name={name}
-        placeholder={placeholder}
-        required={required}
-      />
+      <div className="row">
+        <input
+          type={type}
+          name={name}
+          placeholder={placeholder}
+          required={required}
+        />
+      </div>
     </Wrapper>
   );
 };
@@ -32,9 +34,14 @@ const Wrapper = styled.div`
     font-size: 1rem;
     color: var(--color-black-dark);
   }
-  span {
+  .required {
     color: red;
   }
+  .row {
+    display: flex;
+    align-items: center;
+  }
+
   input {
     width: 70%;
     border: none;
