@@ -4,9 +4,9 @@ import Form from "../features/signup/SignUpBusiness";
 
 const SignUp = () => {
   return (
-    <div>
+    <>
       <Outlet />
-    </div>
+    </>
   );
 };
 export default SignUp;
