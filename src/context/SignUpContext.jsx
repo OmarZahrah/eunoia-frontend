@@ -26,20 +26,20 @@ const SignUpProvider = ({ children }) => {
   const [coverPhotoFile, setCoverPhotoFile] = useState("");
   const [albumPhotosFile, setAlbumPhotosFile] = useState("");
 
-  const onSubmit = async (formData) => {
+  const onSubmit = async (formData, role) => {
     // const profile = Array.from(formData.profile);
-    console.log(profilePhotoFile);
+    // console.log(profilePhotoFile);
     // console.log(profile);
     // console.log(profilePic);
     const finalData = {
       ...formData,
-      role: "provider",
-      photo: profilePhotoFile,
-      coverPhoto: coverPhotoFile,
+      role: { role },
+      // photo: profilePhotoFile,
+      // coverPhoto: coverPhotoFile,
       // photoAlbum: [...Object.values(albumPhotosFile)],
     };
     console.log(finalData);
-    console.log(signup(finalData));
+    // console.log(signup(finalData));
   };
 
   return (
