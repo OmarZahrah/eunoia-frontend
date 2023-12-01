@@ -14,24 +14,28 @@ const SignUpUser = () => {
           <header>
             <div className="inputs">
               <FormInput
+                name="fullname"
                 label="name"
                 type="text"
                 required
                 placeholder="Your Full Name"
               />
               <FormInput
+                name="email"
                 label="email"
                 type="email"
                 required
                 placeholder="example@example.com"
               />
               <FormInput
+                name="password"
                 label="password"
                 type="password"
                 required
                 placeholder="Your Password"
               />
               <FormInput
+                name="passwordConfirm"
                 label="confirm password"
                 type="password"
                 required

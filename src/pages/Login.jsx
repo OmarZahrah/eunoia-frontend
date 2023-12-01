@@ -19,9 +19,19 @@ const Login = () => {
             </span>
             <div className="input-with-icon">
               <LuUser className="icon" />
-              <FormInput required type="text" placeholder="Email" />
+              <FormInput
+                name="email"
+                required
+                type="text"
+                placeholder="Email"
+              />
               <VscLock className="icon" />
-              <FormInput required type="password" placeholder="Password" />
+              <FormInput
+                name="password"
+                required
+                type="password"
+                placeholder="Password"
+              />
             </div>
           </header>
           <footer>
