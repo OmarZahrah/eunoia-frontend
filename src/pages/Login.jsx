@@ -5,6 +5,7 @@ import styled from "styled-components";
 import pana from "../images/pana.png";
 import { LuUser } from "react-icons/lu";
 import { VscLock } from "react-icons/vsc";
+import WelcomeSection from "../components/WelcomeSection";
 
 const Login = () => {
   return (
@@ -18,24 +19,36 @@ const Login = () => {
             </span>
             <div className="input-with-icon">
               <LuUser className="icon" />
-              <FormInput type="text" placeholder="Email" />
+              <FormInput required type="text" placeholder="Email" />
               <VscLock className="icon" />
-              <FormInput type="password" placeholder="Password" />
+              <FormInput required type="password" placeholder="Password" />
             </div>
           </header>
           <footer>
-            <p className="text">Forgot your password ?</p>
-            <Button size="medium">Log In</Button>
+            <a className="text" href="#">
+              Forgot your password ?
+            </a>
+            <Button
+              className="button"
+              size="medium"
+              // onClick={}
+            >
+              Log In
+            </Button>
             <p className="text">
-              Not a user ? <a href="#">Create account</a>
+              Not a user ?{" "}
+              <a className="create-link" href="#">
+                Create account
+              </a>
             </p>
           </footer>
         </section>
-        <section className="right">
-          <p className="again">Nice to see you again</p>
-          <h1>Welcome Back!</h1>
-          <img src={pana} />
-        </section>
+        <WelcomeSection
+          img={pana}
+          welcomeText={"Nice to see you again"}
+          header={"Welcome Back!"}
+          style={{ width: "34.375rem", height: "21.875rem" }}
+        />
       </div>
     </Wrapper>
   );
@@ -46,53 +59,60 @@ const Wrapper = styled.div`
   .input-with-icon ::before {
     content: "";
     position: absolute;
-    width: 1px;
-    height: 25px;
-    border: 1px solid grey;
-    margin: 40px 0px 20px 35px;
+    width: 0.063rem;
+    height: 1.563rem;
+    border: 0.063rem solid grey;
+    margin: 2.5rem 0 1.25rem 2.188rem;
   }
 
   .input-with-icon input {
-    padding: 0px 0px 10px 45px;
-    margin: 30px 0px 20px 0px;
-    height: 45px;
+    padding: 0 0 0.625rem 2.813rem;
+    margin: 1.875rem 0 1.25rem 0;
+    height: 2.813rem;
     font-family: Koh Santepheap;
-    font-size: 15px;
+    font-size: 0.938rem;
+    width: 29.375rem;
+    /* width: 433px; */
+    /* width: 550px; */
   }
 
   .icon {
     position: absolute;
-    margin: 37px 0px;
-    padding: 0 3px 0 6px;
-    width: 30px;
-    height: 40px;
+    margin: 2.313rem 0;
+    padding: 0 0.188rem 0 0.375rem;
+    width: 1.875rem;
+    height: 2.5rem;
+  }
+  .button {
+    font-size: 1.25rem;
+    width: 29.375rem;
+    /* width: 550px; */
+    /* old size 432px */
   }
 
   header {
-    margin-left: 180px;
+    /* margin-left: 168px; */
+    margin-left: 9.25rem;
   }
 
   .login-text {
     color: rgba(0, 0, 0, 0.5);
     font-family: Literata;
-    font-size: 17px;
-    font-style: normal;
+    font-size: 1.063rem;
     font-weight: 500;
-    line-height: normal;
-    letter-spacing: -0.408px;
+    letter-spacing: -0.026rem;
     display: block;
-    padding: 20px 0px;
+    padding: 1.25rem 0;
   }
 
   .text {
     color: var(--text, rgba(0, 0, 0, 0.6));
     font-family: Koh Santepheap;
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: 1px;
-    padding: 60px 0px 25px 0px;
+    font-size: 0.938rem;
+    letter-spacing: 0.063rem;
+    /* padding: 3.75rem 0 0.625rem 0; */
+    margin: 3.75rem 0 0.9rem 0;
+    display: block;
   }
 
   footer {
@@ -102,60 +122,25 @@ const Wrapper = styled.div`
   h2 {
     color: rgba(0, 0, 0, 0.65);
     font-family: Literata;
-    font-size: 30px;
-    font-style: normal;
+    font-size: 1.875rem;
     font-weight: 800;
-    line-height: normal;
-    letter-spacing: -0.408px;
-    margin-left: 180px;
-    display: inline;
+    margin-left: 9.25rem;
+    /* margin-left: 168px; */
+    /* margin-left: 108px; */
   }
 
   section {
     width: 50%;
     float: left;
-    padding-top: 60px;
-  }
-
-  .right {
-    border-radius: 90px 0px 0px 80px;
-    background: var(--beige, #fef9f0);
-    height: 100vh;
-    text-align: center;
+    padding-top: 3.75rem;
   }
 
   .left {
     height: 100vh;
   }
-  .again {
-    color: var(--text, rgba(0, 0, 0, 0.6));
-    text-align: center;
-    font-family: Literata;
-    font-size: 30px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    letter-spacing: -0.408px;
-  }
 
-  h1 {
-    color: var(--pink, #f5b9a7);
-    font-family: Literata;
-    font-size: 50px;
-    font-style: normal;
-    font-weight: 800;
-    line-height: normal;
-    letter-spacing: 5px;
-    padding-bottom: 60px;
-  }
-
-  img {
-    width: 600px;
-    height: 400px;
-  }
-
-  a {
-    color: var(--green, #74ab70);
+  .create-link {
+    color: var(--green, #74ab70) !important;
     font-weight: 550;
   }
 `;
