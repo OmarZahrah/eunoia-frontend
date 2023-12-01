@@ -1,4 +1,8 @@
+import styled from "styled-components";
+
 const Welcome = () => {
-  return <div>Welcome</div>;
+  return <Wrapper>Welcome</Wrapper>;
 };
 export default Welcome;
+
+const Wrapper = styled.div``;

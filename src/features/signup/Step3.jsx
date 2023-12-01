@@ -3,20 +3,18 @@ import FormInput from "../../components/FormInput";
 import { IoImageOutline } from "react-icons/io5";
 import { MdAdd } from "react-icons/md";
 import { useState } from "react";
+import { useSignUpContext } from "../../context/SignUpContext";
 
 const Step3 = () => {
-  const [profilePhoto, setProfilePhoto] = useState("");
-
+  const { register, profilePhoto, setProfilePhoto, setProfilePhotoFile } =
+    useSignUpContext();
+  // const [profilePhoto, setProfilePhoto] = useState("");
   const onSelectFile = (e) => {
     const selectedFiles = e.target.files;
+    setProfilePhotoFile(selectedFiles[0]);
     const photo = URL.createObjectURL(...selectedFiles);
-
     setProfilePhoto(photo);
   };
-  // const handleDeleteImage = (image) => {
-  //   const newImages = AlbumImages.filter((images) => images !== image);
-  //   setProfilePhoto("");
-  // };
   return (
     <Wrapper>
       <div className="image-box">
@@ -27,6 +25,7 @@ const Step3 = () => {
               <img className="profile-photo" src={profilePhoto} />
             )}
             <input
+              // {...register("photo")}
               className="image-input"
               type="file"
               onChange={onSelectFile}
@@ -39,10 +38,17 @@ const Step3 = () => {
           <p>Preferably Your Personal Photo</p>
         </div>
       </div>
-      <FormInput label="Mobile Number" placeholder="+20 1234567890" />
+      <FormInput
+        name="mobile"
+        label="Mobile Number"
+        placeholder="+20 1234567890"
+      />
       <div className="about-box">
         <label htmlFor="">About</label>
-        <textarea placeholder="Describe Your Business"></textarea>
+        <textarea
+          {...register("about")}
+          placeholder="Describe Your Business"
+        ></textarea>
       </div>
     </Wrapper>
   );

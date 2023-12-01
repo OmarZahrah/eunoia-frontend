@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
+=======
+import { useSignUpContext } from "../context/SignUpContext";
 const FormInput = ({
   label,
   type,
@@ -10,18 +12,22 @@ const FormInput = ({
   required,
   icon,
 }) => {
+
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
   };
 
+=======
+  const { register } = useSignUpContext();
   return (
     <Wrapper>
       <label htmlFor={name}>
         {label} {required && label && <span className="required">*</span>}
       </label>
       <div className="row">
+
         {type === "password" ? (
           <>
             <input
@@ -48,6 +54,14 @@ const FormInput = ({
             defaultValue={defaultValue}
           />
         )}
+
+        <input
+          type={type}
+          {...register(name)}
+          placeholder={placeholder}
+          required={required}
+        />
+
       </div>
     </Wrapper>
   );
