@@ -1,3 +1,4 @@
+
 import logo from "../../public/images/png-wordmark-1.png"
 import styled from "styled-components"
 import Button from "../components/Button"
@@ -140,3 +141,11 @@ p {
 
 `
 
+import styled from "styled-components";
+
+const Welcome = () => {
+  return <Wrapper>Welcome</Wrapper>;
+};
+export default Welcome;
+
+const Wrapper = styled.div``;

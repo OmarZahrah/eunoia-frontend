@@ -33,8 +33,10 @@ const sizes = {
     padding: 0.5rem 1.5rem;
   `,
   medium: css`
-    width: 25rem;
-    padding: 0.7rem 1.5rem;
+    /* width: 27rem; */
+    width: 29.375rem;
+
+    padding: 0.4rem 1.7rem;
     font-size: 1.4rem;
   `,
   large: css`
@@ -111,7 +113,6 @@ const Button = styled.button`
   ${(props) => colors[props.color]};
   ${(props) => borders[props.border]};
 `;
-
 Button.defaultProps = {
   background: "green",
   size: "medium",

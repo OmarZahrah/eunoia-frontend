@@ -1,17 +1,21 @@
 import { IoMdArrowDropdown } from "react-icons/io";
 import styled from "styled-components";
+import { useSignUpContext } from "../context/SignUpContext";
 
-const Select = ({ label, options, multiple = false, color }) => {
+const Select = ({ label, options, multiple = false, color, name }) => {
+  const { register } = useSignUpContext();
   return (
     <Wrapper color={color}>
       <label htmlFor="">{label}</label>
       <div className="select-box">
-        <select name="" className="select-item" multiple={multiple}>
+        <select {...register(name)} className="select-item" multiple={multiple}>
           <option value="" disabled selected hidden>
             Select
           </option>
           {options?.map((option) => (
-            <option key={option}>{option}</option>
+            <option key={option.value} value={option.value}>
+              {option.option}
+            </option>
           ))}
         </select>
         <IoMdArrowDropdown className="select-icon" />
