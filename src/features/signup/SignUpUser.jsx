@@ -5,7 +5,7 @@ import styled from "styled-components";
 import FormInput from "../../components/FormInput";
 import Button from "../../components/Button";
 
-const SignUp = () => {
+const SignUpUser = () => {
   return (
     <Wrapper>
       <div>
@@ -56,13 +56,13 @@ const SignUp = () => {
           img={pana2}
           welcomeText={"Join our family"}
           header={"Hello, friend!"}
-          style={{ width: "400px", height: "350px" }}
+          style={{ width: "25rem", height: "21.875rem" }}
         />
       </div>
     </Wrapper>
   );
 };
-export default SignUp;
+export default SignUpUser;
 
 const Wrapper = styled.div`
   .inputs input {
@@ -94,8 +94,8 @@ const Wrapper = styled.div`
     margin-top: 2.5rem;
     padding: 0.625rem;
     font-family: Koh Santepheap;
-    width: 29.375rem;
     font-size: 1.25rem;
+    /* width: 29.375rem; */
     /* width: 550px; */
   }
 

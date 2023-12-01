@@ -85,7 +85,7 @@ const Wrapper = styled.div`
   }
   .button {
     font-size: 1.25rem;
-    width: 29.375rem;
+    /* width: 29.375rem; */
     /* width: 550px; */
     /* old size 432px */
   }
@@ -140,7 +140,7 @@ const Wrapper = styled.div`
   }
 
   .create-link {
-    color: var(--green, #74ab70) !important;
+    color: var(--green, #74ab70);
     font-weight: 550;
   }
 `;

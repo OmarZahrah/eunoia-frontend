@@ -33,7 +33,9 @@ const sizes = {
     padding: 0.5rem 1.5rem;
   `,
   medium: css`
-    width: 27rem;
+    /* width: 27rem; */
+    width: 29.375rem;
+
     padding: 0.4rem 1.7rem;
     font-size: 1.4rem;
   `,
