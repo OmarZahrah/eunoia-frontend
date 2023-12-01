@@ -5,15 +5,30 @@ import { TiDeleteOutline } from "react-icons/ti";
 
 import { MdAdd } from "react-icons/md";
 import { useState } from "react";
+import { useSignUpContext } from "../../context/SignUpContext";
 
 const Step4 = () => {
-  const keywords = ["test1", "test2", "test3"];
-  const [AlbumImages, setAlbumImages] = useState([]);
-  const [coverPhoto, setCoverPhoto] = useState([]);
+  const keywords = [
+    { option: "test1", value: "test1" },
+    { option: "test2", value: "test2" },
+    { option: "test3", value: "test3" },
+    { option: "test4", value: "test4" },
+  ];
+  // const [AlbumImages, setAlbumImages] = useState([]);
+  // const [coverPhoto, setCoverPhoto] = useState([]);
+  const {
+    register,
+    coverPhoto,
+    setCoverPhoto,
+    albumImages,
+    setAlbumImages,
+    setCoverPhotoFile,
+    setAlbumPhotosFile,
+  } = useSignUpContext();
 
   const onSelectFile = (e, type) => {
     const selectedFiles = e.target.files;
-
+    console.log(selectedFiles);
     const selectedFilesArray = Array.from(selectedFiles);
 
     const imagesArray = selectedFilesArray.map((file) => {
@@ -21,20 +36,23 @@ const Step4 = () => {
     });
 
     if (type === "album") {
+      setAlbumPhotosFile(selectedFiles);
       setAlbumImages((images) => images.concat(imagesArray));
     } else if (type === "cover") {
+      setCoverPhotoFile(selectedFiles[0]);
       setCoverPhoto(imagesArray);
     }
   };
 
   const handleDeleteImage = (image) => {
-    const newImages = AlbumImages.filter((images) => images !== image);
+    const newImages = albumImages.filter((images) => images !== image);
     setAlbumImages(newImages);
   };
 
   return (
     <Wrapper>
       <Select
+        name="keywords"
         label="Words describe your business (Choose 3)"
         options={keywords}
       />
@@ -46,6 +64,7 @@ const Step4 = () => {
             <img className="cover-photo" src={coverPhoto} />
           )}
           <input
+            // {...register("coverPhoto")}
             className="image-input"
             type="file"
             onChange={(e) => onSelectFile(e, "cover")}
@@ -58,6 +77,7 @@ const Step4 = () => {
           <label>
             + Add photos
             <input
+              // {...register("photoAlbum")}
               className="image-input"
               type="file"
               onChange={(e) => onSelectFile(e, "album")}
@@ -66,8 +86,8 @@ const Step4 = () => {
           </label>
         </p>
         <div className="images">
-          {AlbumImages &&
-            AlbumImages.map((image) => (
+          {albumImages &&
+            albumImages.map((image) => (
               <div className="image" key={image}>
                 <img src={image} />
                 <TiDeleteOutline

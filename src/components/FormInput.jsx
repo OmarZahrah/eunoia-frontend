@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useSignUpContext } from "../context/SignUpContext";
 
 const FormInput = ({
   label,
@@ -9,15 +10,16 @@ const FormInput = ({
   required,
   icon,
 }) => {
+  const { register } = useSignUpContext();
   return (
     <Wrapper>
-      <label htmlFor="">
+      <label htmlFor={name}>
         {label} {required && label && <span className="required">*</span>}
       </label>
       <div className="row">
         <input
           type={type}
-          name={name}
+          {...register(name)}
           placeholder={placeholder}
           required={required}
         />

@@ -4,14 +4,28 @@ import Select from "../../components/Select";
 import Button from "../../components/Button";
 
 const Step2 = () => {
-  const businessCategories = ["Wedding Hall", "Photographer", "MakeupArtist"];
+  const businessCategories = [
+    { option: "Wedding Hall", value: "Wedding Hall" },
+    { option: "Photographer", value: "Photographer" },
+    { option: "Makeup Artist", value: "Makeup Artist" },
+    { option: "Event Planner", value: "Event Planner" },
+  ];
 
-  const locations = ["Alexandria", "Ismailia", "Cairo", "Portsaid"];
+  const locations = [
+    { option: "Alexandria", value: "Alexandria" },
+    { option: "Ismailia", value: "Ismailia" },
+    { option: "Cairo", value: "Cairo" },
+    { option: "Portsaid", value: "Portsaid" },
+  ];
   return (
     <Wrapper>
       <div className="inputs">
-        <Select label="Business Category" options={businessCategories} />
-        <Select label="Location" options={locations} />
+        <Select
+          label="Business Category"
+          options={businessCategories}
+          name="businessCategory"
+        />
+        <Select label="Location" options={locations} name="location" />
       </div>
     </Wrapper>
   );
