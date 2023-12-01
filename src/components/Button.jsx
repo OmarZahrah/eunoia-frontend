@@ -105,6 +105,7 @@ const Button = styled.button`
   border-radius: 100px;
   color: ${(props) => props.color};
   background-color: ${(props) => props.background};
+  font-family: var(--font-main);
   ${(props) => sizes[props.size]};
   ${(props) => backgrounds[props.background]};
   ${(props) => colors[props.color]};
