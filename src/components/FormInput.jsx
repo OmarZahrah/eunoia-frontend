@@ -163,10 +163,10 @@ const Wrapper = styled.div`
     top: 50%;
     transform: translateY(-50%);
     /* margin: 2.313rem 0; */
-    width: 24px;
-    height: 24px;
-    padding-right: 5px;
-    border-right: 1px solid #333;
+    width: 30px;
+    height: 30px;
+    padding-right: 8px;
+    border-right: 1px solid green;
   }
   .passIcon {
     position: absolute;

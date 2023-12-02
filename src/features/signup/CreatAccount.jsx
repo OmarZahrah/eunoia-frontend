@@ -55,7 +55,7 @@ const Wrapper = styled.div`
     /* width: 75rem; */
     /* height: 37.5rem; */
     width: 80%;
-    /* height: 80%; */
+    height: 80%;
     flex-shrink: 0;
     background: #ffffffe5;
     display: flex;
