@@ -21,6 +21,7 @@ const AuthProvider = ({ children }) => {
   const [albumImages, setAlbumImages] = useState([]);
   const { register, formState, getValues, handleSubmit } = useForm();
   const { errors } = formState;
+
   // const [profilePhotoFile, setProfilePhotoFile] = useState("");
   // const [coverPhotoFile, setCoverPhotoFile] = useState("");
   // const [albumPhotosFile, setAlbumPhotosFile] = useState("");

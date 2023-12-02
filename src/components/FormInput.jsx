@@ -95,27 +95,34 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
-const FormInput = ({ children, label, required, error, type }) => {
-  const [showPassword, setShowPassword] = useState(false);
-  const togglePasswordVisibility = () => {
-    setShowPassword((prevState) => !prevState);
-  };
-
+import { useAuthContext } from "../context/AuthContext";
+const FormInput = ({ children, label, required, error, type, icon }) => {
+  // const [showPassword, setShowPassword] = useState(false);
+  // const togglePasswordVisibility = () => {
+  //   setShowPassword((prevState) => !prevState);
+  // };
+  const { showPassword, togglePasswordVisibility } = useAuthContext();
   return (
     <Wrapper>
       <label htmlFor={children.props.id}>
         {label} {required && label && <span className="required">*</span>}
       </label>
-      {children}
-      {type === "password" && (
-        <TogglePasswordButton onClick={togglePasswordVisibility}>
-          {showPassword ? (
-            <VscEye size="0.95rem" />
-          ) : (
-            <VscEyeClosed size="0.95rem" />
-          )}
-        </TogglePasswordButton>
-      )}
+      <div className="input">
+        {icon && icon}
+        {children}
+        {type === "password" && (
+          <TogglePasswordButton
+            className="passIcon"
+            onClick={togglePasswordVisibility}
+          >
+            {showPassword ? (
+              <VscEye size="0.95rem" />
+            ) : (
+              <VscEyeClosed size="0.95rem" />
+            )}
+          </TogglePasswordButton>
+        )}
+      </div>
       {error && <span className="error">{error}</span>}
     </Wrapper>
   );
@@ -129,6 +136,7 @@ const TogglePasswordButton = styled.button`
 `;
 
 const Wrapper = styled.div`
+  /* position: relative; */
   label {
     display: block;
     text-transform: capitalize;
@@ -146,6 +154,25 @@ const Wrapper = styled.div`
     font-size: 14px;
     color: red;
     /* display: block; */
+  }
+  .input {
+    position: relative;
+  }
+  .icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    /* margin: 2.313rem 0; */
+    width: 24px;
+    height: 24px;
+    padding-right: 5px;
+    border-right: 1px solid #333;
+  }
+  .passIcon {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
   }
   /* input {
     width: 70%;

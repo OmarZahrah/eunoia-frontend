@@ -14,8 +14,8 @@ import { useForm } from "react-hook-form";
 import Input from "../components/Input";
 
 const Login = () => {
-  // const { handleSubmit } = useAuthContext();
   const { register, handleSubmit } = useForm();
+
   const onSubmit = async (formData) => {
     // console.log(login(formData));
     console.log(formData);
@@ -32,22 +32,34 @@ const Login = () => {
           </header>
 
           <div className="inputs">
-            <div className="input">
-              <LuUser className="icon" />
-              <FormInput
+            <FormInput icon={<LuUser className="icon" />}>
+              <Input
                 type="email"
                 id="email"
-                {...register("email", { required: "this field is required" })}
-              >
-                <Input />
-              </FormInput>
-            </div>
-            <div className="input">
-              <VscLock className="icon" />
-              <FormInput>
-                <Input />
-              </FormInput>
-            </div>
+                placeholder="example@example.com"
+                {...register("email", {
+                  required: "this field is required",
+                  pattern: {
+                    value: /\S+@\S+\.\S+/,
+                    message: "Please provide a valid email address",
+                  },
+                })}
+              />
+            </FormInput>
+            <FormInput type="password" icon={<VscLock className="icon" />}>
+              <Input
+                type="password"
+                id="password"
+                placeholder="Your Password"
+                {...register("password", {
+                  required: "This field is required",
+                  minLength: {
+                    value: 8,
+                    message: "Password needs a minimum of 8 characters",
+                  },
+                })}
+              />
+            </FormInput>
           </div>
 
           <footer>
@@ -128,16 +140,15 @@ const Wrapper = styled.div`
     width: 100%;
   }
 
-  .icon {
+  /* .icon {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    /* margin: 2.313rem 0; */
     width: 24px;
     height: 24px;
     padding-right: 5px;
     border-right: 1px solid #333;
-  }
+  } */
   footer button {
     font-size: 1.25rem;
     /* width: 30rem; */

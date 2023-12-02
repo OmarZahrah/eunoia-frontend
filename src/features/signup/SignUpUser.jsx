@@ -12,7 +12,6 @@ import { useAuthContext } from "../../context/AuthContext";
 const SignUpUser = () => {
   // const { handleSubmit } = useAuthContext();
   const { register, getValues, handleSubmit, errors } = useAuthContext();
-
   const onSubmit = async (data) => {
     console.log(data);
     // console.log("data");
