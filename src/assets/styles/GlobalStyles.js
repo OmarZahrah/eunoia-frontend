@@ -9,7 +9,7 @@ const GlobalStyles = createGlobalStyle`
 }
 body {
 /* font-family: 'Limelight', sans-serif; */
-font-family: 'Literata', serif;  
+font-family: 'Literata', sans-serif;  
 /* min-height: 100vh; */
   line-height: 1.5;
 }
@@ -28,7 +28,7 @@ button {
 
 /* Fonts */
 
---font-main:'Literata';
+--font-main:'Literata',serif;
 --font-sec:'Limelight';
 
 /* color Brand */

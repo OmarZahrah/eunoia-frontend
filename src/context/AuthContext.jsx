@@ -4,10 +4,8 @@ import Step2 from "../features/signup/step2";
 import Step3 from "../features/signup/step3";
 import Step4 from "../features/signup/step4";
 import { useForm } from "react-hook-form";
-import customFetch from "../utils/customFetch";
-import { signup } from "../services/signup";
 
-const SignUpContext = createContext();
+const AuthContext = createContext();
 
 const steps = [
   { stepNum: 1, stepTitle: "Personal Details", stepForm: <Step1 /> },
@@ -16,21 +14,23 @@ const steps = [
   { stepNum: 4, stepTitle: "More Details", stepForm: <Step4 /> },
 ];
 
-const SignUpProvider = ({ children }) => {
+const AuthProvider = ({ children }) => {
   const [currentStep, setCurrentStep] = useState(1);
-  const { register, handleSubmit } = useForm();
   const [profilePhoto, setProfilePhoto] = useState("");
   const [coverPhoto, setCoverPhoto] = useState([]);
   const [albumImages, setAlbumImages] = useState([]);
-  const [profilePhotoFile, setProfilePhotoFile] = useState("");
-  const [coverPhotoFile, setCoverPhotoFile] = useState("");
-  const [albumPhotosFile, setAlbumPhotosFile] = useState("");
+  const { register, formState, getValues, handleSubmit } = useForm();
+  const { errors } = formState;
+  // const [profilePhotoFile, setProfilePhotoFile] = useState("");
+  // const [coverPhotoFile, setCoverPhotoFile] = useState("");
+  // const [albumPhotosFile, setAlbumPhotosFile] = useState("");
 
   const onSubmit = async (formData, role) => {
     // const profile = Array.from(formData.profile);
     // console.log(profilePhotoFile);
     // console.log(profile);
     // console.log(profilePic);
+    console.log(formData);
     const finalData = {
       ...formData,
       role: { role },
@@ -43,13 +43,15 @@ const SignUpProvider = ({ children }) => {
   };
 
   return (
-    <SignUpContext.Provider
+    <AuthContext.Provider
       value={{
         steps,
         currentStep,
         setCurrentStep,
         register,
         handleSubmit,
+        getValues,
+        errors,
         onSubmit,
         profilePhoto,
         setProfilePhoto,
@@ -57,20 +59,21 @@ const SignUpProvider = ({ children }) => {
         setCoverPhoto,
         albumImages,
         setAlbumImages,
-        setProfilePhotoFile,
-        setCoverPhotoFile,
-        setAlbumPhotosFile,
+
+        // setProfilePhotoFile,
+        // setCoverPhotoFile,
+        // setAlbumPhotosFile,
       }}
     >
       {children}
-    </SignUpContext.Provider>
+    </AuthContext.Provider>
   );
 };
 
-function useSignUpContext() {
-  const context = useContext(SignUpContext);
+function useAuthContext() {
+  const context = useContext(AuthContext);
   if (context === undefined)
-    throw new Error("SignUpContext was used outside the Form Provider");
+    throw new Error("AuthContext was used outside the Form Provider");
   return context;
 }
-export { SignUpProvider, useSignUpContext };
+export { AuthProvider, useAuthContext };

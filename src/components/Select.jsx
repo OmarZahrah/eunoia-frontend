@@ -1,9 +1,9 @@
 import { IoMdArrowDropdown } from "react-icons/io";
 import styled from "styled-components";
-import { useSignUpContext } from "../context/SignUpContext";
+import { useAuthContext } from "../context/AuthContext";
 
 const Select = ({ label, options, multiple = false, color, name }) => {
-  const { register } = useSignUpContext();
+  const { register } = useAuthContext();
   return (
     <Wrapper color={color}>
       <label htmlFor="">{label}</label>

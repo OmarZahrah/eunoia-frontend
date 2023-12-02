@@ -6,103 +6,142 @@ import pana from "../images/pana.png";
 import { LuUser } from "react-icons/lu";
 import { VscLock } from "react-icons/vsc";
 import WelcomeSection from "../components/WelcomeSection";
+import { Link } from "react-router-dom";
+import customFetch from "../utils/customFetch";
+import { useAuthContext } from "../context/AuthContext";
+import { login } from "../services/Auth";
+import { useForm } from "react-hook-form";
+import Input from "../components/Input";
 
 const Login = () => {
+  // const { handleSubmit } = useAuthContext();
+  const { register, handleSubmit } = useForm();
+  const onSubmit = async (formData) => {
+    // console.log(login(formData));
+    console.log(formData);
+  };
   return (
     <Wrapper>
-      <div>
-        <section className="left">
-          <h2>Log in</h2>
+      <div className="left">
+        <form className="left-container" onSubmit={handleSubmit(onSubmit)}>
           <header>
+            <h2>Log in</h2>
             <span className="login-text">
               Log in with your data you entered during your registration
             </span>
-            <div className="input-with-icon">
+          </header>
+
+          <div className="inputs">
+            <div className="input">
               <LuUser className="icon" />
               <FormInput
-                name="email"
-                required
-                type="text"
-                placeholder="Email"
-              />
-              <VscLock className="icon" />
-              <FormInput
-                name="password"
-                required
-                type="password"
-                placeholder="Password"
-              />
+                type="email"
+                id="email"
+                {...register("email", { required: "this field is required" })}
+              >
+                <Input />
+              </FormInput>
             </div>
-          </header>
+            <div className="input">
+              <VscLock className="icon" />
+              <FormInput>
+                <Input />
+              </FormInput>
+            </div>
+          </div>
+
           <footer>
-            <a className="text" href="#">
+            <Link className="text" to="">
               Forgot your password ?
-            </a>
-            <Button
-              className="button"
-              size="medium"
-              // onClick={}
-            >
+            </Link>
+            <Button size="large" type="submit">
               Log In
             </Button>
             <p className="text">
               Not a user ?{" "}
-              <a className="create-link" href="#">
+              <Link
+                to="/signup/user
+               "
+                className="create-link"
+              >
                 Create account
-              </a>
+              </Link>
             </p>
           </footer>
-        </section>
-        <WelcomeSection
-          img={pana}
-          welcomeText={"Nice to see you again"}
-          header={"Welcome Back!"}
-          style={{ width: "34.375rem", height: "21.875rem" }}
-        />
+        </form>
       </div>
+      <WelcomeSection
+        className="right"
+        img={pana}
+        welcomeText={"Nice to see you again"}
+        header={"Welcome Back!"}
+        imgsize="70%"
+      />
     </Wrapper>
   );
 };
 export default Login;
 
 const Wrapper = styled.div`
-  .input-with-icon ::before {
-    content: "";
-    position: absolute;
-    width: 0.063rem;
-    height: 1.563rem;
-    border: 0.063rem solid grey;
-    margin: 2.5rem 0 1.25rem 2.188rem;
+  display: flex;
+  justify-content: space-between;
+
+  .left {
+    /* height: 100vh; */
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .left-container {
+    width: 30rem;
+  }
+  header {
+    /* width: 30rem; */
+    width: 100%;
+  }
+  header h2 {
+    color: rgba(0, 0, 0, 0.65);
+    font-family: "Literata";
+    font-size: 1.875rem;
+    font-weight: 800;
+    margin-left: 0;
+    display: inline-block;
+    margin-right: auto;
+  }
+  .inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .input {
+    position: relative;
   }
 
-  .input-with-icon input {
+  .inputs input {
     padding: 0 0 0.625rem 2.813rem;
-    margin: 1.875rem 0 1.25rem 0;
     height: 2.813rem;
-    font-family: Koh Santepheap;
+    font-family: "Koh Santepheap";
     font-size: 0.938rem;
-    width: 29.375rem;
-    /* width: 433px; */
-    /* width: 550px; */
+    /* width: 30rem; */
+    width: 100%;
   }
 
   .icon {
     position: absolute;
-    margin: 2.313rem 0;
-    padding: 0 0.188rem 0 0.375rem;
-    width: 1.875rem;
-    height: 2.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    /* margin: 2.313rem 0; */
+    width: 24px;
+    height: 24px;
+    padding-right: 5px;
+    border-right: 1px solid #333;
   }
-  .button {
+  footer button {
     font-size: 1.25rem;
-    /* width: 29.375rem; */
-    /* width: 550px; */
-    /* old size 432px */
-  }
-
-  header {
-    /* margin-left: 168px; */
-    margin-left: 9.25rem;
+    /* width: 30rem; */
+    width: 100%;
   }
 
   .login-text {
@@ -121,7 +160,8 @@ const Wrapper = styled.div`
     font-size: 0.938rem;
     letter-spacing: 0.063rem;
     /* padding: 3.75rem 0 0.625rem 0; */
-    margin: 3.75rem 0 0.9rem 0;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
     display: block;
   }
 
@@ -129,23 +169,8 @@ const Wrapper = styled.div`
     text-align: center;
   }
 
-  h2 {
-    color: rgba(0, 0, 0, 0.65);
-    font-family: Literata;
-    font-size: 1.875rem;
-    font-weight: 800;
-    margin-left: 9.25rem;
-    /* margin-left: 168px; */
-    /* margin-left: 108px; */
-  }
-
-  section {
+  .right {
     width: 50%;
-    float: left;
-    padding-top: 3.75rem;
-  }
-
-  .left {
     height: 100vh;
   }
 

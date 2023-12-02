@@ -1,26 +1,25 @@
 import styled from "styled-components";
 
-function WelcomeSection({ img, welcomeText, header, style }) {
+function WelcomeSection({ img, welcomeText, header, imgsize, className }) {
   return (
-    <Wrapper>
-      <section className="right">
-        <p className="again">{welcomeText}</p>
-        <h1>{header}</h1>
-        <img src={img} alt="Welcome!" style={style} />
-      </section>
+    <Wrapper className={className} imgsize={imgsize}>
+      <p className="again">{welcomeText}</p>
+      <h1>{header}</h1>
+      <img src={img} alt="Welcome!" />
     </Wrapper>
   );
 }
 
 export default WelcomeSection;
 
-const Wrapper = styled.div`
-  .right {
-    border-radius: 5.625rem 0 0 5rem;
-    background: var(--beige, #fef9f0);
-    height: 100vh;
-    text-align: center;
-  }
+const Wrapper = styled.section`
+  border-radius: 5.625rem 0 0 5rem;
+  background: var(--beige, #fef9f0);
+  /* height: 100vh; */
+  height: 100%;
+  text-align: center;
+  padding: 3.75rem 0;
+
   .again {
     color: var(--text, rgba(0, 0, 0, 0.6));
     text-align: center;
@@ -40,5 +39,9 @@ const Wrapper = styled.div`
     line-height: normal;
     letter-spacing: 0.313rem;
     padding-bottom: 4.375rem;
+  }
+  img {
+    width: ${({ imgsize }) => imgsize || "60%"};
+    /* width: 50%; */
   }
 `;

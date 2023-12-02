@@ -1,19 +1,21 @@
 import styled from "styled-components";
 import logo from "../../../public/logo-1.png";
 import Button from "../../components/Button";
+import { Link } from "react-router-dom";
 
 const CreateAccount = () => {
   return (
     <Wrapper>
-      <div className="container">
-        <div className="child">
-          <div className="childcontent">
-            <img src={logo} />
-            <p> Create account as a</p>
-            <Button size="medium"
-             className="provbutton">
+      <div className="child">
+        <img src={logo} />
+        <div className="buttons">
+          <p> Create account as a</p>
+          <Link to="/signup/provider">
+            <Button size="medium" className="provbutton">
               Service Provider
             </Button>
+          </Link>
+          <Link to="/signup/user">
             <Button
               className="userbutton"
               size="medium"
@@ -22,11 +24,11 @@ const CreateAccount = () => {
             >
               User
             </Button>
-            <footer>
-              Already have an account ?<a href="#"> Login </a>
-            </footer>
-          </div>
+          </Link>
         </div>
+        <footer>
+          Already have an account ?<Link to="/login"> Login </Link>
+        </footer>
       </div>
     </Wrapper>
   );
@@ -38,28 +40,32 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background: var(--beige, #fef9f0);
+  height: 100vh;
 
-  .container {
-    background: var(--beige, #fef9f0);
+  /* .container {
     height: 100vh;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+  } */
 
   .child {
-    width: 75rem;
-    height: 37.5rem;
+    /* width: 75rem; */
+    /* height: 37.5rem; */
+    width: 80%;
+    /* height: 80%; */
     flex-shrink: 0;
     background: #ffffffe5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 3rem 0;
   }
 
-  .childcontent {
-    text-align: center;
-    padding: 6.25rem;
-    display: block;
-  }
   img {
     width: 2.625rem;
     height: 2.813rem;
@@ -73,19 +79,24 @@ const Wrapper = styled.div`
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.00625rem;
-    margin-top: 3.4375rem;
-    margin-bottom: 1.25rem;
+    /* margin-top: 3.4375rem; */
+    /* margin-bottom: 1.25rem; */
   }
-
+  .buttons {
+    gap: 1rem;
+  }
+  .buttons p {
+    margin-bottom: 1.5rem;
+  }
   Button {
     margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
-    width: 26.875rem; 
-    height: 2.8125rem; 
-    padding: 1.25rem 0.625rem; 
+    width: 26.875rem;
+    height: 2.8125rem;
+    padding: 1.25rem 0.625rem;
     gap: 0.625rem;
   }
   .provbutton {
@@ -95,8 +106,7 @@ const Wrapper = styled.div`
     font-style: normal;
     font-weight: 300;
     line-height: 1.375rem;
-letter-spacing: 0.0625rem; 
-
+    letter-spacing: 0.0625rem;
   }
   .userbutton {
     color: var(--green, #74ab70);
@@ -118,7 +128,7 @@ letter-spacing: 0.0625rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    margin-top: 8.125rem;
+    /* margin-top: 8.125rem; */
 
     a {
       color: var(--green, #74ab70);

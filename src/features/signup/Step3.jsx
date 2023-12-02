@@ -2,12 +2,14 @@ import styled from "styled-components";
 import FormInput from "../../components/FormInput";
 import { IoImageOutline } from "react-icons/io5";
 import { MdAdd } from "react-icons/md";
-import { useState } from "react";
-import { useSignUpContext } from "../../context/SignUpContext";
+import { useAuthContext } from "../../context/AuthContext";
+import Input from "../../components/Input";
 
 const Step3 = () => {
-  const { register, profilePhoto, setProfilePhoto, setProfilePhotoFile } =
-    useSignUpContext();
+  const { profilePhoto, setProfilePhoto, setProfilePhotoFile } =
+    useAuthContext();
+  const { register } = useAuthContext();
+
   // const [profilePhoto, setProfilePhoto] = useState("");
   const onSelectFile = (e) => {
     const selectedFiles = e.target.files;
@@ -38,11 +40,15 @@ const Step3 = () => {
           <p>Preferably Your Personal Photo</p>
         </div>
       </div>
-      <FormInput
-        name="mobile"
-        label="Mobile Number"
-        placeholder="+20 1234567890"
-      />
+
+      <FormInput label="Mobile Number">
+        <Input
+          type="text"
+          id="mobile"
+          placeholder="+20 1234567890"
+          {...register("mobile")}
+        />
+      </FormInput>
       <div className="about-box">
         <label htmlFor="">About</label>
         <textarea

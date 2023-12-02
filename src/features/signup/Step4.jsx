@@ -4,8 +4,7 @@ import { IoImageOutline } from "react-icons/io5";
 import { TiDeleteOutline } from "react-icons/ti";
 
 import { MdAdd } from "react-icons/md";
-import { useState } from "react";
-import { useSignUpContext } from "../../context/SignUpContext";
+import { useAuthContext } from "../../context/AuthContext";
 
 const Step4 = () => {
   const keywords = [
@@ -24,7 +23,7 @@ const Step4 = () => {
     setAlbumImages,
     setCoverPhotoFile,
     setAlbumPhotosFile,
-  } = useSignUpContext();
+  } = useAuthContext();
 
   const onSelectFile = (e, type) => {
     const selectedFiles = e.target.files;

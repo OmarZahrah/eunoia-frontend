@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { useSignUpContext } from "../context/SignUpContext";
+import { useAuthContext } from "../context/AuthContext";
 
 const Stepper = () => {
-  const { steps, currentStep } = useSignUpContext();
+  const { steps, currentStep } = useAuthContext();
   return (
     <Wrapper>
       {steps.map((step, i) => {

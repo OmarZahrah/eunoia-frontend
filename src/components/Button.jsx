@@ -33,17 +33,16 @@ const sizes = {
     padding: 0.5rem 1.5rem;
   `,
   medium: css`
-    /* width: 27rem; */
-    width: 29.375rem;
-
-    padding: 0.4rem 1.7rem;
+    width: 25rem;
+    padding: 0.7rem 1.5rem;
     font-size: 1.4rem;
   `,
   large: css`
+    /* width: 27rem; */
+    /* width: 29.375rem; */
     width: 100%;
-    padding: 0.7rem 2rem;
-    font-size: 1.6rem;
-    font-weight: 500;
+    padding: 0.4rem 0;
+    font-size: 1.4rem;
   `,
 };
 

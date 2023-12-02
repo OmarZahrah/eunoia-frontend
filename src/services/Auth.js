@@ -5,3 +5,8 @@ export const signup = async (formData) => {
 
   return data;
 };
+
+export const login = async (formData) => {
+  const { data } = await customFetch.post("/users/login", formData);
+  return data;
+};

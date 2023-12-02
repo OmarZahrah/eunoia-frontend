@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import Stepper from "../../components/Stepper";
 import Button from "../../components/Button";
-import { useSignUpContext } from "../../context/SignUpContext";
+import { useAuthContext } from "../../context/AuthContext";
 
 const SignUpBusiness = () => {
-  const { currentStep, setCurrentStep, steps } = useSignUpContext();
-  const { handleSubmit, onSubmit } = useSignUpContext();
+  const { currentStep, setCurrentStep, steps, handleSubmit, onSubmit } =
+    useAuthContext();
+
   const lastStep = currentStep === steps.length;
 
   const handleNext = () => {
@@ -19,7 +20,6 @@ const SignUpBusiness = () => {
 
   return (
     <Wrapper>
-      {/* <div className="container"> */}
       <form className="container" onSubmit={handleSubmit(onSubmit)}>
         <h2>JOIN US TODAY</h2>
         <hr />
@@ -28,10 +28,11 @@ const SignUpBusiness = () => {
           <header>
             <h2 className="form-title">{steps[currentStep - 1].stepTitle}</h2>
           </header>
-          {/* <form className="form-inputs" onSubmit={handleSubmit(onSubmit)}> */}
+
           <div className="form-inputs">{steps[currentStep - 1].stepForm}</div>
         </div>
         <div className="buttons">
+          {/* <Link to="/signup/create"> */}
           <Button
             type="button"
             onClick={handleBack}
@@ -41,20 +42,8 @@ const SignUpBusiness = () => {
           >
             &lt; Back
           </Button>
-          {/* {lastStep ? (
-            <Button type="submit" background="green" size="small">
-              Submit
-            </Button>
-          ) : (
-            <Button
-              type="button"
-              onClick={handleNext}
-              background="green"
-              size="small"
-            >
-              Next &gt;
-            </Button>
-          )} */}
+          {/* </Link> */}
+
           {!lastStep && (
             <Button
               type="button"

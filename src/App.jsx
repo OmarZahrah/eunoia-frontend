@@ -5,16 +5,16 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Welcome from "./pages/Welcome";
 import GlobalStyles from "./assets/styles/GlobalStyles";
-import { SignUpProvider } from "./context/SignUpContext";
 import SignUpUser from "./features/signup/SignUpUser";
 import SignUpBusiness from "./features/signup/SignUpBusiness";
 import CreateAccount from "./features/signup/CreatAccount";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   return (
     <>
-      <GlobalStyles />
-      <SignUpProvider>
+      <AuthProvider>
+        <GlobalStyles />
         <BrowserRouter>
           <Routes>
             <Route path="welcome" element={<Welcome />} />
@@ -30,7 +30,7 @@ function App() {
             </Route>
           </Routes>
         </BrowserRouter>
-      </SignUpProvider>
+      </AuthProvider>
     </>
   );
 }

@@ -1,39 +1,69 @@
 import styled from "styled-components";
 import FormInput from "../../components/FormInput";
-import { FaApple } from "react-icons/fa";
+import Input from "../../components/Input";
+import { useForm } from "react-hook-form";
+import { useAuthContext } from "../../context/AuthContext";
 
 const Step1 = () => {
+  const { register, getValues, errors } = useAuthContext();
+
   return (
     <Wrapper>
       <div className="inputs">
+        <FormInput label="name" required error={errors?.fullname?.message}>
+          <Input
+            type="text"
+            id="fullname"
+            placeholder="Your Full Name"
+            {...register("fullname", {
+              required: "this field is required",
+            })}
+          />
+        </FormInput>
+        <FormInput label="email" required error={errors?.email?.message}>
+          <Input
+            type="email"
+            id="email"
+            placeholder="example@example.com"
+            {...register("email", {
+              required: "this field is required",
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: "Please provide a valid email address",
+              },
+            })}
+          />
+        </FormInput>
+        <FormInput label="password" required error={errors?.password?.message}>
+          <Input
+            type="password"
+            id="password"
+            placeholder="Your Password"
+            {...register("password", {
+              required: "This field is required",
+              minLength: {
+                value: 8,
+                message: "Password needs a minimum of 8 characters",
+              },
+            })}
+          />
+        </FormInput>
         <FormInput
-          name="fullname"
-          label="name"
-          type="text"
-          required
-          placeholder="Your Full Name"
-        />
-        <FormInput
-          name="email"
-          label="email"
-          type="email"
-          required
-          placeholder="example@example.com"
-        />
-        <FormInput
-          name="password"
-          label="password"
-          type="password"
-          required
-          placeholder="Your Password"
-        />
-        <FormInput
-          name="passwordConfirm"
           label="confirm password"
-          type="password"
           required
-          placeholder="Your Password"
-        />
+          error={errors?.passwordConfirm?.message}
+        >
+          <Input
+            type="password"
+            id="passwordConfirm"
+            placeholder="Confirm Your Password"
+            {...register("passwordConfirm", {
+              required: "This field is required",
+              validate: (value) =>
+                value === getValues().password || "Passwords need to match",
+            })}
+          />
+        </FormInput>
       </div>
     </Wrapper>
   );

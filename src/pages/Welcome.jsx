@@ -5,6 +5,7 @@ import image1 from "../../public/images/unsplash-ebv-cs-rypmx-m.png";
 import image2 from "../../public/images/unsplash-fn-0-xxl-9-szc-u.png";
 import image3 from "../../public/images/unsplash-azod-v-2-d-0-g-lc.png";
 import group from "../../public/group-26.svg";
+import { Link } from "react-router-dom";
 const Welcome = () => {
   return (
     <Wrapper>
@@ -12,23 +13,26 @@ const Welcome = () => {
         <nav>
           <img className="Hlogo" src={logo} />
           <div className="buttons">
-            <Button
-              className="logbutton"
-              color="pink"
-              background="transparent"
-              size="small"
-            >
-              Login
-            </Button>
-
-            <Button
-              className="regbutton"
-              color="white"
-              background="pink"
-              size="small"
-            >
-              Register
-            </Button>
+            <Link to="/login">
+              <Button
+                className="logbutton"
+                color="pink"
+                background="transparent"
+                size="small"
+              >
+                Login
+              </Button>
+            </Link>
+            <Link to="/signup/create">
+              <Button
+                className="regbutton"
+                color="white"
+                background="pink"
+                size="small"
+              >
+                Register
+              </Button>
+            </Link>
           </div>
         </nav>
         <div className="images">
