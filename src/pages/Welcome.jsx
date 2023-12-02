@@ -136,4 +136,14 @@ const Wrapper = styled.div`
     align-items: center;
     gap: 5px;
   }
+
+  @media only screen and (max-width: ${({ theme }) => theme.mid}) {
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.small}) {
+  }
+
+  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+  }
 `;
