@@ -8,10 +8,10 @@ import { useForm } from "react-hook-form";
 const AuthContext = createContext();
 
 const steps = [
-  { stepNum: 1, stepTitle: "Personal Details", stepForm: <Step1 /> },
-  { stepNum: 2, stepTitle: "Business Type", stepForm: <Step2 /> },
-  { stepNum: 3, stepTitle: "Business Info", stepForm: <Step3 /> },
-  { stepNum: 4, stepTitle: "More Details", stepForm: <Step4 /> },
+  // { stepNum: 1, stepTitle: "Personal Details", stepForm: <Step1 /> },
+  { stepNum: 1, stepTitle: "Business Type", stepForm: <Step2 /> },
+  { stepNum: 2, stepTitle: "Business Info", stepForm: <Step3 /> },
+  { stepNum: 3, stepTitle: "More Details", stepForm: <Step4 /> },
 ];
 
 const AuthProvider = ({ children }) => {

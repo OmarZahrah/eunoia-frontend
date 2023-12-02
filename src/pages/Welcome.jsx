@@ -22,7 +22,7 @@ const Welcome = () => {
               Login
             </Button>
           </Link>
-          <Link to="/signup/create">
+          <Link to="/signup/user">
             <Button
               className="regbutton"
               color="white"
