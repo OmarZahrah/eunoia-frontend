@@ -44,4 +44,33 @@ const Wrapper = styled.section`
     width: ${({ imgsize }) => imgsize || "60%"};
     /* width: 50%; */
   }
+
+  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
+    .again {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.026rem;
+      padding-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      letter-spacing: 0.2rem;
+      padding-bottom: 3.5rem;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    .again {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: -0.02rem;
+      padding-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      letter-spacing: 0.2rem;
+      padding-bottom: 4.375rem;
+    }
+  }
 `;

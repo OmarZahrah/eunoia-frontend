@@ -6,7 +6,7 @@ import FormInput from "../../components/FormInput";
 import Button from "../../components/Button";
 import { Link } from "react-router-dom";
 import Input from "../../components/Input";
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 import { useAuthContext } from "../../context/AuthContext";
 
 const SignUpUser = () => {
@@ -134,7 +134,7 @@ const Wrapper = styled.div`
     width: 30rem;
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    /* gap: 4.35rem; */
   }
   header {
     /* width: 30rem; */
@@ -145,11 +145,13 @@ const Wrapper = styled.div`
     color: rgba(0, 0, 0, 0.65);
     font-size: 1.875rem;
     font-weight: 800;
+    /* margin-bottom: 4rem; */
+    padding-bottom: 2rem;
   }
   .inputs {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.7rem;
     /* width: 100%; */
     /* align-items: center; */
   }
@@ -164,15 +166,21 @@ const Wrapper = styled.div`
   footer {
     /* display: flex; */
     flex-direction: column;
-    gap: 10px;
+    gap: 0px;
     align-items: center;
   }
   footer button {
     /* width: 30rem; */
     width: 100%;
+    margin-top: 5rem;
+    font-size: 1.25rem;
   }
   footer p {
     text-align: center;
+    color: var(--text, rgba(0, 0, 0, 0.6));
+    font-family: Koh Santepheap;
+    font-size: 1rem;
+    letter-spacing: 0.063rem;
     margin-top: 1rem;
   }
 
@@ -180,5 +188,61 @@ const Wrapper = styled.div`
     color: var(--green, #74ab70) !important;
     font-weight: 550;
     /* font-family: Source Serif Pro !important; */
+  }
+
+  @media only screen and (max-width: ${({ theme }) => theme.mid}) {
+    .inputs {
+      gap: 1rem;
+    }
+    footer button {
+      margin-top: 3rem;
+      font-size: 1.15rem;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.small}) {
+    a {
+      color: var(--green, #74ab70) !important; //mlhash lazma
+    }
+  }
+
+  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
+    .left-container {
+      width: 17rem;
+      height: 100vh;
+    }
+    h2 {
+      margin-top: 3rem;
+    }
+
+    .inputs input {
+      font-size: 0.75rem;
+    }
+    .inputs label {
+      font-size: 0.9rem;
+    }
+    footer button {
+      margin-top: 2.5rem;
+      font-size: 1rem;
+    }
+
+    footer p {
+      font-size: 0.85rem;
+      letter-spacing: 0.053rem;
+    }
+
+    img {
+      width: 70%;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    .left {
+      width: 100vh;
+    }
+    .left-container {
+      width: 80%;
+    }
+    .right {
+      display: none;
+    }
   }
 `;
