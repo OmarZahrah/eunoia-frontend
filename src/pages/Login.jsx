@@ -207,6 +207,9 @@ const Wrapper = styled.div`
       gap: 2rem;
       padding-bottom: 0.5rem;
     }
+    h1 {
+      padding-bottom: 3rem;
+    }
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.semi}) {
@@ -226,6 +229,9 @@ const Wrapper = styled.div`
     .inputs {
       gap: 1rem;
       /* padding-bottom: 0.5rem; */
+    }
+    .again {
+      font-size: 1.6rem;
     }
   }
 
@@ -259,6 +265,13 @@ const Wrapper = styled.div`
     .text {
       font-size: 0.8rem;
       letter-spacing: 0.063rem;
+    }
+    .again {
+      font-size: 1.5rem;
+    }
+    img {
+      width: 90%;
+      padding-top: 1.2rem;
     }
   }
 
@@ -300,9 +313,16 @@ const Wrapper = styled.div`
       font-size: 0.8rem;
       letter-spacing: 0.063rem;
     }
+    h1 {
+      font-size: 2.2rem;
+    }
+
+    .again {
+      font-size: 1.5rem;
+    }
 
     img {
-      width: 90%;
+      width: 100%;
     }
   }
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
