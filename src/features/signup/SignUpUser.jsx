@@ -12,6 +12,8 @@ import { useAuthContext } from "../../context/AuthContext";
 const SignUpUser = () => {
   // const { handleSubmit } = useAuthContext();
   const { register, getValues, handleSubmit, errors } = useAuthContext();
+  const { showPassword } = useAuthContext();
+
   const onSubmit = async (data) => {
     console.log(data);
     // console.log("data");
@@ -56,7 +58,7 @@ const SignUpUser = () => {
               type="password"
             >
               <Input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="password"
                 placeholder="Your Password"
                 {...register("password", {
@@ -69,13 +71,13 @@ const SignUpUser = () => {
               />
             </FormInput>
             <FormInput
+              type="password"
               label="confirm password"
               required
               error={errors?.passwordConfirm?.message}
-              type="password"
             >
               <Input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="passwordConfirm"
                 placeholder="Confirm Your Password"
                 {...register("passwordConfirm", {

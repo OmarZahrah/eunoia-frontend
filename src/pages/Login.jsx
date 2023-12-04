@@ -15,6 +15,7 @@ import Input from "../components/Input";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
+  const { showPassword } = useAuthContext();
 
   const onSubmit = async (formData) => {
     // console.log(login(formData));
@@ -48,7 +49,7 @@ const Login = () => {
             </FormInput>
             <FormInput type="password" icon={<VscLock className="icon" />}>
               <Input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="password"
                 placeholder="Your Password"
                 {...register("password", {
