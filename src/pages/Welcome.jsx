@@ -67,17 +67,13 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* padding: 1.1rem 8rem; */
     width: 80%;
     padding-top: 1rem;
-    /* margin: 0 auto; */
   }
   .container {
     height: 100%;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
-    /* padding-top: 1rem; */
   }
 
   .Hlogo {
@@ -102,7 +98,6 @@ const Wrapper = styled.div`
     display: flex;
     width: 80%;
     margin: 0 auto;
-    /* padding: 20px; */
     gap: 1rem;
     justify-content: center;
   }
@@ -124,11 +119,10 @@ const Wrapper = styled.div`
   p {
     color: var(--text, rgba(0, 0, 0, 0.6));
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: 300;
     letter-spacing: 0.0625rem;
     width: 55%;
-    /* padding-bottom: 1rem; */
   }
   .text {
     display: flex;
@@ -136,14 +130,156 @@ const Wrapper = styled.div`
     align-items: center;
     gap: 5px;
   }
-
   @media only screen and (max-width: ${({ theme }) => theme.mid}) {
+    nav {
+      width: 85%;
+      padding-top: 2rem;
+    }
+     .Hlogo {
+      width: 8.7rem;
+      height: 2rem;
+      flex-shrink: 0;
+    }
+    .logbutton {
+      font-size: 1.5rem;
+    }
+
+    .regbutton {
+      font-size: 1.2rem;
+      letter-spacing: 0.0625rem;
+      text-indent: -0.2rem;
+      width: 9rem;
+      height: 2.8rem;
+      flex-shrink: 0;
+    }
+
+    .images {
+      width: 83%;
+    }
+    .images img {
+      width: 34%;
+      padding: 19px;
+    }
+   
+    p {
+      font-size: 1.7rem;
+      font-weight: 300;
+      letter-spacing: 0.0625rem;
+      width: 64%;
+    }
+
+    .container {
+      gap: 10px;
+    }
+    
   }
+
   @media only screen and (max-width: ${({ theme }) => theme.small}) {
+    nav {
+      width: 79%;
+      padding-top: 2rem;
+    }
+
+    .logbutton {
+      font-size: 1.3rem;
+    }
+    .regbutton {
+      font-size: 1.1rem;
+      width: 8rem;
+      height: 2.6rem;
+    }
+
+    .images {
+      width: 75%;
+    }
+    .images img {
+      width: 35%;
+      padding: 19px;
+
+    }
+   
+    p {
+      font-size: 1.8rem;
+      font-weight: 350;
+      letter-spacing: 0.0625rem;
+      padding-bottom: 1rem;
+    }
+    
+    .container {
+      gap: 15px;
+    }
   }
+
 
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
+    background: linear-gradient(to top, #fef9f0 60%, #fff 40%);
+  display: flex;
+  gap: 4rem;
+  align-items:center;
+
+    nav {
+      padding-top: 3rem;
+      flex-direction:column;
+      gap:2rem;
+    }
+    .Hlogo{
+      width: 7.6rem;
+      height: 2.1rem;
+    }
+
+    .images {
+      width: 72%;
+    }
+    .images img {
+      width: 39%;
+      padding: 1px;
+      
+    }
+   
+    .logbutton {
+      font-size: 1.8rem;
+      margin-right: 10rem;
+    }
+
+    .regbutton {
+      font-size: 1.3rem;
+      width: 8rem;
+      height: 2.9rem;
+    }
+
+    .h{
+    font-size: 2rem;
+    font-weight: 510;
+    font-style: italic;
+    letter-spacing: 0.0625rem;
+    width: 55%;
+    }
+
+    p {
+      font-size: 1.4rem;
+      font-weight: 350;
+      letter-spacing: 0.0625rem;
+      width: 80%;
+      
+    }
+    .container {
+      gap: 6rem;
+    }
+    .text{
+      gap:1rem;
+    }
+ 
   }
+
+
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+  background: linear-gradient(to top, #fef9f0 65%, #fff 35%);
+  display: flex;
+  gap: 3rem;
+  align-items:center;
+  nav {
+      padding-top: 3.5rem;
+    
+    }
   }
 `;
