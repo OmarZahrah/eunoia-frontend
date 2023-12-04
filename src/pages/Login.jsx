@@ -7,9 +7,9 @@ import { LuUser } from "react-icons/lu";
 import { VscLock } from "react-icons/vsc";
 import WelcomeSection from "../components/WelcomeSection";
 import { Link } from "react-router-dom";
-import customFetch from "../utils/customFetch";
-import { useAuthContext } from "../context/AuthContext";
-import { login } from "../services/Auth";
+// import customFetch from "../utils/customFetch";
+// import { useAuthContext } from "../context/AuthContext";
+// import { login } from "../services/Auth";
 import { useForm } from "react-hook-form";
 import Input from "../components/Input";
 
@@ -108,6 +108,7 @@ const Wrapper = styled.div`
   }
   .left-container {
     width: 30rem;
+    height: 100vh;
   }
   header {
     /* width: 30rem; */
@@ -118,14 +119,16 @@ const Wrapper = styled.div`
     font-family: "Literata";
     font-size: 1.875rem;
     font-weight: 800;
-    margin-left: 0;
+    /* margin-left: 0; */
     display: inline-block;
     margin-right: auto;
+    padding: 3.75rem 0 2.45rem 0;
   }
   .inputs {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2.5rem;
+    padding-bottom: 2rem;
   }
   .input {
     position: relative;
@@ -153,6 +156,7 @@ const Wrapper = styled.div`
     font-size: 1.25rem;
     /* width: 30rem; */
     width: 100%;
+    margin-bottom: 2rem;
   }
 
   .login-text {
@@ -162,7 +166,7 @@ const Wrapper = styled.div`
     font-weight: 500;
     letter-spacing: -0.026rem;
     display: block;
-    padding: 1.25rem 0;
+    padding-bottom: 3rem;
   }
 
   .text {
@@ -188,5 +192,72 @@ const Wrapper = styled.div`
   .create-link {
     color: var(--green, #74ab70);
     font-weight: 550;
+  }
+
+  @media only screen and (max-width: ${({ theme }) => theme.mid}) {
+    footer button {
+      margin-bottom: 0.7rem;
+    }
+    .login-text {
+      padding-bottom: 2rem;
+    }
+    .inputs {
+      gap: 2rem;
+      padding-bottom: 0.5rem;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.small}) {
+    footer {
+      text-align: center;
+    } /////mlhash lazma
+  }
+
+  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
+    .left-container {
+      width: 17rem;
+      height: 100vh;
+    }
+
+    header h2 {
+      font-size: 1.6rem;
+      padding: 3.75rem 0 1.3rem 0;
+    }
+
+    .login-text {
+      font-size: 0.8rem;
+      padding-bottom: 2.1rem;
+    }
+
+    .inputs input {
+      padding: 0 0 1.2rem 2.3rem;
+      height: 2rem;
+      font-size: 0.75rem;
+    }
+    .icon {
+      width: 27px;
+      transform: translateY(-60%);
+    }
+    footer button {
+      font-size: 1rem;
+    }
+    .text {
+      font-size: 0.8rem;
+      letter-spacing: 0.063rem;
+    }
+
+    img {
+      width: 90%;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    .left {
+      width: 100vh;
+    }
+    .left-container {
+      width: 80%;
+    }
+    .right {
+      display: none;
+    }
   }
 `;
