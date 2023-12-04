@@ -208,6 +208,60 @@ const Wrapper = styled.div`
       padding-bottom: 0.5rem;
     }
   }
+
+  @media only screen and (max-width: ${({ theme }) => theme.semi}) {
+    .left-container {
+      width: 25rem;
+      height: 100vh;
+    }
+    h1 {
+      font-size: 2.5rem;
+      letter-spacing: 0.2rem;
+    }
+
+    img {
+      width: 80%;
+    }
+
+    .inputs {
+      gap: 1rem;
+      /* padding-bottom: 0.5rem; */
+    }
+  }
+
+  @media only screen and (max-width: 52.5em) {
+    .left-container {
+      width: 20rem;
+      height: 100vh;
+    }
+    header h2 {
+      font-size: 1.6rem;
+      padding: 3.75rem 0 1.3rem 0;
+    }
+
+    .login-text {
+      font-size: 0.9rem;
+      padding-bottom: 2.1rem;
+    }
+
+    .inputs input {
+      padding: 0 0 1.2rem 2.3rem;
+      height: 2.3rem;
+      font-size: 0.8rem;
+    }
+    .icon {
+      width: 27px;
+      transform: translateY(-60%);
+    }
+    footer button {
+      font-size: 1rem;
+    }
+    .text {
+      font-size: 0.8rem;
+      letter-spacing: 0.063rem;
+    }
+  }
+
   @media only screen and (max-width: ${({ theme }) => theme.small}) {
     footer {
       text-align: center;

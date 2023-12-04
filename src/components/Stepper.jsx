@@ -81,12 +81,30 @@ const Wrapper = styled.div`
   @media only screen and (max-width: ${({ theme }) => theme.small}) {
   }
 
+  @media only screen and (max-width: ${({ theme }) => theme.semi}) {
+    padding: 0.5rem 1rem 0.5rem 0;
+    .step-title {
+      font-size: 0.9rem;
+    }
+    &::after {
+      right: calc(2rem + 1px);
+    }
+    .step:first-of-type {
+      align-items: start;
+    }
+    .step:last-of-type {
+      align-items: end;
+    }
+  }
+
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
     flex-direction: row;
     height: 20%;
+    padding: 0.5rem 2rem;
+
     &:after {
       height: 3px;
-      width: calc(100% - 10rem);
+      width: calc(100% - 8rem);
       top: calc(0.5rem + 17px);
       /* right: 50%; */
       right: 0;
