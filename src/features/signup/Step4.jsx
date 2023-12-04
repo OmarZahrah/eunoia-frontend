@@ -63,7 +63,7 @@ const Step4 = () => {
             <img className="cover-photo" src={coverPhoto} />
           )}
           <input
-            // {...register("coverPhoto")}
+            {...register("coverPhoto")}
             className="image-input"
             type="file"
             onChange={(e) => onSelectFile(e, "cover")}
@@ -76,7 +76,7 @@ const Step4 = () => {
           <label>
             + Add photos
             <input
-              // {...register("photoAlbum")}
+              {...register("photoAlbum")}
               className="image-input"
               type="file"
               onChange={(e) => onSelectFile(e, "album")}
@@ -172,5 +172,17 @@ const Wrapper = styled.div`
     background-color: #a00808;
     border-radius: 50%;
     cursor: pointer;
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mid}) {
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.small}) {
+  }
+
+  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
+    .image-uploader {
+      width: 100%;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
   }
 `;

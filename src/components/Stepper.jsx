@@ -76,4 +76,50 @@ const Wrapper = styled.div`
   .step-title {
     color: var(--color-black-light);
   }
+  @media only screen and (max-width: ${({ theme }) => theme.mid}) {
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.small}) {
+  }
+
+  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
+    flex-direction: row;
+    height: 20%;
+    &:after {
+      height: 3px;
+      width: calc(100% - 10rem);
+      top: calc(0.5rem + 17px);
+      /* right: 50%; */
+      right: 0;
+      transform: translateX(-4rem);
+    }
+    .step {
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .step-num {
+      order: 1;
+    }
+    .step-title {
+      order: 2;
+    }
+    .step-title {
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    padding: 0.5rem 1rem;
+    &::after {
+      width: calc(100% - 4rem);
+      transform: translateX(-2rem);
+    }
+
+    .step:first-of-type {
+      align-items: start;
+    }
+    .step:last-of-type {
+      align-items: end;
+    }
+  }
 `;

@@ -21,10 +21,14 @@ const AuthProvider = ({ children }) => {
   const [albumImages, setAlbumImages] = useState([]);
   const { register, formState, getValues, handleSubmit } = useForm();
   const { errors } = formState;
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword((s) => !s);
+  };
 
-  // const [profilePhotoFile, setProfilePhotoFile] = useState("");
-  // const [coverPhotoFile, setCoverPhotoFile] = useState("");
-  // const [albumPhotosFile, setAlbumPhotosFile] = useState("");
+  const [profilePhotoFile, setProfilePhotoFile] = useState("");
+  const [coverPhotoFile, setCoverPhotoFile] = useState("");
+  const [albumPhotosFile, setAlbumPhotosFile] = useState("");
 
   const onSubmit = async (formData, role) => {
     // const profile = Array.from(formData.profile);
@@ -35,9 +39,9 @@ const AuthProvider = ({ children }) => {
     const finalData = {
       ...formData,
       role: { role },
-      // photo: profilePhotoFile,
-      // coverPhoto: coverPhotoFile,
-      // photoAlbum: [...Object.values(albumPhotosFile)],
+      photo: profilePhotoFile,
+      coverPhoto: coverPhotoFile,
+      photoAlbum: [...Object.values(albumPhotosFile)],
     };
     console.log(finalData);
     // console.log(signup(finalData));
@@ -60,10 +64,12 @@ const AuthProvider = ({ children }) => {
         setCoverPhoto,
         albumImages,
         setAlbumImages,
+        showPassword,
+        togglePasswordVisibility,
 
-        // setProfilePhotoFile,
-        // setCoverPhotoFile,
-        // setAlbumPhotosFile,
+        setProfilePhotoFile,
+        setCoverPhotoFile,
+        setAlbumPhotosFile,
       }}
     >
       {children}

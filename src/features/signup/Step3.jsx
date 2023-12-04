@@ -27,7 +27,7 @@ const Step3 = () => {
               <img className="profile-photo" src={profilePhoto} />
             )}
             <input
-              // {...register("photo")}
+              {...register("photo")}
               className="image-input"
               type="file"
               onChange={onSelectFile}
@@ -121,5 +121,19 @@ const Wrapper = styled.div`
     height: 5rem;
     box-shadow: 0px 2px 11px -5px rgba(0, 0, 0, 0.5);
     padding: 5px 10px;
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mid}) {
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.small}) {
+    font-size: 1rem;
+  }
+
+  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
+    textarea {
+      width: 100%;
+      height: 8rem;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
   }
 `;

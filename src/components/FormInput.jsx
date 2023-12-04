@@ -128,7 +128,7 @@ const FormInput = ({ children, label, required, error, type, icon }) => {
   );
 };
 
-const TogglePasswordButton = styled.button`
+const TogglePasswordButton = styled.span`
   background: none;
   border: none;
   cursor: pointer;

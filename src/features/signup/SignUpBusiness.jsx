@@ -118,4 +118,43 @@ const Wrapper = styled.div`
     justify-content: space-between;
     grid-column: span 2;
   }
+  @media only screen and (max-width: ${({ theme }) => theme.mid}) {
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.small}) {
+  }
+
+  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
+    .container {
+      /* grid-template-columns: 1fr; */
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      padding: 3rem 0;
+      gap: 1rem;
+    }
+    hr {
+      display: none;
+    }
+    .form-step {
+      border-left: none;
+      /* border-top: 2px solid #ddd; */
+      /* border-left: 2px solid #ddd; */
+      border-top-left-radius: 100px;
+      padding-top: 2rem;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    .container {
+      width: 100%;
+      height: 100%;
+      padding: 3rem 0;
+    }
+    .form-step {
+      padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+    }
+    .buttons {
+      padding: 2rem 1.5rem;
+    }
+  }
 `;
