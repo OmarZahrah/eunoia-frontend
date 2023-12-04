@@ -202,6 +202,9 @@ const Wrapper = styled.div`
     }
   }
   @media only screen and (max-width: ${({ theme }) => theme.semi}) {
+    a {
+      color: var(--green, #74ab70) !important; //mlhash lazma
+    }
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.small}) {
