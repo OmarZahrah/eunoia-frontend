@@ -135,7 +135,7 @@ const Wrapper = styled.div`
       width: 85%;
       padding-top: 2rem;
     }
-     .Hlogo {
+    .Hlogo {
       width: 8.7rem;
       height: 2rem;
       flex-shrink: 0;
@@ -160,7 +160,7 @@ const Wrapper = styled.div`
       width: 34%;
       padding: 19px;
     }
-   
+
     p {
       font-size: 1.7rem;
       font-weight: 300;
@@ -171,7 +171,6 @@ const Wrapper = styled.div`
     .container {
       gap: 10px;
     }
-    
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.small}) {
@@ -195,34 +194,33 @@ const Wrapper = styled.div`
     .images img {
       width: 35%;
       padding: 19px;
-
     }
-   
+
     p {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       font-weight: 350;
       letter-spacing: 0.0625rem;
       padding-bottom: 1rem;
     }
-    
+
     .container {
       gap: 15px;
     }
   }
 
-
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
     background: linear-gradient(to top, #fef9f0 60%, #fff 40%);
-  display: flex;
-  gap: 4rem;
-  align-items:center;
+    height: 100%;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
 
     nav {
-      padding-top: 3rem;
-      flex-direction:column;
-      gap:2rem;
+      padding-top: 2rem;
+      flex-direction: column;
+      gap: 2rem;
     }
-    .Hlogo{
+    .Hlogo {
       width: 7.6rem;
       height: 2.1rem;
     }
@@ -233,9 +231,8 @@ const Wrapper = styled.div`
     .images img {
       width: 39%;
       padding: 1px;
-      
     }
-   
+
     .logbutton {
       font-size: 1.8rem;
       margin-right: 10rem;
@@ -247,39 +244,101 @@ const Wrapper = styled.div`
       height: 2.9rem;
     }
 
-    .h{
-    font-size: 2rem;
-    font-weight: 510;
-    font-style: italic;
-    letter-spacing: 0.0625rem;
-    width: 55%;
+    .h {
+      font-size: 1.5rem !important ;
+      font-weight: 510;
+      font-style: italic;
+      letter-spacing: 0.0625rem;
+      width: 50%;
     }
 
     p {
-      font-size: 1.4rem;
+      font-size: 1.2rem !important;
       font-weight: 350;
       letter-spacing: 0.0625rem;
       width: 80%;
-      
     }
     .container {
       gap: 6rem;
     }
-    .text{
-      gap:1rem;
+    .text {
+      gap: 1rem;
     }
- 
   }
-
 
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
-  background: linear-gradient(to top, #fef9f0 65%, #fff 35%);
-  display: flex;
-  gap: 3rem;
-  align-items:center;
-  nav {
+    height: 100%;
+    background: linear-gradient(to top, #fef9f0 60%, #fff 40%);
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    nav {
       padding-top: 3.5rem;
-    
     }
   }
+
+  @media only screen and (max-width: ${({ theme }) => theme.semi}) {
+    .h {
+      font-size: 1.9rem;
+    }
+    p {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media only screen and (max-width: 527px) {
+    heigh: 100%;
+    gap: 1.9rem;
+
+    .logbutton {
+      font-size: 1rem;
+      margin-right: 10rem;
+    }
+
+    nav {
+      padding-top: 1rem;
+    }
+
+    .regbutton {
+      font-size: 1.1rem;
+      width: 7.9rem;
+      height: 2.4rem;
+    }
+    .h{
+      font-size: 2rem !important ;
+      width:72%;
+    }
+    p{
+      font-size: 1.3rem !important ;
+      width:85%;
+    }
+  }
+  
+  /* @media only screen and (max-width: 570px) {
+    heigh: 100%;
+    gap: 1.9rem;
+
+    .logbutton {
+      font-size: 1.4rem;
+      margin-right: 10rem;
+    }
+
+    nav {
+      padding-top: 1rem;
+    }
+
+    .regbutton {
+      font-size: 1.1rem;
+      width: 7.9rem;
+      height: 2.4rem;
+    }
+    .h{
+      font-size: 2rem !important ;
+      width:72%;
+    }
+    p{
+      font-size: 1.3rem !important ;
+      width:85%;
+    }
+  } */
 `;

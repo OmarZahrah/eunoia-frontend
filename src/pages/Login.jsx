@@ -261,5 +261,6 @@ const Wrapper = styled.div`
     .right {
       display: none;
     }
+
   }
 `;
