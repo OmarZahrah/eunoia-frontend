@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 // import { login } from "../services/Auth";
 import { useForm } from "react-hook-form";
 import Input from "../components/Input";
+import { useAuthContext } from "../context/AuthContext";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
