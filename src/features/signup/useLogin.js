@@ -1,8 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { login as loginApi } from "../../services/Auth";
-import { replace } from "stylis";
-import { toast } from "react-toastify";
 
 export const useLogin = () => {
   const queryClient = useQueryClient();
@@ -17,7 +15,6 @@ export const useLogin = () => {
     },
     onError: (err) => {
       console.log(err);
-      toast.error(err);
     },
   });
   return { login, isLoading };
