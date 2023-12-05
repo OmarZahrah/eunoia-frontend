@@ -201,10 +201,62 @@ const Wrapper = styled.div`
       margin-top: 3rem;
       font-size: 1.15rem;
     }
+    h1 {
+      font-size: 3rem;
+      padding-bottom: 2.9rem;
+    }
+    .again {
+      font-size: 1.8rem;
+    }
   }
   @media only screen and (max-width: ${({ theme }) => theme.semi}) {
+    gap: 15px;
+
+    .left-container {
+      width: 25rem;
+      height: 100vh;
+    }
+    h2 {
+      margin-top: 3rem;
+    }
+    h1 {
+      font-size: 2.5rem;
+      letter-spacing: 0.2rem;
+      padding-bottom: 3.1rem;
+    }
+    .again {
+      font-size: 1.7rem;
+      /* padding-bottom: 0.5rem; */
+    }
+    img {
+      width: 60%;
+    }
   }
 
+  @media only screen and (max-width: 52.5em) {
+    .left-container {
+      width: 22rem;
+      height: 100vh;
+    }
+    h1 {
+      font-size: 2.3rem;
+      letter-spacing: 0.2rem;
+      padding-bottom: 3.75rem;
+    }
+
+    img {
+      width: 70%;
+    }
+
+    .inputs {
+      gap: 0.6rem;
+      /* padding-bottom: 0.5rem; */
+    }
+    .again {
+      font-size: 1.5rem;
+      padding-bottom: 0.5rem;
+    }
+  }
   @media only screen and (max-width: ${({ theme }) => theme.small}) {
     a {
       color: var(--green, #74ab70) !important; //mlhash lazma
@@ -236,6 +288,9 @@ const Wrapper = styled.div`
       letter-spacing: 0.053rem;
     }
 
+    h1 {
+      padding-bottom: 4rem;
+    }
     img {
       width: 70%;
     }

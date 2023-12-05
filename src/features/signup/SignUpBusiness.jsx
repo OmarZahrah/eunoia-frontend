@@ -150,6 +150,12 @@ const Wrapper = styled.div`
   @media only screen and (max-width: ${({ theme }) => theme.small}) {
   }
 
+  @media only screen and (max-width: ${({ theme }) => theme.semi}) {
+    h2 {
+      font-size: 1.1rem;
+    }
+  }
+
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
     .container {
       /* grid-template-columns: 1fr; */
@@ -169,6 +175,9 @@ const Wrapper = styled.div`
       /* border-left: 2px solid #ddd; */
       border-top-left-radius: 100px;
       padding-top: 2rem;
+    }
+    h2 {
+      font-size: 1.3rem;
     }
   }
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {

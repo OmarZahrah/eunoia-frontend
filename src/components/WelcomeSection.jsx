@@ -45,7 +45,7 @@ const Wrapper = styled.section`
     /* width: 50%; */
   }
 
-  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
+  /* @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
     .again {
       font-size: 1.2rem;
       font-weight: 700;
@@ -72,5 +72,5 @@ const Wrapper = styled.section`
       letter-spacing: 0.2rem;
       padding-bottom: 4.375rem;
     }
-  }
+  } */
 `;
