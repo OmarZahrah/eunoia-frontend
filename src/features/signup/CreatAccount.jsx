@@ -15,7 +15,7 @@ const CreateAccount = () => {
               Service Provider
             </Button>
           </Link>
-          <Link to="/signup/user">
+          <Link to="/welcome">
             <Button
               className="userbutton"
               size="medium"
@@ -136,28 +136,25 @@ const Wrapper = styled.div`
     }
   }
   @media only screen and (max-width: ${({ theme }) => theme.mid}) {
-  
   }
   @media only screen and (max-width: ${({ theme }) => theme.small}) {
-    
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
- 
   }
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
     p {
-    font-size: 2rem;
-  }
-  .provbutton {
-    font-size: 18px;
-  }
-  .userbutton {
-    font-size: 1.20rem;
-  }
-  Button {
-    width: 23rem;
-    height: 2rem;
-  }
+      font-size: 2rem;
+    }
+    .provbutton {
+      font-size: 18px;
+    }
+    .userbutton {
+      font-size: 1.2rem;
+    }
+    Button {
+      width: 23rem;
+      height: 2rem;
+    }
   }
 `;

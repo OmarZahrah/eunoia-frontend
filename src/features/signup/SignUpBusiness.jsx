@@ -2,10 +2,20 @@ import styled from "styled-components";
 import Stepper from "../../components/Stepper";
 import Button from "../../components/Button";
 import { useAuthContext } from "../../context/AuthContext";
+import { useUpdateUser } from "./useUpdateUser";
 
 const SignUpBusiness = () => {
-  const { currentStep, setCurrentStep, steps, handleSubmit, onSubmit } =
-    useAuthContext();
+  const {
+    currentStep,
+    setCurrentStep,
+    steps,
+    handleSubmit,
+    profilePhotoFile,
+    coverPhotoFile,
+    albumPhotosFile,
+  } = useAuthContext();
+
+  const { updateUser, isUpdating } = useUpdateUser();
 
   const lastStep = currentStep === steps.length;
 
@@ -16,6 +26,23 @@ const SignUpBusiness = () => {
   const handleBack = () => {
     if (currentStep === 1) return;
     setCurrentStep((s) => s - 1);
+  };
+  const onSubmit = async (formData, role) => {
+    // const profile = Array.from(formData.profile);
+    // console.log(profilePhotoFile);
+    // console.log(profile);
+    // console.log(profilePic);
+    console.log(formData);
+    const finalData = {
+      ...formData,
+      role: "provider",
+      photo: profilePhotoFile,
+      coverPhoto: coverPhotoFile,
+      photoAlbum: [...Object.values(albumPhotosFile)],
+    };
+    // console.log(formData);
+    console.log(await updateUser(finalData));
+    // console.log(finalData);
   };
 
   return (

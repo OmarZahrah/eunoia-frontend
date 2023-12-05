@@ -4,6 +4,7 @@ import Step2 from "../features/signup/step2";
 import Step3 from "../features/signup/step3";
 import Step4 from "../features/signup/step4";
 import { useForm } from "react-hook-form";
+import { useUpdateUser } from "../features/signup/useUpdateUser";
 
 const AuthContext = createContext();
 
@@ -30,22 +31,25 @@ const AuthProvider = ({ children }) => {
   const [coverPhotoFile, setCoverPhotoFile] = useState("");
   const [albumPhotosFile, setAlbumPhotosFile] = useState("");
 
-  const onSubmit = async (formData, role) => {
-    // const profile = Array.from(formData.profile);
-    // console.log(profilePhotoFile);
-    // console.log(profile);
-    // console.log(profilePic);
-    console.log(formData);
-    const finalData = {
-      ...formData,
-      role: { role },
-      photo: profilePhotoFile,
-      coverPhoto: coverPhotoFile,
-      photoAlbum: [...Object.values(albumPhotosFile)],
-    };
-    console.log(finalData);
-    // console.log(signup(finalData));
-  };
+  // const { updateUser, isUpdating } = useUpdateUser();
+
+  // const onSubmit = async (formData, role) => {
+  //   // const profile = Array.from(formData.profile);
+  //   // console.log(profilePhotoFile);
+  //   // console.log(profile);
+  //   // console.log(profilePic);
+  //   console.log(formData);
+  //   const finalData = {
+  //     ...formData,
+  //     role: "provider",
+  //     photo: profilePhotoFile,
+  //     coverPhoto: coverPhotoFile,
+  //     photoAlbum: [...Object.values(albumPhotosFile)],
+  //   };
+  //   // console.log(formData);
+  //   // console.log(updateUser(finalData));
+  //   console.log(finalData);
+  // };
 
   return (
     <AuthContext.Provider
@@ -57,7 +61,7 @@ const AuthProvider = ({ children }) => {
         handleSubmit,
         getValues,
         errors,
-        onSubmit,
+        // onSubmit,
         profilePhoto,
         setProfilePhoto,
         coverPhoto,
@@ -66,6 +70,10 @@ const AuthProvider = ({ children }) => {
         setAlbumImages,
         showPassword,
         togglePasswordVisibility,
+
+        profilePhotoFile,
+        coverPhotoFile,
+        albumPhotosFile,
 
         setProfilePhotoFile,
         setCoverPhotoFile,

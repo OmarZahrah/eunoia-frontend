@@ -8,14 +8,15 @@ import { Link } from "react-router-dom";
 import Input from "../../components/Input";
 // import { useForm } from "react-hook-form";
 import { useAuthContext } from "../../context/AuthContext";
+import { useSignup } from "./useSignUp";
 
 const SignUpUser = () => {
   // const { handleSubmit } = useAuthContext();
   const { register, getValues, handleSubmit, errors } = useAuthContext();
   const { showPassword } = useAuthContext();
-
+  const { signup, isLoading } = useSignup();
   const onSubmit = async (data) => {
-    console.log(data);
+    signup(data);
     // console.log("data");
     // console.log(await getCurrentUser());
   };

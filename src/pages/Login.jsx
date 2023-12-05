@@ -13,14 +13,19 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Input from "../components/Input";
 import { useAuthContext } from "../context/AuthContext";
+import { login } from "../services/Auth";
+import { getCurrentUser } from "../services/user";
+import { useLogin } from "../features/signup/useLogin";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const { showPassword } = useAuthContext();
+  const { login, isLoading } = useLogin();
 
   const onSubmit = async (formData) => {
-    // console.log(login(formData));
-    console.log(formData);
+    console.log(await login(formData));
+    // console.log(await getCurrentUser());
+    // console.log(formData);
   };
   return (
     <Wrapper>
