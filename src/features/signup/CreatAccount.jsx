@@ -141,8 +141,14 @@ const Wrapper = styled.div`
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
+    .child {
+      background: var(--beige, #fef9f0);
+    }
   }
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    .child {
+      background: var(--beige, #fef9f0);
+    }
     p {
       font-size: 2rem;
     }
@@ -155,6 +161,31 @@ const Wrapper = styled.div`
     Button {
       width: 23rem;
       height: 2rem;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.semi}) {
+  }
+  @media only screen and (max-width: 430px) {
+    .child {
+      background: var(--beige, #fef9f0);
+    }
+    button {
+      width: 100%;
+    }
+    p {
+      font-size: 1.4rem;
+    }
+    .provbutton {
+      font-size: 19px;
+    }
+    .userbutton {
+      font-size: 1.2rem;
+    }
+    Button {
+      width: 15rem;
+    }
+    footer {
+      font-size: 1.3rem;
     }
   }
 `;
