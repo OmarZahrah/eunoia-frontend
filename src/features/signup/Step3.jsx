@@ -6,8 +6,12 @@ import { useAuthContext } from "../../context/AuthContext";
 import Input from "../../components/Input";
 
 const Step3 = () => {
-  const { profilePhoto, setProfilePhoto, setProfilePhotoFile } =
-    useAuthContext();
+  const {
+    profilePhoto,
+    profilePhotoFile,
+    setProfilePhoto,
+    setProfilePhotoFile,
+  } = useAuthContext();
   const { register } = useAuthContext();
 
   // const [profilePhoto, setProfilePhoto] = useState("");
@@ -27,7 +31,7 @@ const Step3 = () => {
               <img className="profile-photo" src={profilePhoto} />
             )}
             <input
-              {...register("photo")}
+              {...register("avatar")}
               className="image-input"
               type="file"
               onChange={onSelectFile}
@@ -45,14 +49,16 @@ const Step3 = () => {
         <Input
           type="text"
           id="mobile"
+          value="01091417354"
           placeholder="+20 1234567890"
-          {...register("mobile")}
+          {...register("phoneNumber")}
         />
       </FormInput>
       <div className="about-box">
         <label htmlFor="">About</label>
         <textarea
           {...register("about")}
+          value="test test test"
           placeholder="Describe Your Business"
         ></textarea>
       </div>

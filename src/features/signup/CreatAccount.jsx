@@ -26,9 +26,9 @@ const CreateAccount = () => {
             </Button>
           </Link>
         </div>
-        <footer>
+        {/* <footer>
           Already have an account ?<Link to="/login"> Login </Link>
-        </footer>
+        </footer> */}
       </div>
     </Wrapper>
   );

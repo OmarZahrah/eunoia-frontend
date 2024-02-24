@@ -9,16 +9,20 @@ import Input from "../../components/Input";
 // import { useForm } from "react-hook-form";
 import { useAuthContext } from "../../context/AuthContext";
 import { useSignup } from "./useSignUp";
+import { useForm } from "react-hook-form";
 
 const SignUpUser = () => {
   // const { handleSubmit } = useAuthContext();
-  const { register, getValues, handleSubmit, errors } = useAuthContext();
+  // const { register, getValues, handleSubmit, errors } = useAuthContext();
+  const { register, formState, getValues, handleSubmit } = useForm();
+  const { errors } = formState;
   const { showPassword } = useAuthContext();
   const { signup, isLoading } = useSignup();
-  const onSubmit = async (data) => {
-    signup(data);
+  const onSubmit = (data) => {
+    const finalData = { ...data, role: "user" };
+    signup(finalData);
     // console.log("data");
-    // console.log(await getCurrentUser());
+    // console.log(await getCurrentUse  r());
   };
   return (
     <Wrapper>
@@ -33,7 +37,7 @@ const SignUpUser = () => {
                 type="text"
                 id="fullname"
                 placeholder="Your Full Name"
-                {...register("fullname", {
+                {...register("name", {
                   required: "this field is required",
                 })}
               />

@@ -2,30 +2,32 @@ import styled from "styled-components";
 import { FaAngleDown } from "react-icons/fa6";
 import Select from "../../components/Select";
 import Button from "../../components/Button";
+import { businessCategories, governorates } from "../../data/data";
+import FormInput from "../../components/FormInput";
+import Input from "../../components/Input";
+import { useAuthContext } from "../../context/AuthContext";
 
 const Step2 = () => {
-  const businessCategories = [
-    { option: "Wedding Hall", value: "Wedding Hall" },
-    { option: "Photographer", value: "Photographer" },
-    { option: "Makeup Artist", value: "Makeup Artist" },
-    { option: "Event Planner", value: "Event Planner" },
-  ];
+  const { register } = useAuthContext();
 
-  const locations = [
-    { option: "Alexandria", value: "Alexandria" },
-    { option: "Ismailia", value: "Ismailia" },
-    { option: "Cairo", value: "Cairo" },
-    { option: "Portsaid", value: "Portsaid" },
-  ];
   return (
     <Wrapper>
       <div className="inputs">
+        <FormInput label="Business Name">
+          <Input
+            type="text"
+            id="businessName"
+            placeholder="The Diamond Hall"
+            value="zahra photography"
+            {...register("businessName")}
+          />
+        </FormInput>
         <Select
           label="Business Category"
           options={businessCategories}
           name="businessCategory"
         />
-        <Select label="Location" options={locations} name="location" />
+        <Select label="Location" options={governorates} name="location" />
       </div>
     </Wrapper>
   );

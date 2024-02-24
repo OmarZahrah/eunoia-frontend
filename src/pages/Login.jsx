@@ -7,14 +7,11 @@ import { LuUser } from "react-icons/lu";
 import { VscLock } from "react-icons/vsc";
 import WelcomeSection from "../components/WelcomeSection";
 import { Link } from "react-router-dom";
-// import customFetch from "../utils/customFetch";
-// import { useAuthContext } from "../context/AuthContext";
-// import { login } from "../services/Auth";
+
 import { useForm } from "react-hook-form";
 import Input from "../components/Input";
 import { useAuthContext } from "../context/AuthContext";
 import { login } from "../services/Auth";
-import { getCurrentUser } from "../services/user";
 import { useLogin } from "../features/signup/useLogin";
 
 const Login = () => {
@@ -23,9 +20,7 @@ const Login = () => {
   const { login, isLoading } = useLogin();
 
   const onSubmit = async (formData) => {
-    console.log(await login(formData));
-    // console.log(await getCurrentUser());
-    // console.log(formData);
+    login(formData);
   };
   return (
     <Wrapper>
@@ -340,6 +335,5 @@ const Wrapper = styled.div`
     .right {
       display: none;
     }
-
   }
 `;

@@ -102,6 +102,8 @@ const borders = {
 };
 
 const Button = styled.button`
+  /* display: flex; */
+  /* align-items: center; */
   border: none;
   border-radius: 100px;
   color: ${(props) => props.color};

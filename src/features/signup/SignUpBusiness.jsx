@@ -2,7 +2,8 @@ import styled from "styled-components";
 import Stepper from "../../components/Stepper";
 import Button from "../../components/Button";
 import { useAuthContext } from "../../context/AuthContext";
-import { useUpdateUser } from "./useUpdateUser";
+import { useUpdateUser } from "./useAddService";
+import { object } from "prop-types";
 
 const SignUpBusiness = () => {
   const {
@@ -27,22 +28,40 @@ const SignUpBusiness = () => {
     if (currentStep === 1) return;
     setCurrentStep((s) => s - 1);
   };
-  const onSubmit = async (formData, role) => {
-    // const profile = Array.from(formData.profile);
-    // console.log(profilePhotoFile);
-    // console.log(profile);
-    // console.log(profilePic);
-    console.log(formData);
-    const finalData = {
+  const onSubmit = (formData, role) => {
+    const allData = {
       ...formData,
-      role: "provider",
-      photo: profilePhotoFile,
-      coverPhoto: coverPhotoFile,
-      photoAlbum: [...Object.values(albumPhotosFile)],
+      avatar: profilePhotoFile && profilePhotoFile,
+      coverPhoto: coverPhotoFile && coverPhotoFile,
+      // images: albumPhotosFile && [...Object.values(albumPhotosFile)],
+      // photoAlbum: albumPhotosFile && [...albumPhotosFile],
     };
-    // console.log(formData);
-    console.log(await updateUser(finalData));
+
+    const filteredData = Object.fromEntries(
+      Object.entries(allData).filter(
+        (el) => el[1] !== "" && el[1] !== null && el[1] !== undefined
+      )
+    );
+
+    let finalData = new FormData();
+    Object.keys(filteredData).forEach((key) =>
+      finalData.append(key, filteredData[key])
+    );
+
+    // albumPhotosFile &&
+    //   allData["photoAlbum"].forEach((photo, i) =>
+    //     finalData.append("photoAlbum", photo)
+    //   );
+
+    // finalData.append("photoAlbum", JSON.stringify(allData["photoAlbum"]));
+
     // console.log(finalData);
+    // console.log(Object.fromEntries(finalData));
+    const Data = Object.fromEntries(finalData);
+    // console.log("finalData: ", Data);
+    // console.log(JSON.parse(Data["photoAlbum"]));
+    // console.log("album ", Data["photoAlbum"]);
+    updateUser(finalData);
   };
 
   return (
@@ -181,6 +200,7 @@ const Wrapper = styled.div`
     }
   }
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    height: 100%;
     .container {
       width: 100%;
       height: 100%;

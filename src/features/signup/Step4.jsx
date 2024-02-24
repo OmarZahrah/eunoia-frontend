@@ -76,7 +76,8 @@ const Step4 = () => {
           <label>
             + Add photos
             <input
-              {...register("photoAlbum")}
+              // {...register("photoAlbum")}
+              {...register("images")}
               className="image-input"
               type="file"
               onChange={(e) => onSelectFile(e, "album")}

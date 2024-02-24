@@ -14,6 +14,7 @@ import { theme } from "./assets/styles/responsive";
 import { QueryClient } from "@tanstack/query-core";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Toaster } from "react-hot-toast";
 
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({
@@ -47,7 +48,7 @@ function App() {
             </Routes>
           </BrowserRouter>
         </AuthProvider>
-        {/* <Toaster
+        <Toaster
           position="top-center"
           gutter={12}
           containerStyle={{ margin: "8px" }}
@@ -62,11 +63,11 @@ function App() {
               fontSize: "16px",
               maxWidth: "500px",
               padding: "16px 24px",
-              // backgroundColor: "#ddd",
-              // color: "#222",
+              backgroundColor: "#fff",
+              color: "#222",
             },
           }}
-        /> */}
+        />
       </ThemeProvider>
     </QueryClientProvider>
   );

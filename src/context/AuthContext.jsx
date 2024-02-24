@@ -4,7 +4,7 @@ import Step2 from "../features/signup/step2";
 import Step3 from "../features/signup/step3";
 import Step4 from "../features/signup/step4";
 import { useForm } from "react-hook-form";
-import { useUpdateUser } from "../features/signup/useUpdateUser";
+import { useUpdateUser } from "../features/signup/useAddService";
 
 const AuthContext = createContext();
 
@@ -20,8 +20,7 @@ const AuthProvider = ({ children }) => {
   const [profilePhoto, setProfilePhoto] = useState("");
   const [coverPhoto, setCoverPhoto] = useState([]);
   const [albumImages, setAlbumImages] = useState([]);
-  const { register, formState, getValues, handleSubmit } = useForm();
-  const { errors } = formState;
+  const { register, handleSubmit } = useForm();
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword((s) => !s);
@@ -59,8 +58,8 @@ const AuthProvider = ({ children }) => {
         setCurrentStep,
         register,
         handleSubmit,
-        getValues,
-        errors,
+        // getValues,
+        // errors,
         // onSubmit,
         profilePhoto,
         setProfilePhoto,

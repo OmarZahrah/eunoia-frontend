@@ -37,7 +37,7 @@ const Welcome = () => {
       <div className="container">
         <div className="images">
           <img src={image1} />
-          <img src={image2} />
+          <img src={image2} className="mobile-img" />
           <img src={image3} />
         </div>
 
@@ -63,6 +63,16 @@ const Wrapper = styled.div`
   flex-direction: column;
   gap: 1rem;
   align-items: center;
+
+  .container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-5%);
+  }
+
   nav {
     display: flex;
     justify-content: space-between;
@@ -70,12 +80,9 @@ const Wrapper = styled.div`
     width: 80%;
     padding-top: 1rem;
   }
-  .container {
-    height: 100%;
+  .buttons {
     display: flex;
-    flex-direction: column;
   }
-
   .Hlogo {
     width: 9.3rem;
     height: 2.2rem;
@@ -102,7 +109,7 @@ const Wrapper = styled.div`
     justify-content: center;
   }
   .images img {
-    width: 32%;
+    width: 30%;
     padding: 17px;
   }
 
@@ -119,7 +126,7 @@ const Wrapper = styled.div`
   p {
     color: var(--text, rgba(0, 0, 0, 0.6));
     text-align: center;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 300;
     letter-spacing: 0.0625rem;
     width: 55%;
@@ -157,19 +164,19 @@ const Wrapper = styled.div`
       width: 83%;
     }
     .images img {
-      width: 34%;
+      width: 28%;
       padding: 19px;
-    }
-
-    p {
-      font-size: 1.7rem;
-      font-weight: 300;
-      letter-spacing: 0.0625rem;
-      width: 64%;
     }
 
     .container {
       gap: 10px;
+    }
+
+    .h {
+      font-size: 2rem;
+    }
+    p {
+      font-size: 1.1rem;
     }
   }
 
@@ -181,6 +188,8 @@ const Wrapper = styled.div`
 
     .logbutton {
       font-size: 1.3rem;
+      width: 8rem;
+      height: 2.6rem;
     }
     .regbutton {
       font-size: 1.1rem;
@@ -192,12 +201,12 @@ const Wrapper = styled.div`
       width: 75%;
     }
     .images img {
-      width: 35%;
+      width: 28%;
       padding: 19px;
     }
 
     p {
-      font-size: 1.5rem;
+      font-size: 1rem;
       font-weight: 350;
       letter-spacing: 0.0625rem;
       padding-bottom: 1rem;
@@ -208,18 +217,27 @@ const Wrapper = styled.div`
     }
   }
 
+  @media only screen and (max-width: ${({ theme }) => theme.semi}) {
+    .h {
+      font-size: 1.5rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+  }
+
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
     background: linear-gradient(to top, #fef9f0 60%, #fff 40%);
-    height: 100%;
+    height: 100vh;
     display: flex;
     gap: 2rem;
     align-items: center;
 
-    nav {
+    /* nav {
       padding-top: 2rem;
       flex-direction: column;
       gap: 2rem;
-    }
+    } */
     .Hlogo {
       width: 7.6rem;
       height: 2.1rem;
@@ -234,14 +252,11 @@ const Wrapper = styled.div`
     }
 
     .logbutton {
-      font-size: 1.8rem;
-      margin-right: 10rem;
+      font-size: 1.4rem;
     }
 
     .regbutton {
       font-size: 1.3rem;
-      width: 8rem;
-      height: 2.9rem;
     }
 
     .h {
@@ -249,96 +264,54 @@ const Wrapper = styled.div`
       font-weight: 510;
       font-style: italic;
       letter-spacing: 0.0625rem;
-      width: 50%;
+      width: 100%;
     }
 
     p {
-      font-size: 1.2rem !important;
+      font-size: 1rem !important;
       font-weight: 350;
       letter-spacing: 0.0625rem;
-      width: 80%;
+      width: 60%;
     }
     .container {
-      gap: 6rem;
+      /* gap: 6rem; */
+      height: 100%;
     }
     .text {
-      gap: 1rem;
+      /* gap: 1rem; */
     }
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
-    height: 100%;
-    background: linear-gradient(to top, #fef9f0 60%, #fff 40%);
-    display: flex;
-    gap: 3rem;
-    align-items: center;
+    background-color: var(--color-brand-beige);
     nav {
-      padding-top: 3.5rem;
+      /* background-color: var(--color-brand-beige); */
+      width: 100%;
+      padding: 1.2rem;
     }
-  }
+    .container {
+      /* background-color: var(--color-brand-beige); */
+      justify-content: start;
 
-  @media only screen and (max-width: ${({ theme }) => theme.semi}) {
-    .h {
-      font-size: 1.9rem;
+      /* align-items: flex-start; */
+      transform: translateY(0);
+    }
+    .buttons button {
+      width: 100%;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+    }
+    .images img {
+      display: none;
+    }
+    .images .mobile-img {
+      display: block;
+      width: 90%;
+      /* border: 8px solid var(--color-brand-pink); */
     }
     p {
-      font-size: 1.5rem;
+      width: 80%;
+      font-size: 0.9rem;
     }
   }
-
-  @media only screen and (max-width: 527px) {
-    heigh: 100%;
-    gap: 1.9rem;
-
-    .logbutton {
-      font-size: 1rem;
-      margin-right: 10rem;
-    }
-
-    nav {
-      padding-top: 1rem;
-    }
-
-    .regbutton {
-      font-size: 1.1rem;
-      width: 7.9rem;
-      height: 2.4rem;
-    }
-    .h{
-      font-size: 2rem !important ;
-      width:72%;
-    }
-    p{
-      font-size: 1.3rem !important ;
-      width:85%;
-    }
-  }
-  
-  /* @media only screen and (max-width: 570px) {
-    heigh: 100%;
-    gap: 1.9rem;
-
-    .logbutton {
-      font-size: 1.4rem;
-      margin-right: 10rem;
-    }
-
-    nav {
-      padding-top: 1rem;
-    }
-
-    .regbutton {
-      font-size: 1.1rem;
-      width: 7.9rem;
-      height: 2.4rem;
-    }
-    .h{
-      font-size: 2rem !important ;
-      width:72%;
-    }
-    p{
-      font-size: 1.3rem !important ;
-      width:85%;
-    }
-  } */
 `;
