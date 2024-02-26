@@ -2,8 +2,7 @@ import styled from "styled-components";
 import Stepper from "../../components/Stepper";
 import Button from "../../components/Button";
 import { useAuthContext } from "../../context/AuthContext";
-import { useUpdateUser } from "./useAddService";
-import { object } from "prop-types";
+import { useAddService } from "./useAddService";
 
 const SignUpBusiness = () => {
   const {
@@ -16,7 +15,7 @@ const SignUpBusiness = () => {
     albumPhotosFile,
   } = useAuthContext();
 
-  const { updateUser, isUpdating } = useUpdateUser();
+  const { addService, isLoading } = useAddService();
 
   const lastStep = currentStep === steps.length;
 
@@ -28,40 +27,34 @@ const SignUpBusiness = () => {
     if (currentStep === 1) return;
     setCurrentStep((s) => s - 1);
   };
-  const onSubmit = (formData, role) => {
+  const onSubmit = (formData) => {
     const allData = {
       ...formData,
       avatar: profilePhotoFile && profilePhotoFile,
-      coverPhoto: coverPhotoFile && coverPhotoFile,
-      // images: albumPhotosFile && [...Object.values(albumPhotosFile)],
-      // photoAlbum: albumPhotosFile && [...albumPhotosFile],
+      imageCover: coverPhotoFile && coverPhotoFile,
+      images: albumPhotosFile && [...albumPhotosFile],
     };
 
     const filteredData = Object.fromEntries(
       Object.entries(allData).filter(
-        (el) => el[1] !== "" && el[1] !== null && el[1] !== undefined
+        (el) =>
+          el[1] !== "" &&
+          el[1] !== null &&
+          el[1] !== undefined &&
+          el[0] !== "images"
       )
     );
+    filteredData;
 
     let finalData = new FormData();
     Object.keys(filteredData).forEach((key) =>
       finalData.append(key, filteredData[key])
     );
+    for (let i = 0; i < albumPhotosFile.length; i++) {
+      finalData.append("images", albumPhotosFile[i]);
+    }
 
-    // albumPhotosFile &&
-    //   allData["photoAlbum"].forEach((photo, i) =>
-    //     finalData.append("photoAlbum", photo)
-    //   );
-
-    // finalData.append("photoAlbum", JSON.stringify(allData["photoAlbum"]));
-
-    // console.log(finalData);
-    // console.log(Object.fromEntries(finalData));
-    const Data = Object.fromEntries(finalData);
-    // console.log("finalData: ", Data);
-    // console.log(JSON.parse(Data["photoAlbum"]));
-    // console.log("album ", Data["photoAlbum"]);
-    updateUser(finalData);
+    addService(finalData);
   };
 
   return (
@@ -78,7 +71,6 @@ const SignUpBusiness = () => {
           <div className="form-inputs">{steps[currentStep - 1].stepForm}</div>
         </div>
         <div className="buttons">
-          {/* <Link to="/signup/create"> */}
           <Button
             type="button"
             onClick={handleBack}
@@ -88,7 +80,6 @@ const SignUpBusiness = () => {
           >
             &lt; Back
           </Button>
-          {/* </Link> */}
 
           {!lastStep && (
             <Button
@@ -101,8 +92,13 @@ const SignUpBusiness = () => {
             </Button>
           )}
           {lastStep && (
-            <Button type="submit" background="green" size="small">
-              Submit
+            <Button
+              type="submit"
+              background="green"
+              size="small"
+              disabled={isLoading}
+            >
+              {isLoading ? "Submitting" : "Submit"}
             </Button>
           )}
         </div>
@@ -121,13 +117,10 @@ const Wrapper = styled.div`
   margin: auto;
   .container {
     width: 90%;
-    /* width: 130rem; */
     min-height: 80%;
     margin: auto;
     display: grid;
     grid-template-columns: 20% 1fr;
-    /* grid-auto-rows: 20% min-content; */
-    /* grid-auto-rows: 20% minmax(min-content, 1fr) 20%; */
     grid-auto-rows: 12.5% minmax(min-content, 1fr) 15%;
   }
 
@@ -177,7 +170,6 @@ const Wrapper = styled.div`
 
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
     .container {
-      /* grid-template-columns: 1fr; */
       display: flex;
       flex-direction: column;
       width: 100%;
@@ -190,8 +182,6 @@ const Wrapper = styled.div`
     }
     .form-step {
       border-left: none;
-      /* border-top: 2px solid #ddd; */
-      /* border-left: 2px solid #ddd; */
       border-top-left-radius: 100px;
       padding-top: 2rem;
     }

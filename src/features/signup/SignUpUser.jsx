@@ -21,8 +21,6 @@ const SignUpUser = () => {
   const onSubmit = (data) => {
     const finalData = { ...data, role: "user" };
     signup(finalData);
-    // console.log("data");
-    // console.log(await getCurrentUse  r());
   };
   return (
     <Wrapper>
@@ -98,9 +96,9 @@ const SignUpUser = () => {
               className="button"
               size="large"
               type="submit"
-              // onClick={}
+              disabled={isLoading}
             >
-              Create Account
+              {isLoading ? "Creating Account..." : " Create Account"}
             </Button>
             <p className="text">
               Already have an account ? <Link to="/login">Login</Link>

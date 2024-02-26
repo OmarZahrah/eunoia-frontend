@@ -15,7 +15,7 @@ const CreateAccount = () => {
               Service Provider
             </Button>
           </Link>
-          <Link to="/welcome">
+          <Link to="/home">
             <Button
               className="userbutton"
               size="medium"

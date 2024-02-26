@@ -11,7 +11,6 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Input from "../components/Input";
 import { useAuthContext } from "../context/AuthContext";
-import { login } from "../services/Auth";
 import { useLogin } from "../features/signup/useLogin";
 
 const Login = () => {
@@ -68,8 +67,8 @@ const Login = () => {
             <Link className="text" to="">
               Forgot your password ?
             </Link>
-            <Button size="large" type="submit">
-              Log In
+            <Button size="large" type="submit" disabled={isLoading}>
+              {isLoading ? "Logging in..." : "Log In"}
             </Button>
             <p className="text">
               Not a user ?{" "}

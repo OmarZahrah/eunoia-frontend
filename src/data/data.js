@@ -1,8 +1,9 @@
 export const businessCategories = [
-  { option: "Venus", value: "Venus" },
+  { option: "Venues", value: "Venues" },
   { option: "Photographer", value: "Photographers" },
-  { option: "Makeup Artist", value: "Makeup Artists" },
+  { option: "Makeup Artist", value: "Makeup" },
   { option: "Event Planner", value: "Event Planners" },
+  { option: "DJS", value: "DJs" },
   { option: "Food", value: "Food" },
   { option: "Hair Stylist", value: "Hair Stylists" },
   { option: "Other", value: "Other" },
