@@ -37,7 +37,7 @@ const Welcome = () => {
       <div className="container">
         <div className="images">
           <img src={image1} />
-          <img src={image2} />
+          <img src={image2} className="mobile-img" />
           <img src={image3} />
         </div>
 
@@ -63,6 +63,16 @@ const Wrapper = styled.div`
   flex-direction: column;
   gap: 1rem;
   align-items: center;
+
+  .container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-5%);
+  }
+
   nav {
     display: flex;
     justify-content: space-between;
@@ -70,12 +80,9 @@ const Wrapper = styled.div`
     width: 80%;
     padding-top: 1rem;
   }
-  .container {
-    height: 100%;
+  .buttons {
     display: flex;
-    flex-direction: column;
   }
-
   .Hlogo {
     width: 9.3rem;
     height: 2.2rem;
@@ -102,7 +109,7 @@ const Wrapper = styled.div`
     justify-content: center;
   }
   .images img {
-    width: 32%;
+    width: 30%;
     padding: 17px;
   }
 
@@ -119,7 +126,7 @@ const Wrapper = styled.div`
   p {
     color: var(--text, rgba(0, 0, 0, 0.6));
     text-align: center;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 300;
     letter-spacing: 0.0625rem;
     width: 55%;
@@ -135,7 +142,7 @@ const Wrapper = styled.div`
       width: 85%;
       padding-top: 2rem;
     }
-     .Hlogo {
+    .Hlogo {
       width: 8.7rem;
       height: 2rem;
       flex-shrink: 0;
@@ -157,21 +164,20 @@ const Wrapper = styled.div`
       width: 83%;
     }
     .images img {
-      width: 34%;
+      width: 28%;
       padding: 19px;
-    }
-   
-    p {
-      font-size: 1.7rem;
-      font-weight: 300;
-      letter-spacing: 0.0625rem;
-      width: 64%;
     }
 
     .container {
       gap: 10px;
     }
-    
+
+    .h {
+      font-size: 2rem;
+    }
+    p {
+      font-size: 1.1rem;
+    }
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.small}) {
@@ -182,6 +188,8 @@ const Wrapper = styled.div`
 
     .logbutton {
       font-size: 1.3rem;
+      width: 8rem;
+      height: 2.6rem;
     }
     .regbutton {
       font-size: 1.1rem;
@@ -193,36 +201,44 @@ const Wrapper = styled.div`
       width: 75%;
     }
     .images img {
-      width: 35%;
+      width: 28%;
       padding: 19px;
-
     }
-   
+
     p {
-      font-size: 1.8rem;
+      font-size: 1rem;
       font-weight: 350;
       letter-spacing: 0.0625rem;
       padding-bottom: 1rem;
     }
-    
+
     .container {
       gap: 15px;
     }
   }
 
+  @media only screen and (max-width: ${({ theme }) => theme.semi}) {
+    .h {
+      font-size: 1.5rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+  }
 
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
     background: linear-gradient(to top, #fef9f0 60%, #fff 40%);
-  display: flex;
-  gap: 4rem;
-  align-items:center;
+    height: 100vh;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
 
-    nav {
-      padding-top: 3rem;
-      flex-direction:column;
-      gap:2rem;
-    }
-    .Hlogo{
+    /* nav {
+      padding-top: 2rem;
+      flex-direction: column;
+      gap: 2rem;
+    } */
+    .Hlogo {
       width: 7.6rem;
       height: 2.1rem;
     }
@@ -233,53 +249,69 @@ const Wrapper = styled.div`
     .images img {
       width: 39%;
       padding: 1px;
-      
     }
-   
+
     .logbutton {
-      font-size: 1.8rem;
-      margin-right: 10rem;
+      font-size: 1.4rem;
     }
 
     .regbutton {
       font-size: 1.3rem;
-      width: 8rem;
-      height: 2.9rem;
     }
 
-    .h{
-    font-size: 2rem;
-    font-weight: 510;
-    font-style: italic;
-    letter-spacing: 0.0625rem;
-    width: 55%;
+    .h {
+      font-size: 1.5rem !important ;
+      font-weight: 510;
+      font-style: italic;
+      letter-spacing: 0.0625rem;
+      width: 100%;
     }
 
     p {
-      font-size: 1.4rem;
+      font-size: 1rem !important;
       font-weight: 350;
       letter-spacing: 0.0625rem;
-      width: 80%;
-      
+      width: 60%;
     }
     .container {
-      gap: 6rem;
+      /* gap: 6rem; */
+      height: 100%;
     }
-    .text{
-      gap:1rem;
+    .text {
+      /* gap: 1rem; */
     }
- 
   }
 
-
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
-  background: linear-gradient(to top, #fef9f0 65%, #fff 35%);
-  display: flex;
-  gap: 3rem;
-  align-items:center;
-  nav {
-      padding-top: 3.5rem;
-    
+    background-color: var(--color-brand-beige);
+    nav {
+      /* background-color: var(--color-brand-beige); */
+      width: 100%;
+      padding: 1.2rem;
+    }
+    .container {
+      /* background-color: var(--color-brand-beige); */
+      justify-content: start;
+
+      /* align-items: flex-start; */
+      transform: translateY(0);
+    }
+    .buttons button {
+      width: 100%;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+    }
+    .images img {
+      display: none;
+    }
+    .images .mobile-img {
+      display: block;
+      width: 90%;
+      /* border: 8px solid var(--color-brand-pink); */
+    }
+    p {
+      width: 80%;
+      font-size: 0.9rem;
     }
   }
 `;

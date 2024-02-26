@@ -1,60 +1,97 @@
 import styled from "styled-components";
-import FormInput from "../../components/FormInput";
+import Select from "../../components/Select";
 import { IoImageOutline } from "react-icons/io5";
+import { TiDeleteOutline } from "react-icons/ti";
+
 import { MdAdd } from "react-icons/md";
 import { useAuthContext } from "../../context/AuthContext";
-import Input from "../../components/Input";
 
 const Step3 = () => {
-  const { profilePhoto, setProfilePhoto, setProfilePhotoFile } =
-    useAuthContext();
-  const { register } = useAuthContext();
+  const keywords = [
+    { option: "test1", value: "test1" },
+    { option: "test2", value: "test2" },
+    { option: "test3", value: "test3" },
+    { option: "test4", value: "test4" },
+  ];
+  const {
+    register,
+    coverPhoto,
+    setCoverPhoto,
+    albumImages,
+    setAlbumImages,
+    setCoverPhotoFile,
+    setAlbumPhotosFile,
+  } = useAuthContext();
 
-  // const [profilePhoto, setProfilePhoto] = useState("");
-  const onSelectFile = (e) => {
+  const onSelectFile = (e, type) => {
     const selectedFiles = e.target.files;
-    setProfilePhotoFile(selectedFiles[0]);
-    const photo = URL.createObjectURL(...selectedFiles);
-    setProfilePhoto(photo);
+    const selectedFilesArray = Array.from(selectedFiles);
+    const imagesArray = selectedFilesArray.map((file) => {
+      return URL.createObjectURL(file);
+    });
+
+    if (type === "album") {
+      setAlbumPhotosFile(selectedFiles);
+      setAlbumImages((images) => images.concat(imagesArray));
+    } else if (type === "cover") {
+      setCoverPhotoFile(selectedFiles[0]);
+      setCoverPhoto(imagesArray);
+    }
   };
+
+  const handleDeleteImage = (image) => {
+    const newImages = albumImages.filter((images) => images !== image);
+    setAlbumImages(newImages);
+  };
+
   return (
     <Wrapper>
-      <div className="image-box">
-        <div className="image">
-          <label className="image-uploader">
-            {!profilePhoto && <IoImageOutline className="image-icon" />}
-            {profilePhoto && (
-              <img className="profile-photo" src={profilePhoto} />
-            )}
+      <Select
+        name="keywords"
+        label="Words describe your business (Choose 3)"
+        options={keywords}
+      />
+      <div>
+        <span className="image-label">Upload your cover photo</span>
+        <label className="image-uploader">
+          {coverPhoto.length === 0 && <IoImageOutline className="image-icon" />}
+          {coverPhoto.length > 0 && (
+            <img className="cover-photo" src={coverPhoto} />
+          )}
+          <input
+            {...register("imageCover")}
+            className="image-input"
+            type="file"
+            onChange={(e) => onSelectFile(e, "cover")}
+          />
+          <MdAdd className="add-icon" />
+        </label>
+
+        <p className="add-photos">
+          Do you want to add more photos for people to see?{" "}
+          <label>
+            + Add photos
             <input
-              {...register("photo")}
+              {...register("images")}
               className="image-input"
               type="file"
-              onChange={onSelectFile}
+              onChange={(e) => onSelectFile(e, "album")}
+              multiple
             />
-            <MdAdd className="add-icon" />
           </label>
+        </p>
+        <div className="images">
+          {albumImages &&
+            albumImages.map((image) => (
+              <div className="image" key={image}>
+                <img src={image} />
+                <TiDeleteOutline
+                  className="delete-icon"
+                  onClick={() => handleDeleteImage(image)}
+                />
+              </div>
+            ))}
         </div>
-        <div className="image-text">
-          <h3>Upload Your Profile Picture</h3>
-          <p>Preferably Your Personal Photo</p>
-        </div>
-      </div>
-
-      <FormInput label="Mobile Number">
-        <Input
-          type="text"
-          id="mobile"
-          placeholder="+20 1234567890"
-          {...register("mobile")}
-        />
-      </FormInput>
-      <div className="about-box">
-        <label htmlFor="">About</label>
-        <textarea
-          {...register("about")}
-          placeholder="Describe Your Business"
-        ></textarea>
       </div>
     </Wrapper>
   );
@@ -64,28 +101,33 @@ export default Step3;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
   gap: 1rem;
-  .image-box {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-  }
   .image-uploader {
-    width: 7rem;
-    height: 7rem;
+    width: 60%;
+    height: 10rem;
     border: 1px solid var(--color-grey-500);
-    border-radius: 50%;
+    border-radius: 3px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    margin-top: 10px;
     position: relative;
   }
-  .profile-photo {
+  .cover-photo {
     width: 100%;
     height: 100%;
+  }
+  .add-icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: #fff;
     border-radius: 50%;
+    background-color: var(--color-brand-pink);
+    transform: translate(50%, 50%);
+    width: 24px;
+    height: 24px;
   }
   .image-input {
     display: none;
@@ -95,43 +137,46 @@ const Wrapper = styled.div`
     height: 2rem;
     color: var(--color-grey-500);
   }
-  .add-icon {
+  .add-photos {
+    color: var(--color-black-light);
+    margin-top: 5px;
+  }
+  .add-photos label {
+    color: var(--color-brand-green);
+    cursor: pointer;
+  }
+  .images {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .image {
+    position: relative;
+  }
+  .image img {
+    border: 2px solid var(--color-grey-500);
+    width: 50px;
+  }
+  .delete-icon {
     position: absolute;
     bottom: 0;
-    left: 60%;
+    right: 0;
     color: #fff;
-    border-radius: 50%;
-    background-color: var(--color-brand-pink);
-    transform: translate(50%, 50%);
-    width: 24px;
-    height: 24px;
     transform: translateX(50%);
-  }
-  .image-text {
-    color: var(--color-black-light);
-  }
-  .about-box {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-  textarea {
-    border: none;
-    width: 60%;
-    height: 5rem;
-    box-shadow: 0px 2px 11px -5px rgba(0, 0, 0, 0.5);
-    padding: 5px 10px;
+    background-color: #a00808;
+    border-radius: 50%;
+    cursor: pointer;
   }
   @media only screen and (max-width: ${({ theme }) => theme.mid}) {
   }
   @media only screen and (max-width: ${({ theme }) => theme.small}) {
-    font-size: 1rem;
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
-    textarea {
+    .image-uploader {
       width: 100%;
-      height: 8rem;
     }
   }
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {

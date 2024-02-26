@@ -8,16 +8,19 @@ import { Link } from "react-router-dom";
 import Input from "../../components/Input";
 // import { useForm } from "react-hook-form";
 import { useAuthContext } from "../../context/AuthContext";
+import { useSignup } from "./useSignUp";
+import { useForm } from "react-hook-form";
 
 const SignUpUser = () => {
   // const { handleSubmit } = useAuthContext();
-  const { register, getValues, handleSubmit, errors } = useAuthContext();
+  // const { register, getValues, handleSubmit, errors } = useAuthContext();
+  const { register, formState, getValues, handleSubmit } = useForm();
+  const { errors } = formState;
   const { showPassword } = useAuthContext();
-
-  const onSubmit = async (data) => {
-    console.log(data);
-    // console.log("data");
-    // console.log(await getCurrentUser());
+  const { signup, isLoading } = useSignup();
+  const onSubmit = (data) => {
+    const finalData = { ...data, role: "user" };
+    signup(finalData);
   };
   return (
     <Wrapper>
@@ -32,7 +35,7 @@ const SignUpUser = () => {
                 type="text"
                 id="fullname"
                 placeholder="Your Full Name"
-                {...register("fullname", {
+                {...register("name", {
                   required: "this field is required",
                 })}
               />
@@ -93,9 +96,9 @@ const SignUpUser = () => {
               className="button"
               size="large"
               type="submit"
-              // onClick={}
+              disabled={isLoading}
             >
-              Create Account
+              {isLoading ? "Creating Account..." : " Create Account"}
             </Button>
             <p className="text">
               Already have an account ? <Link to="/login">Login</Link>
@@ -200,10 +203,62 @@ const Wrapper = styled.div`
       margin-top: 3rem;
       font-size: 1.15rem;
     }
+    h1 {
+      font-size: 3rem;
+      padding-bottom: 2.9rem;
+    }
+    .again {
+      font-size: 1.8rem;
+    }
   }
   @media only screen and (max-width: ${({ theme }) => theme.semi}) {
+    gap: 15px;
+
+    .left-container {
+      width: 25rem;
+      height: 100vh;
+    }
+    h2 {
+      margin-top: 3rem;
+    }
+    h1 {
+      font-size: 2.5rem;
+      letter-spacing: 0.2rem;
+      padding-bottom: 3.1rem;
+    }
+    .again {
+      font-size: 1.7rem;
+      /* padding-bottom: 0.5rem; */
+    }
+    img {
+      width: 60%;
+    }
   }
 
+  @media only screen and (max-width: 52.5em) {
+    .left-container {
+      width: 22rem;
+      height: 100vh;
+    }
+    h1 {
+      font-size: 2.3rem;
+      letter-spacing: 0.2rem;
+      padding-bottom: 3.75rem;
+    }
+
+    img {
+      width: 70%;
+    }
+
+    .inputs {
+      gap: 0.6rem;
+      /* padding-bottom: 0.5rem; */
+    }
+    .again {
+      font-size: 1.5rem;
+      padding-bottom: 0.5rem;
+    }
+  }
   @media only screen and (max-width: ${({ theme }) => theme.small}) {
     a {
       color: var(--green, #74ab70) !important; //mlhash lazma
@@ -235,6 +290,9 @@ const Wrapper = styled.div`
       letter-spacing: 0.053rem;
     }
 
+    h1 {
+      padding-bottom: 4rem;
+    }
     img {
       width: 70%;
     }

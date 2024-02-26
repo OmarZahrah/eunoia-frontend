@@ -1,17 +1,15 @@
 import { createContext, useContext, useState } from "react";
 import Step1 from "../features/signup/step1";
 import Step2 from "../features/signup/step2";
-import Step3 from "../features/signup/step3";
-import Step4 from "../features/signup/step4";
+import Step3 from "../features/signup/Step3";
+// import Step4 from "../features/signup/Step3";
 import { useForm } from "react-hook-form";
-
 const AuthContext = createContext();
 
 const steps = [
-  // { stepNum: 1, stepTitle: "Personal Details", stepForm: <Step1 /> },
-  { stepNum: 1, stepTitle: "Business Type", stepForm: <Step2 /> },
-  { stepNum: 2, stepTitle: "Business Info", stepForm: <Step3 /> },
-  { stepNum: 3, stepTitle: "More Details", stepForm: <Step4 /> },
+  { stepNum: 1, stepTitle: "Business Type", stepForm: <Step1 /> },
+  { stepNum: 2, stepTitle: "Business Info", stepForm: <Step2 /> },
+  { stepNum: 3, stepTitle: "More Details", stepForm: <Step3 /> },
 ];
 
 const AuthProvider = ({ children }) => {
@@ -19,8 +17,7 @@ const AuthProvider = ({ children }) => {
   const [profilePhoto, setProfilePhoto] = useState("");
   const [coverPhoto, setCoverPhoto] = useState([]);
   const [albumImages, setAlbumImages] = useState([]);
-  const { register, formState, getValues, handleSubmit } = useForm();
-  const { errors } = formState;
+  const { register, handleSubmit } = useForm();
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword((s) => !s);
@@ -30,23 +27,6 @@ const AuthProvider = ({ children }) => {
   const [coverPhotoFile, setCoverPhotoFile] = useState("");
   const [albumPhotosFile, setAlbumPhotosFile] = useState("");
 
-  const onSubmit = async (formData, role) => {
-    // const profile = Array.from(formData.profile);
-    // console.log(profilePhotoFile);
-    // console.log(profile);
-    // console.log(profilePic);
-    console.log(formData);
-    const finalData = {
-      ...formData,
-      role: { role },
-      photo: profilePhotoFile,
-      coverPhoto: coverPhotoFile,
-      photoAlbum: [...Object.values(albumPhotosFile)],
-    };
-    console.log(finalData);
-    // console.log(signup(finalData));
-  };
-
   return (
     <AuthContext.Provider
       value={{
@@ -55,9 +35,9 @@ const AuthProvider = ({ children }) => {
         setCurrentStep,
         register,
         handleSubmit,
-        getValues,
-        errors,
-        onSubmit,
+        // getValues,
+        // errors,
+        // onSubmit,
         profilePhoto,
         setProfilePhoto,
         coverPhoto,
@@ -66,6 +46,10 @@ const AuthProvider = ({ children }) => {
         setAlbumImages,
         showPassword,
         togglePasswordVisibility,
+
+        profilePhotoFile,
+        coverPhotoFile,
+        albumPhotosFile,
 
         setProfilePhotoFile,
         setCoverPhotoFile,

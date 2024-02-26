@@ -15,7 +15,7 @@ const CreateAccount = () => {
               Service Provider
             </Button>
           </Link>
-          <Link to="/signup/user">
+          <Link to="/home">
             <Button
               className="userbutton"
               size="medium"
@@ -26,9 +26,9 @@ const CreateAccount = () => {
             </Button>
           </Link>
         </div>
-        <footer>
+        {/* <footer>
           Already have an account ?<Link to="/login"> Login </Link>
-        </footer>
+        </footer> */}
       </div>
     </Wrapper>
   );
@@ -136,28 +136,56 @@ const Wrapper = styled.div`
     }
   }
   @media only screen and (max-width: ${({ theme }) => theme.mid}) {
-  
   }
   @media only screen and (max-width: ${({ theme }) => theme.small}) {
-    
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
- 
+    .child {
+      background: var(--beige, #fef9f0);
+    }
   }
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    .child {
+      background: var(--beige, #fef9f0);
+    }
     p {
-    font-size: 2rem;
+      font-size: 2rem;
+    }
+    .provbutton {
+      font-size: 18px;
+    }
+    .userbutton {
+      font-size: 1.2rem;
+    }
+    Button {
+      width: 23rem;
+      height: 2rem;
+    }
   }
-  .provbutton {
-    font-size: 18px;
+  @media only screen and (max-width: ${({ theme }) => theme.semi}) {
   }
-  .userbutton {
-    font-size: 1.20rem;
-  }
-  Button {
-    width: 23rem;
-    height: 2rem;
-  }
+  @media only screen and (max-width: 430px) {
+    .child {
+      background: var(--beige, #fef9f0);
+    }
+    button {
+      width: 100%;
+    }
+    p {
+      font-size: 1.4rem;
+    }
+    .provbutton {
+      font-size: 19px;
+    }
+    .userbutton {
+      font-size: 1.2rem;
+    }
+    Button {
+      width: 15rem;
+    }
+    footer {
+      font-size: 1.3rem;
+    }
   }
 `;
