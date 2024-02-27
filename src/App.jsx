@@ -8,6 +8,7 @@ import GlobalStyles from "./assets/styles/GlobalStyles";
 import SignUpUser from "./features/signup/SignUpUser";
 import SignUpBusiness from "./features/signup/SignUpBusiness";
 import CreateAccount from "./features/signup/CreatAccount";
+import ForgotPass from "./pages/ForgotPass";
 import { AuthProvider } from "./context/AuthContext";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./assets/styles/responsive";
@@ -42,6 +43,7 @@ function App() {
                 <Route path="provider" element={<SignUpBusiness />} />
               </Route>
               <Route path="login" element={<Login />} />
+              <Route path="forgotpassword" element={<ForgotPass />} />
               <Route element={<AppLayout />}>
                 <Route path="home" element={<Home />} />
               </Route>
