@@ -1,18 +1,22 @@
 import logo from "../../public/images/png-wordmark-1.png";
 import Button from "../components/Button";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 function NavBar({ showLoginButton = false, showRegisterButton = false }) {
+  const location = useLocation();
   return (
     <Wrapper>
       <nav>
-        <img className="Hlogo" src={logo} />
+        <Link to="/welcome">
+          <img className="Hlogo" src={logo} />
+        </Link>
+
         <ul>
           <li>
             <Link to="">Categories</Link>
           </li>
-          <li>
-            <Link to="">Profile</Link>
+          <li className={location.pathname === "/profile" ? "active" : ""}>
+            <Link to="/profile">Profile</Link>
           </li>
           <li>
             <Link to="">Search</Link>
@@ -77,6 +81,9 @@ const Wrapper = styled.div`
     gap: 5rem;
     color: rgba(0, 0, 0, 0.5);
     padding-left: 18.9rem;
+  }
+  .active {
+    color: var(--pink, #f5b9a7);
   }
   li {
     font-size: 1.1rem;
