@@ -3,7 +3,9 @@ import Button from "../components/Button";
 import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
 function NavBar({ showLoginButton = false, showRegisterButton = false }) {
+  const activePaths = ["/profile", "/editprofile", "/createbusiness"];
   const location = useLocation();
+  const isActive = activePaths.includes(location.pathname) ? "active" : "";
   return (
     <Wrapper>
       <nav>
@@ -15,7 +17,7 @@ function NavBar({ showLoginButton = false, showRegisterButton = false }) {
           <li>
             <Link to="">Categories</Link>
           </li>
-          <li className={location.pathname === "/profile" ? "active" : ""}>
+          <li className={isActive}>
             <Link to="/profile">Profile</Link>
           </li>
           <li>
@@ -80,19 +82,19 @@ const Wrapper = styled.div`
     flex-direction: row;
     gap: 5rem;
     color: rgba(0, 0, 0, 0.5);
-    padding-left: 18.9rem;
+    padding-left: 17rem;
   }
   .active {
-    color: var(--pink, #f5b9a7);
+    color: #f5b9a7;
   }
   li {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     transition: transform 0.3s ease;
   }
 
   li:hover {
     transform: scale(1.1);
-    color: var(--pink, #f5b9a7);
+    color: #f5b9a7;
   }
   .logbutton {
     margin-left: 10rem;

@@ -1,21 +1,21 @@
 import NavBar from "../components/NavBar";
 import styled from "styled-components";
 import ProfilePic from "../components/ProfilePic";
-import List from "../components/List";
+import EditName from "../components/EditName";
 
-function Profile() {
+function EditProfile() {
   return (
     <Wrapper>
       <NavBar />
       <div className="container">
         <ProfilePic />
-        <List />
+        <EditName />
       </div>
     </Wrapper>
   );
 }
 
-export default Profile;
+export default EditProfile;
 
 const Wrapper = styled.div`
   height: 100vh;

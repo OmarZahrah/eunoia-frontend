@@ -11,7 +11,7 @@ function List() {
     <Wrapper>
       <ul>
         <li>
-          <Link to="">
+          <Link to="/editprofile">
             <LuPencilLine className="icons" />
             <span>Edit Profile</span>
           </Link>
@@ -30,7 +30,7 @@ function List() {
           </Link>
         </li>
         <li>
-          <Link to="">
+          <Link to="/createbusiness">
             <BsPersonVcard className="icons" />
             <span>Business Account</span>
           </Link>
@@ -74,7 +74,7 @@ const Wrapper = styled.div`
     padding-left: 20px;
   }
   ul {
-    margin-top: 30px;
+    margin-top: 10px;
     /* border-left: 1px solid; */
   }
   .icons {

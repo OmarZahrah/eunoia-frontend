@@ -17,6 +17,8 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
+import CreateBussAcc from "./pages/CreateBussAcc";
 
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({
@@ -49,6 +51,8 @@ function App() {
                 <Route path="home" element={<Home />} />
               </Route>
               <Route path="profile" element={<Profile />} />
+              <Route path="editprofile" element={<EditProfile />} />
+              <Route path="createbusiness" element={<CreateBussAcc />} />
             </Routes>
           </BrowserRouter>
         </AuthProvider>
