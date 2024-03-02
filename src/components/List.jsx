@@ -62,23 +62,27 @@ export default List;
 
 const Wrapper = styled.div`
   width: 70%;
-  li {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.347);
-    padding: 22px;
-    width: 60%;
-    color: rgba(0, 0, 0, 0.593);
-
-    /* font-family: Literata; */
-  }
-  span {
-    padding-left: 20px;
-  }
   ul {
     margin-top: 10px;
     /* border-left: 1px solid; */
   }
+  li {
+    /* display: flex;
+    align-items: center; */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.347);
+    padding: 22px;
+    width: 60%;
+    color: rgba(0, 0, 0, 0.593);
+  }
   .icons {
     width: 1.1rem;
     height: 1.1rem;
+  }
+  span {
+    padding-left: 20px;
+  }
+  a {
+    display: flex;
+    align-items: center;
   }
 `;

@@ -43,7 +43,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 120px;
+    padding: 130px;
   }
   p,
   h1 {
@@ -59,6 +59,7 @@ const Wrapper = styled.div`
   h1 {
     font-size: 30px;
     padding-bottom: 10px;
+    font-weight: 800;
   }
   .right {
     width: 50%;
