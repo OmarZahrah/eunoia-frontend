@@ -72,4 +72,150 @@ const Wrapper = styled.div`
     height: 70%;
     width: auto;
   }
+  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .container {
+      margin-top: 0px;
+    }
+    .right {
+      display: none;
+    }
+    .left {
+      width: 100%;
+      /* padding: 1rem; */
+    }
+    p,
+    h1 {
+      font-size: 20px;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .container {
+      margin-top: 0px;
+    }
+    .right {
+      display: none;
+    }
+    .left {
+      width: 100%;
+      padding: 1rem;
+    }
+    p,
+    h1 {
+      font-size: 25px;
+    }
+  }
+  @media only screen and (max-width: 52.5em) {
+    .container {
+      height: 80%;
+    }
+
+    .left { 
+      padding: 20px;
+      margin-left: 10px;
+    }
+    p,
+    h1 {
+      font-size: 18px;
+      line-height: 45px;
+     
+    }
+    p {
+      padding-bottom: 10px;
+    }
+    h1 {
+      font-size: 25px;
+      padding-bottom: 8px;
+    }
+    .img {
+      width: 70%;
+      height: auto;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.semi}) {
+    .container {
+      height: 80%;
+    }
+
+    .left { 
+      padding: 20px;
+      margin-left: 10px;
+    }
+    p,
+    h1 {
+      font-size: 18px;
+      line-height: 45px;
+     
+    }
+    p {
+      padding-bottom: 10px;
+    }
+    h1 {
+      font-size: 25px;
+      padding-bottom: 8px;
+    }
+    .img {
+      width: 70%;
+      height: auto;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.small}) {
+    .container {
+      height: 80%;
+    }
+
+    .left { 
+      padding: 50px;
+      margin-left: 10px;
+    }
+    p,
+    h1 {
+      font-size: 18px;
+      line-height: 45px;
+     
+    }
+    p {
+      padding-bottom: 10px;
+    }
+    h1 {
+      font-size: 25px;
+      padding-bottom: 8px;
+    }
+    .img {
+      width: 60%;
+      height: auto;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mid}) {
+    .container {
+      height: 80%;
+    }
+
+    .left { 
+      padding: 30px;
+      margin-left: 10px;
+    }
+    p,
+    h1 {
+      font-size: 18px;
+      line-height: 45px;
+     
+    }
+    p {
+      padding-bottom: 10px;
+    }
+    h1 {
+      font-size: 25px;
+      padding-bottom: 8px;
+    }
+    .img {
+      width: 60%;
+      height: auto;
+    }
+  }
 `;

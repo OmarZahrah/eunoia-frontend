@@ -63,7 +63,7 @@ export default List;
 const Wrapper = styled.div`
   width: 70%;
   ul {
-    margin-top: 10px;
+    margin-top: 2rem;
     /* border-left: 1px solid; */
   }
   li {
@@ -84,5 +84,63 @@ const Wrapper = styled.div`
   a {
     display: flex;
     align-items: center;
+  }
+
+  @media only screen and (max-width: ${({ theme }) => theme.mid}) {
+    width: 70%;
+    li {
+      width: 70%;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+    ul {
+      margin-top: 0rem;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.semi}) {
+    width: 70%;
+    li {
+      width: 70%;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+    ul {
+      margin-top: 0rem;
+    }
+  }
+
+  @media only screen and (max-width: 52.5em) {
+
+  }
+
+  @media only screen and (max-width: ${({ theme }) => theme.small}) {
+    width: 50%;
+    li {
+      width: 90%;
+      padding: 0.9rem;
+      font-size: 0.9rem;
+    }
+    ul {
+      margin-top: 0.9rem;
+    }
+  }
+
+  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
+    width: 100%;
+    li {
+      width: 94%;
+    }
+    ul {
+      margin-bottom: 2rem;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    width: 100%;
+    li {
+      width: 88%;
+    }
+    ul {
+      margin-bottom: 2rem;
+    }
   }
 `;

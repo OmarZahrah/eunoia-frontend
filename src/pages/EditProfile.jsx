@@ -25,4 +25,26 @@ const Wrapper = styled.div`
     margin-top: 20px;
     /* padding: 20px; */
   }
+  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    width: 100%;
+
+    /*height: 60rem; */
+    /* width: 30rem; */
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      /* width: 10rem; */
+    }
+  }
+
+  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
+    width: 100%;
+    /* height: auto; */
+    .container {
+      display: flex;
+      flex-direction: column;
+      margin-top: 0px;
+    }
+  }
 `;

@@ -99,4 +99,29 @@ const Wrapper = styled.div`
   .logbutton {
     margin-left: 10rem;
   }
+
+  @media only screen and (max-width: ${({ theme }) => theme.mid}) {
+    color: black;
+  }
+
+  @media only screen and (max-width: ${({ theme }) => theme.semi}) {
+    color: black;
+  }
+
+  @media only screen and (max-width: 52.5em) {
+    color: black;
+  }
+
+  @media only screen and (max-width: ${({ theme }) => theme.small}) {
+    ul {
+      padding-left: 12rem;
+    }
+  }
+
+  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
+    color: black;
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    color: black;
+  }
 `;

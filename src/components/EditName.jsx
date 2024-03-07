@@ -57,4 +57,91 @@ const Wrapper = styled.div`
     width: 1.1rem;
     height: 1.1rem;
   }
+  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    width: 100%;
+    input {
+      width: 85%;
+    }
+    p {
+      font-size: 1.7rem;
+    }
+    label {
+      font-size: 1.3rem;
+    }
+    input {
+      font-size: 1rem;
+      margin-top: 0.7rem;
+      padding-bottom: 1.1rem;
+      height: 2.5rem;
+    }
+    .icons {
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
+    width: 100%;
+    input {
+      width: 85%;
+    }
+    p {
+      font-size: 1.7rem;
+    }
+    label {
+      font-size: 1.2rem;
+    }
+    input {
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      padding-bottom: 0.7rem;
+      height: 2.1rem;
+    }
+    .icons {
+      width: 1rem;
+      height: auto;
+    }
+  }
+  @media only screen and (max-width: 52.5em) {
+    width: 100%;
+    input {
+      width: 80%;
+    }
+    p {
+      font-size: 1.5rem;
+    }
+    label {
+      font-size: 1.1rem;
+    }
+    input {
+      font-size: 0.8rem;
+      margin-top: 0rem;
+      padding-bottom: 0.4rem;
+      height: 1.5rem;
+    }
+    .icons {
+      width: 1rem;
+      height: auto;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.semi}) {
+    input {
+      width: 80%;
+    }
+    p {
+      font-size: 1.7rem;
+    }
+    label {
+      font-size: 1.1rem;
+    }
+    input {
+      font-size: 0.8rem;
+      margin-top: 0rem;
+      padding-bottom: 0.4rem;
+      height: 1.5rem;
+    }
+    .icons {
+      width: 1rem;
+      height: auto;
+    }
+  }
 `;

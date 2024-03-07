@@ -34,4 +34,38 @@ const Wrapper = styled.div`
     border-bottom: 1px solid rgba(0, 0, 0, 0.347);
     width: 15rem;
   }
+  @media only screen and (max-width: ${({ theme }) => theme.mid}) {
+    height: 75vh;
+    /* width: 25%; */
+  }
+  @media only screen and (max-width: 52.5em) {
+    width: 50%;
+
+    span {
+      font-size: 25px;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
+    width: 100%;
+    border-right: none;
+    height: 8rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.347);
+    span {
+      font-size: 25px;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.347);
+    height: 10rem;
+    span {
+      font-size: 26px;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.semi}) {
+    span {
+      /* font-size: 30px; */
+    }
+  }
 `;
