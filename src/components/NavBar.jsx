@@ -57,12 +57,13 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 
   nav {
     display: flex;
     /* justify-content: space-between; */
     align-items: center;
-    width: 80%;
+    width: 90%;
     padding-top: 1rem;
     /* border-bottom: 0.01rem solid; */
   }
@@ -90,4 +91,47 @@ const Wrapper = styled.div`
   .logbutton {
     margin-left: 10rem;
   }
+
+
+
+
+
+  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
+    /* Media query for tablet-sized screens */
+    /* Adjust NavBar styles for tablet-sized screens */
+    nav {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    ul {
+      display: ${({ isOpen }) => (isOpen ? "flex" : "none")};
+      flex-direction: column;
+      gap: 1rem;
+      padding-left: 0;
+      margin-top: 1rem;
+    }
+    
+    li {
+      font-size: 1.2rem;
+      padding-left: 1rem;
+    }
+
+    .Hlogo {
+      margin-left: 1rem; /* Add margin to logo */
+    }
+
+    .buttons {
+      display: ${({ isOpen }) => (isOpen ? "flex" : "none")};
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+      padding-left: 1rem; /* Add padding for consistency */
+    }
+  }
+
+
 `;
+
+
+
