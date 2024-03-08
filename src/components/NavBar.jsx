@@ -1,18 +1,23 @@
 import logo from "../../public/images/png-wordmark-1.png";
 import Button from "../components/Button";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 function NavBar({ showLoginButton = false, showRegisterButton = false }) {
+  const activePaths = ["/profile", "/editprofile", "/createbusiness"];
+  const location = useLocation();
+  const isActive = activePaths.includes(location.pathname) ? "active" : "";
   return (
     <Wrapper>
-      <nav>
+      <Link to="/welcome">
         <img className="Hlogo" src={logo} />
+      </Link>
+      <nav>
         <ul>
           <li>
             <Link to="">Categories</Link>
           </li>
-          <li>
-            <Link to="">Profile</Link>
+          <li className={isActive}>
+            <Link to="/profile">Profile</Link>
           </li>
           <li>
             <Link to="">Search</Link>
@@ -21,24 +26,14 @@ function NavBar({ showLoginButton = false, showRegisterButton = false }) {
         <div className="buttons">
           {showLoginButton && (
             <Link to="/login">
-              <Button
-                className="logbutton"
-                color="pink"
-                background="transparent"
-                size="small"
-              >
+              <Button color="pink" background="transparent" size="small">
                 Login
               </Button>
             </Link>
           )}
           {showRegisterButton && (
             <Link to="/signup/user">
-              <Button
-                className="regbutton"
-                color="white"
-                background="pink"
-                size="small"
-              >
+              <Button color="white" background="pink" size="small">
                 Register
               </Button>
             </Link>
@@ -52,33 +47,37 @@ function NavBar({ showLoginButton = false, showRegisterButton = false }) {
 export default NavBar;
 
 const Wrapper = styled.div`
-  /* height: 100vh; */
-  /* gap: 1rem; */
   display: flex;
   /* height: 6rem; */
   padding: 1rem 4rem;
   border-bottom: 1px solid #ccc;
   nav {
     display: flex;
-    /* justify-content: space-between; */
+    width: 100%;
     align-items: center;
     /* position: fixed; */
   }
   .Hlogo {
-    width: 9.3rem;
-    height: 2.2rem;
-    flex-shrink: 0;
+    width: 10rem;
+    height: auto;
   }
   ul {
+    width: 100%;
     display: flex;
-    flex-direction: row;
-    gap: 5rem;
+    gap: 6rem;
     color: rgba(0, 0, 0, 0.5);
-    padding-left: 18.9rem;
+    justify-content: center;
+    padding: 0;
+    /* padding-left: 9rem; */
+  }
+  .active {
+    color: #f5b9a7;
   }
   li {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
   }
 
   li:hover {

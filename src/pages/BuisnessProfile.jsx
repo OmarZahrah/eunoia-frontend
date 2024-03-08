@@ -22,9 +22,9 @@ function BuisnessProfile() {
 
   return (
     <Wrapper>
-      <StyledNavBar>
+      
         <NavBar />
-      </StyledNavBar>
+    
       <div className="Section1">
         <img className="cover" src={coverimg} alt="cover" />
         {/* <Cover/> */}
@@ -248,15 +248,9 @@ const Wrapper = styled.div`
     }
   }
 
- 
 
   
 `;
 
-
-const StyledNavBar = styled.div`
-  border-bottom: 0.4px solid #ccc;
-  padding: 0.625rem 0rem 1.563rem;
-`;
 
 export default BuisnessProfile;
