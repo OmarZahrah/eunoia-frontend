@@ -8,6 +8,7 @@ import GlobalStyles from "./assets/styles/GlobalStyles";
 import SignUpUser from "./features/signup/SignUpUser";
 import SignUpBusiness from "./features/signup/SignUpBusiness";
 import CreateAccount from "./features/signup/CreatAccount";
+import ForgotPass from "./pages/ForgotPass";
 import { AuthProvider } from "./context/AuthContext";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./assets/styles/responsive";
@@ -15,6 +16,10 @@ import { QueryClient } from "@tanstack/query-core";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
+import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
+import CreateBussAcc from "./pages/CreateBussAcc";
+import BuisnessProfile from "./pages/BuisnessProfile";
 
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({
@@ -42,9 +47,14 @@ function App() {
                 <Route path="provider" element={<SignUpBusiness />} />
               </Route>
               <Route path="login" element={<Login />} />
+              <Route path="forgotpassword" element={<ForgotPass />} />
+              <Route path="buisnessaccount" element={<BuisnessProfile/>} />
               <Route element={<AppLayout />}>
                 <Route path="home" element={<Home />} />
               </Route>
+              <Route path="profile" element={<Profile />} />
+              <Route path="editprofile" element={<EditProfile />} />
+              <Route path="createbusiness" element={<CreateBussAcc />} />
             </Routes>
           </BrowserRouter>
         </AuthProvider>

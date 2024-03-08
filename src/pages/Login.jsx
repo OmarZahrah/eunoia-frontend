@@ -64,7 +64,7 @@ const Login = () => {
           </div>
 
           <footer>
-            <Link className="text" to="">
+            <Link className="text" to="/forgotpassword">
               Forgot your password ?
             </Link>
             <Button size="large" type="submit" disabled={isLoading}>
