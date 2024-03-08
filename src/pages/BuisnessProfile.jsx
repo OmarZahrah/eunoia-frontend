@@ -93,6 +93,7 @@ const Wrapper = styled.div`
   background-color: #fef9f0;
   .section1{
     position: relatives;
+    
   }
   .cover {
     width: 90%;
@@ -103,12 +104,12 @@ const Wrapper = styled.div`
   }
   .profile {
     position: absolute;
-    top: 61%;
+    top: 59%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
-    width: 220px;
-    height: 220px;
+    width: 200px;
+    height: 200px;
   }
   .change {
     position: absolute ;
@@ -121,7 +122,7 @@ const Wrapper = styled.div`
 
   .name {
     font-family: Literata;
-    font-size: 2.5875rem;
+    font-size: 2rem;
     font-weight: 400;
     line-height: 5rem;
     letter-spacing: 0.0625rem;
@@ -137,11 +138,12 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    font-size: 2.1rem;
+    font-size: 1.5rem;
     font-weight: 370;
     border-bottom: 0.2px solid #ccc;
     width: 90%;
     margin: 0 auto;
+    
   }
 
   button:hover {
@@ -188,8 +190,8 @@ const Wrapper = styled.div`
   @media only screen and (max-width: ${({ theme }) => theme.semi}) {
     .profile {
       top: 42%;
-      width: 180px;
-      height: 180px;
+      width: 170px;
+      height: 170px;
     }
     .change {
       position: absolute;

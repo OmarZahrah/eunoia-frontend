@@ -81,7 +81,7 @@ const PackageCard = styled.div`
   padding-top: 1.875rem;
   background-color: #f5b9a72c;
   box-shadow: 0px 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-  width: calc(50% - 50px);
+  width: calc(40% - 40px);
   height: 200px;
   border-radius: 3.125rem;
   margin-bottom: 1.25rem;
@@ -104,7 +104,7 @@ const PackageCard = styled.div`
   }
 `;
 
-const PackageTitle = styled.h3`
+const PackageTitle = styled.h2`
 font-size: 1.3rem;
   margin-bottom: 0.125rem;
   color: #00000099;
@@ -113,7 +113,7 @@ font-size: 1.3rem;
 `;
 
 const PackageDescription = styled.p`
-font-size: 1.3rem;
+  font-size: 1.2rem;
   margin-bottom: 0.125rem;
   color: #00000099;
   justify-self: start;
@@ -135,7 +135,7 @@ const AddPackageButton = styled.button`
   background-color: transparent;
   border: none;
   color: #00000099;
-  font-size: 1.2rem;
+  font-size: 1rem;
   cursor: pointer;
   outline: none; 
 `;
@@ -147,7 +147,7 @@ const DeleteButton = styled.button`
   background-color: transparent; 
   border: none;
   color: #00000099; 
-  font-size: 1.2rem;
+  font-size: 1rem;
   cursor: pointer;
   outline: none;
 `;
@@ -155,7 +155,7 @@ const DeleteButton = styled.button`
 const TitleInput = styled.input`
    margin-bottom: 0.625rem;
   padding: 0.313rem;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   border: none;
   background-color: transparent;
   outline: none;
@@ -164,7 +164,7 @@ const TitleInput = styled.input`
 const DescriptionInput = styled.input`
   margin-bottom: 0.625rem;
   padding: 0.313rem;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   border: none;
   background-color: transparent;
   outline: none;
@@ -173,7 +173,7 @@ const DescriptionInput = styled.input`
 const PriceInput = styled.input`
   margin-bottom: 0.625rem;
   padding: 0.313rem;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   border: none;
   background-color: transparent;
   outline: none;

@@ -4,7 +4,6 @@ export const theme = {
   small: "75em",
   semi: "64em",
   mid: "84em",
-  large:"93.95100093951001em",
-
+  
   
 };
