@@ -36,46 +36,13 @@ const Wrapper = styled.div`
   background: linear-gradient(to top, #fef9f0 55%, #fff 45%);
   display: flex;
   flex-direction: column;
-  /* gap: 1rem;
-  align-items: center; */
 
   .container {
     height: 100%;
     display: flex;
     flex-direction: column;
-    /* align-items: center;
-    justify-content: center;
-    transform: translateY(-5%); */
   }
 
-  /* nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 80%;
-    padding-top: 1rem;
-  } */
-  /* .buttons {
-    display: flex;
-  }
-  .Hlogo {
-    width: 9.3rem;
-    height: 2.2rem;
-    flex-shrink: 0;
-  }
-
-  .logbutton {
-    font-size: 1.5rem;
-  }
-
-  .regbutton {
-    font-size: 1.3rem;
-    letter-spacing: 0.0625rem;
-    text-indent: -0.25rem;
-    width: 9.375rem;
-    height: 3.125rem;
-    flex-shrink: 0;
-  } */
   .images {
     display: flex;
     width: 80%;
@@ -113,28 +80,6 @@ const Wrapper = styled.div`
     gap: 5px;
   }
   @media only screen and (max-width: ${({ theme }) => theme.mid}) {
-    nav {
-      width: 85%;
-      padding-top: 2rem;
-    }
-    .Hlogo {
-      width: 8.7rem;
-      height: 2rem;
-      flex-shrink: 0;
-    }
-    .logbutton {
-      font-size: 1.5rem;
-    }
-
-    .regbutton {
-      font-size: 1.2rem;
-      letter-spacing: 0.0625rem;
-      text-indent: -0.2rem;
-      width: 9rem;
-      height: 2.8rem;
-      flex-shrink: 0;
-    }
-
     .images {
       width: 83%;
     }
@@ -156,22 +101,6 @@ const Wrapper = styled.div`
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.small}) {
-    nav {
-      width: 79%;
-      padding-top: 2rem;
-    }
-
-    .logbutton {
-      font-size: 1.3rem;
-      width: 8rem;
-      height: 2.6rem;
-    }
-    .regbutton {
-      font-size: 1.1rem;
-      width: 8rem;
-      height: 2.6rem;
-    }
-
     .images {
       width: 75%;
     }
@@ -208,30 +137,12 @@ const Wrapper = styled.div`
     gap: 2rem;
     align-items: center;
 
-    /* nav {
-      padding-top: 2rem;
-      flex-direction: column;
-      gap: 2rem;
-    } */
-    .Hlogo {
-      width: 7.6rem;
-      height: 2.1rem;
-    }
-
     .images {
       width: 72%;
     }
     .images img {
       width: 39%;
       padding: 1px;
-    }
-
-    .logbutton {
-      font-size: 1.4rem;
-    }
-
-    .regbutton {
-      font-size: 1.3rem;
     }
 
     .h {
@@ -259,11 +170,6 @@ const Wrapper = styled.div`
 
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
     background-color: var(--color-brand-beige);
-    nav {
-      /* background-color: var(--color-brand-beige); */
-      width: 100%;
-      padding: 1.2rem;
-    }
     .container {
       /* background-color: var(--color-brand-beige); */
       justify-content: start;
@@ -271,11 +177,7 @@ const Wrapper = styled.div`
       /* align-items: flex-start; */
       transform: translateY(0);
     }
-    .buttons button {
-      width: 100%;
-      font-size: 1rem;
-      padding: 0.5rem 1rem;
-    }
+
     .images img {
       display: none;
     }

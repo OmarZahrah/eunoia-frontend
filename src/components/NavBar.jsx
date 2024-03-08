@@ -9,11 +9,11 @@ function NavBar({ showLoginButton = false, showRegisterButton = false }) {
   return (
     <Wrapper>
       <nav>
-        <Link to="/welcome">
-          <img className="Hlogo" src={logo} />
-        </Link>
-
         <ul>
+          <Link to="/welcome">
+            <img className="Hlogo" src={logo} />
+          </Link>
+
           <li>
             <Link to="">Categories</Link>
           </li>
@@ -27,24 +27,14 @@ function NavBar({ showLoginButton = false, showRegisterButton = false }) {
         <div className="buttons">
           {showLoginButton && (
             <Link to="/login">
-              <Button
-                className="logbutton"
-                color="pink"
-                background="transparent"
-                size="small"
-              >
+              <Button color="pink" background="transparent" size="small">
                 Login
               </Button>
             </Link>
           )}
           {showRegisterButton && (
             <Link to="/signup/user">
-              <Button
-                className="regbutton"
-                color="white"
-                background="pink"
-                size="small"
-              >
+              <Button color="white" background="pink" size="small">
                 Register
               </Button>
             </Link>
@@ -58,31 +48,23 @@ function NavBar({ showLoginButton = false, showRegisterButton = false }) {
 export default NavBar;
 
 const Wrapper = styled.div`
-  /* height: 100vh; */
-  /* gap: 1rem; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
   nav {
     display: flex;
-    /* justify-content: space-between; */
+    width: 100%;
+    height: 4rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     align-items: center;
-    width: 80%;
-    padding-top: 1rem;
-    /* border-bottom: 0.01rem solid; */
   }
   .Hlogo {
-    width: 9.3rem;
-    height: 2.2rem;
-    flex-shrink: 0;
+    width: 10rem;
+    height: auto;
   }
   ul {
+    width: 100%;
     display: flex;
-    flex-direction: row;
-    gap: 5rem;
+    gap: 11rem;
     color: rgba(0, 0, 0, 0.5);
-    padding-left: 17rem;
+    padding-left: 9rem;
   }
   .active {
     color: #f5b9a7;
@@ -90,38 +72,58 @@ const Wrapper = styled.div`
   li {
     font-size: 1.2rem;
     transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
   }
 
   li:hover {
     transform: scale(1.1);
     color: #f5b9a7;
   }
-  .logbutton {
-    margin-left: 10rem;
+  .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
   }
 
-  @media only screen and (max-width: ${({ theme }) => theme.mid}) {
-    color: black;
-  }
-
-  @media only screen and (max-width: ${({ theme }) => theme.semi}) {
-    color: black;
-  }
-
-  @media only screen and (max-width: 52.5em) {
-    color: black;
-  }
-
-  @media only screen and (max-width: ${({ theme }) => theme.small}) {
+  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
     ul {
-      padding-left: 12rem;
+      gap: 5rem;
+      padding-left: 1rem;
     }
   }
-
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
-    color: black;
+    ul {
+      gap: 5rem;
+      padding-left: 1rem;
+    }
   }
-  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
-    color: black;
+  @media only screen and (max-width: 52.5em) {
+    ul {
+      gap: 6rem;
+      padding-left: 2rem;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.semi}) {
+    ul {
+      gap: 7rem;
+      padding-left: 3rem;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.small}) {
+    ul {
+      gap: 8rem;
+      padding-left: 4rem;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mid}) {
+    ul {
+      gap: 9rem;
+      padding-left: 5rem;
+    }
+    li {
+      font-size: 1.1rem;
+    }
   }
 `;

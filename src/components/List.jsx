@@ -69,7 +69,7 @@ const Wrapper = styled.div`
   li {
     /* display: flex;
     align-items: center; */
-    border-bottom: 1px solid rgba(0, 0, 0, 0.347);
+    border-bottom: 1px solid  rgba(0, 0, 0, 0.2);
     padding: 22px;
     width: 60%;
     color: rgba(0, 0, 0, 0.593);

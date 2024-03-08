@@ -38,7 +38,7 @@ const Wrapper = styled.div`
     margin-bottom: 2rem;
     border: none;
     background-color: transparent;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.114);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     width: 70%;
     height: 30px;
     color: rgba(0, 0, 0, 0.593);
@@ -59,9 +59,6 @@ const Wrapper = styled.div`
   }
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
     width: 100%;
-    input {
-      width: 85%;
-    }
     p {
       font-size: 1.7rem;
     }
@@ -73,6 +70,7 @@ const Wrapper = styled.div`
       margin-top: 0.7rem;
       padding-bottom: 1.1rem;
       height: 2.5rem;
+      width: 85%;
     }
     .icons {
       width: 1.2rem;
@@ -81,9 +79,6 @@ const Wrapper = styled.div`
   }
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
     width: 100%;
-    input {
-      width: 85%;
-    }
     p {
       font-size: 1.7rem;
     }
@@ -95,6 +90,7 @@ const Wrapper = styled.div`
       margin-top: 0.5rem;
       padding-bottom: 0.7rem;
       height: 2.1rem;
+      width: 100%;
     }
     .icons {
       width: 1rem;
@@ -102,10 +98,7 @@ const Wrapper = styled.div`
     }
   }
   @media only screen and (max-width: 52.5em) {
-    width: 100%;
-    input {
-      width: 80%;
-    }
+    width: 60%;
     p {
       font-size: 1.5rem;
     }
@@ -117,6 +110,7 @@ const Wrapper = styled.div`
       margin-top: 0rem;
       padding-bottom: 0.4rem;
       height: 1.5rem;
+      width: 80%;
     }
     .icons {
       width: 1rem;
@@ -124,9 +118,6 @@ const Wrapper = styled.div`
     }
   }
   @media only screen and (max-width: ${({ theme }) => theme.semi}) {
-    input {
-      width: 80%;
-    }
     p {
       font-size: 1.7rem;
     }
@@ -138,6 +129,7 @@ const Wrapper = styled.div`
       margin-top: 0rem;
       padding-bottom: 0.4rem;
       height: 1.5rem;
+      width: 80%;
     }
     .icons {
       width: 1rem;
