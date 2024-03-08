@@ -55,17 +55,14 @@ const Wrapper = styled.div`
   /* height: 100vh; */
   /* gap: 1rem; */
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  
-
+  /* height: 6rem; */
+  padding: 1rem 4rem;
+  border-bottom: 1px solid #ccc;
   nav {
     display: flex;
     /* justify-content: space-between; */
     align-items: center;
-    width: 90%;
-    padding-top: 1rem;
-    /* border-bottom: 0.01rem solid; */
+    /* position: fixed; */
   }
   .Hlogo {
     width: 9.3rem;
@@ -86,52 +83,52 @@ const Wrapper = styled.div`
 
   li:hover {
     transform: scale(1.1);
-    color: var(--pink, #f5b9a7);
+    color: #f5b9a7;
   }
-  .logbutton {
-    margin-left: 10rem;
+  .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* width: 50%; */
   }
 
-
-
-
-
-  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
-    /* Media query for tablet-sized screens */
-    /* Adjust NavBar styles for tablet-sized screens */
-    nav {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    
+  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
     ul {
-      display: ${({ isOpen }) => (isOpen ? "flex" : "none")};
-      flex-direction: column;
-      gap: 1rem;
-      padding-left: 0;
-      margin-top: 1rem;
-    }
-    
-    li {
-      font-size: 1.2rem;
-      padding-left: 1rem;
-    }
-
-    .Hlogo {
-      margin-left: 1rem; /* Add margin to logo */
-    }
-
-    .buttons {
-      display: ${({ isOpen }) => (isOpen ? "flex" : "none")};
-      flex-direction: column;
-      gap: 1rem;
-      margin-top: 1rem;
-      padding-left: 1rem; /* Add padding for consistency */
+      gap: 5rem;
+      /* padding-left: 1rem; */
     }
   }
-
-
+  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
+    ul {
+      gap: 5rem;
+      /* padding-left: 1rem; */
+    }
+  }
+  @media only screen and (max-width: 52.5em) {
+    ul {
+      gap: 6rem;
+      /* padding-left: 2rem; */
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.semi}) {
+    ul {
+      gap: 7rem;
+      /* padding-left: 3rem; */
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.small}) {
+    ul {
+      gap: 8rem;
+      /* padding-left: 4rem; */
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mid}) {
+    ul {
+      gap: 9rem;
+      /* padding-left: 5rem; */
+    }
+    li {
+      font-size: 1.1rem;
+    }
+  }
 `;
-
-
-
