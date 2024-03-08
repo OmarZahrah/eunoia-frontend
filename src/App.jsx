@@ -19,6 +19,7 @@ import { Toaster } from "react-hot-toast";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import CreateBussAcc from "./pages/CreateBussAcc";
+import AddPackage from "./pages/AddPackage";
 
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({
@@ -53,6 +54,8 @@ function App() {
               <Route path="profile" element={<Profile />} />
               <Route path="editprofile" element={<EditProfile />} />
               <Route path="createbusiness" element={<CreateBussAcc />} />
+              <Route path="addpackage" element={<AddPackage />} />
+
             </Routes>
           </BrowserRouter>
         </AuthProvider>
