@@ -4,15 +4,13 @@ import { LuPencilLine } from "react-icons/lu";
 function EditName() {
   return (
     <Wrapper>
-      <div>
-        <p>Edit Profile</p>
-        <label>NAME</label>
-        <input type="text" placeholder="Your Name" />
-        <LuPencilLine className="icons" />
-        <label>EMAIL</label>
-        <input type="text" placeholder="Your Email" />
-        <LuPencilLine className="icons" />
-      </div>
+      <p>Edit Profile</p>
+      <label>NAME</label>
+      <input type="text" placeholder="Your Name" />
+      <LuPencilLine className="icons" />
+      <label>EMAIL</label>
+      <input type="text" placeholder="Your Email" />
+      <LuPencilLine className="icons" />
     </Wrapper>
   );
 }
@@ -70,7 +68,7 @@ const Wrapper = styled.div`
       margin-top: 0.7rem;
       padding-bottom: 1.1rem;
       height: 2.5rem;
-      width: 85%;
+      width: 185%;
     }
     .icons {
       width: 1.2rem;
@@ -98,7 +96,7 @@ const Wrapper = styled.div`
     }
   }
   @media only screen and (max-width: 52.5em) {
-    width: 60%;
+    /* width: 60%; */
     p {
       font-size: 1.5rem;
     }

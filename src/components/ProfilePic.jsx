@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { MdOutlineCameraAlt } from "react-icons/md";
 
 function ProfilePic() {
   const [imageSrc, setImageSrc] = useState(
@@ -15,11 +16,14 @@ function ProfilePic() {
 
   return (
     <Wrapper>
-      <div>
+      <div className="photo">
         <label>
           <img src={imageSrc} alt="Upload" />
           <input id="image-upload" type="file" onChange={handleImageUpload} />
         </label>
+        <div className="camera">
+          <MdOutlineCameraAlt className="camera-icon" />
+        </div>
       </div>
       <span>Your Name</span>
     </Wrapper>
@@ -38,6 +42,27 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  .photo {
+    position: relative;
+  }
+  .camera {
+    position: absolute;
+    bottom: 10%;
+    right: 10%;
+    background-color: var(--green, #74ab70);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+  }
+  .camera-icon {
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+    color: #fff;
+  }
 
   label {
     cursor: pointer;

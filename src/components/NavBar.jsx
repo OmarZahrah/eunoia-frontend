@@ -8,12 +8,11 @@ function NavBar({ showLoginButton = false, showRegisterButton = false }) {
   const isActive = activePaths.includes(location.pathname) ? "active" : "";
   return (
     <Wrapper>
+      <Link to="/welcome">
+        <img className="Hlogo" src={logo} />
+      </Link>
       <nav>
         <ul>
-          <Link to="/welcome">
-            <img className="Hlogo" src={logo} />
-          </Link>
-
           <li>
             <Link to="">Categories</Link>
           </li>
@@ -48,12 +47,15 @@ function NavBar({ showLoginButton = false, showRegisterButton = false }) {
 export default NavBar;
 
 const Wrapper = styled.div`
+  display: flex;
+  /* height: 6rem; */
+  padding: 1rem 4rem;
+  border-bottom: 1px solid #ccc;
   nav {
     display: flex;
     width: 100%;
-    height: 4rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     align-items: center;
+    /* position: fixed; */
   }
   .Hlogo {
     width: 10rem;
@@ -62,9 +64,11 @@ const Wrapper = styled.div`
   ul {
     width: 100%;
     display: flex;
-    gap: 11rem;
+    gap: 6rem;
     color: rgba(0, 0, 0, 0.5);
-    padding-left: 9rem;
+    justify-content: center;
+    padding: 0;
+    /* padding-left: 9rem; */
   }
   .active {
     color: #f5b9a7;
@@ -84,43 +88,43 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50%;
+    /* width: 50%; */
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
     ul {
       gap: 5rem;
-      padding-left: 1rem;
+      /* padding-left: 1rem; */
     }
   }
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
     ul {
       gap: 5rem;
-      padding-left: 1rem;
+      /* padding-left: 1rem; */
     }
   }
   @media only screen and (max-width: 52.5em) {
     ul {
       gap: 6rem;
-      padding-left: 2rem;
+      /* padding-left: 2rem; */
     }
   }
   @media only screen and (max-width: ${({ theme }) => theme.semi}) {
     ul {
       gap: 7rem;
-      padding-left: 3rem;
+      /* padding-left: 3rem; */
     }
   }
   @media only screen and (max-width: ${({ theme }) => theme.small}) {
     ul {
       gap: 8rem;
-      padding-left: 4rem;
+      /* padding-left: 4rem; */
     }
   }
   @media only screen and (max-width: ${({ theme }) => theme.mid}) {
     ul {
       gap: 9rem;
-      padding-left: 5rem;
+      /* padding-left: 5rem; */
     }
     li {
       font-size: 1.1rem;
