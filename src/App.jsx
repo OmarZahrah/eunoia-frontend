@@ -20,6 +20,8 @@ import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import CreateBussAcc from "./pages/CreateBussAcc";
 import AddPackage from "./pages/AddPackage";
+import BuisnessProfile from "./pages/BuisnessProfile";
+import Categories from "./pages/Categories";
 
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({
@@ -48,14 +50,15 @@ function App() {
               </Route>
               <Route path="login" element={<Login />} />
               <Route path="forgotpassword" element={<ForgotPass />} />
+              <Route path="buisnessaccount" element={<BuisnessProfile />} />
               <Route element={<AppLayout />}>
                 <Route path="home" element={<Home />} />
               </Route>
+              <Route path="categories" element={<Categories />} />
               <Route path="profile" element={<Profile />} />
               <Route path="editprofile" element={<EditProfile />} />
               <Route path="createbusiness" element={<CreateBussAcc />} />
               <Route path="addpackage" element={<AddPackage />} />
-
             </Routes>
           </BrowserRouter>
         </AuthProvider>
