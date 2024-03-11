@@ -3,12 +3,12 @@ import styled from "styled-components";
 
 function CategoriesDiv({ backgroundImage, title, link, marginTop }) {
   return (
-      <Wrapper style={{ marginTop }}>
-          <Link to={link}>
+    <Wrapper style={{ marginTop }}>
+      <Link to={link}>
         <Background backgroundImage={backgroundImage} />
         <span>{title}</span>
-    </Link>
-      </Wrapper>
+      </Link>
+    </Wrapper>
   );
 }
 
@@ -32,6 +32,34 @@ const Wrapper = styled.div`
     letter-spacing: 1px;
     white-space: nowrap;
   }
+
+  @media only screen and (max-width: ${({ theme }) => theme.mid}) {
+    width: 8rem;
+  }
+
+  @media only screen and (max-width: 52.5em) {
+    width: 40rem;
+    height: 10rem;
+    margin-top: 0rem !important;
+    margin-bottom: 1.5rem !important;
+    span {
+      writing-mode: horizontal-tb;
+      font-size: 23px;
+      font-weight: 900;
+      letter-spacing: 15px;
+    }
+  }
+
+  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
+    width: 20rem;
+    height: 9rem;
+    span {
+      writing-mode: horizontal-tb;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 10px;
+    }
+  }
 `;
 
 const Background = styled.div`
@@ -44,5 +72,9 @@ const Background = styled.div`
 
   ${Wrapper}:hover & {
     opacity: 1;
+  }
+
+  @media only screen and (max-width: 52.5em) {
+    border-radius: 10px;
   }
 `;

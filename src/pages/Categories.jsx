@@ -2,6 +2,8 @@ import styled from "styled-components";
 import NavBar from "../components/NavBar";
 import CategoriesDiv from "../components/CategoriesDiv";
 import venues from "../images/Venues.png";
+import v from "../images/v.png";
+
 import photographers from "../images/Photographers.png";
 import eventPlanners from "../images/EventPlanners.png";
 import DJs from "../images/DJs.png";
@@ -47,7 +49,7 @@ function Categories() {
         <CategoriesDiv
           title={"Other Details"}
           backgroundImage={otherDetails}
-            marginTop={15}
+          marginTop={15}
         />
       </div>
     </Wrapper>
@@ -63,11 +65,37 @@ const Wrapper = styled.div`
     line-height: 50px;
     letter-spacing: 1px;
     text-align: center;
-    /* margin: 1rem 0; */
   }
   .container {
     display: flex;
     justify-content: space-between;
     margin: 0 8rem;
   }
+
+  @media only screen and (max-width: ${({ theme }) => theme.mid}) {
+    .container {
+      margin: 0 4rem;
+    }
+  }
+
+  @media only screen and (max-width: 52.5em) {
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0;
+    }
+    h1 {
+      font-size: 30px;
+      line-height: 5rem;
+    }
+
+  }
+
+  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
+    h1 {
+      font-size: 25px;
+    }
+  }
+
 `;
