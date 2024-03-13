@@ -75,9 +75,21 @@ function BuisnessProfile() {
             />
             <img className="change" src={changephoto} alt="change photo" />
           </label>
-
           {/* <Cover/> */}
-          <img className="profile" src={photo} alt="profile" />
+          <label>
+            <img
+              className="profile"
+              src={profilePhoto || photo}
+              alt="profile"
+            />
+            <input
+              // {...register("imageCover")}
+              className="image-input"
+              type="file"
+              onChange={(e) => onSelectFile(e, "avatar")}
+            />
+            {/* <img className="change" src={changephoto} alt="change photo" /> */}
+          </label>{" "}
           {/* <img
             className="change"
             src={changephoto}
@@ -162,18 +174,6 @@ const Wrapper = styled.div`
     margin: 0 auto 7rem auto;
   }
 
-  .image-uploader {
-    width: 100%;
-    min-height: 20rem;
-    border: 1px solid var(--color-grey-500);
-    border-radius: 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    margin-top: 10px;
-    position: relative;
-  }
   .cover-photo {
     width: 100%;
     height: 100%;
@@ -200,7 +200,7 @@ const Wrapper = styled.div`
 
   .cover {
     max-width: 100%;
-    height: auto;
+    /* max-height: 20rem; */
     display: block;
     margin: 0 auto;
   }
@@ -211,6 +211,7 @@ const Wrapper = styled.div`
     transform: translate(-50%, 50%);
     z-index: 1;
     width: 15%;
+    border-radius: 50%;
     /* height: 200px; */
   }
   .change {

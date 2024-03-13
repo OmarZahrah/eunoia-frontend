@@ -12,25 +12,25 @@ function NavBar({
   userId,
 }) {
   const [openNav, setOpenNav] = useState(false);
-  const activePaths = ["/profile", "/editprofile", "/createbusiness"];
   const location = useLocation();
-  const isActive = activePaths.includes(location.pathname) ? "active" : "";
+
+  const checkIsActive = (path) => location.pathname === path;
 
   const toggleNav = () => {
     setOpenNav((s) => !s);
   };
-  // console.log(openNav);
+
   return (
     <Wrapper>
       <Link to="/welcome">
-        <img className="Hlogo" src={logo} />
+        <img className="Hlogo" src={logo} alt="logo" />
       </Link>
       <nav className={openNav ? "open-nav" : ""}>
         <ul>
-          <li>
-            <Link to="">Categories</Link>
+          <li className={checkIsActive("/categories") ? "active" : ""}>
+            <Link to="/categories">Categories</Link>
           </li>
-          <li className={isActive}>
+          <li className={checkIsActive("/profile") ? "active" : ""}>
             <Link to={`/profile/${userId}`}>Profile</Link>
           </li>
           <li>

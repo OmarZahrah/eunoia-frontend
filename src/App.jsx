@@ -61,7 +61,7 @@ function App() {
                     <Route index element={<MainProfile />} />
                     <Route path="editprofile" element={<EditProfile />} />
                     <Route
-                      path="businessProfile/:id"
+                      path="businessProfile/:serviced"
                       element={<BuisnessProfile />}
                     />
                     <Route path="business" element={<CreateBussAcc />} />

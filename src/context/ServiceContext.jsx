@@ -14,6 +14,7 @@ const ServiceProvider = ({ children }) => {
         profilePhoto,
         setProfilePhoto,
         setCoverPhotoFile,
+        setProfilePhotoFile,
       }}
     >
       {children}
