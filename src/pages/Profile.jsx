@@ -1,54 +1,22 @@
+import { Outlet, useOutletContext, useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
+import { useUser } from "../features/signup/useUser";
 import styled from "styled-components";
-import ProfilePic from "../components/ProfilePic";
-import List from "../components/List";
-
-function Profile() {
+import { useService } from "../features/signup/useService";
+import Loading from "react-loading";
+const Profile = () => {
+  const { user, isLoading } = useUser();
+  const { id } = useParams();
+  const { service } = useService(id);
   return (
     <Wrapper>
       <NavBar />
-      <div className="container">
-        <ProfilePic />
-        <List />
-      </div>
+      <Outlet context={{ user, isLoading, service }} />
     </Wrapper>
   );
-}
+};
+const Wrapper = styled.div`
+  background-color: #fef9f0;
+`;
 
 export default Profile;
-
-const Wrapper = styled.div`
-  height: 100vh;
-  background: #fef9f0;
-  .container {
-    display: flex;
-    margin-top: 20px;
-    /* padding: 20px; */
-  }
-  /* @media only screen and (max-width: ${({ theme }) => theme.mid}) {
-  } */
-
-  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
-    /* width: 100%; */
-    height: auto;
-    .container {
-      display: flex;
-      flex-direction: column;
-      margin-top: 0px;
-    }
-  }
-  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
-    width: 100%;
-    height: 100vh;
-    .container {
-      display: flex;
-      flex-direction: column;
-      margin-top: 0px;
-    }
-  }
-  @media only screen and (max-width: 52.5em) {
-    .container {
-      /* width: 65%; */
-    }
-  }
-`;

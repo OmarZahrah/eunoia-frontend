@@ -1,22 +1,20 @@
 import { useUser } from "../features/signup/useUser";
 import { useService } from "../features/signup/useService";
-
+import { useUserContext } from "../context/UserContext";
+import NavBar from "../components/NavBar";
+import { Outlet } from "react-router-dom";
+import styled from "styled-components";
+import Loading from "../components/Loading";
 const Home = () => {
-  const { user } = useUser();
-  const { service } = useService();
-  const currentUser = user?.user;
-  const currentService = service?.data[0];
-  console.log(currentService);
-  console.log(currentUser);
+  const { user, isLoading } = useUser();
   return (
-    <div>
-      <h1>Home</h1>
-      {/* <img src={currentService.avatar} alt="avatar" />
-      <img src={currentService.imageCover} alt="avatar" /> <h2>Album</h2>
-      {currentService.images.map((image, i) => (
-        <img src={image} alt={`image ${i + 1}`} key={i} />
-      ))} */}
-    </div>
+    <Wrapper>
+      <NavBar userId={user?._id} />
+      {isLoading ? <Loading /> : <></>}
+    </Wrapper>
   );
 };
+const Wrapper = styled.div`
+  background-color: #fef9f0;
+`;
 export default Home;

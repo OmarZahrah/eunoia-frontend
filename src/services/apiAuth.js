@@ -14,5 +14,5 @@ export const login = async (formData) => {
 
 export const getCurrentUser = async () => {
   const { data } = await customFetch.get("users/me");
-  return data;
+  return data.user;
 };

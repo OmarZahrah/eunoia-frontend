@@ -16,10 +16,13 @@ import { QueryClient } from "@tanstack/query-core";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
-import Profile from "./pages/Profile";
-import EditProfile from "./pages/EditProfile";
-import CreateBussAcc from "./pages/CreateBussAcc";
+import MainProfile from "./features/userProfile/MainProfile";
+import EditProfile from "./features/userProfile/EditProfile";
+import CreateBussAcc from "./features/userProfile/CreateBussAcc";
 import BuisnessProfile from "./pages/BuisnessProfile";
+import { UserProvider } from "./context/UserContext";
+import Profile from "./pages/Profile";
+import { ServiceProvider } from "./context/ServiceContext";
 
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({
@@ -36,27 +39,37 @@ function App() {
       <ThemeProvider theme={theme}>
         <ReactQueryDevtools />
         <AuthProvider>
-          <GlobalStyles />
-          <BrowserRouter>
-            <Routes>
-              <Route path="welcome" element={<Welcome />} />
-              <Route index element={<Navigate replace to="welcome" />} />
-              <Route path="signup" element={<SignUp />}>
-                <Route path="create" element={<CreateAccount />} />
-                <Route path="user" element={<SignUpUser />} />
-                <Route path="provider" element={<SignUpBusiness />} />
-              </Route>
-              <Route path="login" element={<Login />} />
-              <Route path="forgotpassword" element={<ForgotPass />} />
-              <Route path="buisnessaccount" element={<BuisnessProfile/>} />
-              <Route element={<AppLayout />}>
-                <Route path="home" element={<Home />} />
-              </Route>
-              <Route path="profile" element={<Profile />} />
-              <Route path="editprofile" element={<EditProfile />} />
-              <Route path="createbusiness" element={<CreateBussAcc />} />
-            </Routes>
-          </BrowserRouter>
+          <UserProvider>
+            <ServiceProvider>
+              <GlobalStyles />
+              <BrowserRouter>
+                <Routes>
+                  {/* <Route element={<AppLayout />}> */}
+                  <Route path="welcome" element={<Welcome />} />
+                  <Route index element={<Navigate replace to="welcome" />} />
+                  <Route path="signup" element={<SignUp />}>
+                    <Route path="create" element={<CreateAccount />} />
+                    <Route path="user" element={<SignUpUser />} />
+                    <Route path="provider" element={<SignUpBusiness />} />
+                  </Route>
+                  {/* </Route> */}
+                  <Route path="login" element={<Login />} />
+                  <Route path="forgotpassword" element={<ForgotPass />} />
+                  {/* <Route element={<AppLayout />}> */}
+                  <Route path="home" element={<Home />} />
+                  <Route path="profile/:id" element={<Profile />}>
+                    <Route index element={<MainProfile />} />
+                    <Route path="editprofile" element={<EditProfile />} />
+                    <Route
+                      path="businessProfile/:id"
+                      element={<BuisnessProfile />}
+                    />
+                    <Route path="business" element={<CreateBussAcc />} />
+                  </Route>
+                </Routes>
+              </BrowserRouter>
+            </ServiceProvider>
+          </UserProvider>
         </AuthProvider>
         <Toaster
           position="top-center"

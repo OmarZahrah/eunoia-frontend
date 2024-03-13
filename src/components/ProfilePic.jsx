@@ -1,14 +1,22 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { MdOutlineCameraAlt } from "react-icons/md";
+import { useOutletContext } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useUserContext } from "../context/UserContext";
 
-function ProfilePic() {
+function ProfilePic({ form, register }) {
+  const { user } = useOutletContext();
+  const { setAvatar } = useUserContext();
+  // const { register } = useForm();
   const [imageSrc, setImageSrc] = useState(
     "https://as1.ftcdn.net/v2/jpg/01/87/38/18/1000_F_187381803_PkyqnKdHacpV4dXk6jaHGTvtdwqVCclS.jpg"
   );
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
+    setAvatar(file);
+    // console.log(file);
     if (file) {
       setImageSrc(URL.createObjectURL(file)); // Create a temporary URL for the file
     }
@@ -16,16 +24,32 @@ function ProfilePic() {
 
   return (
     <Wrapper>
-      <div className="photo">
-        <label>
-          <img src={imageSrc} alt="Upload" />
-          <input id="image-upload" type="file" onChange={handleImageUpload} />
-        </label>
-        <div className="camera">
-          <MdOutlineCameraAlt className="camera-icon" />
-        </div>
-      </div>
-      <span>Your Name</span>
+      {form ? (
+        <>
+          <div className="photo">
+            <label>
+              <img src={user?.avatar || imageSrc} alt="Upload" />
+              <input
+                id="image-upload"
+                type="file"
+                {...register("avatar")}
+                onChange={handleImageUpload}
+              />
+            </label>
+            <div className="camera">
+              <MdOutlineCameraAlt className="camera-icon" />
+            </div>
+          </div>
+          <span>{user?.name}</span>
+        </>
+      ) : (
+        <>
+          <div className="photo">
+            <img src={user?.avatar || imageSrc} alt="Upload" />
+          </div>
+          <span>{user?.name}</span>
+        </>
+      )}
     </Wrapper>
   );
 }
@@ -37,7 +61,7 @@ const Wrapper = styled.div`
   text-align: center;
   height: 80vh;
   border-right: 1px solid rgba(0, 0, 0, 0.2);
-  margin-top: 20px;
+  margin-top: 30px;
   color: rgba(0, 0, 0, 0.593);
   display: flex;
   flex-direction: column;
@@ -111,7 +135,8 @@ const Wrapper = styled.div`
     width: 100%;
     border-right: none;
     height: 17rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.347);
+    margin-top: 40px;
+    /* border-bottom: 1px solid rgba(0, 0, 0, 0.347); */
     span {
       font-size: 25px;
     }
@@ -119,15 +144,11 @@ const Wrapper = styled.div`
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
     width: 100%;
     border-right: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.347);
+    margin-top: 45px;
+    /* border-bottom: 1px solid rgba(0, 0, 0, 0.347); */
     height: 17rem;
     span {
       font-size: 26px;
-    }
-  }
-  @media only screen and (max-width: ${({ theme }) => theme.semi}) {
-    span {
-      /* font-size: 30px; */
     }
   }
 `;

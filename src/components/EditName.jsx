@@ -1,15 +1,29 @@
 import styled from "styled-components";
 import { LuPencilLine } from "react-icons/lu";
+import { useOutletContext } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
-function EditName() {
+function EditName({ register }) {
+  const { user } = useOutletContext();
+  // const { register } = useForm();
   return (
     <Wrapper>
       <p>Edit Profile</p>
       <label>NAME</label>
-      <input type="text" placeholder="Your Name" />
+      <input
+        type="text"
+        placeholder={user?.name}
+        // defaultValue={user?.name}
+        {...register("name")}
+      />
       <LuPencilLine className="icons" />
       <label>EMAIL</label>
-      <input type="text" placeholder="Your Email" />
+      <input
+        type="text"
+        placeholder={user?.email}
+        // defaultValue={user?.email}
+        {...register("email")}
+      />
       <LuPencilLine className="icons" />
     </Wrapper>
   );

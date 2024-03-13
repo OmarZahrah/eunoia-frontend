@@ -6,12 +6,14 @@ import { FaRegHeart, FaRegEnvelope } from "react-icons/fa";
 import { BsPersonVcard } from "react-icons/bs";
 import { RiDownloadLine } from "react-icons/ri";
 
-function List() {
+function List({ serviceId }) {
+  const hasService = true;
+  // const hasService = false;
   return (
     <Wrapper>
       <ul>
         <li>
-          <Link to="/editprofile">
+          <Link to="editprofile">
             <LuPencilLine className="icons" />
             <span>Edit Profile</span>
           </Link>
@@ -30,7 +32,7 @@ function List() {
           </Link>
         </li>
         <li>
-          <Link to="/createbusiness">
+          <Link to={hasService ? `businessProfile/${serviceId}` : "business"}>
             <BsPersonVcard className="icons" />
             <span>Business Account</span>
           </Link>
@@ -69,7 +71,7 @@ const Wrapper = styled.div`
   li {
     /* display: flex;
     align-items: center; */
-    border-bottom: 1px solid  rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     padding: 22px;
     width: 60%;
     color: rgba(0, 0, 0, 0.593);
@@ -110,7 +112,6 @@ const Wrapper = styled.div`
   }
 
   @media only screen and (max-width: 52.5em) {
-
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.small}) {

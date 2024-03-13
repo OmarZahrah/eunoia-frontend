@@ -6,7 +6,11 @@ import { IoMenu } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
 import { useState } from "react";
 
-function NavBar({ showLoginButton = false, showRegisterButton = false }) {
+function NavBar({
+  showLoginButton = false,
+  showRegisterButton = false,
+  userId,
+}) {
   const [openNav, setOpenNav] = useState(false);
   const activePaths = ["/profile", "/editprofile", "/createbusiness"];
   const location = useLocation();
@@ -27,7 +31,7 @@ function NavBar({ showLoginButton = false, showRegisterButton = false }) {
             <Link to="">Categories</Link>
           </li>
           <li className={isActive}>
-            <Link to="/profile">Profile</Link>
+            <Link to={`/profile/${userId}`}>Profile</Link>
           </li>
           <li>
             <Link to="">Search</Link>

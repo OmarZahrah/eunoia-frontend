@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import Select from "./Select";
+import { businessCategories, governorates } from "../data/data";
+import FormInput from "./FormInput";
+import Input from "./Input";
 
 function AboutComponent() {
   const [category, setCategory] = useState("");
@@ -20,140 +24,63 @@ function AboutComponent() {
 
   return (
     <AboutWrapper>
-      <div className="options">
-        <div className="li">
-          <Header>CATEGORY</Header>
-          <CategorySelector value={category} onChange={handleCategoryChange}>
-            <option disabled value="">
-              Select Category
-            </option>
-            <option value="Category 1">Venues</option>
-            <option value="Category 2">Photographer </option>
-            <option value="Category 3">Event Planners</option>
-            <option value="Category 4">DJS</option>
-            <option value="Category 5">Makeup Artist </option>
-            <option value="Category 6">Food</option>
-            <option value="Category 7">Hair Stylist</option>
-            <option value="Category 8">Other Details</option>
-          </CategorySelector>
-        </div>
-        <div className="li">
-          <Header>Mobile Number</Header>
-          <MobileNumberInput
-            type="number"
-            value={mobileNumber}
-            onChange={handleMobileNumberChange}
-            placeholder="Mobile Number"
-          />
-        </div>
-        <div className="li">
-          <Header>Location</Header>
-          <LocationSelector value={location} onChange={handleLocationChange}>
-            <option disabled value="">
-              Select Location
-            </option>
-            <option value="Location 1">Cairo</option>
-            <option value="Location 2">Ismailia</option>
-            <option value="Location 3">Portsaid</option>
-            <option value="Location 3">Alex</option>
-          </LocationSelector>
-        </div>
-      </div>
+      <Select
+        label="Category"
+        options={businessCategories}
+        name="businessCategory"
+      />
+      <FormInput label="Mobile Number">
+        <Input
+          type="text"
+          id="mobile"
+          placeholder="+20 1234567890"
+          // {...register("phoneNumber")}
+        />
+      </FormInput>
+      <Select label="Location" options={governorates} name="location" />
     </AboutWrapper>
   );
 }
 
 const AboutWrapper = styled.div`
   margin-top: 25px;
-  background-color: #fef9f0;
-
-  .options {
-    padding: 0 0.625rem 0 4rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-top : 0.325rem;
-  }
-
-.li{
+  /* background-color: #fef9f0; */
   display: flex;
   flex-direction: column;
-  gap:0.04rem;
-}
-`;
+  gap: 1rem;
 
-const Header = styled.label`
-  font-size: 1.3rem;
-  font-weight: 370;
-  color: #00000099;
-
-
+  .select-box {
+    width: 100%;
+  }
+  label {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-bottom: 0;
+  }
+  select {
+    box-shadow: none;
+    border-radius: 0;
+    /* padding: 0; */
+    background-color: transparent;
+    border-bottom: 0.2px solid #ccc;
+    padding-left: 0;
+  }
+  input {
+    box-shadow: none;
+    border-radius: 0;
+    /* padding: 0; */
+    background-color: transparent;
+    border-bottom: 0.2px solid #ccc;
+    width: 100%;
+  }
+  /* 
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
-    font-size: 1.3rem;
-  }
-
+  } */
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
-    font-size: 1.3rem;
-  }
-`;
-
-const CategorySelector = styled.select`
-  border: none;
-  border-bottom: 0.013rem solid #ccc;
-  margin-bottom: 1rem;
-  font-size: 1.3rem;
-  width: 95%;
-  font-weight: 370;
-  color: #00000099;
-  font-family: Literata;
-  background-color: #fef9f0;
-
-  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
-    font-size: 1.3rem;
-  }
-
-  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
-    font-size: 1.3rem;
-  }
-`;
-const MobileNumberInput = styled.input`
-  border: none;
-  border-bottom: 0.013rem solid #ccc;
-  margin-bottom: 1rem;
-  font-size: 1.3rem;
-  width: 95%;
-  font-weight: 370;
-  color: #00000099;
-  font-family: Literata;
-  background-color: #fef9f0;
-
-  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
-    font-size: 1rem;
-  }
-
-  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
-    font-size: 1rem;
-  }
-`;
-
-const LocationSelector = styled.select`
-  border: none;
-  border-bottom: 0.013rem solid #ccc;
-  margin-bottom: 1rem;
-  font-size: 1.3rem;
-  width: 95%;
-  font-weight: 370;
-  color: #00000099;
-
-  font-family: Literata;
-  background-color: #fef9f0;
-
-  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
-    font-size: 1rem;
-  }
-
-  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
-    font-size: 1rem;
+    label {
+      font-size: 1.24rem;
+    }
   }
 `;
 

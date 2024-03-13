@@ -1,12 +1,10 @@
 import styled from "styled-components";
-import NavBar from "../components/NavBar";
-import photo from "../images/business.svg";
-import Button from "../components/Button";
+import photo from "../../images/business.svg";
+import Button from "../../components/Button";
 
 function CreateBussAcc() {
   return (
     <Wrapper>
-      <NavBar />
       <div className="container">
         <div className="left">
           <h1>Business Account</h1>
@@ -115,7 +113,7 @@ const Wrapper = styled.div`
       height: 80%;
     }
 
-    .left { 
+    .left {
       padding: 20px;
       margin-left: 10px;
     }
@@ -123,7 +121,6 @@ const Wrapper = styled.div`
     h1 {
       font-size: 18px;
       line-height: 45px;
-     
     }
     p {
       padding-bottom: 10px;
@@ -142,7 +139,7 @@ const Wrapper = styled.div`
       height: 80%;
     }
 
-    .left { 
+    .left {
       padding: 20px;
       margin-left: 10px;
     }
@@ -150,7 +147,6 @@ const Wrapper = styled.div`
     h1 {
       font-size: 18px;
       line-height: 45px;
-     
     }
     p {
       padding-bottom: 10px;
@@ -169,7 +165,7 @@ const Wrapper = styled.div`
       height: 80%;
     }
 
-    .left { 
+    .left {
       padding: 50px;
       margin-left: 10px;
     }
@@ -177,7 +173,6 @@ const Wrapper = styled.div`
     h1 {
       font-size: 18px;
       line-height: 45px;
-     
     }
     p {
       padding-bottom: 10px;
@@ -196,7 +191,7 @@ const Wrapper = styled.div`
       height: 80%;
     }
 
-    .left { 
+    .left {
       padding: 30px;
       margin-left: 10px;
     }
@@ -204,7 +199,6 @@ const Wrapper = styled.div`
     h1 {
       font-size: 18px;
       line-height: 45px;
-     
     }
     p {
       padding-bottom: 10px;
