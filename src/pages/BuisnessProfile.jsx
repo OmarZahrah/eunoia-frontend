@@ -91,6 +91,7 @@ function SelectedItemComponent({ activeItem }) {
 const Wrapper = styled.div`
   height: 100vh;
   background-color: #fef9f0;
+  
   .section1{
     position: relatives;
     

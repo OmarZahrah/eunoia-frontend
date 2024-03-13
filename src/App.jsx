@@ -20,6 +20,7 @@ import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import CreateBussAcc from "./pages/CreateBussAcc";
 import BuisnessProfile from "./pages/BuisnessProfile";
+import VenueProfile from "./pages/VenueProfile";
 
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({
@@ -55,6 +56,7 @@ function App() {
               <Route path="profile" element={<Profile />} />
               <Route path="editprofile" element={<EditProfile />} />
               <Route path="createbusiness" element={<CreateBussAcc />} />
+              <Route path ="venueprofile" element={<VenueProfile/>} />
             </Routes>
           </BrowserRouter>
         </AuthProvider>
