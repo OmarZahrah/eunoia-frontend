@@ -26,6 +26,7 @@ import Profile from "./pages/Profile";
 import { ServiceProvider } from "./context/ServiceContext";
 import VenueProfile from "./pages/VenueProfile";
 import Categories from "./pages/Categories";
+import Error from "./pages/Error";
 
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({
@@ -55,6 +56,7 @@ function App() {
                     <Route path="user" element={<SignUpUser />} />
                     <Route path="provider" element={<SignUpBusiness />} />
                   </Route>
+                  <Route path="error" element={<Error />} />
                   {/* </Route> */}
                   <Route path="login" element={<Login />} />
                   <Route path="forgotpassword" element={<ForgotPass />} />

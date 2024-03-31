@@ -25,6 +25,7 @@ function BuisnessProfile() {
   const [change, setChange] = useState(false);
   const { editService, isLoading: editing } = useEditService();
   const [changeName, setChangeName] = useState(false);
+  console.log(service);
   const {
     components,
     coverPhoto,

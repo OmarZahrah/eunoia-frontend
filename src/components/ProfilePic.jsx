@@ -1,18 +1,17 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { MdOutlineCameraAlt } from "react-icons/md";
+import { MdOutlineCameraAlt, MdOutlineImagesearchRoller } from "react-icons/md";
 import { useOutletContext } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useUserContext } from "../context/UserContext";
+import defaultProfile from "../../public/images/defaultProfile.jpg";
 
 function ProfilePic({ form, register }) {
   const { user } = useOutletContext();
   const { setAvatar } = useUserContext();
-  // const { register } = useForm();
-  const [imageSrc, setImageSrc] = useState(
-    "https://as1.ftcdn.net/v2/jpg/01/87/38/18/1000_F_187381803_PkyqnKdHacpV4dXk6jaHGTvtdwqVCclS.jpg"
-  );
+  const [imageSrc, setImageSrc] = useState("");
 
+  console.log(imageSrc);
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     setAvatar(file);
@@ -28,7 +27,12 @@ function ProfilePic({ form, register }) {
         <>
           <div className="photo">
             <label>
-              <img src={user?.avatar || imageSrc} alt="Upload" />
+              <img
+                src={imageSrc || user.avatar || defaultProfile}
+                // src={defaultProfile}
+                alt="Upload"
+              />
+
               <input
                 id="image-upload"
                 type="file"

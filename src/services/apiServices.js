@@ -6,7 +6,7 @@ export const addService = async (formData) => {
       "Content-Type": "multipart/form-data",
     },
   });
-
+  // console.log(Object.fromEntries(formData));
   return data;
 };
 
