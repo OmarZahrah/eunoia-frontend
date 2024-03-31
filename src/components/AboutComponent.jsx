@@ -4,11 +4,13 @@ import Select from "./Select";
 import { businessCategories, governorates } from "../data/data";
 import FormInput from "./FormInput";
 import Input from "./Input";
+import { useServiceContext } from "../context/ServiceContext";
 
-function AboutComponent() {
+function AboutComponent({ service }) {
   const [category, setCategory] = useState("");
   const [mobileNumber, setMobileNumber] = useState("+20 1234567890");
   const [location, setLocation] = useState("");
+  const { register } = useServiceContext();
 
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
@@ -28,16 +30,25 @@ function AboutComponent() {
         label="Category"
         options={businessCategories}
         name="businessCategory"
+        placeholder={service.businessCategory}
+        register={register}
       />
       <FormInput label="Mobile Number">
         <Input
           type="text"
           id="mobile"
-          placeholder="+20 1234567890"
-          // {...register("phoneNumber")}
+          // placeholder="+20 1234567890"
+          placeholder={service.phoneNumber}
+          {...register("phoneNumber")}
         />
       </FormInput>
-      <Select label="Location" options={governorates} name="location" />
+      <Select
+        label="Location"
+        options={governorates}
+        name="location"
+        placeholder={service.location}
+        register={register}
+      />
     </AboutWrapper>
   );
 }

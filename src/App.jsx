@@ -19,10 +19,13 @@ import { Toaster } from "react-hot-toast";
 import MainProfile from "./features/userProfile/MainProfile";
 import EditProfile from "./features/userProfile/EditProfile";
 import CreateBussAcc from "./features/userProfile/CreateBussAcc";
-import BuisnessProfile from "./pages/BuisnessProfile";
+import AddPackage from "./pages/AddPackage";
+import BuisnessProfile from "././features/serviceProfile/BuisnessProfile";
 import { UserProvider } from "./context/UserContext";
 import Profile from "./pages/Profile";
 import { ServiceProvider } from "./context/ServiceContext";
+import VenueProfile from "./pages/VenueProfile";
+import Categories from "./pages/Categories";
 
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({
@@ -57,15 +60,21 @@ function App() {
                   <Route path="forgotpassword" element={<ForgotPass />} />
                   {/* <Route element={<AppLayout />}> */}
                   <Route path="home" element={<Home />} />
-                  <Route path="profile/:id" element={<Profile />}>
+                  <Route path="profile" element={<Profile />}>
                     <Route index element={<MainProfile />} />
                     <Route path="editprofile" element={<EditProfile />} />
                     <Route
-                      path="businessProfile/:serviced"
+                      path=":userId/businessProfile"
                       element={<BuisnessProfile />}
                     />
-                    <Route path="business" element={<CreateBussAcc />} />
+                    <Route path="createBusiness" element={<CreateBussAcc />} />
                   </Route>
+                  <Route path="categories" element={<Categories />} />
+                  <Route path="addpackage" element={<AddPackage />} />
+                  <Route
+                    path="venueprofile/:venuId"
+                    element={<VenueProfile />}
+                  />
                 </Routes>
               </BrowserRouter>
             </ServiceProvider>

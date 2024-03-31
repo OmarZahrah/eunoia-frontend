@@ -22,7 +22,7 @@ function NavBar({
 
   return (
     <Wrapper>
-      <Link to="/welcome">
+      <Link to="/home">
         <img className="Hlogo" src={logo} alt="logo" />
       </Link>
       <nav className={openNav ? "open-nav" : ""}>
@@ -31,7 +31,7 @@ function NavBar({
             <Link to="/categories">Categories</Link>
           </li>
           <li className={checkIsActive("/profile") ? "active" : ""}>
-            <Link to={`/profile/${userId}`}>Profile</Link>
+            <Link to={`/profile`}>Profile</Link>
           </li>
           <li>
             <Link to="">Search</Link>
@@ -159,6 +159,7 @@ const Wrapper = styled.div`
   @media only screen and (max-width: 52.5em) {
     width: 100%;
     justify-content: space-between;
+    overflow: hidden;
     ul {
       gap: 5rem;
       /* padding-left: 1rem; */
@@ -169,7 +170,7 @@ const Wrapper = styled.div`
     .open-nav {
       /* display: none; */
       display: flex !important;
-      display: block;
+      /* display: block; */
       position: absolute;
       top: 0;
       left: 0;
@@ -180,7 +181,6 @@ const Wrapper = styled.div`
       background-color: #fff;
       align-items: center;
       justify-content: center;
-      transition: 0.3s ease;
     }
     ul {
       flex-direction: column;
@@ -201,13 +201,15 @@ const Wrapper = styled.div`
       display: block;
     }
     .buttons {
-      margin-top: 5px;
+      margin-top: 2rem;
       flex-direction: column;
-      gap: 10px;
+      gap: 5px;
     }
     .buttons button {
-      font-size: 2.4rem;
+      font-size: 2.2rem;
       width: 100%;
+      /* background: transparent; */
+      /* color: #f5b9a7; */
     }
   }
 

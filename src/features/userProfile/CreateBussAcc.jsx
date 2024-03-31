@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import photo from "../../images/business.svg";
 import Button from "../../components/Button";
+import { Link } from "react-router-dom";
 
 function CreateBussAcc() {
   return (
@@ -12,9 +13,9 @@ function CreateBussAcc() {
             You don’t have a business account
             <br /> Create business account?
           </p>
-          <Button size="large" type="submit">
-            Create Business Account
-          </Button>
+          <Link to="/signup/provider">
+            <Button size="large">Create Business Account</Button>
+          </Link>
         </div>
         <div className="right">
           <img className="img" src={photo} alt="Business" />

@@ -57,7 +57,7 @@ const Step2 = () => {
         <label htmlFor="">About</label>
         <textarea
           {...register("about")}
-          value="test test test"
+          // value="test test test"
           placeholder="Describe Your Business"
         ></textarea>
       </div>

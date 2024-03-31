@@ -1,11 +1,17 @@
 import { createContext, useContext, useState } from "react";
+import { useForm } from "react-hook-form";
 
 const serviceContext = createContext();
 const ServiceProvider = ({ children }) => {
   const [coverPhoto, setCoverPhoto] = useState("");
-  const [coverPhotoFile, setCoverPhotoFile] = useState("");
   const [profilePhoto, setProfilePhoto] = useState("");
+  const [albumImages, setAlbumImages] = useState([]);
+  const { register, handleSubmit } = useForm();
+
   const [profilePhotoFile, setProfilePhotoFile] = useState("");
+  const [coverPhotoFile, setCoverPhotoFile] = useState("");
+  const [albumPhotosFile, setAlbumPhotosFile] = useState("");
+
   return (
     <serviceContext.Provider
       value={{
@@ -13,8 +19,16 @@ const ServiceProvider = ({ children }) => {
         setCoverPhoto,
         profilePhoto,
         setProfilePhoto,
+        coverPhotoFile,
         setCoverPhotoFile,
+        profilePhotoFile,
         setProfilePhotoFile,
+        albumImages,
+        setAlbumImages,
+        albumPhotosFile,
+        setAlbumPhotosFile,
+        register,
+        handleSubmit,
       }}
     >
       {children}

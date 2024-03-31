@@ -10,99 +10,122 @@ import outdoorr from "../../public/images/outdoor.jpeg";
 import firstpack from "../../public/images/firstpack.jpeg";
 import secondpack from "../../public/images/secondpack.jpeg";
 import thirdpack from "../../public/images/thirdpack.jpeg";
+import { useParams } from "react-router";
+import { useService } from "../features/signup/useService";
+import Loading from "../components/Loading";
+import CoverSlider from "../components/CoverSlider";
+import Slider from "../components/Slider";
+import coverimg from "../../public/images/Rectangle 9.svg";
 
 function VenueProfile() {
+  const { venuId } = useParams();
+  const { service, isLoading } = useService(venuId);
+  // console.log(service);
   return (
     <Wrapper>
       <NavBar />
-      <div className="main">
-        <div className="first-section">
-          <div className="image-container">
-            <img className="img" src={image} alt="venue" />
-            <LoveButton className="like" />
-          </div>
-          <div className="text">
-            <p className="name-venue">Mercure Al-Forsan Hotel</p>
-            <p className="rate">
-              <FaStar style={{ color: "#FFF279" }} /> 3.8
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div className="main">
+          <div className="first-section">
+            <div className="images">
+              <Slider
+                photos={service?.images}
+                cover={service?.imageCover || coverimg}
+              />
+              <img className="profile" src={service.avatar} alt="profile" />
+            </div>
+
+            {/* <CoverSlider photos={service.images} /> */}
+            <div className="text">
+              <p className="name-venue">{service?.businessName}</p>
+              <p className="rate">
+                <FaStar style={{ color: "#FFF279" }} /> 3.8
+              </p>
+            </div>
+            <p className="pin">
+              <FaMapPin /> {service?.location}
             </p>
+            <div className="about">{service?.about}</div>
           </div>
-          <p className="pin">
-            {" "}
-            <FaMapPin /> Ismailia
-          </p>
-        </div>
-        <div className="second-section">
-          <p className="location">Location</p>
-          <img className="imgloc" src={imgloc} alt="map" />
-          <a
-            href="https://www.google.com/maps/search/?api=1&query=30.59569736038205,32.270704449476916"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="google-maps-link"
-          >
-            Open in Google Maps
-          </a>
-        </div>
-        <div className="third-section">
-          <p className="location">Packages</p>
-          <div className="packages-container">
-            <VenuePackages
-              image={indoor}
-              width={280}
-              title="Indoor Hall"
-              price="13,500 EGP"
-            />
-            <VenuePackages
-              image={outdoorr}
-              width={280}
-              title="Outdoor Venue"
-              price="15,000 EGP"
-            />
-            
+          <div className="second-section">
+            <p className="location">Location</p>
+            <img className="imgloc" src={imgloc} alt="map" />
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=30.59569736038205,32.270704449476916"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="google-maps-link"
+            >
+              Open in Google Maps
+            </a>
           </div>
-        </div>
-        <div className="fourth-section">
-          <p className="location">Similar</p>
-          <div className="packages-container">
-            <VenuePackages
-              image={firstpack}
-              width={370}
-              title="Omar Eleven"
-              showRate={4.5}
-            />
-            <VenuePackages
-              image={secondpack}
-              width={370}
-              title="Occhio Films"
-              showRate={4}
-            />
-            <VenuePackages
-              image={thirdpack}
-              width={370}
-              title=" Omar Eleven"
-              showRate={3.5}
-            />
-            <VenuePackages
-              image={secondpack}
-              width={370}
-              title="Occhio Films"
-              showRate={3.5}
-            />
+          <div className="third-section">
+            <p className="location">Packages</p>
+            <div className="packages-container">
+              <VenuePackages
+                image={indoor}
+                width={280}
+                title="Indoor Hall"
+                price="13,500 EGP"
+              />
+              <VenuePackages
+                image={outdoorr}
+                width={280}
+                title="Outdoor Venue"
+                price="15,000 EGP"
+              />
+            </div>
+          </div>
+          <div className="fourth-section">
+            <p className="location">Similar</p>
+            <div className="packages-container">
+              <VenuePackages
+                image={firstpack}
+                width={370}
+                title="Omar Eleven"
+                showRate={4.5}
+              />
+              <VenuePackages
+                image={secondpack}
+                width={370}
+                title="Occhio Films"
+                showRate={4}
+              />
+              <VenuePackages
+                image={thirdpack}
+                width={370}
+                title=" Omar Eleven"
+                showRate={3.5}
+              />
+              <VenuePackages
+                image={secondpack}
+                width={370}
+                title="Occhio Films"
+                showRate={3.5}
+              />
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
   background-color: #fef9f0;
-  height: 100%;
-
+  /* height: 100%; */
+  min-height: 100vh;
+  padding-bottom: 2rem;
+  .main {
+    margin: 0 auto;
+    width: 90%;
+  }
   .first-section {
     position: relative;
     padding-bottom: 1.5rem;
+    margin-bottom: 4rem;
   }
 
   .first-section::after {
@@ -121,11 +144,24 @@ const Wrapper = styled.div`
   }
 
   .img {
-    width: 90%;
+    /* width: 90%; */
     max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
+    height: 100%;
+    object-fit: cover;
+  }
+  .images {
+    position: relative;
+    margin-bottom: 2rem;
+  }
+  .profile {
+    position: absolute;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    object-fit: cover;
+    bottom: 0;
+    right: 50%;
+    transform: translate(50%, 50%);
   }
 
   .like {
@@ -137,7 +173,6 @@ const Wrapper = styled.div`
   .text {
     display: flex;
     justify-content: space-between;
-    padding: 0 5rem;
   }
 
   .name-venue {
@@ -157,27 +192,28 @@ const Wrapper = styled.div`
   .pin {
     font-family: Literata;
     color: #00000099;
-    padding-left: 5.2rem;
     font-weight: 300;
     font-size: 1.3rem;
   }
-
+  .about {
+    color: #06050599;
+    margin-top: 1rem;
+  }
   .location {
-    padding-left: 5.2rem;
-    padding-top: 1rem;
+    /* padding-top: 1rem; */
     font-family: Literata;
     color: #00000099;
     font-size: 2.1rem;
     font-weight: 600;
+    margin-bottom: 1rem;
   }
 
   .imgloc {
-    width: 1210px;
-    /* height: 450px; */
-    height: auto;
-    padding-top: 2.5rem;
+    width: 90%;
+    /* height: 15rem; */
+    /* height: auto; */
     display: block;
-    padding-left: 5.2rem;
+    margin: 0 auto;
   }
 
   .google-maps-link {
@@ -189,11 +225,13 @@ const Wrapper = styled.div`
     font-weight: 450;
     text-decoration: none;
     text-align: right;
-    width: 84%;
+    /* width: 84%; */
     padding-bottom: 1.5rem;
+    width: 95%;
   }
   .second-section {
     position: relative;
+    /* max-width: 100%; */
   }
   .second-section::after {
     content: "";
@@ -210,6 +248,18 @@ const Wrapper = styled.div`
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
+    margin-top: 1rem;
+    display: flex;
+    gap: 1.5rem;
+  }
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 8px;
+    /* background-color: #eee; */
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #74ab70;
+    border-radius: 5px;
   }
   .third-section {
     position: relative;
@@ -225,17 +275,50 @@ const Wrapper = styled.div`
     height: 0.013rem;
     background-color: #ccc; /* Border color */
   }
-
-  @media only screen and (max-width: ${({ theme }) => theme.small}) {
-    .imgloc {
-      width: 1200px;
-      /* height: 450px; */
+  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
+    .name-venue {
+      font-size: 1.2rem;
     }
+    .rate {
+      font-size: 1.2rem;
+    }
+    .location {
+      font-size: 1.7rem;
+    }
+    .google-maps-link {
+      font-size: 1rem;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mid}) {
+    .name-venue {
+      font-size: 1.5rem;
+    }
+    .rate {
+      font-size: 1.5rem;
+    }
+    .pin {
+      font-size: 1rem;
+    }
+    .location {
+      font-size: 1.7rem;
+    }
+    .google-maps-link {
+      font-size: 1rem;
+    }
+    .images {
+      margin-bottom: 3rem;
+    }
+    .profile {
+      width: 8rem;
+      height: 8rem;
+    }
+  }
+
+  /*
 
     @media only screen and (max-width: 82em) {
       .imgloc {
         width: 900px;
-        /* height: 450px; */
       }
     }
   }
@@ -243,18 +326,12 @@ const Wrapper = styled.div`
   @media only screen and (max-width: ${({ theme }) => theme.small}) {
     .imgloc {
       width: 1100px;
-      /* height: 450px; */
     }
   }
 
-  @media only screen and (max-width: ${({ theme }) => theme.semi}) {
-    .text {
-      padding-top: 0.5rem;
-    }
-
+  
     .imgloc {
       width: 940px;
-      /* height: 450px; */
       padding-top: 2rem;
     }
 
@@ -283,7 +360,6 @@ const Wrapper = styled.div`
 
     .imgloc {
       width: 750px;
-      /* height: 450px; */
       padding-top: 1.8rem;
     }
 
@@ -304,65 +380,43 @@ const Wrapper = styled.div`
     }
   }
 
-  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
-    .text {
-      padding-top: 0.5rem;
-    }
-
-    .imgloc {
-      width: 610px;
-      padding-top: 1.3rem;
-    }
-
-    .location {
-      font-size: 1.2rem;
-    }
-    .name-venue {
-      font-size: 1.3rem;
-    }
-    .rate {
-      font-size: 1.2rem;
-    }
-  }
-
+  
 
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
     .img {
       width: 75%;
-      padding-bottom:1rem;
+      padding-bottom: 1rem;
     }
     .like {
       right: 16%;
     }
-    .name-venue{
-      font-size:1rem;
-     font-weight: 400;
-     padding-left:0.01rem;
+    .name-venue {
+      font-size: 1rem;
+      font-weight: 400;
+      padding-left: 0.01rem;
     }
 
     .text {
-   
-    display: flex;
-    justify-content: space-between;
-    padding: 0 4rem;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 4rem;
     }
-    .location{
-      padding-left:3rem;
+    .location {
+      padding-left: 3rem;
     }
     .pin {
-    padding-left: 4rem;
-    font-weight: 300;
-    font-size: 1rem;
-  }
-  .google-maps-link {
-    font-size: 1rem;
-
-  }
+      padding-left: 4rem;
+      font-weight: 300;
+      font-size: 1rem;
+    }
+    .google-maps-link {
+      font-size: 1rem;
+    }
 
     .imgloc {
       width: 350px;
       padding-top: 1.3rem;
-      padding-left:3rem
+      padding-left: 3rem;
     }
 
     .location {
@@ -374,8 +428,7 @@ const Wrapper = styled.div`
     .rate {
       font-size: 1rem;
     }
-
-  }
+  } */
 `;
 
 export default VenueProfile;

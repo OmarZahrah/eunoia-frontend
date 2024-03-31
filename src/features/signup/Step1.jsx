@@ -25,8 +25,14 @@ const Step1 = () => {
           label="Business Category"
           options={businessCategories}
           name="businessCategory"
+          register={register}
         />
-        <Select label="Location" options={governorates} name="location" />
+        <Select
+          label="Location"
+          options={governorates}
+          name="location"
+          register={register}
+        />
       </div>
     </Wrapper>
   );

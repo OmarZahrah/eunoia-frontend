@@ -48,6 +48,7 @@ function EditProfile() {
             background="green"
             size="small"
             disabled={isLoading}
+            className="submit"
           >
             {isLoading ? "Saving..." : "Save "}
           </Button>
@@ -67,7 +68,7 @@ const Wrapper = styled.div`
     margin-top: 20px;
     /* padding: 20px; */
   }
-  button {
+  .submit {
     display: block;
     margin-left: auto;
   }

@@ -12,6 +12,14 @@ export const addService = async (formData) => {
 
 export const getCurrentService = async (id) => {
   const { data } = await customFetch.get(`services/${id}/serviceProfile`);
+  // console.log(data.data);
+  return data.data;
+};
 
-  return data.data[0];
+export const editService = async (formData) => {
+  console.log("fromData", Object.fromEntries(formData));
+  const { data } = await customFetch.patch(`services/serviceProfile`, formData);
+  // console.log(Object.fromEntries(formData));
+  // console.log(data.data);
+  return data.data;
 };

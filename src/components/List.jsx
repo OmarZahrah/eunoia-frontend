@@ -5,12 +5,19 @@ import { VscLock } from "react-icons/vsc";
 import { FaRegHeart, FaRegEnvelope } from "react-icons/fa";
 import { BsPersonVcard } from "react-icons/bs";
 import { RiDownloadLine } from "react-icons/ri";
+import { useState } from "react";
+import Logout from "./Logout";
 
-function List({ serviceId }) {
-  const hasService = true;
+function List({ user }) {
+  const [logout, setLogout] = useState(false);
+  const hasService = user.hasService;
   // const hasService = false;
+  console.log(user);
   return (
     <Wrapper>
+      {logout && (
+        <div className="overlay" onClick={() => setLogout(false)}></div>
+      )}
       <ul>
         <li>
           <Link to="editprofile">
@@ -32,7 +39,9 @@ function List({ serviceId }) {
           </Link>
         </li>
         <li>
-          <Link to={hasService ? `businessProfile/${serviceId}` : "business"}>
+          <Link
+            to={hasService ? `${user._id}/businessProfile` : "createBusiness"}
+          >
             <BsPersonVcard className="icons" />
             <span>Business Account</span>
           </Link>
@@ -44,7 +53,7 @@ function List({ serviceId }) {
           </Link>
         </li>
         <li>
-          <Link to="/welcome">
+          <Link onClick={() => setLogout(true)}>
             <LuLogOut className="icons" />
             <span>Logout</span>
           </Link>
@@ -56,6 +65,7 @@ function List({ serviceId }) {
           </Link>
         </li>
       </ul>
+      {logout && <Logout setLogout={setLogout} />}
     </Wrapper>
   );
 }
@@ -64,6 +74,17 @@ export default List;
 
 const Wrapper = styled.div`
   width: 70%;
+  .overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+
+    background-color: #0000006d;
+  }
   ul {
     margin-top: 2rem;
     /* border-left: 1px solid; */

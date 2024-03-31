@@ -8,18 +8,15 @@ import Loading from "../../components/Loading";
 import { useOutletContext } from "react-router-dom";
 
 function Profile() {
-  const { user, isLoading, service } = useOutletContext();
+  const { user, service } = useOutletContext();
+  // console.log(user)
   // console.log(user);
   return (
     <Wrapper>
-      {isLoading ? (
-        <Loading type="bubbles" />
-      ) : (
-        <div className="container">
-          <ProfilePic user={user} />
-          <List serviceId={service?._id} />
-        </div>
-      )}
+      <div className="container">
+        <ProfilePic user={user} />
+        <List user={user} />
+      </div>
     </Wrapper>
   );
 }
@@ -29,13 +26,12 @@ export default Profile;
 const Wrapper = styled.div`
   min-height: 100vh;
   background: #fef9f0;
+  /* position: relative; */
   .container {
     display: flex;
     margin-top: 20px;
     /* padding: 20px; */
   }
-  /* @media only screen and (max-width: ${({ theme }) => theme.mid}) {
-  } */
 
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
     /* width: 100%; */

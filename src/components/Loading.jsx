@@ -11,7 +11,7 @@ const style = {
 const Example = ({ type, color }) => (
   <Wrapper>
     <ReactLoading
-      type={type}
+      type={"spin"}
       color={color || "#74ab70"}
       height={500}
       width={200}

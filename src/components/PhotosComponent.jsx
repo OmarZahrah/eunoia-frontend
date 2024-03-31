@@ -1,20 +1,42 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useEffect, useState } from "react";
+import { TiDeleteOutline } from "react-icons/ti";
+import { RiDeleteBin7Line } from "react-icons/ri";
 
-const App = () => {
-  const [selectedImages, setSelectedImages] = useState([]);
+import styled from "styled-components";
+import { useServiceContext } from "../context/ServiceContext";
+
+const PhotosComponent = ({ images }) => {
+  const [selectedImages, setSelectedImages] = useState(images);
+  const {
+    albumImages,
+    setAlbumImages,
+    albumPhotosFile,
+    setAlbumPhotosFile,
+    register,
+  } = useServiceContext();
+
+  () => setAlbumImages(images);
+  useEffect(() => {
+    const f = () => {
+      setAlbumImages(images);
+    };
+
+    f();
+  }, []);
 
   const onSelectFile = (event) => {
     const selectedFiles = event.target.files;
+    console.log(selectedFiles);
     const selectedFilesArray = Array.from(selectedFiles);
 
     const imagesArray = selectedFilesArray.map((file) => {
       return URL.createObjectURL(file);
     });
+    setAlbumPhotosFile(selectedFiles);
+    setAlbumImages((previousImages) => previousImages.concat(imagesArray));
+    // setSelectedImages((previousImages) => previousImages.concat(imagesArray));
+    // setAlbumImages(selectedImages);
 
-    setSelectedImages((previousImages) => previousImages.concat(imagesArray));
-
-  
     event.target.value = "";
   };
 
@@ -23,24 +45,51 @@ const App = () => {
     URL.revokeObjectURL(image);
   }
 
+  const handleDeleteImage = (image) => {
+    const newImages = albumImages.filter((images) => images !== image);
+    setAlbumImages(newImages);
+  };
+
   return (
     <Section>
-      <Label>
-        + Add Images
-        <br />
-        <Span>up to 10 images</Span>
-        <Input
+      <div className="album">
+        {/* {selectedImages.map((image) => ( */}
+        {albumImages.map((image) => (
+          <div className="image" key={image}>
+            <img src={image} />
+            <div
+              className="delete-icon"
+              onClick={() => handleDeleteImage(image)}
+            >
+              <RiDeleteBin7Line className="icon" />
+            </div>
+          </div>
+        ))}
+      </div>
+      <label className="add-image">
+        +
+        <input
           type="file"
           name="images"
           onChange={onSelectFile}
           multiple
           accept="image/png , image/jpeg, image/webp"
         />
-      </Label>
-      <br />
+      </label>
+      {/* <label>
+        + Add photos
+        <input
+          {...register("images")}
+          className="image-input"
+          type="file"
+          onChange={(e) => onSelectFile(e)}
+          multiple
+        />
+      </label> */}
+      {/* <br /> */}
 
-      <Input type="file" multiple />
-
+      {/* <Input type="file" multiple /> */}
+      {/* 
       {selectedImages.length > 0 &&
         (selectedImages.length > 10 ? (
           <Error>
@@ -64,7 +113,7 @@ const App = () => {
               </ImageContainer>
             );
           })}
-      </Images>
+      </Images> */}
     </Section>
   );
 };
@@ -72,80 +121,54 @@ const App = () => {
 const Section = styled.section`
   padding: 2rem 0;
   background-color: #fef9f0;
-`;
-
-const Label = styled.label`
-  margin: 0 auto;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  /* border: 1px dotted black; */
-  /* border-radius: 20px; */
-  width: 10rem;
-  height: 10rem;
-  cursor: pointer;
-  font-size: large;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
-      rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-     
+  gap: 20px;
 
-  &:hover {
-    box-shadow: rgba(164, 140, 140, 0.1) 0px 10px 15px -3px,
-      rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-      background-color:#efcfc5b0;
+  .album {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .add-image {
+    cursor: pointer;
+    background-color: #f5b9a735;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: 400;
+    transition: 0.3s ease;
+  }
+  .add-image:hover {
+    scale: 1.05;
+  }
+  input {
+    display: none;
+  }
+  .image {
+    position: relative;
+  }
+  .image img {
+    border: 2px solid var(--color-grey-500);
+    width: 10rem;
+    /* height: auto; */
+  }
+  .delete-icon {
+    position: absolute;
+    top: -10px;
+    right: 5px;
+    color: #fff;
+    transform: translateX(50%);
+    background-color: #fef9f0;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #555;
+    padding: 5px;
   }
 `;
 
-const Span = styled.span`
-  font-weight: lighter;
-  font-size: small;
-  padding-top: 0.5rem;
-`;
-
-const Input = styled.input`
-  display: none;
-`;
-
-const Images = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ImageContainer = styled.div`
-  margin: 1rem 0.5rem;
-  position: relative;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
-`;
-
-const Image = styled.img`
-  height: 10rem; 
-  width: 10rem; 
-`;
-
-const Button = styled.button`
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  cursor: pointer;
-  border: none;
-  color: white;
-  background-color: lightcoral;
-
-  &:hover {
-    background-color: red;
-  }
-`;
-
-const Error = styled.p`
-  text-align: center;
-`;
-
-const ErrorSpan = styled.span`
-  color: red;
-`;
-
-export default App;
+export default PhotosComponent;

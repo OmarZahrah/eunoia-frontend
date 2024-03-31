@@ -50,6 +50,7 @@ const Step3 = () => {
         name="keywords"
         label="Words describe your business (Choose 3)"
         options={keywords}
+        register={register}
       />
       <div>
         <span className="image-label">Upload your cover photo</span>

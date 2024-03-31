@@ -2,15 +2,28 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import styled from "styled-components";
 import { useAuthContext } from "../context/AuthContext";
 
-const Select = ({ label, options, multiple = false, color, name }) => {
-  const { register } = useAuthContext();
+const Select = ({
+  label,
+  options,
+  multiple = false,
+  color,
+  name,
+  placeholder,
+  register,
+}) => {
+  // const { register } = useAuthContext();
   return (
     <Wrapper color={color}>
       <label htmlFor="">{label}</label>
       <div className="select-box">
-        <select {...register(name)} className="select-item" multiple={multiple}>
+        <select
+          {...register(name)}
+          className="select-item"
+          multiple={multiple}
+          // defaultValue={placeholder}
+        >
           <option value="" disabled selected hidden>
-            Select
+            {`${placeholder}` || "Select"}
           </option>
           {options?.map((option) => (
             <option key={option.value} value={option.value}>
