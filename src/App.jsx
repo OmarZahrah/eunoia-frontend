@@ -23,6 +23,7 @@ import AddPackage from "./pages/AddPackage";
 import BuisnessProfile from "./pages/BuisnessProfile";
 import VenueProfile from "./pages/VenueProfile";
 import Categories from "./pages/Categories";
+import OutDoorvenue from "./pages/OutDoorvenue";
 
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({
@@ -60,6 +61,7 @@ function App() {
               <Route path="editprofile" element={<EditProfile />} />
               <Route path="createbusiness" element={<CreateBussAcc />} />
               <Route path ="venueprofile" element={<VenueProfile/>} />
+              <Route path="outdoorvenue" element={<OutDoorvenue />}/>
               <Route path="addpackage" element={<AddPackage />} />
             </Routes>
           </BrowserRouter>
