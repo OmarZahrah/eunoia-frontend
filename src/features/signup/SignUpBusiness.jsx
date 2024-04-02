@@ -28,6 +28,7 @@ const SignUpBusiness = () => {
     setCurrentStep((s) => s - 1);
   };
   const onSubmit = (formData) => {
+    console.log("service Album", albumPhotosFile);
     const allData = {
       ...formData,
       avatar: profilePhotoFile && profilePhotoFile,

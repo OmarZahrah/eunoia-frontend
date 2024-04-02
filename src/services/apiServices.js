@@ -1,13 +1,13 @@
 import customFetch from "../utils/customFetch";
 
 export const addService = async (formData) => {
-  const { data } = await customFetch.post("/Services", formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
-
-  return data;
+  // const { data } = await customFetch.post("/Services", formData, {
+  //   headers: {
+  //     "Content-Type": "multipart/form-data",
+  //   },
+  // });
+  console.log("service", Object.fromEntries(formData));
+  // return data;
 };
 
 export const getCurrentService = async (id) => {
@@ -17,9 +17,9 @@ export const getCurrentService = async (id) => {
 };
 
 export const editService = async (formData) => {
-  console.log("fromData", Object.fromEntries(formData));
+  console.log("formData", Object.fromEntries(formData));
   const { data } = await customFetch.patch(`services/serviceProfile`, formData);
   // console.log(Object.fromEntries(formData));
-  // console.log(data.data);
+  console.log("data", data.data);
   return data.data;
 };

@@ -4,58 +4,55 @@ import { RiDeleteBin7Line } from "react-icons/ri";
 
 import styled from "styled-components";
 import { useServiceContext } from "../context/ServiceContext";
+import { showImages } from "../utils/showImages";
 
-const PhotosComponent = ({ images }) => {
+const PhotosComponent = ({ images, setChange }) => {
   const [selectedImages, setSelectedImages] = useState(images);
   const {
     albumImages,
     setAlbumImages,
     albumPhotosFile,
-    setAlbumPhotosFile,
+    setNewPhotos,
+    setOldPhotos,
+    oldPhotos,
+    noOldPhotos,
+    setNoOldPhotos,
     register,
   } = useServiceContext();
-
-  () => setAlbumImages(images);
   useEffect(() => {
     const f = () => {
       setAlbumImages(images);
+      // setOldPhotos(images);
     };
 
     f();
   }, []);
 
-  const onSelectFile = (event) => {
-    const selectedFiles = event.target.files;
-    console.log(selectedFiles);
-    const selectedFilesArray = Array.from(selectedFiles);
+  const onSelectFile = (e) => {
+    const selectedFiles = e.target.files;
 
-    const imagesArray = selectedFilesArray.map((file) => {
-      return URL.createObjectURL(file);
-    });
-    setAlbumPhotosFile(selectedFiles);
-    setAlbumImages((previousImages) => previousImages.concat(imagesArray));
-    // setSelectedImages((previousImages) => previousImages.concat(imagesArray));
-    // setAlbumImages(selectedImages);
-
-    event.target.value = "";
+    // setOldPhotos(images);
+    setNewPhotos(selectedFiles);
+    setAlbumImages((previousImages) =>
+      previousImages.concat(showImages(selectedFiles))
+    );
   };
-
-  function deleteHandler(image) {
-    setSelectedImages(selectedImages.filter((e) => e !== image));
-    URL.revokeObjectURL(image);
-  }
 
   const handleDeleteImage = (image) => {
     const newImages = albumImages.filter((images) => images !== image);
     setAlbumImages(newImages);
+    const oldImages = images.filter((photos) => photos !== image);
+    // if (oldImages.length === 0) setNoOldPhotos(true);
+    setOldPhotos(oldImages);
+    setChange(true);
   };
 
   return (
     <Section>
       <div className="album">
         {/* {selectedImages.map((image) => ( */}
-        {albumImages.map((image) => (
-          <div className="image" key={image}>
+        {albumImages?.map((image, i) => (
+          <div className="image" key={i}>
             <img src={image} />
             <div
               className="delete-icon"
@@ -69,11 +66,11 @@ const PhotosComponent = ({ images }) => {
       <label className="add-image">
         +
         <input
+          {...register("images")}
+          className="image-input"
           type="file"
-          name="images"
-          onChange={onSelectFile}
+          onChange={(e) => onSelectFile(e)}
           multiple
-          accept="image/png , image/jpeg, image/webp"
         />
       </label>
       {/* <label>

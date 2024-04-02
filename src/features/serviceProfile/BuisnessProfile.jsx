@@ -17,6 +17,8 @@ import { useEditService } from "../serviceProfile/useEditService";
 import { useService } from "../signup/useService";
 import { CiEdit } from "react-icons/ci";
 import FormInput from "../../components/FormInput";
+import { filterData } from "../../utils/filterData";
+import { createFormData } from "../../utils/createFormData";
 
 function BuisnessProfile() {
   const { userId } = useParams();
@@ -25,23 +27,26 @@ function BuisnessProfile() {
   const [change, setChange] = useState(false);
   const { editService, isLoading: editing } = useEditService();
   const [changeName, setChangeName] = useState(false);
+  // console.log(service);
   const {
-    components,
     coverPhoto,
     setCoverPhoto,
     profilePhoto,
     setProfilePhoto,
     setProfilePhotoFile,
     setCoverPhotoFile,
-    albumPhotosFile,
+    oldPhotos,
+    newPhotos,
     profilePhotoFile,
     coverPhotoFile,
+    noOldPhotos,
     register,
     handleSubmit,
   } = useServiceContext();
   const handleItemClick = (item) => {
     setActiveItem(item);
   };
+
   const onSelectFile = (e, type) => {
     const selectedFiles = e.target.files;
     if (type == "avatar") {
@@ -55,35 +60,40 @@ function BuisnessProfile() {
     }
   };
 
-  const handlePhotoChange = (event) => {
-    // Handle photo change
-  };
   const onSubmit = (data) => {
+    console.log("album", oldPhotos);
+    console.log("new photos", newPhotos);
     const allData = {
       ...data,
       avatar: profilePhotoFile && profilePhotoFile,
       imageCover: coverPhotoFile && coverPhotoFile,
-      images: albumPhotosFile && [...albumPhotosFile],
+      // images: oldPhotos && [...oldPhotos],
     };
 
-    const filteredData = Object.fromEntries(
-      Object.entries(allData).filter(
-        (el) =>
-          el[1] !== "" &&
-          el[1] !== null &&
-          el[1] !== undefined &&
-          el[0] !== "images"
-      )
-    );
-    filteredData;
+    // =========================================
+    // filter the empty data an create form data
+    // =========================================
+    const filteredData = filterData(allData, true);
+    let finalData = createFormData(filteredData);
 
-    let finalData = new FormData();
-    Object.keys(filteredData).forEach((key) =>
-      finalData.append(key, filteredData[key])
-    );
-    for (let i = 0; i < albumPhotosFile.length; i++) {
-      finalData.append("images", albumPhotosFile[i]);
+    // ========================================
+    // Add the old photos to form data if exist
+    // ========================================
+    oldPhotos &&
+      oldPhotos.forEach((photo, index) => {
+        finalData.append(`images`, photo);
+      });
+    // if (noOldPhotos) {
+    //   finalData.append(`images`, "");
+    // }
+
+    // ==========================
+    // Add the new photos to form data if exist
+    // ===========================
+    for (let i = 0; i < newPhotos.length; i++) {
+      finalData.append("newPhoto", newPhotos[i]);
     }
+
     editService(finalData);
     setChangeName(false);
   };
@@ -132,13 +142,13 @@ function BuisnessProfile() {
                 onChange={(e) => onSelectFile(e, "avatar")}
               />
             </label>
-            <input
+            {/* <input
               id="fileInput"
               type="file"
               accept="image/*"
               onChange={handlePhotoChange}
               style={{ display: "none" }}
-            />
+            /> */}
           </div>
           <div className="name-container">
             {changeName ? (
@@ -188,7 +198,7 @@ function BuisnessProfile() {
                 </button>
               </li>
             </ul>
-            {activeItem && SelectedItem(activeItem, service)}
+            {activeItem && SelectedItem(activeItem, service, setChange)}
           </div>
           {change && (
             <Button
@@ -209,14 +219,14 @@ function BuisnessProfile() {
   );
 }
 
-function SelectedItem(activeItem, service) {
+function SelectedItem(activeItem, service, setChange) {
   switch (activeItem) {
     case "About":
       return <AboutComponent service={service} />;
     case "Packages":
       return <PackagesComponent />;
     case "Photos":
-      return <PhotosComponent images={service.images} />;
+      return <PhotosComponent images={service.images} setChange={setChange} />;
     default:
       return null;
   }
