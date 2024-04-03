@@ -24,9 +24,9 @@ const PackagesComponent = ({ type }) => {
 };
 
 const Wrapper = styled.div`
-  min-width: 25%;
+  /* min-width: 25%; */
   min-height: 150px;
-  width: 30%;
+  width: 100%;
   background-color: #f5b9a735;
   border-radius: 10px;
   display: inline-block;
