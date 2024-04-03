@@ -27,6 +27,7 @@ function Categories() {
         <CategoriesDiv
           title={"Photographers"}
           backgroundImage={photographers}
+          link={"/photographers"}
           marginTop={115}
         />
         <CategoriesDiv
