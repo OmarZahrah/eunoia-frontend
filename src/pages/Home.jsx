@@ -56,50 +56,64 @@ const Home = () => {
             image={man}
             title={"Amr Abdallah"}
             description={"Photographer"}
-            width={230}
-            height={200}
+            width={185}
+            height={160}
           />
           <DetailsCard
             image={man}
             title={"Amr Abdallah"}
             description={"Photographer"}
-            width={230}
-            height={200}
+            width={185}
+            height={160}
           />
           <DetailsCard
             image={man}
             title={"Amr Abdallah"}
             description={"Photographer"}
-            width={230}
-            height={200}
+            width={185}
+            height={160}
           />
           <DetailsCard
             image={man}
             title={"Amr Abdallah"}
             description={"Photographer"}
-            width={230}
-            height={200}
+            width={185}
+            height={160}
           />
           <DetailsCard
             image={man}
             title={"Amr Abdallah"}
             description={"Photographer"}
-            width={230}
-            height={200}
+            width={185}
+            height={160}
           />
           <DetailsCard
             image={man}
             title={"Amr Abdallah"}
             description={"Photographer"}
-            width={230}
-            height={200}
+            width={185}
+            height={160}
           />
           <DetailsCard
             image={man}
             title={"Amr Abdallah"}
             description={"Photographer"}
-            width={230}
-            height={200}
+            width={185}
+            height={160}
+          />
+          <DetailsCard
+            image={man}
+            title={"Amr Abdallah"}
+            description={"Photographer"}
+            width={185}
+            height={160}
+          />
+          <DetailsCard
+            image={man}
+            title={"Amr Abdallah"}
+            description={"Photographer"}
+            width={185}
+            height={160}
           />
         </div>
         <p className="titles">Nearby</p>
@@ -108,36 +122,36 @@ const Home = () => {
             image={table}
             title={"Yomna Tarek"}
             description={"Event Planner"}
-            width={350}
-            height={200}
+            width={330}
+            height={180}
           />
           <DetailsCard
             image={table}
             title={"Yomna Tarek"}
             description={"Event Planner"}
-            width={350}
-            height={200}
+            width={330}
+            height={180}
           />
           <DetailsCard
             image={table}
             title={"Yomna Tarek"}
             description={"Event Planner"}
-            width={350}
-            height={200}
+            width={330}
+            height={180}
           />
           <DetailsCard
             image={table}
             title={"Yomna Tarek"}
             description={"Event Planner"}
-            width={350}
-            height={200}
+            width={330}
+            height={180}
           />
           <DetailsCard
             image={table}
             title={"Yomna Tarek"}
             description={"Event Planner"}
-            width={350}
-            height={200}
+            width={330}
+            height={180}
           />
         </div>
       </div>
@@ -161,15 +175,13 @@ const Wrapper = styled.div`
   }
   .packages-container {
     display: flex;
-    gap: 1.5rem;
-    /* padding-bottom: 1rem; */
-    overflow: auto;
-    white-space: nowrap;
-    height: 240px;
+    gap: 1.2rem;
+    overflow-x: auto;
+    height: 220px;
+    /* white-space: nowrap; */
     /* justify-content: space-evenly; */
   }
   .packages-container::-webkit-scrollbar-thumb {
-    /* width: 20px; */
     background-color: #d4d4d4;
     border-radius: 10px;
     cursor: pointer;

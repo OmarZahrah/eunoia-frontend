@@ -15,8 +15,8 @@ function SpecialOffers({ link, backgroundImage, percentage, title, category }) {
 
 export default SpecialOffers;
 const Wrapper = styled.div`
-  width: 25rem;
-  height: 13rem;
+  width: 27rem;
+  height: 12rem;
   background: ${({ backgroundImage }) => `url(${backgroundImage})`};
   border-radius: 25px;
   background-size: cover;
@@ -33,5 +33,4 @@ const Wrapper = styled.div`
     font-size: 17px;
     line-height: 17.82px;
   }
-  
 `;
