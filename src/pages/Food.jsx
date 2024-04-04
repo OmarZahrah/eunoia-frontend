@@ -2,11 +2,11 @@ import styled from "styled-components";
 import NavBar from "../components/NavBar";
 import Category from "../components/Category";
 
-function Photographers() {
+function Food() {
   return (
     <Wrapper>
       <NavBar />
-      <Category title="Photographers" />
+      <Category title="Food" />
     </Wrapper>
   );
 }
@@ -16,4 +16,4 @@ const Wrapper = styled.div`
   min-height: 100vh;
 `;
 
-export default Photographers;
+export default Food;
