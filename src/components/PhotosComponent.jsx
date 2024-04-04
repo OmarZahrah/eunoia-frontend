@@ -17,6 +17,7 @@ const PhotosComponent = ({ images, setChange }) => {
     oldPhotos,
     noOldPhotos,
     setNoOldPhotos,
+    setDeletedPhotos,
     register,
   } = useServiceContext();
   useEffect(() => {
@@ -44,6 +45,9 @@ const PhotosComponent = ({ images, setChange }) => {
     const oldImages = images.filter((photos) => photos !== image);
     // if (oldImages.length === 0) setNoOldPhotos(true);
     setOldPhotos(oldImages);
+
+    !image.startsWith("blob") &&
+      setDeletedPhotos((previousImages) => previousImages.concat(image));
     setChange(true);
   };
 

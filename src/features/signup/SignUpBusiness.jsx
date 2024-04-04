@@ -28,14 +28,13 @@ const SignUpBusiness = () => {
     setCurrentStep((s) => s - 1);
   };
   const onSubmit = (formData) => {
-    console.log("service Album", albumPhotosFile);
     const allData = {
       ...formData,
       avatar: profilePhotoFile && profilePhotoFile,
       imageCover: coverPhotoFile && coverPhotoFile,
       images: albumPhotosFile && [...albumPhotosFile],
     };
-
+    console.log(allData);
     const filteredData = Object.fromEntries(
       Object.entries(allData).filter(
         (el) =>
@@ -54,7 +53,6 @@ const SignUpBusiness = () => {
     for (let i = 0; i < albumPhotosFile.length; i++) {
       finalData.append("images", albumPhotosFile[i]);
     }
-
     addService(finalData);
   };
 

@@ -13,6 +13,7 @@ const ServiceProvider = ({ children }) => {
   const [oldPhotos, setOldPhotos] = useState("");
   const [newPhotos, setNewPhotos] = useState("");
   const [noOldPhotos, setNoOldPhotos] = useState(false);
+  const [deletedPhotos, setDeletedPhotos] = useState([]);
 
   return (
     <serviceContext.Provider
@@ -33,6 +34,8 @@ const ServiceProvider = ({ children }) => {
         setNewPhotos,
         noOldPhotos,
         setNoOldPhotos,
+        deletedPhotos,
+        setDeletedPhotos,
         register,
         handleSubmit,
       }}

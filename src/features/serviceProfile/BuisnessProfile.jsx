@@ -19,6 +19,9 @@ import { CiEdit } from "react-icons/ci";
 import FormInput from "../../components/FormInput";
 import { filterData } from "../../utils/filterData";
 import { createFormData } from "../../utils/createFormData";
+import { useAddPhotos } from "./useAddPhotos";
+import { deletePhotos } from "../../services/apiServices";
+import { useDeletePhotos } from "./useDeletePhotos";
 
 function BuisnessProfile() {
   const { userId } = useParams();
@@ -26,8 +29,10 @@ function BuisnessProfile() {
   const [activeItem, setActiveItem] = useState("About");
   const [change, setChange] = useState(false);
   const { editService, isLoading: editing } = useEditService();
+  const { deletePhotos, isLoading: deletingPhotos } = useDeletePhotos();
   const [changeName, setChangeName] = useState(false);
-  // console.log(service);
+  const { addPhotos, isLoading: addingPhotos } = useAddPhotos();
+
   const {
     coverPhoto,
     setCoverPhoto,
@@ -39,6 +44,7 @@ function BuisnessProfile() {
     newPhotos,
     profilePhotoFile,
     coverPhotoFile,
+    deletedPhotos,
     noOldPhotos,
     register,
     handleSubmit,
@@ -61,14 +67,20 @@ function BuisnessProfile() {
   };
 
   const onSubmit = (data) => {
-    console.log("album", oldPhotos);
-    console.log("new photos", newPhotos);
     const allData = {
       ...data,
       avatar: profilePhotoFile && profilePhotoFile,
       imageCover: coverPhotoFile && coverPhotoFile,
       // images: oldPhotos && [...oldPhotos],
     };
+    const serviceData =
+      profilePhotoFile ||
+      coverPhotoFile ||
+      data.businessName ||
+      data.businessCategory ||
+      data.about ||
+      data.location ||
+      data.phoneNumber;
 
     // =========================================
     // filter the empty data an create form data
@@ -79,22 +91,37 @@ function BuisnessProfile() {
     // ========================================
     // Add the old photos to form data if exist
     // ========================================
-    oldPhotos &&
-      oldPhotos.forEach((photo, index) => {
-        finalData.append(`images`, photo);
-      });
+    // oldPhotos &&
+    //   oldPhotos.forEach((photo, index) => {
+    //     finalData.append(`images`, photo);
+    //   });
     // if (noOldPhotos) {
     //   finalData.append(`images`, "");
     // }
 
-    // ==========================
+    // ========================================
     // Add the new photos to form data if exist
-    // ===========================
+    // ========================================
+
+    const newPhotosFormData = new FormData();
+
     for (let i = 0; i < newPhotos.length; i++) {
-      finalData.append("newPhoto", newPhotos[i]);
+      // finalData.append("newPhoto", newPhotos[i]);
+      newPhotosFormData.append("newImages", newPhotos[i]);
     }
 
-    editService(finalData);
+    const deletedPhotosFormData = new FormData();
+    deletedPhotos.forEach((photo) =>
+      deletedPhotosFormData.append("imageLinks", photo)
+    );
+    // deletePhotos(deletedPhotosFormData);
+    // deletePhotos(JSON.stringify(deletedPhotos));
+    deletePhotos(deletedPhotos);
+
+    serviceData && editService(finalData);
+    newPhotos && addPhotos(newPhotosFormData);
+    // console.log(Object.fromEntries(finalData));
+    // console.log("deleted Photos", deletedPhotos);
     setChangeName(false);
   };
 
@@ -206,11 +233,11 @@ function BuisnessProfile() {
               // type="button"
               background="green"
               size="small"
-              disabled={editing}
+              disabled={editing || addingPhotos}
               className="submit"
               onClick={handleSubmit(onSubmit)}
             >
-              {editing ? "Saving..." : "Save "}
+              {editing || addingPhotos ? "Saving..." : "Save "}
             </Button>
           )}
         </form>
