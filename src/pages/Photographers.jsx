@@ -1,8 +1,5 @@
-import NavBar from "../components/NavBar";
 import styled from "styled-components";
-import SearchResults from "../components/SearchResults";
-import { FaSort, FaAngleDown } from "react-icons/fa";
-import { useState } from "react";
+import NavBar from "../components/NavBar";
 import Category from "../components/Category";
 import { useGetServices } from "../features/categories/useGetServices";
 import Loading from "../components/Loading";
@@ -24,4 +21,4 @@ const Wrapper = styled.div`
   min-height: 100vh;
 `;
 
-export default Search;
+export default Photographers;

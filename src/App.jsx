@@ -30,6 +30,13 @@ import Error from "./pages/Error";
 import Search from "./pages/Search";
 import Favorites from "./pages/Favorites";
 import Photographers from "./pages/Photographers";
+import EventPlanners from "./pages/EventPlanners";
+import Djs from "./pages/Djs";
+import MakeupArtist from "./pages/MakeupArtist";
+import HairStylest from "./pages/HairStylest";
+import OtherDetails from "./pages/OtherDetails";
+import Food from "./pages/Food";
+
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -80,6 +87,13 @@ function App() {
                   <Route path="search" element={<Search/>} />
                   <Route path="favorites" element={<Favorites />} />
                   <Route path="photographers" element={<Photographers />} />
+                  <Route path="eventplanners" element={<EventPlanners />} />
+                  <Route path="djs" element={<Djs />} />
+                  <Route path="makeupartist" element={<MakeupArtist />} />
+                  <Route path="food" element={<Food />} />
+                  <Route path="hairstylest" element={<HairStylest />} />
+                  <Route path="otherdetails" element={<OtherDetails />} />
+
                  
                   <Route path="addpackage" element={<AddPackage />} />
                   <Route

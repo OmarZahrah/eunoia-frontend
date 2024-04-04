@@ -1,4 +1,3 @@
-
 import NavBar from "../components/NavBar";
 import styled from "styled-components";
 import SearchResults from "../components/SearchResults";
@@ -10,10 +9,10 @@ function Search() {
       <div className="container">
         <p className="title">Favorites</p>
         <div className="search-container">
-        <SearchResults showRate={4.5} />
-        <SearchResults showRate={4.5} />
-        <SearchResults showRate={4.5} />
-        <SearchResults showRate={4.5} />
+          <SearchResults showRate={4.5} />
+          <SearchResults showRate={4.5} />
+          <SearchResults showRate={4.5} />
+          <SearchResults showRate={4.5} />
         </div>
       </div>
     </Wrapper>
@@ -65,94 +64,66 @@ const Wrapper = styled.div`
     gap: 1.5rem;
   }
   @media only screen and (max-width: ${({ theme }) => theme.semi}) {
-    .title{
-   font-size: 1.6rem;
-   position: relative;
+    .title {
+      font-size: 1.6rem;
+      position: relative;
+    }
 
-}
+    .title::before,
+    .title::after {
+      top: 50%;
+      width: 27%;
+    }
 
-.title::before,
-  .title::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: 27%;
-    height: 1px;
-    background-color: #3c3b3b33;
-  }
+    .title::before {
+      left: 21%;
+    }
 
-  .title::before {
-    left: 21%;
-    transform: translateX(-50%);
-  }
-
-  .title::after {
-    right: 21%;
-    transform: translateX(50%);
-  }
-
-
+    .title::after {
+      right: 21%;
+    }
   }
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
-    .title{
-   font-size: 1.5rem;
-   position: relative;
+    .title {
+      font-size: 1.5rem;
+    }
 
-}
+    .title::before,
+    .title::after {
+      top: 50%;
+      width: 23%;
+    }
 
-.title::before,
-  .title::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: 23%;
-    height: 1px;
-    background-color: #3c3b3b33;
-  }
+    .title::before {
+      left: 18%;
+    }
 
-  .title::before {
-    left: 18%;
-    transform: translateX(-50%);
-  }
-
-  .title::after {
-    right: 18%;
-    transform: translateX(50%);
-  }
-
-
+    .title::after {
+      right: 18%;
+    }
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    .title {
+      font-size: 1.6rem;
+    }
 
-.title{
-   font-size: 1.6rem;
-   position: relative;
+    .title::before,
+    .title::after {
+      content: "";
 
-}
+      top: 50%;
+      width: 20%;
+    }
 
-.title::before,
-  .title::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: 20%;
-    height: 1px;
-    background-color: #3c3b3b33;
+    .title::before {
+      left: 15%;
+    }
+
+    .title::after {
+      right: 15%;
+    }
   }
-
-  .title::before {
-    left: 15%;
-    transform: translateX(-50%);
-  }
-
-  .title::after {
-    right: 15%;
-    transform: translateX(50%);
-  }
-
- }
- 
 `;
 
 export default Search;

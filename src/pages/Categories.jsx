@@ -2,8 +2,6 @@ import styled from "styled-components";
 import NavBar from "../components/NavBar";
 import CategoriesDiv from "../components/CategoriesDiv";
 import venues from "../images/Venues.png";
-import v from "../images/v.png";
-
 import photographers from "../images/Photographers.png";
 import eventPlanners from "../images/EventPlanners.png";
 import DJs from "../images/DJs.png";
@@ -33,23 +31,39 @@ function Categories() {
         <CategoriesDiv
           title={"Event Planners"}
           backgroundImage={eventPlanners}
+          link={"/eventplanners"}
           marginTop={65}
         />
-        <CategoriesDiv title={"DJs"} backgroundImage={DJs} marginTop={40} />
+        <CategoriesDiv
+          title={"DJs"}
+          backgroundImage={DJs}
+          link={"/djs"}
+          marginTop={40}
+        />
+
         <CategoriesDiv
           title={"Makeup Artists"}
           backgroundImage={makeupArtists}
+          link={"/makeupartist"}
           marginTop={90}
         />
-        <CategoriesDiv title={"Food"} backgroundImage={food} marginTop={50} />
+        <CategoriesDiv
+          title={"Food"}
+          backgroundImage={food}
+          link={"/food"}
+          marginTop={50}
+        />
+
         <CategoriesDiv
           title={"Hair Stylists"}
           backgroundImage={hairStylists}
+          link={"/hairstylest"}
           marginTop={100}
         />
         <CategoriesDiv
           title={"Other Details"}
           backgroundImage={otherDetails}
+          link={"/otherdetails"}
           marginTop={15}
         />
       </div>
@@ -90,7 +104,6 @@ const Wrapper = styled.div`
       font-size: 30px;
       line-height: 5rem;
     }
-
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
@@ -98,5 +111,4 @@ const Wrapper = styled.div`
       font-size: 25px;
     }
   }
-
 `;
