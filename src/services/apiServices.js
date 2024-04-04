@@ -1,13 +1,13 @@
 import customFetch from "../utils/customFetch";
 
 export const addService = async (formData) => {
-  const { data } = await customFetch.post("/Services", formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
-  // console.log(Object.fromEntries(formData));
-  return data;
+  // const { data } = await customFetch.post("/Services", formData, {
+  //   headers: {
+  //     "Content-Type": "multipart/form-data",
+  //   },
+  // });
+  console.log("service", Object.fromEntries(formData));
+  // return data;
 };
 
 export const getCurrentService = async (id) => {
@@ -17,9 +17,27 @@ export const getCurrentService = async (id) => {
 };
 
 export const editService = async (formData) => {
-  console.log("fromData", Object.fromEntries(formData));
   const { data } = await customFetch.patch(`services/serviceProfile`, formData);
   // console.log(Object.fromEntries(formData));
-  // console.log(data.data);
   return data.data;
+};
+
+export const addPhotos = async (formData) => {
+  console.log(Object.fromEntries(formData));
+  const { data } = await customFetch.patch("services/add-Photos", formData);
+  console.log(data);
+  return data;
+};
+
+export const deletePhotos = async (formData) => {
+  console.log("data", formData);
+  console.log(JSON.stringify(formData));
+
+  const request = {
+    imageLinks: JSON.stringify(formData),
+  };
+  console.log("request", request);
+
+  const data = await customFetch.delete("services/remove-Photos", request);
+  return data;
 };

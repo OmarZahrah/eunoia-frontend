@@ -49,6 +49,14 @@ function AboutComponent({ service }) {
         placeholder={service.location}
         register={register}
       />
+      <div className="about-box">
+        <label htmlFor="">About</label>
+        <textarea
+          {...register("about")}
+          // value="test test test"
+          placeholder={service.about}
+        ></textarea>
+      </div>
     </AboutWrapper>
   );
 }
@@ -84,6 +92,20 @@ const AboutWrapper = styled.div`
     background-color: transparent;
     border-bottom: 0.2px solid #ccc;
     width: 100%;
+  }
+  .about-box {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  textarea {
+    border: none;
+    width: 100%;
+    min-height: 6rem;
+    box-shadow: 0px 2px 11px -5px rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    background-color: #fbf8f2;
+    outline: none;
   }
   /* 
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {

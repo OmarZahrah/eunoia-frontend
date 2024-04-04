@@ -10,7 +10,10 @@ const ServiceProvider = ({ children }) => {
 
   const [profilePhotoFile, setProfilePhotoFile] = useState("");
   const [coverPhotoFile, setCoverPhotoFile] = useState("");
-  const [albumPhotosFile, setAlbumPhotosFile] = useState("");
+  const [oldPhotos, setOldPhotos] = useState("");
+  const [newPhotos, setNewPhotos] = useState("");
+  const [noOldPhotos, setNoOldPhotos] = useState(false);
+  const [deletedPhotos, setDeletedPhotos] = useState([]);
 
   return (
     <serviceContext.Provider
@@ -25,8 +28,14 @@ const ServiceProvider = ({ children }) => {
         setProfilePhotoFile,
         albumImages,
         setAlbumImages,
-        albumPhotosFile,
-        setAlbumPhotosFile,
+        oldPhotos,
+        setOldPhotos,
+        newPhotos,
+        setNewPhotos,
+        noOldPhotos,
+        setNoOldPhotos,
+        deletedPhotos,
+        setDeletedPhotos,
         register,
         handleSubmit,
       }}
