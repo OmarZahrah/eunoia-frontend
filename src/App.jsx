@@ -27,7 +27,9 @@ import { ServiceProvider } from "./context/ServiceContext";
 import VenueProfile from "./pages/VenueProfile";
 import Categories from "./pages/Categories";
 import Error from "./pages/Error";
-
+import Search from "./pages/Search";
+import Favorites from "./pages/Favorites";
+import Photographers from "./pages/Photographers";
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -71,12 +73,21 @@ function App() {
                     />
                     <Route path="createBusiness" element={<CreateBussAcc />} />
                   </Route>
-                  <Route path="categories" element={<Categories />} />
+                  <Route path="categories" element={<Categories />} >
+                  <Route path="photographers" element={<Photographers />} />
+
+                    </Route>
+                  <Route path="search" element={<Search/>} />
+                  <Route path="favorites" element={<Favorites />} />
+                  <Route path="photographers" element={<Photographers />} />
+                 
                   <Route path="addpackage" element={<AddPackage />} />
                   <Route
                     path="venueprofile/:venuId"
                     element={<VenueProfile />}
                   />
+                    
+
                 </Routes>
               </BrowserRouter>
             </ServiceProvider>

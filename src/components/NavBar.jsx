@@ -33,8 +33,8 @@ function NavBar({
           <li className={checkIsActive("/profile") ? "active" : ""}>
             <Link to={`/profile`}>Profile</Link>
           </li>
-          <li>
-            <Link to="">Search</Link>
+          <li className={checkIsActive("/search") ? "active" : ""}>
+            <Link to="/search">Search</Link>
           </li>
         </ul>
         <div className="buttons">
