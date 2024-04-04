@@ -1,18 +1,24 @@
 import customFetch from "../utils/customFetch";
 
 export const addService = async (formData) => {
-  // const { data } = await customFetch.post("/Services", formData, {
-  //   headers: {
-  //     "Content-Type": "multipart/form-data",
-  //   },
-  // });
+  const { data } = await customFetch.post("/Services", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
   console.log("service", Object.fromEntries(formData));
-  // return data;
+  return data;
+};
+
+export const getAllServices = async () => {
+  const { data } = await customFetch.get("/services");
+  return data.data;
 };
 
 export const getCurrentService = async (id) => {
-  const { data } = await customFetch.get(`services/${id}/serviceProfile`);
-  // console.log(data.data);
+  // const { data } = await customFetch.get(`services/${id}/serviceProfile`);
+  const { data } = await customFetch.get(`services/${id}`);
+  console.log(data);
   return data.data;
 };
 

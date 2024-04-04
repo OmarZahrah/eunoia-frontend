@@ -34,7 +34,7 @@ function VenueProfile() {
                 photos={service?.images}
                 cover={service?.imageCover || coverimg}
               />
-              <img className="profile" src={service.avatar} alt="profile" />
+              <img className="profile" src={service?.avatar} alt="profile" />
             </div>
 
             {/* <CoverSlider photos={service.images} /> */}
