@@ -4,8 +4,10 @@ import photo from "../../public/images/Rectangle 9.png";
 import mask from "../../public/images/Mask group.png";
 
 const PackageWrapper = styled.div`
-  padding-left: 8rem;
+  /* padding-left: 8rem; */
   position: relative;
+  min-width: 25%;
+  cursor: pointer;
 
   .details {
     position: relative;
@@ -15,10 +17,10 @@ const PackageWrapper = styled.div`
     padding-bottom: 0.5rem;
     justify-content: space-between;
     align-items: center;
-    width: 500px;
-    height:100px;
+    width: 100%;
+    height: 100px;
     padding-top: 30px;
-    z-index: 1; 
+    z-index: 1;
   }
 
   .h2 {
@@ -42,7 +44,7 @@ const PackageWrapper = styled.div`
   }
 
   .photo-search {
-    width: 500px;
+    width: 100%;
     height: 200px;
     position: relative;
     z-index: 1; /* Set z-index to 1 for the search photo */
@@ -67,137 +69,32 @@ const PackageWrapper = styled.div`
   .mask-wrapper {
     position: absolute;
     top: 50%;
-    left: 22%;
-    width: 100%; 
-    height: 100%; 
-    z-index: 2; 
+    left: 5%;
+    /* width: 100%; */
+    /* height: 100%; */
+    z-index: 2;
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.mid}) {
-    .details {
-  
-    width: 400px;
-    height:100px;
-   
   }
 
-  .photo-search {
-    width: 400px;
-    height: 150px;
-    position: relative;
-    z-index: 1; /* Set z-index to 1 for the search photo */
-  }
-  .mask-wrapper {
-    position: absolute;
-    top: 50%;
-    left: 26%;
-    width: 100%; 
-    height: 100%; 
-    z-index: 2; 
-  }
-
-    
-  }
-  
   @media only screen and (max-width: ${({ theme }) => theme.small}) {
-    .details {
-  
-    width: 370px;
-    height:90px;
-   
   }
 
-  .photo-search {
-    width: 370px;
-    height: 130px;
-    position: relative;
-    z-index: 1; 
-  }
-  .mask-wrapper {
-    position: absolute;
-    top: 48%;
-    left: 27%;
-    width: 100%; 
-    height: 100%; 
-    z-index: 2; 
-  }
-
-  }
-  
   @media only screen and (max-width: ${({ theme }) => theme.semi}) {
- .details {
-  
-    width: 340px;
-    height:90px;
-   
-  }
-
-  .photo-search {
-    width: 340px;
-    height: 130px;
-    position: relative;
-    z-index: 1; 
-  }
-  .mask-wrapper {
-    position: absolute;
-    top: 46%;
-    left: 30%;
-    width: 100%; 
-    height: 100%; 
-    z-index: 2; 
-  }
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.avg}) {
- .details {
-  
-    width: 450px;
-    height:90px;
-   
-  }
-
-  .photo-search {
-    width: 450px;
-    height: 130px;
-    position: relative;
-    z-index: 1; 
-  }
-  .mask-wrapper {
-    position: absolute;
-    top: 46%;
-    left: 24%;
-    width: 100%; 
-    height: 100%; 
-    z-index: 2; 
-  }
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
-
- .details {
-  
-    width: 300px;
-    height:90px;
-   
+    .photo-search {
+      width: 100%;
+      height: 130px;
+      position: relative;
+      z-index: 1;
+    }
   }
-
-  .photo-search {
-    width: 300px;
-    height: 130px;
-    position: relative;
-    z-index: 1; 
-  }
-  .mask-wrapper {
-    position: absolute;
-    top: 46%;
-    left: 30%;
-    width: 100%; 
-    height: 100%; 
-    z-index: 2; 
-  }
-  }
-  
-  
 `;
 
 const MaskImage = styled.img`
@@ -205,15 +102,14 @@ const MaskImage = styled.img`
   height: 80px;
 
   @media only screen and (max-width: ${({ theme }) => theme.mid}) {
-    width:60px;
-    height:60px
+    width: 60px;
+    height: 60px;
   }
-  
 `;
 
-function VenuePackages({ showRate }) {
+function VenuePackages({ showRate, className }) {
   return (
-    <PackageWrapper>
+    <PackageWrapper className={className}>
       <img className="photo-search" src={photo} />
       <div className="details">
         <h2 className="h2">Islam Tarek</h2>
