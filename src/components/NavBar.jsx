@@ -22,7 +22,7 @@ function NavBar({
 
   return (
     <Wrapper>
-      <Link to="/welcome">
+      <Link to="/home">
         <img className="Hlogo" src={logo} alt="logo" />
       </Link>
       <nav className={openNav ? "open-nav" : ""}>
