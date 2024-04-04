@@ -36,6 +36,7 @@ import MakeupArtist from "./pages/MakeupArtist";
 import HairStylest from "./pages/HairStylest";
 import OtherDetails from "./pages/OtherDetails";
 import Food from "./pages/Food";
+import Venus from "./pages/Venus";
 
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({
@@ -80,12 +81,12 @@ function App() {
                     />
                     <Route path="createBusiness" element={<CreateBussAcc />} />
                   </Route>
-                  <Route path="categories" element={<Categories />} >
-                  <Route path="photographers" element={<Photographers />} />
-
-                    </Route>
-                  <Route path="search" element={<Search/>} />
+                  <Route path="categories" element={<Categories />}>
+                    <Route path="photographers" element={<Photographers />} />
+                  </Route>
+                  <Route path="search" element={<Search />} />
                   <Route path="favorites" element={<Favorites />} />
+                  <Route path="venus" element={<Venus />} />
                   <Route path="photographers" element={<Photographers />} />
                   <Route path="eventplanners" element={<EventPlanners />} />
                   <Route path="djs" element={<Djs />} />
@@ -94,14 +95,11 @@ function App() {
                   <Route path="hairstylest" element={<HairStylest />} />
                   <Route path="otherdetails" element={<OtherDetails />} />
 
-                 
                   <Route path="addpackage" element={<AddPackage />} />
                   <Route
                     path="venueprofile/:venuId"
                     element={<VenueProfile />}
                   />
-                    
-
                 </Routes>
               </BrowserRouter>
             </ServiceProvider>

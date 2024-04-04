@@ -6,8 +6,6 @@ import { FaArrowLeft } from "react-icons/fa";
 const AlbumSwiper = ({ photos, cover }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const album = [cover, ...photos];
-  //   photos.unshift(cover);
-  console.log(album);
   const nextSlide = () => {
     setCurrentIndex(
       currentIndex === album.length - 1 ? 0 : (prevIndex) => prevIndex + 1
@@ -19,7 +17,6 @@ const AlbumSwiper = ({ photos, cover }) => {
       currentIndex === 0 ? album.length - 1 : (prevIndex) => prevIndex - 1
     );
   };
-  console.log(currentIndex);
   return (
     <Wrapper>
       <div

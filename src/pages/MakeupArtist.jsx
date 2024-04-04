@@ -1,12 +1,22 @@
 import styled from "styled-components";
 import NavBar from "../components/NavBar";
 import Category from "../components/Category";
+import { useGetServices } from "../features/categories/useGetServices";
+import Loading from "../components/Loading";
 
 function MakeupArtist() {
+  const { allServices, isLoading } = useGetServices([
+    { category: "Makeup Artists" },
+  ]);
+  console.log(allServices);
   return (
     <Wrapper>
       <NavBar />
-      <Category title="MakeUp Artist" />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <Category data={allServices} title="Makeup Artists" />
+      )}{" "}
     </Wrapper>
   );
 }

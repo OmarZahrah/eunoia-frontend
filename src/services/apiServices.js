@@ -15,7 +15,6 @@ export const getAllServices = async (filters) => {
     .map((filter) => `&${Object.keys(filter)}=${Object.values(filter)}`)
     .join("");
 
-  console.log("str", str);
   // console.log("filters", filters);
   // const { data } =   await customFetch.get(`/services${str ? str : ""}`);
   const { data } = await customFetch.get(`/services?${str && str}`);

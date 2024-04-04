@@ -32,7 +32,7 @@ function BuisnessProfile() {
   const { deletePhotos, isLoading: deletingPhotos } = useDeletePhotos();
   const [changeName, setChangeName] = useState(false);
   const { addPhotos, isLoading: addingPhotos } = useAddPhotos();
-
+  console.log(service);
   const {
     coverPhoto,
     setCoverPhoto,
@@ -183,7 +183,7 @@ function BuisnessProfile() {
               <input
                 type="text"
                 {...register("businessName")}
-                defaultValue={service.businessName}
+                defaultValue={service?.businessName}
                 className="name name-input"
                 autoFocus
               />

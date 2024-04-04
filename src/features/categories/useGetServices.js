@@ -3,7 +3,7 @@ import { getAllServices, getCurrentService } from "../../services/apiServices";
 
 export function useGetServices(filter) {
   const { isLoading, data: allServices } = useQuery({
-    queryKey: ["services"],
+    queryKey: [`${filter[0].category || "services"}`],
     queryFn: () => getAllServices(filter),
   });
 

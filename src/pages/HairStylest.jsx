@@ -1,12 +1,22 @@
 import styled from "styled-components";
 import NavBar from "../components/NavBar";
 import Category from "../components/Category";
+import { useGetServices } from "../features/categories/useGetServices";
+import Loading from "../components/Loading";
 
-function HairStylest() {
+function MakeupArtist() {
+  const { allServices, isLoading } = useGetServices([
+    { category: "photographers" },
+  ]);
+  console.log(allServices);
   return (
     <Wrapper>
       <NavBar />
-      <Category title="Hair Stylist" />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <Category data={allServices} title="Hair Stylists" />
+      )}{" "}
     </Wrapper>
   );
 }
@@ -16,4 +26,4 @@ const Wrapper = styled.div`
   min-height: 100vh;
 `;
 
-export default HairStylest;
+export default MakeupArtist;

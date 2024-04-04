@@ -3,10 +3,9 @@ import NavBar from "../components/NavBar";
 import Category from "../components/Category";
 import { useGetServices } from "../features/categories/useGetServices";
 import Loading from "../components/Loading";
-function Photographers() {
-  const { allServices, isLoading } = useGetServices([
-    { category: "photographers" },
-  ]);
+
+function MakeupArtist() {
+  const { allServices, isLoading } = useGetServices([{ category: "Venues" }]);
   console.log(allServices);
   return (
     <Wrapper>
@@ -14,8 +13,8 @@ function Photographers() {
       {isLoading ? (
         <Loading />
       ) : (
-        <Category data={allServices} title="Photographers" />
-      )}
+        <Category data={allServices} title="Venues" />
+      )}{" "}
     </Wrapper>
   );
 }
@@ -25,4 +24,4 @@ const Wrapper = styled.div`
   min-height: 100vh;
 `;
 
-export default Photographers;
+export default MakeupArtist;

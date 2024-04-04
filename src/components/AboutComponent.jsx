@@ -30,7 +30,7 @@ function AboutComponent({ service }) {
         label="Category"
         options={businessCategories}
         name="businessCategory"
-        placeholder={service.businessCategory}
+        placeholder={service?.businessCategory}
         register={register}
       />
       <FormInput label="Mobile Number">
@@ -38,7 +38,7 @@ function AboutComponent({ service }) {
           type="text"
           id="mobile"
           // placeholder="+20 1234567890"
-          placeholder={service.phoneNumber}
+          placeholder={service?.phoneNumber}
           {...register("phoneNumber")}
         />
       </FormInput>
@@ -46,7 +46,7 @@ function AboutComponent({ service }) {
         label="Location"
         options={governorates}
         name="location"
-        placeholder={service.location}
+        placeholder={service?.location}
         register={register}
       />
       <div className="about-box">
@@ -54,7 +54,7 @@ function AboutComponent({ service }) {
         <textarea
           {...register("about")}
           // value="test test test"
-          placeholder={service.about}
+          placeholder={service?.about}
         ></textarea>
       </div>
     </AboutWrapper>

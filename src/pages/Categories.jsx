@@ -19,7 +19,7 @@ function Categories() {
         <CategoriesDiv
           title={"Venues"}
           backgroundImage={venues}
-          link={"/profile"}
+          link={"/venus"}
           marginTop={35}
         />
         <CategoriesDiv

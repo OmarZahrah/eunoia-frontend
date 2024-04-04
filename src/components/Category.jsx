@@ -4,8 +4,7 @@ import { useState } from "react";
 import SortSection from "./SortSection";
 import { Link } from "react-router-dom";
 
-function Category({ title }) {
-function Search({ data }) {
+function Category({ title, data }) {
   const [sortBy, setSortBy] = useState("");
   const [sortByRating, setSortByRating] = useState("");
 
@@ -32,7 +31,7 @@ function Search({ data }) {
         handleRatingSortChange={handleRatingSortChange}
       />
       <div className="search-container">
-        {data.map((card) => (
+        {data?.map((card) => (
           // <Link
           //   to={`/venueprofile/${card._id}`}
           //   key={card._id}
@@ -60,7 +59,7 @@ const Wrapper = styled.div`
   padding-bottom: 3rem;
   .link {
     min-width: 25%;
-    /* width: 47%; */
+    width: 48%;
   }
   .title {
     font-family: Literata;
@@ -101,11 +100,8 @@ const Wrapper = styled.div`
     display: flex;
     column-gap: 2rem;
     row-gap: 1.5rem;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-  }
-  .link {
-    width: 46%;
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.semi}) {

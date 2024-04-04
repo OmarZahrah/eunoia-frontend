@@ -1,12 +1,20 @@
 import styled from "styled-components";
 import NavBar from "../components/NavBar";
 import Category from "../components/Category";
+import { useGetServices } from "../features/categories/useGetServices";
+import Loading from "../components/Loading";
 
-function Food() {
+function MakeupArtist() {
+  const { allServices, isLoading } = useGetServices([{ category: "Food" }]);
+  console.log(allServices);
   return (
     <Wrapper>
       <NavBar />
-      <Category title="Food" />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <Category data={allServices} title=" Food" />
+      )}{" "}
     </Wrapper>
   );
 }
@@ -16,4 +24,4 @@ const Wrapper = styled.div`
   min-height: 100vh;
 `;
 
-export default Food;
+export default MakeupArtist;
