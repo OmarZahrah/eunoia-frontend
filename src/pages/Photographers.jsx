@@ -4,12 +4,17 @@ import SearchResults from "../components/SearchResults";
 import { FaSort, FaAngleDown } from "react-icons/fa";
 import { useState } from "react";
 import Category from "../components/Category";
-
+import { useGetServices } from "../features/categories/useGetServices";
+import Loading from "../components/Loading";
 function Search() {
+  const { allServices, isLoading } = useGetServices([
+    { category: "photographers" },
+  ]);
+  console.log(allServices);
   return (
     <Wrapper>
       <NavBar />
-      <Category />
+      {isLoading ? <Loading /> : <Category data={allServices} />}
     </Wrapper>
   );
 }

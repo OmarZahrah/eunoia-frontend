@@ -3,8 +3,9 @@ import styled from "styled-components";
 import SearchResults from "../components/SearchResults";
 import { FaSort, FaAngleDown } from "react-icons/fa";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
-function Search() {
+function Search({ data }) {
   const [sortBy, setSortBy] = useState("");
   const [sortByRating, setSortByRating] = useState("");
 
@@ -53,10 +54,24 @@ function Search() {
         </ul>
       </div>
       <div className="search-container">
+        {data.map((card) => (
+          // <Link
+          //   to={`/venueprofile/${card._id}`}
+          //   key={card._id}
+          //   className="link"
+          // >
+          <SearchResults
+            className="result"
+            showRate={4.5}
+            data={card}
+            key={card._id}
+          />
+          // </Link>
+        ))}
+        {/* <SearchResults showRate={4.5} className="result" />
         <SearchResults showRate={4.5} className="result" />
         <SearchResults showRate={4.5} className="result" />
-        <SearchResults showRate={4.5} className="result" />
-        <SearchResults showRate={4.5} className="result" />
+        <SearchResults showRate={4.5} className="result" /> */}
       </div>
     </Wrapper>
   );
@@ -65,7 +80,10 @@ function Search() {
 const Wrapper = styled.div`
   background-color: #fef9f0;
   padding-bottom: 3rem;
-
+  .link {
+    min-width: 25%;
+    /* width: 47%; */
+  }
   .title {
     font-family: Literata;
     font-size: 2rem;
@@ -145,7 +163,7 @@ const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
   }
-  .result {
+  .link {
     width: 46%;
   }
   .sort-dropdown {
@@ -208,7 +226,7 @@ const Wrapper = styled.div`
     }
   }
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
-    .result {
+    .link {
       width: 100%;
     }
     .title {

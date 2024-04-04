@@ -2,11 +2,12 @@ import styled from "styled-components";
 import { FaStar, FaMapPin } from "react-icons/fa";
 import photo from "../../public/images/Rectangle 9.png";
 import mask from "../../public/images/Mask group.png";
+import { Link } from "react-router-dom";
 
 const PackageWrapper = styled.div`
   /* padding-left: 8rem; */
+  width: 100%;
   position: relative;
-  min-width: 25%;
   cursor: pointer;
 
   .details {
@@ -47,6 +48,7 @@ const PackageWrapper = styled.div`
     width: 100%;
     height: 200px;
     position: relative;
+    /* object-fit: cover; */
     z-index: 1; /* Set z-index to 1 for the search photo */
   }
 
@@ -100,6 +102,8 @@ const PackageWrapper = styled.div`
 const MaskImage = styled.img`
   width: 80px;
   height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
 
   @media only screen and (max-width: ${({ theme }) => theme.mid}) {
     width: 60px;
@@ -107,32 +111,34 @@ const MaskImage = styled.img`
   }
 `;
 
-function VenuePackages({ showRate, className }) {
+function VenuePackages({ showRate, className, data }) {
   return (
-    <PackageWrapper className={className}>
-      <img className="photo-search" src={photo} />
-      <div className="details">
-        <h2 className="h2">Islam Tarek</h2>
-        <h3 className="h3">
-          {" "}
-          <FaMapPin /> Cairo, Ismailia
-        </h3>
-        <div className="bottom-right">
-          <p className="p">Starts from: 4000 EGP</p>
+    <Link className="link" to={`/venueprofile/${data._id}`}>
+      <PackageWrapper>
+        <img className="photo-search" src={data.imageCover || photo} />
+        <div className="details">
+          <h2 className="h2">{data?.businessName}</h2>
+          <h3 className="h3">
+            {" "}
+            <FaMapPin /> {data?.location}
+          </h3>
+          <div className="bottom-right">
+            <p className="p">Starts from: 4000 EGP</p>
+          </div>
+          <div className="top-right">
+            {showRate && (
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <FaStar style={{ color: "#FFF279", marginRight: "0.01rem" }} />
+                <p className="p">{showRate}</p>
+              </div>
+            )}
+          </div>
         </div>
-        <div className="top-right">
-          {showRate && (
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <FaStar style={{ color: "#FFF279", marginRight: "0.01rem" }} />
-              <p className="p">{showRate}</p>
-            </div>
-          )}
+        <div className="mask-wrapper">
+          <MaskImage src={data.avatar || mask} alt="mask" />
         </div>
-      </div>
-      <div className="mask-wrapper">
-        <MaskImage src={mask} alt="mask" />
-      </div>
-    </PackageWrapper>
+      </PackageWrapper>
+    </Link>
   );
 }
 
