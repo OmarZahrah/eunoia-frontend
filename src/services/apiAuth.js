@@ -16,3 +16,7 @@ export const getCurrentUser = async () => {
   const { data } = await customFetch.get("users/me");
   return data.user;
 };
+
+export const logout = async () => {
+  await customFetch.post("auth/logout");
+};

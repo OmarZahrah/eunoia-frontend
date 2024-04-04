@@ -1,17 +1,26 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useLogout } from "../features/signup/useLogout";
 
 const Logout = ({ setLogout }) => {
+  const { logout, isLoading } = useLogout();
   return (
     <Wrapper>
       <p>Logout of your account?</p>
       <div className="buttons">
-        <button className="confirm">Yes</button>
-        <Link to="/profile">
-          <button className="cancel" onClick={() => setLogout(false)}>
-            Cancel
-          </button>
-        </Link>
+        <button
+          className="confirm"
+          disabled={isLoading}
+          onClick={() => logout()}
+        >
+          Yes
+        </button>
+        <button
+          className="cancel"
+          onClick={() => setLogout(false)}
+          disabled={isLoading}
+        >
+          Cancel
+        </button>
       </div>
     </Wrapper>
   );
@@ -21,7 +30,7 @@ const Wrapper = styled.div`
   width: 30rem;
   height: 13rem;
   background-color: #fef9f0;
-  margin: auto;
+  /* margin: auto; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,11 +39,11 @@ const Wrapper = styled.div`
   padding: 2rem 4rem;
   border-radius: 15px;
   position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  /* transform: translateY(-50%); */
+  top: 50%;
+  right: 50%;
+  /* left: 0; */
+  /* bottom: 0; */
+  transform: translate(50%, -50%);
   box-shadow: -1px 2px 14px -1px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: -1px 2px 14px -1px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: -1px 2px 14px -1px rgba(0, 0, 0, 0.75);

@@ -83,7 +83,7 @@ const Wrapper = styled.div`
     left: 0;
     bottom: 0;
 
-    background-color: #0000006d;
+    background-color: #00000040;
   }
   ul {
     margin-top: 2rem;

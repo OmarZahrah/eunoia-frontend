@@ -80,7 +80,8 @@ function BuisnessProfile() {
       data.businessCategory ||
       data.about ||
       data.location ||
-      data.phoneNumber;
+      data.phoneNumber ||
+      data.images;
 
     // =========================================
     // filter the empty data an create form data
@@ -91,10 +92,10 @@ function BuisnessProfile() {
     // ========================================
     // Add the old photos to form data if exist
     // ========================================
-    // oldPhotos &&
-    //   oldPhotos.forEach((photo, index) => {
-    //     finalData.append(`images`, photo);
-    //   });
+    oldPhotos &&
+      oldPhotos.forEach((photo, index) => {
+        finalData.append(`images`, photo);
+      });
     // if (noOldPhotos) {
     //   finalData.append(`images`, "");
     // }
@@ -116,7 +117,7 @@ function BuisnessProfile() {
     );
     // deletePhotos(deletedPhotosFormData);
     // deletePhotos(JSON.stringify(deletedPhotos));
-    deletePhotos(deletedPhotos);
+    // deletePhotos(deletedPhotos);
 
     serviceData && editService(finalData);
     newPhotos && addPhotos(newPhotosFormData);

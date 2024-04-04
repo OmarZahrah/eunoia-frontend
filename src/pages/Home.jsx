@@ -1,36 +1,192 @@
-import { useUser } from "../features/signup/useUser";
-import { useUserContext } from "../context/UserContext";
 import NavBar from "../components/NavBar";
-import { Link, Outlet } from "react-router-dom";
 import styled from "styled-components";
-import Loading from "../components/Loading";
-import { useService } from "../features/signup/useService";
+import SpecialOffers from "../components/SpecialOffers";
+import ring from "../images/ring.png";
+import DetailsCard from "../components/DetailsCard";
+import man from "../images/man.png";
+import table from "../images/table.png";
+
 const Home = () => {
-  const { user, isLoading } = useUser();
   return (
     <Wrapper>
-      <NavBar userId={user?._id} />
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <>
-          <Link to={`/venueprofile/${user._id}`}>
-            <div className="venu">
-              <p>Venu</p>
-            </div>
-          </Link>
-        </>
-      )}
+      <NavBar />
+      <div className="container">
+        {/* <h1>Hey, Name!</h1> */}
+        <p className="titles">Special Offers</p>
+        <div className="packages-container">
+          <SpecialOffers
+            backgroundImage={ring}
+            percentage={"-20%"}
+            title={"Karim Roshdy"}
+            category={"Photographer"}
+            link={"/"}
+          />
+          <SpecialOffers
+            backgroundImage={ring}
+            percentage={"-20%"}
+            title={"Karim Roshdy"}
+            category={"Photographer"}
+            link={"/"}
+          />
+          <SpecialOffers
+            backgroundImage={ring}
+            percentage={"-20%"}
+            title={"Karim Roshdy"}
+            category={"Photographer"}
+            link={"/"}
+          />
+          <SpecialOffers
+            backgroundImage={ring}
+            percentage={"-20%"}
+            title={"Karim Roshdy"}
+            category={"Photographer"}
+            link={"/"}
+          />
+          <SpecialOffers
+            backgroundImage={ring}
+            percentage={"-20%"}
+            title={"Karim Roshdy"}
+            category={"Photographer"}
+            link={"/"}
+          />
+        </div>
+        <p className="titles">Popular</p>
+        <div className="packages-container">
+          <DetailsCard
+            image={man}
+            title={"Amr Abdallah"}
+            description={"Photographer"}
+            width={185}
+            height={160}
+          />
+          <DetailsCard
+            image={man}
+            title={"Amr Abdallah"}
+            description={"Photographer"}
+            width={185}
+            height={160}
+          />
+          <DetailsCard
+            image={man}
+            title={"Amr Abdallah"}
+            description={"Photographer"}
+            width={185}
+            height={160}
+          />
+          <DetailsCard
+            image={man}
+            title={"Amr Abdallah"}
+            description={"Photographer"}
+            width={185}
+            height={160}
+          />
+          <DetailsCard
+            image={man}
+            title={"Amr Abdallah"}
+            description={"Photographer"}
+            width={185}
+            height={160}
+          />
+          <DetailsCard
+            image={man}
+            title={"Amr Abdallah"}
+            description={"Photographer"}
+            width={185}
+            height={160}
+          />
+          <DetailsCard
+            image={man}
+            title={"Amr Abdallah"}
+            description={"Photographer"}
+            width={185}
+            height={160}
+          />
+          <DetailsCard
+            image={man}
+            title={"Amr Abdallah"}
+            description={"Photographer"}
+            width={185}
+            height={160}
+          />
+          <DetailsCard
+            image={man}
+            title={"Amr Abdallah"}
+            description={"Photographer"}
+            width={185}
+            height={160}
+          />
+        </div>
+        <p className="titles">Nearby</p>
+        <div className="packages-container">
+          <DetailsCard
+            image={table}
+            title={"Yomna Tarek"}
+            description={"Event Planner"}
+            width={330}
+            height={180}
+          />
+          <DetailsCard
+            image={table}
+            title={"Yomna Tarek"}
+            description={"Event Planner"}
+            width={330}
+            height={180}
+          />
+          <DetailsCard
+            image={table}
+            title={"Yomna Tarek"}
+            description={"Event Planner"}
+            width={330}
+            height={180}
+          />
+          <DetailsCard
+            image={table}
+            title={"Yomna Tarek"}
+            description={"Event Planner"}
+            width={330}
+            height={180}
+          />
+          <DetailsCard
+            image={table}
+            title={"Yomna Tarek"}
+            description={"Event Planner"}
+            width={330}
+            height={180}
+          />
+        </div>
+      </div>
     </Wrapper>
   );
 };
+export default Home;
+
 const Wrapper = styled.div`
   background-color: #fef9f0;
-  .venu {
-    width: 3rem;
-    height: 3rem;
-    background-color: gray;
-    margin: 2rem auto;
+  min-height: 100vh;
+  .container {
+    margin: 0 1.5rem;
+  }
+  .titles {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: rgba(0, 0, 0, 0.677);
+    margin: 15px 0;
+  }
+  .packages-container {
+    display: flex;
+    gap: 1.2rem;
+    overflow-x: auto;
+    height: 220px;
+    /* white-space: nowrap; */
+    /* justify-content: space-evenly; */
+  }
+  .packages-container::-webkit-scrollbar-thumb {
+    background-color: #d4d4d4;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .packages-container::-webkit-scrollbar {
+    height: 0.5rem;
   }
 `;
-export default Home;
