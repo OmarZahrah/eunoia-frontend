@@ -36,7 +36,9 @@ import MakeupArtist from "./pages/MakeupArtist";
 import HairStylest from "./pages/HairStylest";
 import OtherDetails from "./pages/OtherDetails";
 import Food from "./pages/Food";
-import Venus from "./pages/Venus";
+import Venues from "./pages/Venues";
+import CreatePackage from "./features/package/CreatePackage";
+// import Venus from "./pages/Venus";
 import SearchHistory from "./pages/SearchHistory";
 
 // import theme from "./assets/styles/responsive";
@@ -59,35 +61,28 @@ function App() {
               <GlobalStyles />
               <BrowserRouter>
                 <Routes>
-                  {/* <Route element={<AppLayout />}> */}
+                  {/*
+                  ===========================================
+                                 Public Routes
+                  ===========================================
+                  */}
                   <Route path="welcome" element={<Welcome />} />
                   <Route index element={<Navigate replace to="welcome" />} />
+                  <Route path="error" element={<Error />} />
+
                   <Route path="signup" element={<SignUp />}>
                     <Route path="create" element={<CreateAccount />} />
                     <Route path="user" element={<SignUpUser />} />
                     <Route path="provider" element={<SignUpBusiness />} />
                   </Route>
-                  <Route path="error" element={<Error />} />
-                  {/* </Route> */}
                   <Route path="login" element={<Login />} />
                   <Route path="forgotpassword" element={<ForgotPass />} />
-                  {/* <Route element={<AppLayout />}> */}
+
                   <Route path="home" element={<Home />} />
-                  <Route path="profile" element={<Profile />}>
-                    <Route index element={<MainProfile />} />
-                    <Route path="editprofile" element={<EditProfile />} />
-                    <Route
-                      path=":userId/businessProfile"
-                      element={<BuisnessProfile />}
-                    />
-                    <Route path="createBusiness" element={<CreateBussAcc />} />
-                  </Route>
-                  <Route path="categories" element={<Categories />}>
-                    <Route path="photographers" element={<Photographers />} />
-                  </Route>
                   <Route path="search" element={<Search />} />
-                  <Route path="favorites" element={<Favorites />} />
-                  <Route path="venus" element={<Venus />} />
+
+                  <Route path="categories" element={<Categories />} />
+                  <Route path="venues" element={<Venues />} />
                   <Route path="photographers" element={<Photographers />} />
                   <Route path="eventplanners" element={<EventPlanners />} />
                   <Route path="djs" element={<Djs />} />
@@ -97,11 +92,29 @@ function App() {
                   <Route path="otherdetails" element={<OtherDetails />} />
                   <Route path="searchhistory" element={<SearchHistory />} />
 
-                  <Route path="addpackage" element={<AddPackage />} />
                   <Route
                     path="venueprofile/:venuId"
                     element={<VenueProfile />}
                   />
+                  {/*
+                  ===========================================
+                                 Private Routes
+                  ===========================================
+                  */}
+                  <Route path="profile" element={<Profile />}>
+                    <Route index element={<MainProfile />} />
+                    <Route path="editprofile" element={<EditProfile />} />
+                    <Route
+                      path=":userId/businessProfile"
+                      element={<BuisnessProfile />}
+                    />
+                    <Route path="createBusiness" element={<CreateBussAcc />} />
+                  </Route>
+
+                  <Route path="addpackage" element={<AddPackage />} />
+
+                  <Route path="favorites" element={<Favorites />} />
+                  <Route path="createPackage" element={<CreatePackage />} />
                 </Routes>
               </BrowserRouter>
             </ServiceProvider>

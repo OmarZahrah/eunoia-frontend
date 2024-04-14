@@ -11,7 +11,7 @@ const ServiceProvider = ({ children }) => {
   const [profilePhotoFile, setProfilePhotoFile] = useState("");
   const [coverPhotoFile, setCoverPhotoFile] = useState("");
   const [oldPhotos, setOldPhotos] = useState("");
-  const [newPhotos, setNewPhotos] = useState("");
+  const [newPhotos, setNewPhotos] = useState([]);
   const [noOldPhotos, setNoOldPhotos] = useState(false);
   const [deletedPhotos, setDeletedPhotos] = useState([]);
 

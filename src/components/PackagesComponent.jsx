@@ -1,12 +1,21 @@
 import styled from "styled-components";
 import PackageCard from "./PackageCard";
+import { Link } from "react-router-dom";
 const PackagesComponent = () => {
   return (
     <Wrapper>
-      <PackageCard />
-      <PackageCard />
-      <PackageCard />
-      <PackageCard type="add" />
+      <Link className="card">
+        <PackageCard />
+      </Link>
+      <Link className="card">
+        <PackageCard />
+      </Link>
+      <Link className="card">
+        <PackageCard />
+      </Link>
+      <Link to="/createPackage" className="card">
+        <PackageCard type="add" to="createPackage" />
+      </Link>
     </Wrapper>
   );
 };
@@ -19,6 +28,10 @@ const Wrapper = styled.div`
   align-items: center;
   /* justify-content: space-between; */
   flex-wrap: wrap;
+  .card {
+    min-width: 25%;
+    width: 30%;
+  }
 `;
 
 export default PackagesComponent;

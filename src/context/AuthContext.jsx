@@ -25,7 +25,7 @@ const AuthProvider = ({ children }) => {
 
   const [profilePhotoFile, setProfilePhotoFile] = useState("");
   const [coverPhotoFile, setCoverPhotoFile] = useState("");
-  const [albumPhotosFile, setAlbumPhotosFile] = useState("");
+  const [albumPhotosFile, setAlbumPhotosFile] = useState([]);
 
   return (
     <AuthContext.Provider

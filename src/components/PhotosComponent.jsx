@@ -14,6 +14,7 @@ const PhotosComponent = ({ images, setChange }) => {
     albumPhotosFile,
     setNewPhotos,
     setOldPhotos,
+    newPhotos,
     oldPhotos,
     noOldPhotos,
     setNoOldPhotos,
@@ -33,21 +34,25 @@ const PhotosComponent = ({ images, setChange }) => {
     const selectedFiles = e.target.files;
 
     // setOldPhotos(images);
-    setNewPhotos(selectedFiles);
-    setAlbumImages((previousImages) =>
-      previousImages.concat(showImages(selectedFiles))
-    );
+    setNewPhotos((images) => images.concat(...selectedFiles));
+    // setAlbumImages((previousImages) =>
+    //   // previousImages.concat(showImages(selectedFiles))
+    //   previousImages.concat(selectedFiles)
+    // );
   };
 
   const handleDeleteImage = (image) => {
+    console.log(image);
     const newImages = albumImages.filter((images) => images !== image);
+    const deletedNewPhotos = newPhotos.filter((images) => images !== image);
+    setNewPhotos(deletedNewPhotos);
     setAlbumImages(newImages);
     const oldImages = images.filter((photos) => photos !== image);
     // if (oldImages.length === 0) setNoOldPhotos(true);
     setOldPhotos(oldImages);
 
-    !image.startsWith("blob") &&
-      setDeletedPhotos((previousImages) => previousImages.concat(image));
+    // !image.startsWith("blob") &&
+    //   setDeletedPhotos((previousImages) => previousImages.concat(image));
     setChange(true);
   };
 
@@ -58,6 +63,17 @@ const PhotosComponent = ({ images, setChange }) => {
         {albumImages?.map((image, i) => (
           <div className="image" key={i}>
             <img src={image} />
+            <div
+              className="delete-icon"
+              onClick={() => handleDeleteImage(image)}
+            >
+              <RiDeleteBin7Line className="icon" />
+            </div>
+          </div>
+        ))}
+        {newPhotos?.map((image, i) => (
+          <div className="image" key={i}>
+            <img src={URL.createObjectURL(image)} />
             <div
               className="delete-icon"
               onClick={() => handleDeleteImage(image)}

@@ -21,6 +21,8 @@ const Step3 = () => {
     setAlbumImages,
     setCoverPhotoFile,
     setAlbumPhotosFile,
+    albumPhotosFile,
+    coverPhotoFile,
   } = useAuthContext();
 
   const onSelectFile = (e, type) => {
@@ -31,8 +33,8 @@ const Step3 = () => {
     });
 
     if (type === "album") {
-      setAlbumPhotosFile(selectedFiles);
-      setAlbumImages((images) => images.concat(imagesArray));
+      setAlbumPhotosFile((images) => images.concat(...selectedFiles));
+      // setAlbumImages((images) => images.concat(imagesArray));
     } else if (type === "cover") {
       setCoverPhotoFile(selectedFiles[0]);
       setCoverPhoto(imagesArray);
@@ -40,9 +42,12 @@ const Step3 = () => {
   };
 
   const handleDeleteImage = (image) => {
-    const newImages = albumImages.filter((images) => images !== image);
+    // const newImages = albumImages.filter((images) => images !== image);
+    const newImages = albumPhotosFile.filter((images) => images !== image);
     setAlbumImages(newImages);
+    setAlbumPhotosFile(newImages);
   };
+  console.log(albumPhotosFile);
 
   return (
     <Wrapper>
@@ -82,10 +87,20 @@ const Step3 = () => {
           </label>
         </p>
         <div className="images">
-          {albumImages &&
+          {/* {albumImages &&
             albumImages.map((image) => (
               <div className="image" key={image}>
                 <img src={image} />
+                <TiDeleteOutline
+                  className="delete-icon"
+                  onClick={() => handleDeleteImage(image)}
+                />
+              </div>
+            ))} */}
+          {albumImages &&
+            albumPhotosFile.map((image) => (
+              <div className="image" key={image.name}>
+                <img src={URL.createObjectURL(image)} />
                 <TiDeleteOutline
                   className="delete-icon"
                   onClick={() => handleDeleteImage(image)}

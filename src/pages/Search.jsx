@@ -9,10 +9,10 @@ function Search() {
       <div className="container">
         <p className="title">Search Result</p>
         <div className="search-container">
+          {/* <SearchResults showRate={4.5} />
           <SearchResults showRate={4.5} />
           <SearchResults showRate={4.5} />
-          <SearchResults showRate={4.5} />
-          <SearchResults showRate={4.5} />
+          <SearchResults showRate={4.5} /> */}
         </div>
       </div>
     </Wrapper>
@@ -67,75 +67,62 @@ const Wrapper = styled.div`
   @media only screen and (max-width: ${({ theme }) => theme.semi}) {
     .title {
       font-size: 1.6rem;
-  
     }
 
     .title::before,
     .title::after {
-   
       top: 50%;
       width: 27%;
-
     }
 
     .title::before {
       left: 21%;
-
     }
 
     .title::after {
       right: 21%;
-
     }
   }
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
     .title {
       font-size: 1.5rem;
-
     }
 
     .title::before,
     .title::after {
       content: "";
-  
+
       top: 50%;
       width: 23%;
-
     }
 
     .title::before {
       left: 18%;
- 
     }
 
     .title::after {
       right: 18%;
-
     }
   }
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
     .title {
       font-size: 1.2rem;
-   
     }
 
     .title::before,
     .title::after {
       content: "";
-      
+
       top: 50%;
       width: 29%;
-  
     }
 
     .title::before {
       left: 10%;
-
     }
 
     .title::after {
       right: 10%;
-    
     }
   }
 `;

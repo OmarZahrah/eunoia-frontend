@@ -72,7 +72,8 @@ const Wrapper = styled.div`
     position: absolute;
     border: none;
     font-size: 2.5rem;
-    color: var(--color-brand-green);
+    /* color: var(--color-brand-green); */
+    color: #74ab706b;
     background: transparent;
     transform: translateY(-50%);
   }
