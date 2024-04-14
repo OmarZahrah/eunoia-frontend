@@ -37,6 +37,7 @@ import HairStylest from "./pages/HairStylest";
 import OtherDetails from "./pages/OtherDetails";
 import Food from "./pages/Food";
 import Venus from "./pages/Venus";
+import SearchHistory from "./pages/SearchHistory";
 
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({
@@ -94,6 +95,7 @@ function App() {
                   <Route path="food" element={<Food />} />
                   <Route path="hairstylest" element={<HairStylest />} />
                   <Route path="otherdetails" element={<OtherDetails />} />
+                  <Route path="searchhistory" element={<SearchHistory />} />
 
                   <Route path="addpackage" element={<AddPackage />} />
                   <Route
