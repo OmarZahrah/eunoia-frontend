@@ -1,58 +1,115 @@
 import styled from "styled-components";
 import NavBar from "../../components/NavBar";
 import { useState } from "react";
-
+import Button from "../../components/Button";
+import { useForm } from "react-hook-form";
+import MiniPackage from "../../components/MiniPackage";
+import CreateMiniPackage from "../../components/CreateMiniPackage";
+import { filterData } from "../../utils/filterData";
+import { TiDeleteOutline } from "react-icons/ti";
 const CreatePackage = () => {
-  const [miniPackage, setMiniPackage] = useState([]);
-  const [options, setOptions] = useState([]);
-
-  const handleNewPackage = () => {};
+  const [packages, setPackages] = useState([
+    // {
+    //   title: "Capacity",
+    //   options: [
+    //     { title: "150", price: 5000 },
+    //     { title: "200", price: 5500 },
+    //     { title: "300", price: 6000 },
+    //     { title: "400", price: 7000 },
+    //   ],
+    // },
+    // {
+    //   title: "Desserts",
+    //   options: [
+    //     { title: "gateau", price: 3000 },
+    //     { title: "2 mini pizza", price: 4500 },
+    //     { title: "2 sticks baton sale", price: 2000 },
+    //   ],
+    // },
+  ]);
+  const [openPackage, setOpenPackage] = useState(false);
+  const { register, handleSubmit } = useForm();
+  const [packagePhoto, setPackagePhoto] = useState("");
+  const onSubmit = (formData) => {
+    const data = {
+      ...formData,
+      packagePhoto: packagePhoto,
+      customizePackage: packages.length ? packages : "",
+    };
+    const filteredData = filterData(data);
+    console.log(filteredData);
+  };
   return (
     <Wrapper>
       <NavBar />
-      <div className="container">
+      <form className="container" onSubmit={handleSubmit(onSubmit)}>
         <h1>Add Package</h1>
         <div className="field">
           <label>Package Name:</label>
-          <input type="text" className="top-input" />
+          <input
+            type="text"
+            className="top-input"
+            {...register("packageName")}
+          />
         </div>
         <div className="field">
           <label>Description:</label>
-          <textarea name="" id="" cols="30" rows="10"></textarea>
+          <textarea
+            name=""
+            id=""
+            cols="30"
+            rows="10"
+            {...register("description")}
+          ></textarea>
         </div>
         <div className="field">
           <label>Price:</label>
-          <input type="number" className="top-input" />
+          <input type="number" className="top-input" {...register("price")} />
         </div>
         <div className="field">
           <label>Package Photo:</label>
           <div className="img-container">
-            <label className="img-label">
-              Select File
-              <input type="file" className="img-input top-input" />
-            </label>
+            {packagePhoto ? (
+              <div className="image">
+                <img src={URL.createObjectURL(packagePhoto)} />
+                <TiDeleteOutline
+                  className="delete-icon"
+                  // onClick={() => handleDeleteImage(image)}
+                />
+              </div>
+            ) : (
+              <label className="img-label">
+                Select File
+                <input
+                  type="file"
+                  className="img-input top-input"
+                  {...register("packagePhoto")}
+                  onChange={(e) => setPackagePhoto(e.target.files[0])}
+                />
+              </label>
+            )}
           </div>
         </div>
         <div className="customized-package">
           <h2>Customized Package:</h2>
-          <span className="add" onClick={handleNewPackage}>
+          {packages.map((miniPackage, i) => (
+            <MiniPackage key={i} data={miniPackage} />
+          ))}
+          <span className="add" onClick={() => setOpenPackage(true)}>
             + Add customized package
           </span>
-
-          <div className="package">
-            <div className="title">
-              <h3>title:</h3>
-              <input type="text" className="input-title" />
-            </div>
-            <div className="options">
-              <h3>options:</h3>
-              <span className="add" onClick={handleNewPackage}>
-                + Add option
-              </span>
-            </div>
-          </div>
+          {openPackage && (
+            <CreateMiniPackage
+              setPackages={setPackages}
+              packages={packages}
+              setOpenPackage={setOpenPackage}
+            />
+          )}
         </div>
-      </div>
+        <Button className="submit-package" type="submit">
+          Add Package
+        </Button>
+      </form>
     </Wrapper>
   );
 };
@@ -113,6 +170,24 @@ const Wrapper = styled.div`
     .img-input {
       display: none;
     }
+    .image {
+      position: relative;
+      width: fit-content;
+    }
+    .image img {
+      border: 2px solid var(--color-grey-500);
+      width: 100px;
+    }
+    .delete-icon {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      color: #fff;
+      transform: translateX(50%);
+      background-color: #a00808;
+      border-radius: 50%;
+      cursor: pointer;
+    }
     h2 {
       font-size: 1.25rem;
       color: #444;
@@ -122,10 +197,13 @@ const Wrapper = styled.div`
       color: var(--color-brand-green);
       cursor: pointer;
       font-size: 0.875rem;
+      display: block;
+      margin-top: 1rem;
     }
-    .title {
-      display: flex;
-      gap: 1.25rem;
+    .submit-package {
+      display: block;
+      margin: 5rem auto 0 auto;
+      /* margin-top: 5rem; */
     }
   }
 `;

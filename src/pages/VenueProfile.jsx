@@ -16,6 +16,9 @@ import Loading from "../components/Loading";
 import CoverSlider from "../components/CoverSlider";
 import Slider from "../components/Slider";
 import coverimg from "../../public/images/Rectangle 9.svg";
+import DetailsCard from "../components/DetailsCard";
+import man from "../images/man.png";
+import table from "../images/table.png";
 
 function VenueProfile() {
   const { venuId } = useParams();
@@ -34,7 +37,7 @@ function VenueProfile() {
                 photos={service?.images}
                 cover={service?.imageCover || coverimg}
               />
-              <img className="profile" src={service.avatar} alt="profile" />
+              <img className="profile" src={service?.avatar} alt="profile" />
             </div>
 
             {/* <CoverSlider photos={service.images} /> */}
@@ -64,7 +67,7 @@ function VenueProfile() {
           <div className="third-section">
             <p className="location">Packages</p>
             <div className="packages-container">
-              <VenuePackages
+              {/* <VenuePackages
                 image={indoor}
                 width={280}
                 title="Indoor Hall"
@@ -75,35 +78,53 @@ function VenueProfile() {
                 width={280}
                 title="Outdoor Venue"
                 price="15,000 EGP"
+              /> */}
+              <DetailsCard
+                image={outdoorr}
+                title="outdoor venue"
+                // description="Photographers"
+                width={330}
+                height={180}
+              />
+              <DetailsCard
+                image={indoor}
+                title="indoor hall"
+                // description="Photographers"
+                width={330}
+                height={180}
               />
             </div>
           </div>
           <div className="fourth-section">
             <p className="location">Similar</p>
             <div className="packages-container">
-              <VenuePackages
-                image={firstpack}
-                width={370}
-                title="Omar Eleven"
-                showRate={4.5}
+              <DetailsCard
+                image={table}
+                title="The Garden"
+                description="Photographers"
+                width={330}
+                height={180}
               />
-              <VenuePackages
-                image={secondpack}
-                width={370}
-                title="Occhio Films"
-                showRate={4}
+              <DetailsCard
+                image={table}
+                title="The Garden"
+                description="Photographers"
+                width={330}
+                height={180}
               />
-              <VenuePackages
-                image={thirdpack}
-                width={370}
-                title=" Omar Eleven"
-                showRate={3.5}
+              <DetailsCard
+                image={table}
+                title="The Garden"
+                description="Photographers"
+                width={330}
+                height={180}
               />
-              <VenuePackages
-                image={secondpack}
-                width={370}
-                title="Occhio Films"
-                showRate={3.5}
+              <DetailsCard
+                image={table}
+                title="The Garden"
+                description="Photographers"
+                width={330}
+                height={180}
               />
             </div>
           </div>
@@ -198,6 +219,7 @@ const Wrapper = styled.div`
   .about {
     color: #06050599;
     margin-top: 1rem;
+    max-width: 60%;
   }
   .location {
     /* padding-top: 1rem; */
@@ -244,7 +266,7 @@ const Wrapper = styled.div`
     background-color: #ccc; /* Border color */
   }
 
-  .packages-container {
+  /* .packages-container {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -255,11 +277,26 @@ const Wrapper = styled.div`
   ::-webkit-scrollbar {
     width: 5px;
     height: 8px;
-    /* background-color: #eee; */
   }
   ::-webkit-scrollbar-thumb {
     background: #74ab70;
     border-radius: 5px;
+  } */
+  .packages-container {
+    display: flex;
+    gap: 1.2rem;
+    overflow-x: auto;
+    height: 220px;
+    /* white-space: nowrap; */
+    /* justify-content: space-evenly; */
+  }
+  .packages-container::-webkit-scrollbar-thumb {
+    background-color: #d4d4d4;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .packages-container::-webkit-scrollbar {
+    height: 0.5rem;
   }
   .third-section {
     position: relative;

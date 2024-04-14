@@ -27,6 +27,16 @@ import { ServiceProvider } from "./context/ServiceContext";
 import VenueProfile from "./pages/VenueProfile";
 import Categories from "./pages/Categories";
 import Error from "./pages/Error";
+import Search from "./pages/Search";
+import Favorites from "./pages/Favorites";
+import Photographers from "./pages/Photographers";
+import EventPlanners from "./pages/EventPlanners";
+import Djs from "./pages/Djs";
+import MakeupArtist from "./pages/MakeupArtist";
+import HairStylest from "./pages/HairStylest";
+import OtherDetails from "./pages/OtherDetails";
+import Food from "./pages/Food";
+import Venues from "./pages/Venues";
 import CreatePackage from "./features/package/CreatePackage";
 
 // import theme from "./assets/styles/responsive";
@@ -49,20 +59,45 @@ function App() {
               <GlobalStyles />
               <BrowserRouter>
                 <Routes>
-                  {/* <Route element={<AppLayout />}> */}
+                  {/*
+                  ===========================================
+                                 Public Routes
+                  ===========================================
+                  */}
                   <Route path="welcome" element={<Welcome />} />
                   <Route index element={<Navigate replace to="welcome" />} />
+                  <Route path="error" element={<Error />} />
+
                   <Route path="signup" element={<SignUp />}>
                     <Route path="create" element={<CreateAccount />} />
                     <Route path="user" element={<SignUpUser />} />
                     <Route path="provider" element={<SignUpBusiness />} />
                   </Route>
-                  <Route path="error" element={<Error />} />
-                  {/* </Route> */}
                   <Route path="login" element={<Login />} />
                   <Route path="forgotpassword" element={<ForgotPass />} />
-                  {/* <Route element={<AppLayout />}> */}
+
                   <Route path="home" element={<Home />} />
+                  <Route path="search" element={<Search />} />
+
+                  <Route path="categories" element={<Categories />} />
+                  <Route path="venues" element={<Venues />} />
+                  <Route path="photographers" element={<Photographers />} />
+                  <Route path="eventplanners" element={<EventPlanners />} />
+                  <Route path="djs" element={<Djs />} />
+                  <Route path="makeupartist" element={<MakeupArtist />} />
+                  <Route path="food" element={<Food />} />
+                  <Route path="hairstylest" element={<HairStylest />} />
+                  <Route path="otherdetails" element={<OtherDetails />} />
+
+                  <Route
+                    path="venueprofile/:venuId"
+                    element={<VenueProfile />}
+                  />
+                  {/*
+                  ===========================================
+                                 Private Routes
+                  ===========================================
+                  */}
                   <Route path="profile" element={<Profile />}>
                     <Route index element={<MainProfile />} />
                     <Route path="editprofile" element={<EditProfile />} />
@@ -72,12 +107,10 @@ function App() {
                     />
                     <Route path="createBusiness" element={<CreateBussAcc />} />
                   </Route>
-                  <Route path="categories" element={<Categories />} />
+
                   <Route path="addpackage" element={<AddPackage />} />
-                  <Route
-                    path="venueprofile/:venuId"
-                    element={<VenueProfile />}
-                  />
+
+                  <Route path="favorites" element={<Favorites />} />
                   <Route path="createPackage" element={<CreatePackage />} />
                 </Routes>
               </BrowserRouter>

@@ -14,7 +14,7 @@ const PackagesComponent = () => {
         <PackageCard />
       </Link>
       <Link to="/createPackage" className="card">
-        <PackageCard type="add" />
+        <PackageCard type="add" to="createPackage" />
       </Link>
     </Wrapper>
   );

@@ -5,12 +5,16 @@ import { Link, useLocation } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
 import { useState } from "react";
+import { useUser } from "../features/signup/useUser";
 
 function NavBar({
   showLoginButton = false,
   showRegisterButton = false,
   userId,
 }) {
+  // const { isAuthenticated } = useUser();
+  // console.log(isAuthenticated);
+  // if(isAuthenticated)
   const [openNav, setOpenNav] = useState(false);
   const location = useLocation();
 
@@ -33,8 +37,8 @@ function NavBar({
           <li className={checkIsActive("/profile") ? "active" : ""}>
             <Link to={`/profile`}>Profile</Link>
           </li>
-          <li>
-            <Link to="">Search</Link>
+          <li className={checkIsActive("/search") ? "active" : ""}>
+            <Link to="/search">Search</Link>
           </li>
         </ul>
         <div className="buttons">

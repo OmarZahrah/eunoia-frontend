@@ -34,7 +34,7 @@ const SignUpBusiness = () => {
       imageCover: coverPhotoFile && coverPhotoFile,
       images: albumPhotosFile && [...albumPhotosFile],
     };
-
+    console.log(allData);
     const filteredData = Object.fromEntries(
       Object.entries(allData).filter(
         (el) =>
@@ -53,7 +53,6 @@ const SignUpBusiness = () => {
     for (let i = 0; i < albumPhotosFile.length; i++) {
       finalData.append("images", albumPhotosFile[i]);
     }
-
     addService(finalData);
   };
 
