@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-function DetailsCard({ image, title, description, width, height }) {
+function DetailsCard({ image, title, description, width, height, id }) {
   return (
-    <Link>
+    <Link to={`/venueprofile/${id}`}>
       <Wrapper width={width} height={height}>
         <img src={image} alt={title} />
         <div>

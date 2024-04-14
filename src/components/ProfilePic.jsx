@@ -20,11 +20,13 @@ function ProfilePic({ form, register }) {
       setImageSrc(URL.createObjectURL(file)); // Create a temporary URL for the file
     }
   };
-
+  console.log("avatar", user.avatar);
+  console.log(Boolean(user.avatar));
   return (
     <Wrapper>
       {form ? (
         <>
+          {/* <img src={defaultProfile} alt="" /> */}
           <div className="photo">
             <label>
               <img
@@ -49,7 +51,10 @@ function ProfilePic({ form, register }) {
       ) : (
         <>
           <div className="photo">
-            <img src={user?.avatar || imageSrc} alt="Upload" />
+            <img
+              src={user?.avatar || imageSrc || defaultProfile}
+              alt="Upload"
+            />
           </div>
           <span>{user?.name}</span>
         </>

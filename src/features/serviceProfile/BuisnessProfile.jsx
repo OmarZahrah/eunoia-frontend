@@ -14,7 +14,7 @@ import { useOutletContext, useParams } from "react-router-dom";
 import Loading from "../../components/Loading";
 import Button from "../../components/Button";
 import { useEditService } from "../serviceProfile/useEditService";
-import { useService } from "../signup/useService";
+import { useGetMyService } from "../serviceProfile/useGetMyService";
 import { CiEdit } from "react-icons/ci";
 import FormInput from "../../components/FormInput";
 import { filterData } from "../../utils/filterData";
@@ -25,14 +25,14 @@ import { useDeletePhotos } from "./useDeletePhotos";
 
 function BuisnessProfile() {
   const { userId } = useParams();
-  const { service, isLoading } = useService(userId);
+  const { myService: service, isLoading } = useGetMyService();
   const [activeItem, setActiveItem] = useState("About");
   const [change, setChange] = useState(false);
   const { editService, isLoading: editing } = useEditService();
   const { deletePhotos, isLoading: deletingPhotos } = useDeletePhotos();
   const [changeName, setChangeName] = useState(false);
   const { addPhotos, isLoading: addingPhotos } = useAddPhotos();
-  console.log(service);
+  // console.log(service);
   const {
     coverPhoto,
     setCoverPhoto,

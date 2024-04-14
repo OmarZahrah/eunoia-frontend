@@ -48,7 +48,7 @@ const PackageWrapper = styled.div`
     width: 100%;
     height: 200px;
     position: relative;
-    /* object-fit: cover; */
+    object-fit: cover;
     z-index: 1; /* Set z-index to 1 for the search photo */
   }
 

@@ -21,6 +21,7 @@ const Example = ({ type, color }) => (
 );
 
 const Wrapper = styled.div`
+  background-color: transparent;
   width: 300px;
   height: 300px;
   position: absolute;
