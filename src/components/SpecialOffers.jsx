@@ -6,8 +6,11 @@ function SpecialOffers({ link, backgroundImage, percentage, title, category }) {
     <Link to={link}>
       <Wrapper backgroundImage={backgroundImage}>
         <h1>{percentage}</h1>
-        <span>{title}</span>
-        <p>{category}</p>
+        <span className="title">{title}</span>
+        <div className="div">
+          <p>{category}</p>
+          <span className="view">View Details</span>
+        </div>
       </Wrapper>
     </Link>
   );
@@ -26,11 +29,21 @@ const Wrapper = styled.div`
   color: white;
   padding-left: 10px;
   padding-bottom: 10px;
-  span {
+  .title {
     font-size: 23px;
   }
   p {
     font-size: 17px;
     line-height: 17.82px;
+    padding-bottom: 7px;
+  }
+  .div {
+    display: flex;
+    justify-content: space-between;
+    /* text-decoration: underline; */
+  }
+  .view {
+    text-decoration: underline;
+    padding-right: 10px;
   }
 `;

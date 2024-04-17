@@ -33,19 +33,20 @@ function CustomizePackage() {
         <p className="total">
           Total: <span className="price">3270 EGP</span>
         </p>
-        {/* <br/> */}
         <div className="button">
           <Button size="medium" type="submit" className="button">
             Request Reservation
           </Button>
         </div>
         <hr className="hr" />
-        <p className="reviews">Reviews</p>
-        <LuPencilLine className="icon" />
+        <p className="reviews">
+          Reviews
+          <LuPencilLine className="icon" />
+        </p>
         <div className="reviews-container">
           <Reviews
             profilePic={man}
-            name={"Sara Mohammed"}
+            name={"Sara Mohamed"}
             rate={4.5}
             review={
               "Very helpful and friendly, birthday memories beautifully captured!"
@@ -53,7 +54,7 @@ function CustomizePackage() {
           />
           <Reviews
             profilePic={man}
-            name={"Sara Mohammed"}
+            name={"Sara Mohamed"}
             rate={4.5}
             review={
               "Very helpful and friendly, birthday memories beautifully captured!"
@@ -61,13 +62,13 @@ function CustomizePackage() {
           />
           <Reviews
             profilePic={man}
-            name={"Sara Mohammed"}
+            name={"Sara Mohamed"}
             rate={4.5}
             review={"Very"}
           />
           <Reviews
             profilePic={man}
-            name={"Sara Mohammed"}
+            name={"Sara Mohamed"}
             rate={4.5}
             review={
               "Very helpful and friendly, birthday memories beautifully captured!"
@@ -75,7 +76,7 @@ function CustomizePackage() {
           />
           <Reviews
             profilePic={man}
-            name={"Sara Mohammed"}
+            name={"Sara Mohamed"}
             rate={4.5}
             review={
               "Very helpful and friendly, birthday memories beautifully captured!"
@@ -83,7 +84,7 @@ function CustomizePackage() {
           />
           <Reviews
             profilePic={man}
-            name={"Sara Mohammed"}
+            name={"Sara Mohamed"}
             rate={4.5}
             review={
               "Very helpful and friendly, birthday memories beautifully captured!"
@@ -91,7 +92,7 @@ function CustomizePackage() {
           />
           <Reviews
             profilePic={man}
-            name={"Sara Mohammed"}
+            name={"Sara Mohamed"}
             rate={4.5}
             review={"Very "}
           />
@@ -134,29 +135,25 @@ const Wrapper = styled.div`
     color: #00000099;
     font-size: 1.6rem;
     font-weight: 600;
-    margin-bottom: 15px;
-    display: inline;
-    padding-right: 8px;
   }
   .icon {
     color: #00000078;
     width: 1.7rem;
     height: 1.4rem;
+    margin-left: 5px;
   }
   .reviews-container {
     display: flex;
     overflow-x: auto;
-    white-space: nowrap;
-    gap: 1.2rem;
+    /* width: 200rem; */
+  }
+  .reviews-container::-webkit-scrollbar {
+    height: 0.5rem;
   }
 
   .reviews-container::-webkit-scrollbar-thumb {
     background-color: #d4d4d4;
     border-radius: 10px;
     cursor: pointer;
-  }
-
-  .reviews-container::-webkit-scrollbar {
-    height: 0.5rem;
   }
 `;
