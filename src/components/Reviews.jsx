@@ -1,20 +1,23 @@
 import { FaStar } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 function Reviews({ profilePic, name, rate, review }) {
   return (
-    <Wrapper>
-      <div className="main">
-        <img src={profilePic} />
-        <div className="information">
-          <span className="name">{name}</span>
-          <span className="rate">
-            <FaStar style={{ color: "#FFF279" }} /> {rate}
-          </span>
+    <Link to={"/"}>
+      <Wrapper>
+        <div className="main">
+          <img src={profilePic} />
+          <div className="information">
+            <span className="name">{name}</span>
+            <span className="rate">
+              <FaStar style={{ color: "#FFF279" }} /> {rate}
+            </span>
+          </div>
         </div>
-      </div>
-      <p className="review">{review}</p>
-    </Wrapper>
+        <p className="review">{review}</p>
+      </Wrapper>
+    </Link>
   );
 }
 

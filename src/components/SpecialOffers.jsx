@@ -40,10 +40,10 @@ const Wrapper = styled.div`
   .div {
     display: flex;
     justify-content: space-between;
-    /* text-decoration: underline; */
   }
   .view {
     text-decoration: underline;
     padding-right: 10px;
+    text-underline-offset: 4px;
   }
 `;
