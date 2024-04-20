@@ -11,7 +11,6 @@ function ProfilePic({ form, register }) {
   const { setAvatar } = useUserContext();
   const [imageSrc, setImageSrc] = useState("");
 
-  console.log(imageSrc);
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     setAvatar(file);
@@ -20,8 +19,6 @@ function ProfilePic({ form, register }) {
       setImageSrc(URL.createObjectURL(file)); // Create a temporary URL for the file
     }
   };
-  console.log("avatar", user.avatar);
-  console.log(Boolean(user.avatar));
   return (
     <Wrapper>
       {form ? (

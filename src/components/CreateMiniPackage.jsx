@@ -197,5 +197,25 @@ const Wrapper = styled.div`
     align-items: center;
     gap: 5px;
   }
+
+  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    .field {
+      align-items: start;
+      gap: 10px;
+    }
+    input {
+      font-size: 20px;
+    }
+
+    .input {
+      width: 60%;
+    }
+    .options-list {
+      margin-top: 10px;
+    }
+    .option-field {
+      width: 100%;
+    }
+  }
 `;
 export default CreateMiniPackage;

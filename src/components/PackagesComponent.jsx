@@ -1,18 +1,15 @@
 import styled from "styled-components";
 import PackageCard from "./PackageCard";
 import { Link } from "react-router-dom";
-const PackagesComponent = () => {
+const PackagesComponent = ({ packages }) => {
   return (
     <Wrapper>
-      <Link className="card">
-        <PackageCard />
-      </Link>
-      <Link className="card">
-        <PackageCard />
-      </Link>
-      <Link className="card">
-        <PackageCard />
-      </Link>
+      {packages.map((pack) => (
+        <Link className="card" key={pack._id}>
+          <PackageCard pack={pack} />
+        </Link>
+      ))}
+
       <Link to="/createPackage" className="card">
         <PackageCard type="add" to="createPackage" />
       </Link>
@@ -31,6 +28,11 @@ const Wrapper = styled.div`
   .card {
     min-width: 25%;
     width: 30%;
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    .card {
+      width: 100%;
+    }
   }
 `;
 

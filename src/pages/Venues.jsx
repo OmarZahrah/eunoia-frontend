@@ -6,7 +6,6 @@ import Loading from "../components/Loading";
 
 function MakeupArtist() {
   const { allServices, isLoading } = useGetServices([{ category: "Venues" }]);
-  console.log(allServices);
   return (
     <Wrapper>
       <NavBar />

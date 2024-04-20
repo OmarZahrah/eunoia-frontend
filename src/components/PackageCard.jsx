@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { CiEdit } from "react-icons/ci";
 
-const PackagesComponent = ({ type }) => {
+const PackagesComponent = ({ type, pack }) => {
   return (
     <Wrapper>
       {type == "add" ? (
@@ -11,12 +11,9 @@ const PackagesComponent = ({ type }) => {
           <div className="edit-icon">
             <CiEdit className="icon" />
           </div>
-          <h2 className="title">Package Name</h2>
-          <p className="desc">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus,
-            aliquam....
-          </p>
-          <span className="price">5000 EGP</span>
+          <h2 className="title"> {pack?.packageName}</h2>
+          <p className="desc">{pack?.description}</p>
+          <span className="price">{pack?.price} EGP</span>
         </>
       )}
     </Wrapper>

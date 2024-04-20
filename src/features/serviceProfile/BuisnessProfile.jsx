@@ -29,10 +29,9 @@ function BuisnessProfile() {
   const [activeItem, setActiveItem] = useState("About");
   const [change, setChange] = useState(false);
   const { editService, isLoading: editing } = useEditService();
-  const { deletePhotos, isLoading: deletingPhotos } = useDeletePhotos();
   const [changeName, setChangeName] = useState(false);
   const { addPhotos, isLoading: addingPhotos } = useAddPhotos();
-  // console.log(service);
+  // console.log("service", service);
   const {
     coverPhoto,
     setCoverPhoto,
@@ -72,6 +71,7 @@ function BuisnessProfile() {
       avatar: profilePhotoFile && profilePhotoFile,
       imageCover: coverPhotoFile && coverPhotoFile,
       // images: oldPhotos && [...oldPhotos],
+      images: "",
     };
     const serviceData =
       profilePhotoFile ||
@@ -86,7 +86,7 @@ function BuisnessProfile() {
     // =========================================
     // filter the empty data an create form data
     // =========================================
-    const filteredData = filterData(allData, true);
+    const filteredData = filterData(allData);
     let finalData = createFormData(filteredData);
 
     // ========================================
@@ -115,14 +115,9 @@ function BuisnessProfile() {
     deletedPhotos.forEach((photo) =>
       deletedPhotosFormData.append("imageLinks", photo)
     );
-    // deletePhotos(deletedPhotosFormData);
-    // deletePhotos(JSON.stringify(deletedPhotos));
-    // deletePhotos(deletedPhotos);
-
     serviceData && editService(finalData);
-    newPhotos && addPhotos(newPhotosFormData);
-    // console.log(Object.fromEntries(finalData));
-    // console.log("deleted Photos", deletedPhotos);
+    newPhotos.length && addPhotos(newPhotosFormData);
+
     setChangeName(false);
   };
 
@@ -252,7 +247,7 @@ function SelectedItem(activeItem, service, setChange) {
     case "About":
       return <AboutComponent service={service} />;
     case "Packages":
-      return <PackagesComponent />;
+      return <PackagesComponent packages={service.packages} />;
     case "Photos":
       return <PhotosComponent images={service.images} setChange={setChange} />;
     default:
@@ -345,7 +340,6 @@ const Wrapper = styled.div`
 
   .profile {
     border-radius: 50%;
-    /* height: 200px; */
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -481,11 +475,12 @@ const Wrapper = styled.div`
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
-    /* .profile {
+    .profile {
       top: 27%;
-      width: 120px;
-      height: 120px;
-    } */
+      width: 7rem;
+      height: 7rem;
+      margin-bottom: 1rem;
+    }
 
     .name {
       font-size: 1.8rem;

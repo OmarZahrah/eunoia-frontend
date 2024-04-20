@@ -11,7 +11,7 @@ import firstpack from "../../public/images/firstpack.jpeg";
 import secondpack from "../../public/images/secondpack.jpeg";
 import thirdpack from "../../public/images/thirdpack.jpeg";
 import { useParams } from "react-router";
-import { useService } from "../features/signup/useService";
+import { useService } from "../features/serviceProfile/useService";
 import Loading from "../components/Loading";
 import CoverSlider from "../components/CoverSlider";
 import Slider from "../components/Slider";
@@ -23,7 +23,8 @@ import table from "../images/table.png";
 function VenueProfile() {
   const { venuId } = useParams();
   const { service, isLoading } = useService(venuId);
-  // console.log(service);
+
+  console.log(service);
   return (
     <Wrapper>
       <NavBar />
@@ -79,20 +80,17 @@ function VenueProfile() {
                 title="Outdoor Venue"
                 price="15,000 EGP"
               /> */}
-              <DetailsCard
-                image={outdoorr}
-                title="outdoor venue"
-                // description="Photographers"
-                width={330}
-                height={180}
-              />
-              <DetailsCard
-                image={indoor}
-                title="indoor hall"
-                // description="Photographers"
-                width={330}
-                height={180}
-              />
+              {service.packages?.map((pack) => (
+                <DetailsCard
+                  key={pack._id}
+                  id={pack._id}
+                  image={outdoorr}
+                  title={pack.packageName}
+                  // description="Photographers"
+                  width={330}
+                  height={180}
+                />
+              ))}
             </div>
           </div>
           <div className="fourth-section">
@@ -219,7 +217,7 @@ const Wrapper = styled.div`
   .about {
     color: #06050599;
     margin-top: 1rem;
-    max-width: 60%;
+    width: 60%;
   }
   .location {
     /* padding-top: 1rem; */
@@ -286,7 +284,8 @@ const Wrapper = styled.div`
     display: flex;
     gap: 1.2rem;
     overflow-x: auto;
-    height: 220px;
+    /* height: 220px; */
+    height: 14rem;
     /* white-space: nowrap; */
     /* justify-content: space-evenly; */
   }
@@ -312,20 +311,6 @@ const Wrapper = styled.div`
     height: 0.013rem;
     background-color: #ccc; /* Border color */
   }
-  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
-    .name-venue {
-      font-size: 1.2rem;
-    }
-    .rate {
-      font-size: 1.2rem;
-    }
-    .location {
-      font-size: 1.7rem;
-    }
-    .google-maps-link {
-      font-size: 1rem;
-    }
-  }
   @media only screen and (max-width: ${({ theme }) => theme.mid}) {
     .name-venue {
       font-size: 1.5rem;
@@ -348,6 +333,32 @@ const Wrapper = styled.div`
     .profile {
       width: 8rem;
       height: 8rem;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
+    .name-venue {
+      font-size: 1.2rem;
+    }
+    .rate {
+      font-size: 1.2rem;
+    }
+    .location {
+      font-size: 1.7rem;
+    }
+    .google-maps-link {
+      font-size: 1rem;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    .profile {
+      width: 7rem;
+      height: 7rem;
+    }
+    .images {
+      margin-bottom: 4rem;
+    }
+    .about {
+      width: 100%;
     }
   }
 

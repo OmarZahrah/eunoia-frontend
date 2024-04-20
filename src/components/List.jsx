@@ -12,7 +12,6 @@ function List({ user }) {
   const [logout, setLogout] = useState(false);
   const hasService = user.hasService;
   // const hasService = false;
-  console.log(user);
   return (
     <Wrapper>
       {logout && (

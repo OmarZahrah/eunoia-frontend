@@ -7,11 +7,10 @@ import man from "../images/man.png";
 import table from "../images/table.png";
 import { useGetServices } from "../features/categories/useGetServices";
 import Loading from "../components/Loading";
-import { useUser } from "../features/signup/useUser";
+import { useUser } from "../features/userProfile/useUser";
 import { useGetNearby } from "../features/homepage/useGetNearby";
 const Home = () => {
   const { user, isLoading } = useUser();
-  console.log(Boolean(user));
   const { nearbyServices } = useGetNearby();
   // const isLoading = false;
 
@@ -171,6 +170,7 @@ const Wrapper = styled.div`
     display: flex;
     gap: 1.2rem;
     overflow-x: auto;
+    /* height: 12rem; */
     height: 220px;
     /* white-space: nowrap; */
     /* justify-content: space-evenly; */

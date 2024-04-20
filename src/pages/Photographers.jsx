@@ -7,7 +7,6 @@ function Photographers() {
   const { allServices, isLoading } = useGetServices([
     { category: "photographers" },
   ]);
-  console.log(allServices);
   return (
     <Wrapper>
       <NavBar />

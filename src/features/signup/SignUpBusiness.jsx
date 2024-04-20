@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Stepper from "../../components/Stepper";
 import Button from "../../components/Button";
 import { useAuthContext } from "../../context/AuthContext";
-import { useAddService } from "./useAddService";
+import { useAddService } from "../serviceProfile/useAddService";
 
 const SignUpBusiness = () => {
   const {

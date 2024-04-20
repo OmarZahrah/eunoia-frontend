@@ -7,6 +7,10 @@ import MiniPackage from "../../components/MiniPackage";
 import CreateMiniPackage from "../../components/CreateMiniPackage";
 import { filterData } from "../../utils/filterData";
 import { TiDeleteOutline } from "react-icons/ti";
+import { createFormData } from "../../utils/createFormData";
+import { useAddPackage } from "./useAddPackage";
+import { photoLink } from "../../services/cloudinary";
+import { useGetPhotoLink } from "./useGetPhotoLink";
 const CreatePackage = () => {
   const [packages, setPackages] = useState([
     // {
@@ -30,14 +34,21 @@ const CreatePackage = () => {
   const [openPackage, setOpenPackage] = useState(false);
   const { register, handleSubmit } = useForm();
   const [packagePhoto, setPackagePhoto] = useState("");
+  const { addPackage, isLoading } = useAddPackage();
+  const { photoLink, isLoading: loadingPhotoLink } = useGetPhotoLink();
   const onSubmit = (formData) => {
     const data = {
       ...formData,
-      packagePhoto: packagePhoto,
+      // packagePhoto: packagePhoto,
+      packagePhoto: "",
       customizePackage: packages.length ? packages : "",
     };
     const filteredData = filterData(data);
-    console.log(filteredData);
+    // const photo = createFormData({ packagePhoto: packagePhoto });
+    // const link = photoLink(photo);
+    // if(photo)
+    // console.log(link);
+    addPackage(filteredData);
   };
   return (
     <Wrapper>
@@ -66,7 +77,7 @@ const CreatePackage = () => {
           <label>Price:</label>
           <input type="number" className="top-input" {...register("price")} />
         </div>
-        <div className="field">
+        {/* <div className="field">
           <label>Package Photo:</label>
           <div className="img-container">
             {packagePhoto ? (
@@ -89,7 +100,7 @@ const CreatePackage = () => {
               </label>
             )}
           </div>
-        </div>
+        </div> */}
         <div className="customized-package">
           <h2>Customized Package:</h2>
           {packages.map((miniPackage, i) => (
@@ -107,7 +118,7 @@ const CreatePackage = () => {
           )}
         </div>
         <Button className="submit-package" type="submit">
-          Add Package
+          {isLoading || loadingPhotoLink ? "Adding Package..." : "Add Package"}
         </Button>
       </form>
     </Wrapper>
@@ -204,6 +215,32 @@ const Wrapper = styled.div`
       display: block;
       margin: 5rem auto 0 auto;
       /* margin-top: 5rem; */
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    .container {
+      padding: 0 1rem;
+    }
+    .field {
+      flex-direction: column;
+      width: 100%;
+      gap: 10px;
+    }
+    input,
+    textarea {
+      font-size: 20px;
+    }
+    .top-input {
+      width: 100% !important;
+    }
+    .add {
+      margin-bottom: 15px;
+    }
+    .submit-package {
+      width: 100%;
+    }
+    textarea {
+      width: 100% !important;
     }
   }
 `;

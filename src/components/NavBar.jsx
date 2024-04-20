@@ -5,16 +5,12 @@ import { Link, useLocation } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
 import { useState } from "react";
-import { useUser } from "../features/signup/useUser";
 
 function NavBar({
   showLoginButton = false,
   showRegisterButton = false,
   userId,
 }) {
-  // const { isAuthenticated } = useUser();
-  // console.log(isAuthenticated);
-  // if(isAuthenticated)
   const [openNav, setOpenNav] = useState(false);
   const location = useLocation();
 
@@ -218,5 +214,6 @@ const Wrapper = styled.div`
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    padding: 1.5rem 2rem;
   }
 `;

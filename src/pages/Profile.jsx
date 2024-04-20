@@ -1,8 +1,8 @@
 import { Outlet, useOutletContext, useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
-import { useUser } from "../features/signup/useUser";
+import { useUser } from "../features/userProfile/useUser";
 import styled from "styled-components";
-import { useService } from "../features/signup/useService";
+import { useService } from "../features/serviceProfile/useService";
 import Loading from "../components/Loading";
 import { useNavigate } from "react-router";
 

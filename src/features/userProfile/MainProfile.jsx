@@ -9,8 +9,6 @@ import { useOutletContext } from "react-router-dom";
 
 function Profile() {
   const { user, service } = useOutletContext();
-  console.log(user);
-  // console.log(user);
   return (
     <Wrapper>
       <div className="container">

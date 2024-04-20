@@ -5,9 +5,12 @@ import { RiDeleteBin7Line } from "react-icons/ri";
 import styled from "styled-components";
 import { useServiceContext } from "../context/ServiceContext";
 import { showImages } from "../utils/showImages";
+import { useDeletePhotos } from "../features/serviceProfile/useDeletePhotos";
 
 const PhotosComponent = ({ images, setChange }) => {
   const [selectedImages, setSelectedImages] = useState(images);
+  const { deletePhotos, isLoading: deletingPhotos } = useDeletePhotos();
+
   const {
     albumImages,
     setAlbumImages,
@@ -47,6 +50,7 @@ const PhotosComponent = ({ images, setChange }) => {
     const deletedNewPhotos = newPhotos.filter((images) => images !== image);
     setNewPhotos(deletedNewPhotos);
     setAlbumImages(newImages);
+    // deletePhotos(image);
     const oldImages = images.filter((photos) => photos !== image);
     // if (oldImages.length === 0) setNoOldPhotos(true);
     setOldPhotos(oldImages);
@@ -82,55 +86,17 @@ const PhotosComponent = ({ images, setChange }) => {
             </div>
           </div>
         ))}
+        <label className="add-image">
+          +
+          <input
+            {...register("images")}
+            className="image-input"
+            type="file"
+            onChange={(e) => onSelectFile(e)}
+            multiple
+          />
+        </label>
       </div>
-      <label className="add-image">
-        +
-        <input
-          {...register("images")}
-          className="image-input"
-          type="file"
-          onChange={(e) => onSelectFile(e)}
-          multiple
-        />
-      </label>
-      {/* <label>
-        + Add photos
-        <input
-          {...register("images")}
-          className="image-input"
-          type="file"
-          onChange={(e) => onSelectFile(e)}
-          multiple
-        />
-      </label> */}
-      {/* <br /> */}
-
-      {/* <Input type="file" multiple /> */}
-      {/* 
-      {selectedImages.length > 0 &&
-        (selectedImages.length > 10 ? (
-          <Error>
-            You can not upload more than 10 images! <br />
-            <ErrorSpan>
-              please delete <b>{selectedImages.length - 10}</b> of them{" "}
-            </ErrorSpan>
-          </Error>
-        ) : null)}
-
-      <Images>
-        {selectedImages &&
-          selectedImages.map((image, index) => {
-            return (
-              <ImageContainer key={image}>
-                <Image src={image} alt="uploaded" />
-                <Button onClick={() => deleteHandler(image)}>
-                  delete image
-                </Button>
-                <p>{index + 1}</p>
-              </ImageContainer>
-            );
-          })}
-      </Images> */}
     </Section>
   );
 };
