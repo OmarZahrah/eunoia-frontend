@@ -7,9 +7,12 @@ import { BsPersonVcard } from "react-icons/bs";
 import { RiDownloadLine } from "react-icons/ri";
 import { useState } from "react";
 import Logout from "./Logout";
+import WriteReview from "./WriteReview";
 
 function List({ user }) {
   const [logout, setLogout] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
   const hasService = user.hasService;
   // const hasService = false;
   console.log(user);
@@ -18,6 +21,10 @@ function List({ user }) {
       {logout && (
         <div className="overlay" onClick={() => setLogout(false)}></div>
       )}
+      {isOpenModal && (
+        <div className="overlay" onClick={() => setIsOpenModal(false)}></div>
+      )}
+
       <ul>
         <li>
           <Link to="editprofile">
@@ -59,13 +66,14 @@ function List({ user }) {
           </Link>
         </li>
         <li>
-          <Link to="">
+          <Link onClick={() => setIsOpenModal(true)}>
             <RiDownloadLine className="icons" />
             <span>Download App</span>
           </Link>
         </li>
       </ul>
       {logout && <Logout setLogout={setLogout} />}
+      {isOpenModal && <WriteReview />}
     </Wrapper>
   );
 }
@@ -82,7 +90,6 @@ const Wrapper = styled.div`
     right: 0;
     left: 0;
     bottom: 0;
-
     background-color: #00000040;
   }
   ul {

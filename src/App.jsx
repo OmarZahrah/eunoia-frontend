@@ -28,6 +28,7 @@ import VenueProfile from "./pages/VenueProfile";
 import Categories from "./pages/Categories";
 import Error from "./pages/Error";
 import CustomizePackage from "./pages/CustomizePackage";
+import WriteReview from "./components/WriteReview";
 
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({
@@ -71,6 +72,7 @@ function App() {
                       element={<BuisnessProfile />}
                     />
                     <Route path="createBusiness" element={<CreateBussAcc />} />
+                    <Route path="writeReview" element={<WriteReview />} />
                   </Route>
                   <Route path="categories" element={<Categories />} />
                   <Route path="addpackage" element={<AddPackage />} />
