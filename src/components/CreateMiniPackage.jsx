@@ -15,7 +15,7 @@ const CreateMiniPackage = ({ packages, setPackages, setOpenPackage }) => {
     e.preventDefault();
     if (title && options.length) {
       //   handleSubmitOption();
-      setPackages([...packages, { title: title, options: options }]);
+      setPackages([...packages, { name: title, options: options }]);
       setTitle("");
       setOpenPackage(false);
     }

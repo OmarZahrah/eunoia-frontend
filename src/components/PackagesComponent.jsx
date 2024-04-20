@@ -5,9 +5,10 @@ const PackagesComponent = ({ packages }) => {
   return (
     <Wrapper>
       {packages.map((pack) => (
-        <Link className="card" key={pack._id}>
+        // <Link to={`/updatePackage/${pack._id}`} className="card" key={pack._id}>
+        <div className="card" key={pack._id}>
           <PackageCard pack={pack} />
-        </Link>
+        </div>
       ))}
 
       <Link to="/createPackage" className="card">

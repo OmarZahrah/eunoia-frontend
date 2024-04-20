@@ -24,9 +24,11 @@ import BuisnessProfile from "././features/serviceProfile/BuisnessProfile";
 import { UserProvider } from "./context/UserContext";
 import Profile from "./pages/Profile";
 import { ServiceProvider } from "./context/ServiceContext";
+import { PackageProvider } from "./context/PackageContext";
 import VenueProfile from "./pages/VenueProfile";
 import Categories from "./pages/Categories";
 import Error from "./pages/Error";
+import CustomizePackage from "./pages/CustomizePackage";
 import Search from "./pages/Search";
 import Favorites from "./pages/Favorites";
 import Photographers from "./pages/Photographers";
@@ -38,6 +40,7 @@ import OtherDetails from "./pages/OtherDetails";
 import Food from "./pages/Food";
 import Venues from "./pages/Venues";
 import CreatePackage from "./features/package/CreatePackage";
+import UpdatePackage from "./features/package/updatePackage";
 
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({
@@ -56,64 +59,81 @@ function App() {
         <AuthProvider>
           <UserProvider>
             <ServiceProvider>
-              <GlobalStyles />
-              <BrowserRouter>
-                <Routes>
-                  {/*
+              <PackageProvider>
+                <GlobalStyles />
+                <BrowserRouter>
+                  <Routes>
+                    {/*
                   ===========================================
                                  Public Routes
                   ===========================================
                   */}
-                  <Route path="welcome" element={<Welcome />} />
-                  <Route index element={<Navigate replace to="welcome" />} />
-                  <Route path="error" element={<Error />} />
+                    <Route path="welcome" element={<Welcome />} />
+                    <Route index element={<Navigate replace to="welcome" />} />
+                    <Route path="error" element={<Error />} />
 
-                  <Route path="signup" element={<SignUp />}>
-                    <Route path="create" element={<CreateAccount />} />
-                    <Route path="user" element={<SignUpUser />} />
-                    <Route path="provider" element={<SignUpBusiness />} />
-                  </Route>
-                  <Route path="login" element={<Login />} />
-                  <Route path="forgotpassword" element={<ForgotPass />} />
+                    <Route path="signup" element={<SignUp />}>
+                      <Route path="create" element={<CreateAccount />} />
+                      <Route path="user" element={<SignUpUser />} />
+                      <Route path="provider" element={<SignUpBusiness />} />
+                    </Route>
+                    <Route path="login" element={<Login />} />
+                    <Route path="forgotpassword" element={<ForgotPass />} />
 
-                  <Route path="home" element={<Home />} />
-                  <Route path="search" element={<Search />} />
+                    <Route path="home" element={<Home />} />
+                    <Route path="search" element={<Search />} />
 
-                  <Route path="categories" element={<Categories />} />
-                  <Route path="venues" element={<Venues />} />
-                  <Route path="photographers" element={<Photographers />} />
-                  <Route path="eventplanners" element={<EventPlanners />} />
-                  <Route path="djs" element={<Djs />} />
-                  <Route path="makeupartist" element={<MakeupArtist />} />
-                  <Route path="food" element={<Food />} />
-                  <Route path="hairstylest" element={<HairStylest />} />
-                  <Route path="otherdetails" element={<OtherDetails />} />
+                    <Route path="categories" element={<Categories />} />
+                    <Route path="venues" element={<Venues />} />
+                    <Route path="photographers" element={<Photographers />} />
+                    <Route path="eventplanners" element={<EventPlanners />} />
+                    <Route path="djs" element={<Djs />} />
+                    <Route path="makeupartist" element={<MakeupArtist />} />
+                    <Route path="food" element={<Food />} />
+                    <Route path="hairstylest" element={<HairStylest />} />
+                    <Route path="otherdetails" element={<OtherDetails />} />
 
-                  <Route
-                    path="venueprofile/:venuId"
-                    element={<VenueProfile />}
-                  />
-                  {/*
+                    <Route
+                      path="venueprofile/:venuId"
+                      element={<VenueProfile />}
+                    />
+                    {/*
                   ===========================================
                                  Private Routes
                   ===========================================
                   */}
-                  <Route path="profile" element={<Profile />}>
-                    <Route index element={<MainProfile />} />
-                    <Route path="editprofile" element={<EditProfile />} />
+                    <Route path="profile" element={<Profile />}>
+                      <Route index element={<MainProfile />} />
+                      <Route path="editprofile" element={<EditProfile />} />
+                      <Route
+                        path=":userId/businessProfile"
+                        element={<BuisnessProfile />}
+                      />
+                      <Route
+                        path="createBusiness"
+                        element={<CreateBussAcc />}
+                      />
+                    </Route>
+
+                    <Route path="addpackage" element={<AddPackage />} />
+
+                    <Route path="favorites" element={<Favorites />} />
+                    <Route path="createPackage" element={<CreatePackage />} />
                     <Route
-                      path=":userId/businessProfile"
-                      element={<BuisnessProfile />}
+                      path="updatePackage/:packageId"
+                      element={<UpdatePackage />}
                     />
-                    <Route path="createBusiness" element={<CreateBussAcc />} />
-                  </Route>
-
-                  <Route path="addpackage" element={<AddPackage />} />
-
-                  <Route path="favorites" element={<Favorites />} />
-                  <Route path="createPackage" element={<CreatePackage />} />
-                </Routes>
-              </BrowserRouter>
+                    <Route
+                      path="venueprofile/:venuId"
+                      element={<VenueProfile />}
+                    />
+                    <Route
+                      path="package/:packageId"
+                      element={<CustomizePackage />}
+                    />
+                  </Routes>
+                </BrowserRouter>
+              </PackageProvider>
             </ServiceProvider>
           </UserProvider>
         </AuthProvider>

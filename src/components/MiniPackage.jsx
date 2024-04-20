@@ -3,7 +3,7 @@ import styled from "styled-components";
 const MiniPackage = ({ data }) => {
   return (
     <Wrapper>
-      <h3 className="title">{data?.title}</h3>
+      <h3 className="title">{data?.name}</h3>
       <div className="options">
         {data?.options?.map((option, i) => (
           <div className="option" key={i}>

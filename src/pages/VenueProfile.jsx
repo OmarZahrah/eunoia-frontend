@@ -19,6 +19,9 @@ import coverimg from "../../public/images/Rectangle 9.svg";
 import DetailsCard from "../components/DetailsCard";
 import man from "../images/man.png";
 import table from "../images/table.png";
+import { LuPencilLine } from "react-icons/lu";
+import Reviews from "../components/Reviews";
+import ScrollSection from "../components/ScrollSection";
 
 function VenueProfile() {
   const { venuId } = useParams();
@@ -65,68 +68,134 @@ function VenueProfile() {
               Open in Google Maps
             </a>
           </div>
-          <div className="third-section">
-            <p className="location">Packages</p>
-            <div className="packages-container">
-              {/* <VenuePackages
-                image={indoor}
-                width={280}
-                title="Indoor Hall"
-                price="13,500 EGP"
-              />
-              <VenuePackages
-                image={outdoorr}
-                width={280}
-                title="Outdoor Venue"
-                price="15,000 EGP"
-              /> */}
+          {Boolean(service?.packages.length) && (
+            // <div className="third-section">
+            //   <p className="location">Packages</p>
+            //   <div className="packages-container">
+            //     {service.packages?.map((pack) => (
+            //       <DetailsCard
+            //         key={pack._id}
+            //         id={pack._id}
+            //         link="package"
+            //         image={outdoorr}
+            //         title={pack.packageName}
+            //         width={330}
+            //         height={180}
+            //       />
+            //     ))}
+            //   </div>
+            // </div>
+            <ScrollSection title="Packages">
               {service.packages?.map((pack) => (
                 <DetailsCard
                   key={pack._id}
                   id={pack._id}
+                  link="package"
                   image={outdoorr}
                   title={pack.packageName}
-                  // description="Photographers"
                   width={330}
                   height={180}
                 />
               ))}
-            </div>
-          </div>
-          <div className="fourth-section">
-            <p className="location">Similar</p>
-            <div className="packages-container">
-              <DetailsCard
-                image={table}
-                title="The Garden"
-                description="Photographers"
-                width={330}
-                height={180}
-              />
-              <DetailsCard
-                image={table}
-                title="The Garden"
-                description="Photographers"
-                width={330}
-                height={180}
-              />
-              <DetailsCard
-                image={table}
-                title="The Garden"
-                description="Photographers"
-                width={330}
-                height={180}
-              />
-              <DetailsCard
-                image={table}
-                title="The Garden"
-                description="Photographers"
-                width={330}
-                height={180}
-              />
-            </div>
-          </div>
+            </ScrollSection>
+          )}
+          {/* <div className="fourth-section"> */}
+          {/* <p className="location">Similar</p> */}
+          {/* <div className="packages-container"> */}
+          <ScrollSection title="Similar">
+            <DetailsCard
+              image={table}
+              title="The Garden"
+              description="Photographers"
+              width={330}
+              height={180}
+            />
+            <DetailsCard
+              image={table}
+              title="The Garden"
+              description="Photographers"
+              width={330}
+              height={180}
+            />
+            <DetailsCard
+              image={table}
+              title="The Garden"
+              description="Photographers"
+              width={330}
+              height={180}
+            />
+            <DetailsCard
+              image={table}
+              title="The Garden"
+              description="Photographers"
+              width={330}
+              height={180}
+            />
+          </ScrollSection>
+
+          {/* </div> */}
+          {/* <p className="reviews">
+              Reviews
+              <LuPencilLine className="icon" />
+            </p> */}
+          {/* <div className="reviews-container"> */}
+          <ScrollSection title={"Reviews"}>
+            <Reviews
+              profilePic={man}
+              name={"Sara Mohamed"}
+              rate={4.5}
+              review={
+                "Very helpful and friendly, birthday memories beautifully captured!"
+              }
+            />
+            <Reviews
+              profilePic={man}
+              name={"Sara Mohamed"}
+              rate={4.5}
+              review={
+                "Very helpful and friendly, birthday memories beautifully captured!"
+              }
+            />
+            <Reviews
+              profilePic={man}
+              name={"Sara Mohamed"}
+              rate={4.5}
+              review={"Very"}
+            />
+            <Reviews
+              profilePic={man}
+              name={"Sara Mohamed"}
+              rate={4.5}
+              review={
+                "Very helpful and friendly, birthday memories beautifully captured!"
+              }
+            />
+            <Reviews
+              profilePic={man}
+              name={"Sara Mohamed"}
+              rate={4.5}
+              review={
+                "Very helpful and friendly, birthday memories beautifully captured!"
+              }
+            />
+            <Reviews
+              profilePic={man}
+              name={"Sara Mohamed"}
+              rate={4.5}
+              review={
+                "Very helpful and friendly, birthday memories beautifully captured!"
+              }
+            />
+            <Reviews
+              profilePic={man}
+              name={"Sara Mohamed"}
+              rate={4.5}
+              review={"Very "}
+            />
+          </ScrollSection>
+          {/* </div> */}
         </div>
+        // </div>
       )}
     </Wrapper>
   );
@@ -310,6 +379,31 @@ const Wrapper = styled.div`
     width: 70%;
     height: 0.013rem;
     background-color: #ccc; /* Border color */
+  }
+  .reviews {
+    color: #00000099;
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+  .icon {
+    color: #00000078;
+    width: 1.7rem;
+    height: 1.4rem;
+    margin-left: 5px;
+  }
+  .reviews-container {
+    display: flex;
+    overflow-x: auto;
+    /* width: 200rem; */
+  }
+  .reviews-container::-webkit-scrollbar {
+    height: 0.5rem;
+  }
+
+  .reviews-container::-webkit-scrollbar-thumb {
+    background-color: #d4d4d4;
+    border-radius: 10px;
+    cursor: pointer;
   }
   @media only screen and (max-width: ${({ theme }) => theme.mid}) {
     .name-venue {

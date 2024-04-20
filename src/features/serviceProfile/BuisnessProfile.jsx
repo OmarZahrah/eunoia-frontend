@@ -22,6 +22,7 @@ import { createFormData } from "../../utils/createFormData";
 import { useAddPhotos } from "./useAddPhotos";
 import { deletePhotos } from "../../services/apiServices";
 import { useDeletePhotos } from "./useDeletePhotos";
+import { usePackageContext } from "../../context/PackageContext";
 
 function BuisnessProfile() {
   const { userId } = useParams();
@@ -32,6 +33,7 @@ function BuisnessProfile() {
   const [changeName, setChangeName] = useState(false);
   const { addPhotos, isLoading: addingPhotos } = useAddPhotos();
   // console.log("service", service);
+  const { editPackage, setEditPackage } = usePackageContext();
   const {
     coverPhoto,
     setCoverPhoto,
@@ -122,7 +124,11 @@ function BuisnessProfile() {
   };
 
   return (
-    <Wrapper>
+    <Wrapper
+      onClick={() => {
+        if (editPackage === true) setEditPackage(false);
+      }}
+    >
       {isLoading ? (
         <Loading />
       ) : (
@@ -242,7 +248,13 @@ function BuisnessProfile() {
   );
 }
 
-function SelectedItem(activeItem, service, setChange) {
+function SelectedItem(
+  activeItem,
+  service,
+  setChange,
+  editPackage,
+  setEditPackage
+) {
   switch (activeItem) {
     case "About":
       return <AboutComponent service={service} />;

@@ -9,6 +9,7 @@ import { useGetServices } from "../features/categories/useGetServices";
 import Loading from "../components/Loading";
 import { useUser } from "../features/userProfile/useUser";
 import { useGetNearby } from "../features/homepage/useGetNearby";
+import ScrollSection from "../components/ScrollSection";
 const Home = () => {
   const { user, isLoading } = useUser();
   const { nearbyServices } = useGetNearby();
@@ -21,7 +22,8 @@ const Home = () => {
       <div className="container">
         {/* <h1>Hey, Name!</h1> */}
         <p className="titles">Special Offers</p>
-        <div className="packages-container">
+        {/* <div className="packages-container"> */}
+        <ScrollSection>
           <SpecialOffers
             backgroundImage={ring}
             percentage={"-20%"}
@@ -57,9 +59,11 @@ const Home = () => {
             category={"Photographer"}
             link={"/"}
           />
-        </div>
+          {/* </div> */}
+        </ScrollSection>
         <p className="titles">Popular</p>
-        <div className="packages-container">
+        {/* <div className="packages-container"> */}
+        <ScrollSection>
           <DetailsCard
             image={man}
             title={"Amr Abdallah"}
@@ -123,7 +127,8 @@ const Home = () => {
             width={185}
             height={160}
           />
-        </div>
+          {/* </div> */}
+        </ScrollSection>
         {nearbyServices && (
           <>
             <p className="titles">
@@ -132,11 +137,13 @@ const Home = () => {
                 ({nearbyServices[0]?.location})
               </span>
             </p>
-            <div className="packages-container">
+            {/* <div className="packages-container"> */}
+            <ScrollSection>
               {nearbyServices?.map((nearbyService) => (
                 <DetailsCard
-                  id={nearbyService._id}
                   key={nearbyService._id}
+                  id={nearbyService._id}
+                  link="venueprofile"
                   image={nearbyService.imageCover}
                   title={nearbyService.businessName}
                   description={nearbyService.businessCategory}
@@ -144,7 +151,8 @@ const Home = () => {
                   height={180}
                 />
               ))}
-            </div>
+            </ScrollSection>
+            {/* </div> */}
           </>
         )}
       </div>

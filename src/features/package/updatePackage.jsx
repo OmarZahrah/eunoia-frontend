@@ -11,26 +11,13 @@ import { createFormData } from "../../utils/createFormData";
 import { useAddPackage } from "./useAddPackage";
 import { photoLink } from "../../services/cloudinary";
 import { useGetPhotoLink } from "./useGetPhotoLink";
-const CreatePackage = () => {
-  const [packages, setPackages] = useState([
-    // {
-    //   title: "Capacity",
-    //   options: [
-    //     { title: "150", price: 5000 },
-    //     { title: "200", price: 5500 },
-    //     { title: "300", price: 6000 },
-    //     { title: "400", price: 7000 },
-    //   ],
-    // },
-    // {
-    //   title: "Desserts",
-    //   options: [
-    //     { title: "gateau", price: 3000 },
-    //     { title: "2 mini pizza", price: 4500 },
-    //     { title: "2 sticks baton sale", price: 2000 },
-    //   ],
-    // },
-  ]);
+import { useGetPackage } from "./useGetPackage";
+import { useParams } from "react-router-dom";
+const CreatePackage = ({ pack }) => {
+  const { packageId } = useParams();
+  const { packageData, isLoading: loadingPackage } = useGetPackage(packageId);
+  console.log(packageData);
+  const [packages, setPackages] = useState([]);
   const [openPackage, setOpenPackage] = useState(false);
   const { register, handleSubmit } = useForm();
   const [packagePhoto, setPackagePhoto] = useState("");
@@ -54,7 +41,7 @@ const CreatePackage = () => {
     <Wrapper>
       <NavBar />
       <form className="container" onSubmit={handleSubmit(onSubmit)}>
-        <h1>Add Package</h1>
+        <h1>Update Package</h1>
         <div className="field">
           <label>Package Name:</label>
           <input
@@ -83,11 +70,11 @@ const CreatePackage = () => {
             type="number"
             className="top-input"
             {...register("price", {
-              required: "this field is required",
+              required: "this field is required ",
             })}
           />
         </div>
-        {/* <div className="field">
+        <div className="field">
           <label>Package Photo:</label>
           <div className="img-container">
             {packagePhoto ? (
@@ -110,7 +97,7 @@ const CreatePackage = () => {
               </label>
             )}
           </div>
-        </div> */}
+        </div>
         <div className="customized-package">
           <h2>Customized Package:</h2>
           {packages.map((miniPackage, i) => (
@@ -128,7 +115,9 @@ const CreatePackage = () => {
           )}
         </div>
         <Button className="submit-package" type="submit">
-          {isLoading || loadingPhotoLink ? "Adding Package..." : "Add Package"}
+          {isLoading || loadingPhotoLink
+            ? "Updating Package..."
+            : "Update Package"}
         </Button>
       </form>
     </Wrapper>

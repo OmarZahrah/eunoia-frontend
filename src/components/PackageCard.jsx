@@ -1,16 +1,33 @@
 import styled from "styled-components";
 import { CiEdit } from "react-icons/ci";
+import { RiDeleteBinLine } from "react-icons/ri";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { set } from "react-hook-form";
+import { usePackageContext } from "../context/PackageContext";
 
 const PackagesComponent = ({ type, pack }) => {
+  const { editPackage, setEditPackage } = usePackageContext();
+
   return (
     <Wrapper>
       {type == "add" ? (
         <span className="add-package">+ Add Package</span>
       ) : (
         <>
-          <div className="edit-icon">
-            <CiEdit className="icon" />
+          <div className="edit-icon" onClick={() => setEditPackage((s) => !s)}>
+            {/* <CiEdit className="icon" /> */}:
           </div>
+          {editPackage && (
+            <div className="options">
+              <Link to={`/updatePackage/${pack._id}`} className="option">
+                Edit <CiEdit />
+              </Link>
+              <span className="option">
+                Delete <RiDeleteBinLine />
+              </span>
+            </div>
+          )}
           <h2 className="title"> {pack?.packageName}</h2>
           <p className="desc">{pack?.description}</p>
           <span className="price">{pack?.price} EGP</span>
@@ -54,7 +71,27 @@ const Wrapper = styled.div`
     padding: 20px;
     /* position: relative; */
   }
-
+  .options {
+    display: flex;
+    flex-direction: column;
+    /* gap: 5px; */
+    position: absolute;
+    right: 0;
+    top: 30px;
+    width: 7rem;
+  }
+  .option {
+    padding: 10px 10px;
+    font-weight: 500;
+    background-color: #ded8cbe8;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+  }
+  .option:hover {
+    background-color: #c1b8a4;
+  }
   .icon {
     width: 24px;
     height: 24px;
