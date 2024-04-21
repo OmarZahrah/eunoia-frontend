@@ -9,13 +9,7 @@ function WriteReview() {
       <div className="content">
         <h4>Write a Review</h4>
         <p>Score:</p>
-        {/* <StarRating /> */}
-        <Star full={true} />
-        <Star full={true} />
-        <Star full={true} />
-        <Star full={false} />
-        <Star full={false} />
-
+        <StarRating />
         <p>Review:</p>
         <textarea />
         <Button size="medium" type="submit" className="post-button">
@@ -29,7 +23,7 @@ function WriteReview() {
 export default WriteReview;
 const Wrapper = styled.div`
   width: 35rem;
-  height: 23rem;
+  height: 25rem;
   background-color: white;
   display: flex;
   justify-content: center;
@@ -43,22 +37,22 @@ const Wrapper = styled.div`
 
   .content {
     width: 80%;
-    height: 100%;
+    /* height: 100%; */
     /* background-color: red; */
   }
 
   h4 {
-    color: rgba(0, 0, 0, 0.75);
-    font-size: 30px;
+    color: rgba(0, 0, 0, 0.642);
+    font-size: 28px;
     font-weight: 600;
     text-align: center;
-    padding: 10px 0;
+    margin-bottom: 15px;
   }
 
   p {
     font-size: 20px;
     font-weight: 500;
-    color: rgba(0, 0, 0, 0.712);
+    color: rgba(0, 0, 0, 0.596);
     margin-bottom: 10px;
   }
   textarea {
@@ -67,7 +61,6 @@ const Wrapper = styled.div`
     background-color: transparent;
     color: rgba(0, 0, 0, 0.656);
     font-size: 16px;
-    height: 3rem;
     width: 100%;
     height: 6rem;
     margin-bottom: 20px;
@@ -77,6 +70,6 @@ const Wrapper = styled.div`
     padding: 5px 0;
     width: 100%;
     font-size: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 `;

@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
-function Star({ onRate, full, onHoverIn, onHoverOut, color }) {
+function Star({ onRate, full, onHoverIn, onHoverOut }) {
   return (
     <Wrapper
-      color={color}
       role="button"
       onClick={onRate}
       onMouseEnter={onHoverIn}
@@ -13,8 +12,9 @@ function Star({ onRate, full, onHoverIn, onHoverOut, color }) {
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
-          fill={"#FCF55F		"}
-          stroke={"#FCF55F	"}
+          fill={"#FCF55F"}
+          stroke={"#FCF55F"}
+          strokeWidth="2"
         >
           <path d="M12 2l2.4 7.3h7.6l-6.2 4.5 2.4 7.3-6.2-4.5-6.2 4.5 2.4-7.3-6.2-4.5h7.6z" />
         </svg>
@@ -36,6 +36,8 @@ export default Star;
 
 const Wrapper = styled.span`
   display: inline-block;
-  width: 55px;
-  margin-bottom: 10px;
+  width: 35px;
+  cursor: pointer;
+  margin-right: 12px !important;
+  margin-bottom: 7px !important;
 `;

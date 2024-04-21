@@ -29,20 +29,20 @@ function List({ user }) {
         <li>
           <Link to="editprofile">
             <LuPencilLine className="icons" />
-            <span>Edit Profile</span>
+            <span className="text">Edit Profile</span>
           </Link>
         </li>
 
         <li>
           <Link to="">
             <VscLock className="icons" />
-            <span>Change Password</span>
+            <span className="text">Change Password</span>
           </Link>
         </li>
         <li>
           <Link to="">
             <FaRegHeart className="icons" />
-            <span>Favorites</span>
+            <span className="text">Favorites</span>
           </Link>
         </li>
         <li>
@@ -50,25 +50,25 @@ function List({ user }) {
             to={hasService ? `${user._id}/businessProfile` : "createBusiness"}
           >
             <BsPersonVcard className="icons" />
-            <span>Business Account</span>
+            <span className="text">Business Account</span>
           </Link>
         </li>
         <li>
           <Link to="">
             <FaRegEnvelope className="icons" />
-            <span>Requests</span>
+            <span className="text">Requests</span>
           </Link>
         </li>
         <li>
           <Link onClick={() => setLogout(true)}>
             <LuLogOut className="icons" />
-            <span>Logout</span>
+            <span className="text">Logout</span>
           </Link>
         </li>
         <li>
           <Link onClick={() => setIsOpenModal(true)}>
             <RiDownloadLine className="icons" />
-            <span>Download App</span>
+            <span className="text">Download App</span>
           </Link>
         </li>
       </ul>
@@ -108,7 +108,7 @@ const Wrapper = styled.div`
     width: 1.1rem;
     height: 1.1rem;
   }
-  span {
+  .text {
     padding-left: 20px;
   }
   a {
