@@ -1,14 +1,24 @@
 import styled from "styled-components";
 import PackageCard from "./PackageCard";
 import { Link } from "react-router-dom";
+import { usePackageContext } from "../context/PackageContext";
+import { CiEdit } from "react-icons/ci";
+import { RiDeleteBinLine } from "react-icons/ri";
 const PackagesComponent = ({ packages }) => {
+  const { editPackage, setEditPackage } = usePackageContext();
+
   return (
     <Wrapper>
       {packages.map((pack) => (
-        // <Link to={`/updatePackage/${pack._id}`} className="card" key={pack._id}>
-        <div className="card" key={pack._id}>
+        <Link to={`/updatePackage/${pack._id}`} className="card" key={pack._id}>
           <PackageCard pack={pack} />
-        </div>
+        </Link>
+        // <div className="card" key={pack._id}>
+        //   {/* <Link to={`/updatePackage/${pack._id}`}> */}
+        //   {/* <div className="card" key={pack._id}> */}
+        //   <PackageCard pack={pack} />
+        //   {/* </Link> */}
+        // </div>
       ))}
 
       <Link to="/createPackage" className="card">
@@ -26,10 +36,12 @@ const Wrapper = styled.div`
   align-items: center;
   /* justify-content: space-between; */
   flex-wrap: wrap;
+
   .card {
     min-width: 25%;
     width: 30%;
   }
+
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
     .card {
       width: 100%;

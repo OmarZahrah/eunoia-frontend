@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import NavBar from "../../components/NavBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../components/Button";
 import { useForm } from "react-hook-form";
 import MiniPackage from "../../components/MiniPackage";
@@ -13,16 +13,36 @@ import { photoLink } from "../../services/cloudinary";
 import { useGetPhotoLink } from "./useGetPhotoLink";
 import { useGetPackage } from "./useGetPackage";
 import { useParams } from "react-router-dom";
+import { useEditPackage } from "./useEditPackage";
+import { useAddPhoto } from "./useAddPhoto";
+import { CiEdit } from "react-icons/ci";
 const CreatePackage = ({ pack }) => {
   const { packageId } = useParams();
   const { packageData, isLoading: loadingPackage } = useGetPackage(packageId);
-  console.log(packageData);
+  const { addPhoto, isLoading: addingPhoto } = useAddPhoto();
+  // console.log(packageData);
   const [packages, setPackages] = useState([]);
   const [openPackage, setOpenPackage] = useState(false);
   const { register, handleSubmit } = useForm();
   const [packagePhoto, setPackagePhoto] = useState("");
-  const { addPackage, isLoading } = useAddPackage();
-  const { photoLink, isLoading: loadingPhotoLink } = useGetPhotoLink();
+  const { editPackage, isLoading } = useEditPackage();
+  const [photo, setPhoto] = useState("");
+  // console.log(packagePhoto);
+  useEffect(() => {
+    const func = () => {
+      if (packageData) {
+        setPackages(packageData.customizePackage);
+        setPhoto(packageData.packagePhoto);
+      }
+    };
+    func();
+  }, [packageData]);
+
+  const handleDeletePhoto = () => {
+    const photo = createFormData({ packagePhoto: "" });
+    addPhoto({ id: packageData._id, photo: photo });
+  };
+
   const onSubmit = (formData) => {
     const data = {
       ...formData,
@@ -31,11 +51,12 @@ const CreatePackage = ({ pack }) => {
       customizePackage: packages.length ? packages : "",
     };
     const filteredData = filterData(data);
-    // const photo = createFormData({ packagePhoto: packagePhoto });
-    // const link = photoLink(photo);
-    // if(photo)
-    // console.log(link);
-    addPackage(filteredData);
+    if (packagePhoto) {
+      const photo = createFormData({ packagePhoto: packagePhoto });
+      addPhoto({ id: packageData._id, photo: photo });
+    }
+
+    editPackage({ id: packageData._id, data: filteredData });
   };
   return (
     <Wrapper>
@@ -47,9 +68,8 @@ const CreatePackage = ({ pack }) => {
           <input
             type="text"
             className="top-input"
-            {...register("packageName", {
-              required: "this field is required",
-            })}
+            defaultValue={packageData?.packageName}
+            {...register("packageName")}
           />
         </div>
         <div className="field">
@@ -59,19 +79,17 @@ const CreatePackage = ({ pack }) => {
             id=""
             cols="30"
             rows="10"
-            {...register("description", {
-              required: "this field is required",
-            })}
+            defaultValue={packageData?.description}
+            {...register("description")}
           ></textarea>
         </div>
         <div className="field">
           <label>Price:</label>
           <input
             type="number"
+            defaultValue={packageData?.price}
             className="top-input"
-            {...register("price", {
-              required: "this field is required ",
-            })}
+            {...register("price")}
           />
         </div>
         <div className="field">
@@ -82,8 +100,13 @@ const CreatePackage = ({ pack }) => {
                 <img src={URL.createObjectURL(packagePhoto)} />
                 <TiDeleteOutline
                   className="delete-icon"
-                  // onClick={() => handleDeleteImage(image)}
+                  onClick={() => setPackagePhoto("")}
                 />
+              </div>
+            ) : photo ? (
+              <div className="image">
+                <img src={packageData.packagePhoto} />
+                <CiEdit className="edit-icon " onClick={() => setPhoto("")} />
               </div>
             ) : (
               <label className="img-label">
@@ -115,9 +138,7 @@ const CreatePackage = ({ pack }) => {
           )}
         </div>
         <Button className="submit-package" type="submit">
-          {isLoading || loadingPhotoLink
-            ? "Updating Package..."
-            : "Update Package"}
+          {isLoading || addingPhoto ? "Updating Package..." : "Update Package"}
         </Button>
       </form>
     </Wrapper>
@@ -187,6 +208,17 @@ const Wrapper = styled.div`
     .image img {
       border: 2px solid var(--color-grey-500);
       width: 100px;
+    }
+    .edit-icon {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      color: #fff;
+      transform: translateX(50%);
+      background-color: #fef9f0;
+      color: #555;
+      border-radius: 50%;
+      cursor: pointer;
     }
     .delete-icon {
       position: absolute;

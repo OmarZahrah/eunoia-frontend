@@ -1,5 +1,6 @@
 import React from "react";
 import ReactLoading from "react-loading";
+import { ClipLoader } from "react-spinners";
 import styled from "styled-components";
 
 const style = {
@@ -8,14 +9,34 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
 };
-const Example = ({ type, color }) => (
+const override = {
+  display: "flex",
+  margin: "0 auto",
+  borderColor: "#74ab70",
+};
+// bubbles
+// cubes
+// cylon
+// spin
+// spinningBubbles
+// spokes
+const Example = ({ color = "#74ab70" }) => (
   <Wrapper>
-    <ReactLoading
-      type={"spin"}
+    {/* <ReactLoading
+      // type={"spin"}
+      type={"spokes"}
       color={color || "#74ab70"}
       height={500}
       width={200}
       // style={style}
+    /> */}
+    <ClipLoader
+      color={color}
+      loading={true}
+      cssOverride={override}
+      size={150}
+      aria-label="Loading Spinner"
+      data-testid="loader"
     />
   </Wrapper>
 );

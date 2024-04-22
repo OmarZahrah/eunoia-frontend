@@ -72,6 +72,8 @@ function List({ user }) {
 export default List;
 
 const Wrapper = styled.div`
+  background: #fef9f0;
+
   width: 70%;
   .overlay {
     position: absolute;

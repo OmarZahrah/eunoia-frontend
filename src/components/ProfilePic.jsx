@@ -141,7 +141,7 @@ const Wrapper = styled.div`
     width: 100%;
     border-right: none;
     height: 17rem;
-    margin-top: 40px;
+    margin-top: 40px !important;
     /* border-bottom: 1px solid rgba(0, 0, 0, 0.347); */
     span {
       font-size: 25px;

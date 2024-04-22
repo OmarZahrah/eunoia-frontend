@@ -71,10 +71,13 @@ const Wrapper = styled.div`
   padding: 1rem 4rem;
   border-bottom: 1px solid #ccc;
   align-items: center;
+  overflow: hidden;
+
   nav {
     display: flex;
     width: 100%;
     align-items: center;
+    overflow: hidden;
     /* position: fixed; */
   }
   .Hlogo {
@@ -116,6 +119,7 @@ const Wrapper = styled.div`
     height: 30px;
     margin-left: auto;
     z-index: 100;
+    cursor: pointer;
   }
   .close-icon {
     display: none;
@@ -126,6 +130,7 @@ const Wrapper = styled.div`
     position: absolute;
     top: 10px;
     right: 10px;
+    cursor: pointer;
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.mid}) {
@@ -165,22 +170,34 @@ const Wrapper = styled.div`
       /* padding-left: 1rem; */
     }
     nav {
-      display: none;
+      /* display: none; */
+      visibility: hidden;
+      /* transform: translateX(100%); */
+      transition: 0.4s ease;
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      opacity: 0;
     }
     .open-nav {
       /* display: none; */
+
       display: flex !important;
       /* display: block; */
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%;
+      height: 100vh;
       flex-direction: column;
       z-index: 10;
       background-color: #fff;
       align-items: center;
       justify-content: center;
+      /* transform: translateX(0); */
+      visibility: visible;
+      opacity: 0.98;
     }
     ul {
       flex-direction: column;

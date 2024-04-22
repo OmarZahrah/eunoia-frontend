@@ -44,17 +44,11 @@ export const addPhotos = async (formData) => {
   return data.data;
 };
 
-export const deletePhotos = async (formData) => {
-  console.log("data", formData);
-  console.log(JSON.stringify(formData));
+export const deletePhotos = async (image) => {
+  console.log(image);
 
-  const request = {
-    imageLinks: JSON.stringify(formData),
-  };
-  console.log("request", request);
-
-  const data = await customFetch.delete("services/remove-Photos", request);
-  return data;
+  const { data } = await customFetch.delete("services/remove-Photos", image);
+  console.log(data.data);
 };
 
 export const nearbyServices = async () => {

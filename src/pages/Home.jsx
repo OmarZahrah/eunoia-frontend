@@ -11,151 +11,157 @@ import { useUser } from "../features/userProfile/useUser";
 import { useGetNearby } from "../features/homepage/useGetNearby";
 import ScrollSection from "../components/ScrollSection";
 const Home = () => {
-  const { user, isLoading } = useUser();
-  const { nearbyServices } = useGetNearby();
-  // const isLoading = false;
+  const { user } = useUser();
+  const { nearbyServices, isLoading } = useGetNearby();
+  // const isLoading = true;
 
-  if (isLoading) return <Loading />;
+  // if (isLoading) return <Loading />;
   return (
     <Wrapper>
-      <NavBar showLoginButton={!user} showRegisterButton={!user} />
-      <div className="container">
-        {/* <h1>Hey, Name!</h1> */}
-        <p className="titles">Special Offers</p>
-        {/* <div className="packages-container"> */}
-        <ScrollSection>
-          <SpecialOffers
-            backgroundImage={ring}
-            percentage={"-20%"}
-            title={"Karim Roshdy"}
-            category={"Photographer"}
-            link={"/"}
-          />
-          <SpecialOffers
-            backgroundImage={ring}
-            percentage={"-20%"}
-            title={"Karim Roshdy"}
-            category={"Photographer"}
-            link={"/"}
-          />
-          <SpecialOffers
-            backgroundImage={ring}
-            percentage={"-20%"}
-            title={"Karim Roshdy"}
-            category={"Photographer"}
-            link={"/"}
-          />
-          <SpecialOffers
-            backgroundImage={ring}
-            percentage={"-20%"}
-            title={"Karim Roshdy"}
-            category={"Photographer"}
-            link={"/"}
-          />
-          <SpecialOffers
-            backgroundImage={ring}
-            percentage={"-20%"}
-            title={"Karim Roshdy"}
-            category={"Photographer"}
-            link={"/"}
-          />
-          {/* </div> */}
-        </ScrollSection>
-        <p className="titles">Popular</p>
-        {/* <div className="packages-container"> */}
-        <ScrollSection>
-          <DetailsCard
-            image={man}
-            title={"Amr Abdallah"}
-            description={"Photographer"}
-            width={185}
-            height={160}
-          />
-          <DetailsCard
-            image={man}
-            title={"Amr Abdallah"}
-            description={"Photographer"}
-            width={185}
-            height={160}
-          />
-          <DetailsCard
-            image={man}
-            title={"Amr Abdallah"}
-            description={"Photographer"}
-            width={185}
-            height={160}
-          />
-          <DetailsCard
-            image={man}
-            title={"Amr Abdallah"}
-            description={"Photographer"}
-            width={185}
-            height={160}
-          />
-          <DetailsCard
-            image={man}
-            title={"Amr Abdallah"}
-            description={"Photographer"}
-            width={185}
-            height={160}
-          />
-          <DetailsCard
-            image={man}
-            title={"Amr Abdallah"}
-            description={"Photographer"}
-            width={185}
-            height={160}
-          />
-          <DetailsCard
-            image={man}
-            title={"Amr Abdallah"}
-            description={"Photographer"}
-            width={185}
-            height={160}
-          />
-          <DetailsCard
-            image={man}
-            title={"Amr Abdallah"}
-            description={"Photographer"}
-            width={185}
-            height={160}
-          />
-          <DetailsCard
-            image={man}
-            title={"Amr Abdallah"}
-            description={"Photographer"}
-            width={185}
-            height={160}
-          />
-          {/* </div> */}
-        </ScrollSection>
-        {nearbyServices && (
-          <>
-            <p className="titles">
-              Nearby
-              <span className="service-location">
-                ({nearbyServices[0]?.location})
-              </span>
-            </p>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <NavBar showLoginButton={!user} showRegisterButton={!user} />
+          <div className="container">
+            {/* <h1>Hey, Name!</h1> */}
+            <p className="titles">Special Offers</p>
             {/* <div className="packages-container"> */}
             <ScrollSection>
-              {nearbyServices?.map((nearbyService) => (
-                <DetailsCard
-                  key={nearbyService._id}
-                  id={nearbyService._id}
-                  link="venueprofile"
-                  image={nearbyService.imageCover}
-                  title={nearbyService.businessName}
-                  description={nearbyService.businessCategory}
-                  width={330}
-                  height={180}
-                />
-              ))}
+              <SpecialOffers
+                backgroundImage={ring}
+                percentage={"-20%"}
+                title={"Karim Roshdy"}
+                category={"Photographer"}
+                link={"/"}
+              />
+              <SpecialOffers
+                backgroundImage={ring}
+                percentage={"-20%"}
+                title={"Karim Roshdy"}
+                category={"Photographer"}
+                link={"/"}
+              />
+              <SpecialOffers
+                backgroundImage={ring}
+                percentage={"-20%"}
+                title={"Karim Roshdy"}
+                category={"Photographer"}
+                link={"/"}
+              />
+              <SpecialOffers
+                backgroundImage={ring}
+                percentage={"-20%"}
+                title={"Karim Roshdy"}
+                category={"Photographer"}
+                link={"/"}
+              />
+              <SpecialOffers
+                backgroundImage={ring}
+                percentage={"-20%"}
+                title={"Karim Roshdy"}
+                category={"Photographer"}
+                link={"/"}
+              />
+              {/* </div> */}
             </ScrollSection>
-            {/* </div> */}
-          </>
-        )}
-      </div>
+            <p className="titles">Popular</p>
+            {/* <div className="packages-container"> */}
+            <ScrollSection>
+              <DetailsCard
+                image={man}
+                title={"Amr Abdallah"}
+                description={"Photographer"}
+                width={185}
+                height={160}
+              />
+              <DetailsCard
+                image={man}
+                title={"Amr Abdallah"}
+                description={"Photographer"}
+                width={185}
+                height={160}
+              />
+              <DetailsCard
+                image={man}
+                title={"Amr Abdallah"}
+                description={"Photographer"}
+                width={185}
+                height={160}
+              />
+              <DetailsCard
+                image={man}
+                title={"Amr Abdallah"}
+                description={"Photographer"}
+                width={185}
+                height={160}
+              />
+              <DetailsCard
+                image={man}
+                title={"Amr Abdallah"}
+                description={"Photographer"}
+                width={185}
+                height={160}
+              />
+              <DetailsCard
+                image={man}
+                title={"Amr Abdallah"}
+                description={"Photographer"}
+                width={185}
+                height={160}
+              />
+              <DetailsCard
+                image={man}
+                title={"Amr Abdallah"}
+                description={"Photographer"}
+                width={185}
+                height={160}
+              />
+              <DetailsCard
+                image={man}
+                title={"Amr Abdallah"}
+                description={"Photographer"}
+                width={185}
+                height={160}
+              />
+              <DetailsCard
+                image={man}
+                title={"Amr Abdallah"}
+                description={"Photographer"}
+                width={185}
+                height={160}
+              />
+              {/* </div> */}
+            </ScrollSection>
+            {nearbyServices && (
+              <>
+                <p className="titles">
+                  Nearby
+                  <span className="service-location">
+                    ({nearbyServices[0]?.location})
+                  </span>
+                </p>
+                {/* <div className="packages-container"> */}
+                <ScrollSection>
+                  {nearbyServices?.map((nearbyService) => (
+                    <DetailsCard
+                      key={nearbyService._id}
+                      id={nearbyService._id}
+                      link="venueprofile"
+                      image={nearbyService.imageCover}
+                      title={nearbyService.businessName}
+                      description={nearbyService.businessCategory}
+                      width={330}
+                      height={180}
+                    />
+                  ))}
+                </ScrollSection>
+                {/* </div> */}
+              </>
+            )}
+          </div>
+        </>
+      )}
     </Wrapper>
   );
 };

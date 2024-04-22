@@ -43,7 +43,9 @@ const PhotosComponent = ({ images, setChange }) => {
     //   previousImages.concat(selectedFiles)
     // );
   };
-
+  const deleteImage = (image) => {
+    deletePhotos({ imageLink: image });
+  };
   const handleDeleteImage = (image) => {
     console.log(image);
     const newImages = albumImages.filter((images) => images !== image);
@@ -67,10 +69,7 @@ const PhotosComponent = ({ images, setChange }) => {
         {albumImages?.map((image, i) => (
           <div className="image" key={i}>
             <img src={image} />
-            <div
-              className="delete-icon"
-              onClick={() => handleDeleteImage(image)}
-            >
+            <div className="delete-icon" onClick={() => deleteImage(image)}>
               <RiDeleteBin7Line className="icon" />
             </div>
           </div>

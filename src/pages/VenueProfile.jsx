@@ -54,6 +54,7 @@ function VenueProfile() {
             <p className="pin">
               <FaMapPin /> {service?.location}
             </p>
+            <p className="pin">{service?.phoneNumber}</p>
             <div className="about">{service?.about}</div>
           </div>
           <div className="second-section">
@@ -68,132 +69,133 @@ function VenueProfile() {
               Open in Google Maps
             </a>
           </div>
-          {Boolean(service?.packages.length) && (
-            // <div className="third-section">
-            //   <p className="location">Packages</p>
-            //   <div className="packages-container">
-            //     {service.packages?.map((pack) => (
-            //       <DetailsCard
-            //         key={pack._id}
-            //         id={pack._id}
-            //         link="package"
-            //         image={outdoorr}
-            //         title={pack.packageName}
-            //         width={330}
-            //         height={180}
-            //       />
-            //     ))}
-            //   </div>
-            // </div>
-            <ScrollSection title="Packages">
-              {service.packages?.map((pack) => (
-                <DetailsCard
-                  key={pack._id}
-                  id={pack._id}
-                  link="package"
-                  image={outdoorr}
-                  title={pack.packageName}
-                  width={330}
-                  height={180}
-                />
-              ))}
+          <div className="third-section">
+            {Boolean(service?.packages.length) && (
+              // <div className="third-section">
+              //   <p className="location">Packages</p>
+              //   <div className="packages-container">
+              //     {service.packages?.map((pack) => (
+              //       <DetailsCard
+              //         key={pack._id}
+              //         id={pack._id}
+              //         link="package"
+              //         image={outdoorr}
+              //         title={pack.packageName}
+              //         width={330}
+              //         height={180}
+              //       />
+              //     ))}
+              //   </div>
+              // </div>
+              <ScrollSection title="Packages">
+                {service.packages?.map((pack) => (
+                  <DetailsCard
+                    key={pack._id}
+                    id={pack._id}
+                    link="package"
+                    image={pack.packagePhoto || outdoorr}
+                    title={pack.packageName}
+                    width={330}
+                    height={180}
+                  />
+                ))}
+              </ScrollSection>
+            )}
+            {/* <div className="fourth-section"> */}
+            {/* <p className="location">Similar</p> */}
+            {/* <div className="packages-container"> */}
+            <ScrollSection title="Similar">
+              <DetailsCard
+                image={table}
+                title="The Garden"
+                description="Photographers"
+                width={330}
+                height={180}
+              />
+              <DetailsCard
+                image={table}
+                title="The Garden"
+                description="Photographers"
+                width={330}
+                height={180}
+              />
+              <DetailsCard
+                image={table}
+                title="The Garden"
+                description="Photographers"
+                width={330}
+                height={180}
+              />
+              <DetailsCard
+                image={table}
+                title="The Garden"
+                description="Photographers"
+                width={330}
+                height={180}
+              />
             </ScrollSection>
-          )}
-          {/* <div className="fourth-section"> */}
-          {/* <p className="location">Similar</p> */}
-          {/* <div className="packages-container"> */}
-          <ScrollSection title="Similar">
-            <DetailsCard
-              image={table}
-              title="The Garden"
-              description="Photographers"
-              width={330}
-              height={180}
-            />
-            <DetailsCard
-              image={table}
-              title="The Garden"
-              description="Photographers"
-              width={330}
-              height={180}
-            />
-            <DetailsCard
-              image={table}
-              title="The Garden"
-              description="Photographers"
-              width={330}
-              height={180}
-            />
-            <DetailsCard
-              image={table}
-              title="The Garden"
-              description="Photographers"
-              width={330}
-              height={180}
-            />
-          </ScrollSection>
 
-          {/* </div> */}
-          {/* <p className="reviews">
+            {/* </div> */}
+            {/* <p className="reviews">
               Reviews
               <LuPencilLine className="icon" />
             </p> */}
-          {/* <div className="reviews-container"> */}
-          <ScrollSection title={"Reviews"}>
-            <Reviews
-              profilePic={man}
-              name={"Sara Mohamed"}
-              rate={4.5}
-              review={
-                "Very helpful and friendly, birthday memories beautifully captured!"
-              }
-            />
-            <Reviews
-              profilePic={man}
-              name={"Sara Mohamed"}
-              rate={4.5}
-              review={
-                "Very helpful and friendly, birthday memories beautifully captured!"
-              }
-            />
-            <Reviews
-              profilePic={man}
-              name={"Sara Mohamed"}
-              rate={4.5}
-              review={"Very"}
-            />
-            <Reviews
-              profilePic={man}
-              name={"Sara Mohamed"}
-              rate={4.5}
-              review={
-                "Very helpful and friendly, birthday memories beautifully captured!"
-              }
-            />
-            <Reviews
-              profilePic={man}
-              name={"Sara Mohamed"}
-              rate={4.5}
-              review={
-                "Very helpful and friendly, birthday memories beautifully captured!"
-              }
-            />
-            <Reviews
-              profilePic={man}
-              name={"Sara Mohamed"}
-              rate={4.5}
-              review={
-                "Very helpful and friendly, birthday memories beautifully captured!"
-              }
-            />
-            <Reviews
-              profilePic={man}
-              name={"Sara Mohamed"}
-              rate={4.5}
-              review={"Very "}
-            />
-          </ScrollSection>
-          {/* </div> */}
+            {/* <div className="reviews-container"> */}
+            <ScrollSection title={"Reviews"}>
+              <Reviews
+                profilePic={man}
+                name={"Sara Mohamed"}
+                rate={4.5}
+                review={
+                  "Very helpful and friendly, birthday memories beautifully captured!"
+                }
+              />
+              <Reviews
+                profilePic={man}
+                name={"Sara Mohamed"}
+                rate={4.5}
+                review={
+                  "Very helpful and friendly, birthday memories beautifully captured!"
+                }
+              />
+              <Reviews
+                profilePic={man}
+                name={"Sara Mohamed"}
+                rate={4.5}
+                review={"Very"}
+              />
+              <Reviews
+                profilePic={man}
+                name={"Sara Mohamed"}
+                rate={4.5}
+                review={
+                  "Very helpful and friendly, birthday memories beautifully captured!"
+                }
+              />
+              <Reviews
+                profilePic={man}
+                name={"Sara Mohamed"}
+                rate={4.5}
+                review={
+                  "Very helpful and friendly, birthday memories beautifully captured!"
+                }
+              />
+              <Reviews
+                profilePic={man}
+                name={"Sara Mohamed"}
+                rate={4.5}
+                review={
+                  "Very helpful and friendly, birthday memories beautifully captured!"
+                }
+              />
+              <Reviews
+                profilePic={man}
+                name={"Sara Mohamed"}
+                rate={4.5}
+                review={"Very "}
+              />
+            </ScrollSection>
+          </div>
         </div>
         // </div>
       )}
@@ -282,6 +284,7 @@ const Wrapper = styled.div`
     color: #00000099;
     font-weight: 300;
     font-size: 1.3rem;
+    margin-top: 5px;
   }
   .about {
     color: #06050599;
@@ -367,19 +370,11 @@ const Wrapper = styled.div`
     height: 0.5rem;
   }
   .third-section {
-    position: relative;
-    padding-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
   }
-  .third-section::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 70%;
-    height: 0.013rem;
-    background-color: #ccc; /* Border color */
-  }
+
   .reviews {
     color: #00000099;
     font-size: 1.6rem;

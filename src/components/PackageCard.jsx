@@ -2,35 +2,30 @@ import styled from "styled-components";
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { set } from "react-hook-form";
-import { usePackageContext } from "../context/PackageContext";
-
+import { useDeletePackage } from "../features/package/useDeletePackage";
 const PackagesComponent = ({ type, pack }) => {
-  const { editPackage, setEditPackage } = usePackageContext();
-
+  // const { editPackage, setEditPackage } = usePackageContext();
+  const { deletePackage } = useDeletePackage();
   return (
     <Wrapper>
       {type == "add" ? (
         <span className="add-package">+ Add Package</span>
       ) : (
         <>
-          <div className="edit-icon" onClick={() => setEditPackage((s) => !s)}>
-            {/* <CiEdit className="icon" /> */}:
+          <div className="edit-icon">
+            <RiDeleteBinLine
+              className="icon"
+              onClick={() => {
+                deletePackage(pack._id);
+              }}
+            />
           </div>
-          {editPackage && (
-            <div className="options">
-              <Link to={`/updatePackage/${pack._id}`} className="option">
-                Edit <CiEdit />
-              </Link>
-              <span className="option">
-                Delete <RiDeleteBinLine />
-              </span>
-            </div>
-          )}
+
+          {/* <Link to={`/updatePackage/${pack._id}`}> */}
           <h2 className="title"> {pack?.packageName}</h2>
           <p className="desc">{pack?.description}</p>
           <span className="price">{pack?.price} EGP</span>
+          {/* </Link> */}
         </>
       )}
     </Wrapper>
@@ -71,6 +66,13 @@ const Wrapper = styled.div`
     padding: 20px;
     /* position: relative; */
   }
+  .icon {
+    width: 20px;
+    height: 20px;
+    color: #555;
+    /* padding: 5px; */
+    position: absolute;
+  }
   .options {
     display: flex;
     flex-direction: column;
@@ -92,13 +94,6 @@ const Wrapper = styled.div`
   .option:hover {
     background-color: #c1b8a4;
   }
-  .icon {
-    width: 24px;
-    height: 24px;
-    color: #555;
-    /* padding: 5px; */
-    position: absolute;
-  }
 
   .title {
     font-size: 1.25rem;
@@ -117,6 +112,7 @@ const Wrapper = styled.div`
     padding: 5px 10px;
     border-radius: 100px;
     font-size: 0.875rem;
+    margin-top: auto;
   }
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
     width: 48%;
