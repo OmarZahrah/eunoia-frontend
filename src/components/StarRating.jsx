@@ -12,7 +12,6 @@ function StarRating() {
 
   return (
     <Wrapper>
-
       {Array.from({ length: 5 }, (_, i) => (
         <Star
           key={i}
@@ -22,6 +21,7 @@ function StarRating() {
           onHoverOut={() => setTempRating(0)}
         />
       ))}
+      {/* <span>{rating || tempRating}</span> */}
     </Wrapper>
   );
 }

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Button from "./Button";
-import Star from "./Star";
 import StarRating from "./StarRating";
 
 function WriteReview() {
@@ -43,33 +42,93 @@ const Wrapper = styled.div`
 
   h4 {
     color: rgba(0, 0, 0, 0.642);
+    text-align: center;
     font-size: 28px;
     font-weight: 600;
-    text-align: center;
     margin-bottom: 15px;
   }
 
   p {
-    font-size: 20px;
     font-weight: 500;
     color: rgba(0, 0, 0, 0.596);
+    font-size: 20px;
     margin-bottom: 10px;
   }
+
   textarea {
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: transparent;
     color: rgba(0, 0, 0, 0.656);
+    resize: none;
     font-size: 16px;
     width: 100%;
     height: 6rem;
     margin-bottom: 20px;
-    resize: none;
   }
   .post-button {
-    padding: 5px 0;
     width: 100%;
-    font-size: 20px;
     margin-bottom: 10px;
+    padding: 5px 0;
+    font-size: 20px;
+  }
+
+  @media only screen and (max-width: ${({ theme }) => theme.mid}) {
+    width: 32rem;
+    height: 23rem;
+    h4 {
+      margin-bottom: 10px;
+    }
+    p {
+      margin-bottom: 8px;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.semi}) {
+    width: 30rem;
+    height: 20rem;
+    h4 {
+      font-size: 25px;
+      margin-bottom: 0px;
+    }
+    p {
+      font-size: 19px;
+      margin-bottom: 5px;
+    }
+    textarea {
+      font-size: 15px;
+      width: 100%;
+      height: 5rem;
+      margin-bottom: 15px;
+    }
+
+    .post-button {
+      padding: 4px 0;
+      font-size: 19px;
+    }
+  }
+  @media only screen and (max-width: 52.5em) {
+    h4 {
+      font-size: 24px;
+    }
+    p {
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
+    width: 27rem;
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    width: 20rem;
+    height: 22rem;
+  
+    h4 {
+    font-size: 25px;
+    margin-bottom: 10px;
+  }
+  p {
+      font-size: 20px;
+      margin-bottom: 7px;
+    }
   }
 `;

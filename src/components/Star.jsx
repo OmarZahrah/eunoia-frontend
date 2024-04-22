@@ -40,4 +40,11 @@ const Wrapper = styled.span`
   cursor: pointer;
   margin-right: 12px !important;
   margin-bottom: 7px !important;
+  @media only screen and (max-width: ${({ theme }) => theme.semi}) {
+    width: 32px;
+  }
+  @media only screen and (max-width: 52.5em) {
+    width: 31px;
+  
+  }
 `;
