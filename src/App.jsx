@@ -38,8 +38,8 @@ import OtherDetails from "./pages/OtherDetails";
 import Food from "./pages/Food";
 import Venues from "./pages/Venues";
 import CreatePackage from "./features/package/CreatePackage";
-// import Venus from "./pages/Venus";
 import SearchHistory from "./pages/SearchHistory";
+// import Venus from "./pages/Venus";
 
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({
@@ -90,7 +90,7 @@ function App() {
                   <Route path="food" element={<Food />} />
                   <Route path="hairstylest" element={<HairStylest />} />
                   <Route path="otherdetails" element={<OtherDetails />} />
-                  <Route path="searchhistory" element={<SearchHistory />} />
+                  <Route path="searchHistory" element={<SearchHistory />} />
 
                   <Route
                     path="venueprofile/:venuId"
