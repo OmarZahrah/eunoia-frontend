@@ -41,6 +41,8 @@ import Food from "./pages/Food";
 import Venues from "./pages/Venues";
 import CreatePackage from "./features/package/CreatePackage";
 import UpdatePackage from "./features/package/updatePackage";
+import SearchHistory from "./pages/SearchHistory";
+// import Venus from "./pages/Venus";
 
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({

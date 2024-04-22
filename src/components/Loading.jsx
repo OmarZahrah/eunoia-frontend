@@ -1,5 +1,3 @@
-import React from "react";
-import ReactLoading from "react-loading";
 import { ClipLoader } from "react-spinners";
 import styled from "styled-components";
 

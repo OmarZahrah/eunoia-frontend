@@ -5,7 +5,7 @@ function TitleDesc({ title, description }) {
     <Wrapper>
       <p>{title}</p>
       <span>{description}</span>
-      <hr />
+      {/* <hr /> */}
     </Wrapper>
   );
 }

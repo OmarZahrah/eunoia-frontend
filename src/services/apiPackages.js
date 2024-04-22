@@ -9,8 +9,13 @@ export const addPackage = async (formData) => {
 };
 
 export const getPackage = async (id) => {
-  const { data } = await customFetch.get(`packages/${id}`);
-  return data.data;
+  try {
+    const { data } = await customFetch.get(`packages/${id}`);
+    return data.data;
+  } catch (error) {
+    const unauthorized = error.response.status === 401;
+    if (unauthorized) return null;
+  }
 };
 
 export const editPackage = async (data) => {

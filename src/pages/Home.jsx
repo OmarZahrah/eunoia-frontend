@@ -13,6 +13,7 @@ import ScrollSection from "../components/ScrollSection";
 const Home = () => {
   const { user } = useUser();
   const { nearbyServices, isLoading } = useGetNearby();
+  console.log(nearbyServices);
   // const isLoading = true;
 
   // if (isLoading) return <Loading />;
@@ -133,7 +134,7 @@ const Home = () => {
               />
               {/* </div> */}
             </ScrollSection>
-            {nearbyServices && (
+            {user?.location && nearbyServices.length ? (
               <>
                 <p className="titles">
                   Nearby
@@ -158,6 +159,8 @@ const Home = () => {
                 </ScrollSection>
                 {/* </div> */}
               </>
+            ) : (
+              ""
             )}
           </div>
         </>

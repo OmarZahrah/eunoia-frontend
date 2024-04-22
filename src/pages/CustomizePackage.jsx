@@ -8,11 +8,13 @@ import { LuPencilLine } from "react-icons/lu";
 import Reviews from "../components/Reviews";
 import man from "../images/man.png";
 import { useGetPackage } from "../features/package/useGetPackage";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Loading from "../components/Loading";
 function CustomizePackage(id) {
   const { packageId } = useParams();
   const { packageData, isLoading } = useGetPackage(packageId);
+  const navigate = useNavigate();
+  if (packageData === null) navigate("/login", { replace: true });
   console.log(packageData);
   return (
     <Wrapper>
@@ -28,24 +30,25 @@ function CustomizePackage(id) {
               // rate={"4.5"}
             />
             <TitleDesc
-              title={"Description"}
-              description={packageData.description}
+              // title={"Description"}
+              description={packageData?.description}
             />
+
             <TitleDesc
               title={"Customize Package"}
               // description={"The venue only for 15,000 EGP"}
             />
             {packageData?.customizePackage?.map((pack) => (
               <CustomizeDetails
-                title={pack.name}
-                key={pack._id}
-                options={pack.options}
+                title={pack?.name}
+                key={pack?._id}
+                options={pack?.options}
               />
             ))}
             {/* <CustomizeDetails title={"Capacity"} />
             <CustomizeDetails title={"Capacity"} /> */}
             <p className="total">
-              Total: <span className="price">3270 EGP</span>
+              Total: <span className="price">{packageData?.price} EGP</span>
             </p>
             <div className="button">
               <Button size="medium" type="submit" className="button">
@@ -66,6 +69,9 @@ const Wrapper = styled.div`
   min-height: 100vh;
   padding-bottom: 3rem;
   .content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     padding: 0 4rem;
   }
 

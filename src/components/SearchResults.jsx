@@ -113,9 +113,9 @@ const MaskImage = styled.img`
 
 function VenuePackages({ showRate, className, data }) {
   return (
-    <Link className="link" to={`/venueprofile/${data._id}`}>
+    <Link className="link" to={`/venueprofile/${data?._id}`}>
       <PackageWrapper>
-        <img className="photo-search" src={data.imageCover || photo} />
+        <img className="photo-search" src={data?.imageCover || photo} />
         <div className="details">
           <h2 className="h2">{data?.businessName}</h2>
           <h3 className="h3">

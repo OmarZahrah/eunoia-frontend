@@ -16,7 +16,7 @@ function CoverPhotoSlider({ businessName, location, rate }) {
         </span>
       </div>
       <p className="description">{location}</p>
-      <hr />
+      {/* <hr /> */}
     </Wrapper>
   );
 }

@@ -10,7 +10,7 @@ import Logout from "./Logout";
 
 function List({ user }) {
   const [logout, setLogout] = useState(false);
-  const hasService = user.hasService;
+  const hasService = user?.hasService;
   // const hasService = false;
   return (
     <Wrapper>

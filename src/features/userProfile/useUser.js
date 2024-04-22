@@ -18,14 +18,12 @@ export function useUser() {
     queryKey: ["user"],
     queryFn: getCurrentUser,
   });
-  // if (isError) {
-  //   console.log(error);
-  //   const unauthorized = error.response.status === 401;
-  //   if (unauthorized) {
-  //     queryClient.setQueryData(["user"], {});
-  //     return { isLoading, user: {} };
-  //   }
-  // }
+  if (error) {
+    // navigate("/login", { replace: true });
+    console.log(error);
+    const unauthorized = error.response.status === 401;
+    console.log(unauthorized);
+  }
 
   return { isLoading, user };
 }

@@ -8,9 +8,10 @@ import { useNavigate } from "react-router";
 
 const Profile = () => {
   const navigate = useNavigate();
-  const { user, isLoading, unauthorized } = useUser();
+  const { user, isLoading } = useUser();
+  console.log(user);
   // const { id } = useParams();
-  if (unauthorized) navigate("/login", { replace: true });
+  if (user === null) navigate("/login", { replace: true });
 
   // const { service, isLoading: serviceLoading } = useService(id);
   return (

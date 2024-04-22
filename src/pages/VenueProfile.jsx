@@ -70,7 +70,7 @@ function VenueProfile() {
             </a>
           </div>
           <div className="third-section">
-            {Boolean(service?.packages.length) && (
+            {Boolean(service?.packages?.length) && (
               // <div className="third-section">
               //   <p className="location">Packages</p>
               //   <div className="packages-container">
