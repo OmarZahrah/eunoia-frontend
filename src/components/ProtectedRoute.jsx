@@ -1,19 +1,22 @@
-import { useEffect } from "react";
-import { useUser } from "../features/signup/useUser";
-import { useNavigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import Loading from "../components/Loading";
-const ProtectedRoute = ({ children }) => {
-  const navigate = useNavigate();
-  const { isAuthenticated, isLoading } = useUser();
+import { useCheckAuth } from "../features/signup/useCheckAuth";
 
-  useEffect(
-    function () {
-      if (!isAuthenticated && !isLoading) navigate("/login");
-    },
-    [isAuthenticated, isLoading, navigate]
-  );
+const ProtectedRoute = () => {
+  const { isAuthenticated, isLoading } = useCheckAuth();
+
   if (isLoading) return <Loading />;
 
-  if (isAuthenticated) return children;
+  return (
+    <>
+      {isLoading ? (
+        <Loading />
+      ) : isAuthenticated ? (
+        <Outlet />
+      ) : (
+        <Navigate to="login" replace="true" />
+      )}
+    </>
+  );
 };
 export default ProtectedRoute;

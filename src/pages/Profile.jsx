@@ -7,13 +7,8 @@ import Loading from "../components/Loading";
 import { useNavigate } from "react-router";
 
 const Profile = () => {
-  const navigate = useNavigate();
   const { user, isLoading } = useUser();
-  console.log(user);
-  // const { id } = useParams();
-  if (user === null) navigate("/login", { replace: true });
 
-  // const { service, isLoading: serviceLoading } = useService(id);
   return (
     <Wrapper>
       <NavBar />

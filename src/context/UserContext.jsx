@@ -6,10 +6,20 @@ const UserProvider = ({ children }) => {
   const [avatar, setAvatar] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   return (
     <UserContext.Provider
-      value={{ avatar, setAvatar, email, setEmail, name, setName }}
+      value={{
+        avatar,
+        setAvatar,
+        email,
+        setEmail,
+        name,
+        setName,
+        isAuthenticated,
+        setIsAuthenticated,
+      }}
     >
       {children}
     </UserContext.Provider>

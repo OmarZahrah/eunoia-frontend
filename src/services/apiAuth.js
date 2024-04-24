@@ -1,3 +1,4 @@
+import { useAuthContext } from "../context/AuthContext";
 import customFetch from "../utils/customFetch";
 
 export const signup = async (formData) => {
@@ -15,11 +16,18 @@ export const login = async (formData) => {
 export const getCurrentUser = async () => {
   try {
     const { data } = await customFetch.get("users/me");
-
     return data.user;
   } catch (error) {
-    const unauthorized = error.response.status === 401;
-    if (unauthorized) return null;
+    return {};
+  }
+};
+
+export const checkAuth = async () => {
+  try {
+    const { data } = await customFetch.get("auth/checkAuth");
+    return { isAuthenticated: data.isAuthenticated };
+  } catch (error) {
+    return { isAuthenticated: error.response.data.isAuthenticated };
   }
 };
 

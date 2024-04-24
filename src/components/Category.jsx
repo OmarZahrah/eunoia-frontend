@@ -94,7 +94,7 @@ const Wrapper = styled.div`
   .search-container {
     display: flex;
     flex-wrap: wrap;
-    padding: 0 4rem;
+    padding: 0 1rem;
     /* overflow-x: auto; */
     margin-top: 1rem;
     display: flex;

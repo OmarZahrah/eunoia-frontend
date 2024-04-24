@@ -12,7 +12,7 @@ export function useGetNearby() {
     status,
   } = useQuery({
     queryKey: ["nearby"],
-    queryFn: () => nearbyServicesApi(),
+    queryFn: nearbyServicesApi,
   });
   if (isError) {
     // console.log(error.response.status);

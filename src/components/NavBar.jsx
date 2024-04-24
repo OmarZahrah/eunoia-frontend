@@ -4,7 +4,11 @@ import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useUser } from "../features/userProfile/useUser";
+import { set } from "react-hook-form";
+import { useAuthContext } from "../context/AuthContext";
+import { useCheckAuth } from "../features/signup/useCheckAuth";
 
 function NavBar({
   showLoginButton = false,
@@ -13,6 +17,7 @@ function NavBar({
 }) {
   const [openNav, setOpenNav] = useState(false);
   const location = useLocation();
+  const { isAuthenticated, isLoading } = useCheckAuth();
 
   const checkIsActive = (path) => location.pathname === path;
 
@@ -31,21 +36,21 @@ function NavBar({
             <Link to="/categories">Categories</Link>
           </li>
           <li className={checkIsActive("/profile") ? "active" : ""}>
-            <Link to={`/profile`}>Profile</Link>
+            <Link to={"/profile"}>Profile</Link>
           </li>
           <li className={checkIsActive("/search") ? "active" : ""}>
             <Link to="/search">Search</Link>
           </li>
         </ul>
         <div className="buttons">
-          {showLoginButton && (
+          {!isLoading && !isAuthenticated && (
             <Link to="/login">
               <Button color="pink" background="transparent" size="small">
                 Login
               </Button>
             </Link>
           )}
-          {showRegisterButton && (
+          {!isLoading && !isAuthenticated && (
             <Link to="/signup/user">
               <Button color="white" background="pink" size="small">
                 Register

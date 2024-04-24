@@ -19,6 +19,7 @@ const AuthProvider = ({ children }) => {
   const [albumImages, setAlbumImages] = useState([]);
   const { register, handleSubmit } = useForm();
   const [showPassword, setShowPassword] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword((s) => !s);
   };
@@ -54,6 +55,8 @@ const AuthProvider = ({ children }) => {
         setProfilePhotoFile,
         setCoverPhotoFile,
         setAlbumPhotosFile,
+        isAuthenticated,
+        setIsAuthenticated,
       }}
     >
       {children}

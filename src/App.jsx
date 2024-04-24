@@ -42,6 +42,8 @@ import Venues from "./pages/Venues";
 import CreatePackage from "./features/package/CreatePackage";
 import UpdatePackage from "./features/package/updatePackage";
 import SearchHistory from "./pages/SearchHistory";
+import ProtectedRoute from "./components/ProtectedRoute";
+import PrivateRoute from "./components/PrivateRoute";
 // import Venus from "./pages/Venus";
 
 // import theme from "./assets/styles/responsive";
@@ -104,35 +106,40 @@ function App() {
                                  Private Routes
                   ===========================================
                   */}
-                    <Route path="profile" element={<Profile />}>
-                      <Route index element={<MainProfile />} />
-                      <Route path="editprofile" element={<EditProfile />} />
+                    {/* <Route
+                      element={
+                        <ProtectedRoute>
+                          <PrivateRoute />
+                        </ProtectedRoute>
+                      }
+                    > */}
+                    <Route element={<ProtectedRoute />}>
+                      <Route path="profile" element={<Profile />}>
+                        <Route index element={<MainProfile />} />
+                        <Route path="editprofile" element={<EditProfile />} />
+                        <Route
+                          path=":userId/businessProfile"
+                          element={<BuisnessProfile />}
+                        />
+                        <Route
+                          path="createBusiness"
+                          element={<CreateBussAcc />}
+                        />
+                      </Route>
+
+                      <Route path="addpackage" element={<AddPackage />} />
+
+                      <Route path="favorites" element={<Favorites />} />
+                      <Route path="createPackage" element={<CreatePackage />} />
                       <Route
-                        path=":userId/businessProfile"
-                        element={<BuisnessProfile />}
+                        path="updatePackage/:packageId"
+                        element={<UpdatePackage />}
                       />
                       <Route
-                        path="createBusiness"
-                        element={<CreateBussAcc />}
+                        path="package/:packageId"
+                        element={<CustomizePackage />}
                       />
                     </Route>
-
-                    <Route path="addpackage" element={<AddPackage />} />
-
-                    <Route path="favorites" element={<Favorites />} />
-                    <Route path="createPackage" element={<CreatePackage />} />
-                    <Route
-                      path="updatePackage/:packageId"
-                      element={<UpdatePackage />}
-                    />
-                    <Route
-                      path="venueprofile/:venuId"
-                      element={<VenueProfile />}
-                    />
-                    <Route
-                      path="package/:packageId"
-                      element={<CustomizePackage />}
-                    />
                   </Routes>
                 </BrowserRouter>
               </PackageProvider>

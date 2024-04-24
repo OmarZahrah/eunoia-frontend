@@ -56,7 +56,6 @@ export const nearbyServices = async () => {
     const { data } = await customFetch.get(`services/nearby`);
     return data.data;
   } catch (error) {
-    const unauthorized = error.response.status === 401;
-    if (unauthorized) return null;
+    return [];
   }
 };

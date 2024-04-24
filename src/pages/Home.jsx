@@ -10,20 +10,20 @@ import Loading from "../components/Loading";
 import { useUser } from "../features/userProfile/useUser";
 import { useGetNearby } from "../features/homepage/useGetNearby";
 import ScrollSection from "../components/ScrollSection";
+import { nearbyServices } from "../services/apiServices";
 const Home = () => {
-  const { user } = useUser();
-  const { nearbyServices, isLoading } = useGetNearby();
-  console.log(nearbyServices);
-  // const isLoading = true;
+  const { user, isLoading, isAuthenticated } = useUser();
+  // const isLoading = false;
+  // console.log(user);
+  const { nearbyServices } = useGetNearby();
 
-  // if (isLoading) return <Loading />;
   return (
     <Wrapper>
       {isLoading ? (
         <Loading />
       ) : (
         <>
-          <NavBar showLoginButton={!user} showRegisterButton={!user} />
+          <NavBar />
           <div className="container">
             {/* <h1>Hey, Name!</h1> */}
             <p className="titles">Special Offers</p>
@@ -134,7 +134,7 @@ const Home = () => {
               />
               {/* </div> */}
             </ScrollSection>
-            {user?.location && nearbyServices.length ? (
+            {nearbyServices?.length && user?.location ? (
               <>
                 <p className="titles">
                   Nearby
