@@ -121,12 +121,12 @@ const Wrapper = styled.div`
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
     width: 20rem;
     height: 22rem;
-  
+
     h4 {
-    font-size: 25px;
-    margin-bottom: 10px;
-  }
-  p {
+      font-size: 25px;
+      margin-bottom: 10px;
+    }
+    p {
       font-size: 20px;
       margin-bottom: 7px;
     }
