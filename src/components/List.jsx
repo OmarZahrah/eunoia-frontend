@@ -7,34 +7,41 @@ import { BsPersonVcard } from "react-icons/bs";
 import { RiDownloadLine } from "react-icons/ri";
 import { useState } from "react";
 import Logout from "./Logout";
+import WriteReview from "./WriteReview";
 
 function List({ user }) {
   const [logout, setLogout] = useState(false);
   const hasService = user?.hasService;
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
   // const hasService = false;
   return (
     <Wrapper>
       {logout && (
         <div className="overlay" onClick={() => setLogout(false)}></div>
       )}
+      {isOpenModal && (
+        <div className="overlay" onClick={() => setIsOpenModal(false)}></div>
+      )}
+
       <ul>
         <li>
           <Link to="editprofile">
             <LuPencilLine className="icons" />
-            <span>Edit Profile</span>
+            <span className="text">Edit Profile</span>
           </Link>
         </li>
 
         <li>
           <Link to="">
             <VscLock className="icons" />
-            <span>Change Password</span>
+            <span className="text">Change Password</span>
           </Link>
         </li>
         <li>
           <Link to="">
             <FaRegHeart className="icons" />
-            <span>Favorites</span>
+            <span className="text">Favorites</span>
           </Link>
         </li>
         <li>
@@ -42,29 +49,30 @@ function List({ user }) {
             to={hasService ? `${user._id}/businessProfile` : "createBusiness"}
           >
             <BsPersonVcard className="icons" />
-            <span>Business Account</span>
+            <span className="text">Business Account</span>
           </Link>
         </li>
         <li>
           <Link to="">
             <FaRegEnvelope className="icons" />
-            <span>Requests</span>
+            <span className="text">Requests</span>
           </Link>
         </li>
         <li>
           <Link onClick={() => setLogout(true)}>
             <LuLogOut className="icons" />
-            <span>Logout</span>
+            <span className="text">Logout</span>
           </Link>
         </li>
         <li>
-          <Link to="">
+          <Link onClick={() => setIsOpenModal(true)}>
             <RiDownloadLine className="icons" />
-            <span>Download App</span>
+            <span className="text">Download App</span>
           </Link>
         </li>
       </ul>
       {logout && <Logout setLogout={setLogout} />}
+      {isOpenModal && <WriteReview />}
     </Wrapper>
   );
 }
@@ -83,7 +91,6 @@ const Wrapper = styled.div`
     right: 0;
     left: 0;
     bottom: 0;
-
     background-color: #00000040;
   }
   ul {
@@ -102,7 +109,7 @@ const Wrapper = styled.div`
     width: 1.1rem;
     height: 1.1rem;
   }
-  span {
+  .text {
     padding-left: 20px;
   }
   a {
