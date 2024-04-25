@@ -30,7 +30,7 @@ function CustomizePackage(id) {
               // rate={"4.5"}
             />
             <TitleDesc
-              // title={"Description"}
+              title={"Description"}
               description={packageData?.description}
             />
 

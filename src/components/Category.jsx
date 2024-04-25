@@ -144,8 +144,15 @@ const Wrapper = styled.div`
     .title::after {
       right: 18%;
     }
+    .search-container {
+      column-gap: 1rem;
+    }
   }
-
+  @media only screen and (max-width: ${({ theme }) => "52.5em"}) {
+    .search-container {
+      column-gap: 0.5rem;
+    }
+  }
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
     .title {
       font-size: 1.6rem;
