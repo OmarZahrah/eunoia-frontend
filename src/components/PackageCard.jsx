@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import { CiEdit } from "react-icons/ci";
-
-const PackagesComponent = ({ type }) => {
+import { RiDeleteBinLine } from "react-icons/ri";
+import { useState } from "react";
+import { useDeletePackage } from "../features/package/useDeletePackage";
+const PackagesComponent = ({ type, pack }) => {
+  // const { editPackage, setEditPackage } = usePackageContext();
+  const { deletePackage } = useDeletePackage();
   return (
     <Wrapper>
       {type == "add" ? (
@@ -9,14 +13,19 @@ const PackagesComponent = ({ type }) => {
       ) : (
         <>
           <div className="edit-icon">
-            <CiEdit className="icon" />
+            <RiDeleteBinLine
+              className="icon"
+              onClick={() => {
+                deletePackage(pack._id);
+              }}
+            />
           </div>
-          <h2 className="title">Package Name</h2>
-          <p className="desc">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus,
-            aliquam....
-          </p>
-          <span className="price">5000 EGP</span>
+
+          {/* <Link to={`/updatePackage/${pack._id}`}> */}
+          <h2 className="title"> {pack?.packageName}</h2>
+          <p className="desc">{pack?.description}</p>
+          <span className="price">{pack?.price} EGP</span>
+          {/* </Link> */}
         </>
       )}
     </Wrapper>
@@ -24,9 +33,9 @@ const PackagesComponent = ({ type }) => {
 };
 
 const Wrapper = styled.div`
-  min-width: 25%;
+  /* min-width: 25%; */
   min-height: 150px;
-  width: 30%;
+  width: 100%;
   background-color: #f5b9a735;
   border-radius: 10px;
   display: inline-block;
@@ -57,13 +66,33 @@ const Wrapper = styled.div`
     padding: 20px;
     /* position: relative; */
   }
-
   .icon {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     color: #555;
     /* padding: 5px; */
     position: absolute;
+  }
+  .options {
+    display: flex;
+    flex-direction: column;
+    /* gap: 5px; */
+    position: absolute;
+    right: 0;
+    top: 30px;
+    width: 7rem;
+  }
+  .option {
+    padding: 10px 10px;
+    font-weight: 500;
+    background-color: #ded8cbe8;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+  }
+  .option:hover {
+    background-color: #c1b8a4;
   }
 
   .title {
@@ -83,6 +112,7 @@ const Wrapper = styled.div`
     padding: 5px 10px;
     border-radius: 100px;
     font-size: 0.875rem;
+    margin-top: auto;
   }
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
     width: 48%;

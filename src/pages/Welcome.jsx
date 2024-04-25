@@ -8,7 +8,7 @@ const Welcome = () => {
   return (
     <Wrapper>
       {/* <div className="container"> */}
-      <NavBar showLoginButton={true} showRegisterButton={true} />
+      <NavBar />
       <div className="container">
         <div className="images">
           <img src={image1} />

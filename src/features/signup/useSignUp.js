@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 export function useSignup() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+
   const { mutate: signup, isPending: isLoading } = useMutation({
     mutationFn: signupApi,
     onSuccess: (user) => {

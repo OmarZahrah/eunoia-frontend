@@ -19,13 +19,14 @@ const AuthProvider = ({ children }) => {
   const [albumImages, setAlbumImages] = useState([]);
   const { register, handleSubmit } = useForm();
   const [showPassword, setShowPassword] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword((s) => !s);
   };
 
   const [profilePhotoFile, setProfilePhotoFile] = useState("");
   const [coverPhotoFile, setCoverPhotoFile] = useState("");
-  const [albumPhotosFile, setAlbumPhotosFile] = useState("");
+  const [albumPhotosFile, setAlbumPhotosFile] = useState([]);
 
   return (
     <AuthContext.Provider
@@ -54,6 +55,8 @@ const AuthProvider = ({ children }) => {
         setProfilePhotoFile,
         setCoverPhotoFile,
         setAlbumPhotosFile,
+        isAuthenticated,
+        setIsAuthenticated,
       }}
     >
       {children}

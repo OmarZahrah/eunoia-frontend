@@ -1,28 +1,34 @@
 import { FaStar } from "react-icons/fa";
+import { RiDeleteBinLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useDeleteReview } from "../features/review/useDeleteReview";
 
-function Reviews({ profilePic, name, rate, review }) {
+function Reviews({ profilePic, name, rate, review, id }) {
+  const { deleteReview, isLoading } = useDeleteReview();
   return (
-    <Link to={"/"}>
-      <Wrapper>
-        <div className="main">
-          <img src={profilePic} />
-          <div className="information">
-            <span className="name">{name}</span>
-            <span className="rate">
-              <FaStar style={{ color: "#FFF279" }} /> {rate}
-            </span>
-          </div>
+    <Wrapper>
+      <div className="main">
+        <img src={profilePic} />
+        <div className="information">
+          <span className="name">{name}</span>
+          <span className="rate">
+            <FaStar style={{ color: "#FFF279" }} /> {rate}
+          </span>
         </div>
-        <p className="review">{review}</p>
-      </Wrapper>
-    </Link>
+      </div>
+      <p className="review">{review}</p>
+      <RiDeleteBinLine
+        className="delete-icon"
+        onClick={() => deleteReview(id)}
+      />
+    </Wrapper>
   );
 }
 
 export default Reviews;
 const Wrapper = styled.div`
+  position: relative;
   background-color: white;
   width: 25rem;
   height: 13rem;
@@ -58,7 +64,9 @@ const Wrapper = styled.div`
   }
   img {
     border-radius: 50%;
-    width: 4rem;
+    width: 5rem;
+    height: 5rem;
+    object-fit: contain;
   }
   .information {
     display: flex;
@@ -79,5 +87,14 @@ const Wrapper = styled.div`
   .review {
     color: #00000099;
     margin-top: 10px;
+  }
+  .delete-icon {
+    position: absolute;
+    top: 5%;
+    right: 6%;
+    color: #ccc;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
   }
 `;

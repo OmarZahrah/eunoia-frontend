@@ -11,16 +11,25 @@ import firstpack from "../../public/images/firstpack.jpeg";
 import secondpack from "../../public/images/secondpack.jpeg";
 import thirdpack from "../../public/images/thirdpack.jpeg";
 import { useParams } from "react-router";
-import { useService } from "../features/signup/useService";
+import { useService } from "../features/serviceProfile/useService";
 import Loading from "../components/Loading";
 import CoverSlider from "../components/CoverSlider";
 import Slider from "../components/Slider";
 import coverimg from "../../public/images/Rectangle 9.svg";
+import DetailsCard from "../components/DetailsCard";
+import man from "../images/man.png";
+import table from "../images/table.png";
+import { LuPencilLine } from "react-icons/lu";
+import Reviews from "../components/Reviews";
+import ScrollSection from "../components/ScrollSection";
+import { useState } from "react";
+import WriteReview from "../components/WriteReview";
 
 function VenueProfile() {
   const { venuId } = useParams();
   const { service, isLoading } = useService(venuId);
-  // console.log(service);
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  console.log(service);
   return (
     <Wrapper>
       <NavBar />
@@ -34,19 +43,21 @@ function VenueProfile() {
                 photos={service?.images}
                 cover={service?.imageCover || coverimg}
               />
-              <img className="profile" src={service.avatar} alt="profile" />
+              <img className="profile" src={service?.avatar} alt="profile" />
             </div>
 
             {/* <CoverSlider photos={service.images} /> */}
             <div className="text">
               <p className="name-venue">{service?.businessName}</p>
               <p className="rate">
-                <FaStar style={{ color: "#FFF279" }} /> 3.8
+                <FaStar style={{ color: "#FFF279" }} />{" "}
+                {service?.ratingsAverage}
               </p>
             </div>
             <p className="pin">
               <FaMapPin /> {service?.location}
             </p>
+            <p className="pin">{service?.phoneNumber}</p>
             <div className="about">{service?.about}</div>
           </div>
           <div className="second-section">
@@ -62,52 +73,112 @@ function VenueProfile() {
             </a>
           </div>
           <div className="third-section">
-            <p className="location">Packages</p>
-            <div className="packages-container">
-              <VenuePackages
-                image={indoor}
-                width={280}
-                title="Indoor Hall"
-                price="13,500 EGP"
+            {Boolean(service?.packages?.length) && (
+              // <div className="third-section">
+              //   <p className="location">Packages</p>
+              //   <div className="packages-container">
+              //     {service.packages?.map((pack) => (
+              //       <DetailsCard
+              //         key={pack._id}
+              //         id={pack._id}
+              //         link="package"
+              //         image={outdoorr}
+              //         title={pack.packageName}
+              //         width={330}
+              //         height={180}
+              //       />
+              //     ))}
+              //   </div>
+              // </div>
+              <ScrollSection title="Packages">
+                {service.packages?.map((pack) => (
+                  <DetailsCard
+                    key={pack._id}
+                    id={pack._id}
+                    link="package"
+                    image={pack.packagePhoto || outdoorr}
+                    title={pack.packageName}
+                    width={330}
+                    height={180}
+                  />
+                ))}
+              </ScrollSection>
+            )}
+            {/* <div className="fourth-section"> */}
+            {/* <p className="location">Similar</p> */}
+            {/* <div className="packages-container"> */}
+            <ScrollSection title="Similar">
+              <DetailsCard
+                image={table}
+                title="The Garden"
+                description="Photographers"
+                width={330}
+                height={180}
               />
-              <VenuePackages
-                image={outdoorr}
-                width={280}
-                title="Outdoor Venue"
-                price="15,000 EGP"
+              <DetailsCard
+                image={table}
+                title="The Garden"
+                description="Photographers"
+                width={330}
+                height={180}
               />
-            </div>
+              <DetailsCard
+                image={table}
+                title="The Garden"
+                description="Photographers"
+                width={330}
+                height={180}
+              />
+              <DetailsCard
+                image={table}
+                title="The Garden"
+                description="Photographers"
+                width={330}
+                height={180}
+              />
+            </ScrollSection>
+
+            {/* </div> */}
+            {/* <p className="reviews">
+              Reviews
+              <LuPencilLine className="icon" />
+            </p> */}
+            {/* <div className="reviews-container"> */}
+            <ScrollSection title={"Reviews"}>
+              <span className="add-review" onClick={() => setIsOpenModal(true)}>
+                Add Review
+              </span>
+              {service?.reviews?.map((review) => (
+                <Reviews
+                  key={review._id}
+                  id={review._id}
+                  profilePic={review?.user?.avatar || man}
+                  name={review?.user?.name}
+                  rate={review?.ratings}
+                  review={review?.title}
+                />
+              ))}
+            </ScrollSection>
           </div>
-          <div className="fourth-section">
-            <p className="location">Similar</p>
-            <div className="packages-container">
-              <VenuePackages
-                image={firstpack}
-                width={370}
-                title="Omar Eleven"
-                showRate={4.5}
-              />
-              <VenuePackages
-                image={secondpack}
-                width={370}
-                title="Occhio Films"
-                showRate={4}
-              />
-              <VenuePackages
-                image={thirdpack}
-                width={370}
-                title=" Omar Eleven"
-                showRate={3.5}
-              />
-              <VenuePackages
-                image={secondpack}
-                width={370}
-                title="Occhio Films"
-                showRate={3.5}
-              />
+          {isOpenModal && (
+            <div className="bottom">
+              {isOpenModal && (
+                <WriteReview
+                  serviceId={service._id}
+                  openModal={setIsOpenModal}
+                  setOpenModal={setIsOpenModal}
+                />
+              )}
+              {isOpenModal && (
+                <div
+                  className="overlay"
+                  onClick={() => setIsOpenModal(false)}
+                ></div>
+              )}
             </div>
-          </div>
+          )}
         </div>
+        // </div>
       )}
     </Wrapper>
   );
@@ -118,6 +189,27 @@ const Wrapper = styled.div`
   /* height: 100%; */
   min-height: 100vh;
   padding-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+  .bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* top: 0; */
+    width: 100vw;
+    height: 100vh;
+  }
+  .overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #00000040;
+  }
   .main {
     margin: 0 auto;
     width: 90%;
@@ -194,10 +286,12 @@ const Wrapper = styled.div`
     color: #00000099;
     font-weight: 300;
     font-size: 1.3rem;
+    margin-top: 5px;
   }
   .about {
     color: #06050599;
     margin-top: 1rem;
+    width: 60%;
   }
   .location {
     /* padding-top: 1rem; */
@@ -244,7 +338,7 @@ const Wrapper = styled.div`
     background-color: #ccc; /* Border color */
   }
 
-  .packages-container {
+  /* .packages-container {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -255,39 +349,65 @@ const Wrapper = styled.div`
   ::-webkit-scrollbar {
     width: 5px;
     height: 8px;
-    /* background-color: #eee; */
   }
   ::-webkit-scrollbar-thumb {
     background: #74ab70;
     border-radius: 5px;
+  } */
+  .packages-container {
+    display: flex;
+    gap: 1.2rem;
+    overflow-x: auto;
+    /* height: 220px; */
+    height: 14rem;
+    /* white-space: nowrap; */
+    /* justify-content: space-evenly; */
+  }
+  .packages-container::-webkit-scrollbar-thumb {
+    background-color: #d4d4d4;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .packages-container::-webkit-scrollbar {
+    height: 0.5rem;
   }
   .third-section {
-    position: relative;
-    padding-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
   }
-  .third-section::after {
-    content: "";
+
+  .reviews {
+    color: #00000099;
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+  .icon {
+    color: #00000078;
+    width: 1.7rem;
+    height: 1.4rem;
+    margin-left: 5px;
+  }
+  .reviews-container {
+    display: flex;
+    overflow-x: auto;
+    /* width: 200rem; */
+  }
+  .reviews-container::-webkit-scrollbar {
+    height: 0.5rem;
+  }
+
+  .reviews-container::-webkit-scrollbar-thumb {
+    background-color: #d4d4d4;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .add-review {
     position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 70%;
-    height: 0.013rem;
-    background-color: #ccc; /* Border color */
-  }
-  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
-    .name-venue {
-      font-size: 1.2rem;
-    }
-    .rate {
-      font-size: 1.2rem;
-    }
-    .location {
-      font-size: 1.7rem;
-    }
-    .google-maps-link {
-      font-size: 1rem;
-    }
+    right: 0;
+    top: 0;
+    color: #74ab70;
+    cursor: pointer;
   }
   @media only screen and (max-width: ${({ theme }) => theme.mid}) {
     .name-venue {
@@ -311,6 +431,32 @@ const Wrapper = styled.div`
     .profile {
       width: 8rem;
       height: 8rem;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
+    .name-venue {
+      font-size: 1.2rem;
+    }
+    .rate {
+      font-size: 1.2rem;
+    }
+    .location {
+      font-size: 1.7rem;
+    }
+    .google-maps-link {
+      font-size: 1rem;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    .profile {
+      width: 7rem;
+      height: 7rem;
+    }
+    .images {
+      margin-bottom: 4rem;
+    }
+    .about {
+      width: 100%;
     }
   }
 

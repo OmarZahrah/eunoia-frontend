@@ -10,9 +10,9 @@ export const useEditService = () => {
   const { mutate: editService, isPending: isLoading } = useMutation({
     mutationFn: editServiceApi,
     onSuccess: (service) => {
-      queryClient.setQueryData(["service"], service);
+      // queryClient.setQueryData(["service"], service);
       //   navigate("/home", { replace: true });
-      queryClient.invalidateQueries({ queryKey: ["service"] });
+      queryClient.invalidateQueries({ queryKey: ["myService"] });
       toast.success("Service Updated Successfully");
     },
     onError: (err) => {

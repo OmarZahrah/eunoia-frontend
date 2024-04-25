@@ -11,7 +11,6 @@ function ProfilePic({ form, register }) {
   const { setAvatar } = useUserContext();
   const [imageSrc, setImageSrc] = useState("");
 
-  console.log(imageSrc);
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     setAvatar(file);
@@ -20,11 +19,11 @@ function ProfilePic({ form, register }) {
       setImageSrc(URL.createObjectURL(file)); // Create a temporary URL for the file
     }
   };
-
   return (
     <Wrapper>
       {form ? (
         <>
+          {/* <img src={defaultProfile} alt="" /> */}
           <div className="photo">
             <label>
               <img
@@ -49,7 +48,10 @@ function ProfilePic({ form, register }) {
       ) : (
         <>
           <div className="photo">
-            <img src={user?.avatar || imageSrc} alt="Upload" />
+            <img
+              src={user?.avatar || imageSrc || defaultProfile}
+              alt="Upload"
+            />
           </div>
           <span>{user?.name}</span>
         </>
@@ -139,7 +141,7 @@ const Wrapper = styled.div`
     width: 100%;
     border-right: none;
     height: 17rem;
-    margin-top: 40px;
+    margin-top: 40px !important;
     /* border-bottom: 1px solid rgba(0, 0, 0, 0.347); */
     span {
       font-size: 25px;

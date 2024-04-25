@@ -7,97 +7,57 @@ import Button from "../components/Button";
 import { LuPencilLine } from "react-icons/lu";
 import Reviews from "../components/Reviews";
 import man from "../images/man.png";
-function CustomizePackage() {
+import { useGetPackage } from "../features/package/useGetPackage";
+import { useNavigate, useParams } from "react-router-dom";
+import Loading from "../components/Loading";
+function CustomizePackage(id) {
+  const { packageId } = useParams();
+  const { packageData, isLoading } = useGetPackage(packageId);
+  const navigate = useNavigate();
+  if (packageData === null) navigate("/login", { replace: true });
+  console.log(packageData);
   return (
     <Wrapper>
       <NavBar />
-      <div className="content">
-        <CoverPhotoSlider
-          businessName={"Outdoor Venue"}
-          location={"Mercure Al-Forsan"}
-          rate={"4.5"}
-        />
-        <TitleDesc
-          title={"Description"}
-          description={
-            "Perfect for hosting events, provides an idyllic backdrop for intimate gatherings, and special occasions. "
-          }
-        />
-        <TitleDesc
-          title={"Customize Package"}
-          description={"The venue only for 15,000 EGP"}
-        />
-        <CustomizeDetails title={"Capacity"} />
-        <CustomizeDetails title={"Capacity"} />
-        <CustomizeDetails title={"Capacity"} />
-        <p className="total">
-          Total: <span className="price">3270 EGP</span>
-        </p>
-        <div className="button">
-          <Button size="medium" type="submit" className="button">
-            Request Reservation
-          </Button>
-        </div>
-        <hr className="hr" />
-        <p className="reviews">
-          Reviews
-          <LuPencilLine className="icon" />
-        </p>
-        <div className="reviews-container">
-          <Reviews
-            profilePic={man}
-            name={"Sara Mohamed"}
-            rate={4.5}
-            review={
-              "Very helpful and friendly, birthday memories beautifully captured!"
-            }
-          />
-          <Reviews
-            profilePic={man}
-            name={"Sara Mohamed"}
-            rate={4.5}
-            review={
-              "Very helpful and friendly, birthday memories beautifully captured!"
-            }
-          />
-          <Reviews
-            profilePic={man}
-            name={"Sara Mohamed"}
-            rate={4.5}
-            review={"Very"}
-          />
-          <Reviews
-            profilePic={man}
-            name={"Sara Mohamed"}
-            rate={4.5}
-            review={
-              "Very helpful and friendly, birthday memories beautifully captured!"
-            }
-          />
-          <Reviews
-            profilePic={man}
-            name={"Sara Mohamed"}
-            rate={4.5}
-            review={
-              "Very helpful and friendly, birthday memories beautifully captured!"
-            }
-          />
-          <Reviews
-            profilePic={man}
-            name={"Sara Mohamed"}
-            rate={4.5}
-            review={
-              "Very helpful and friendly, birthday memories beautifully captured!"
-            }
-          />
-          <Reviews
-            profilePic={man}
-            name={"Sara Mohamed"}
-            rate={4.5}
-            review={"Very "}
-          />
-        </div>
-      </div>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <div className="content">
+            <CoverPhotoSlider
+              businessName={packageData?.packageName}
+              // location={"Mercure Al-Forsan"}
+              // rate={"4.5"}
+            />
+            <TitleDesc
+              title={"Description"}
+              description={packageData?.description}
+            />
+
+            <TitleDesc
+              title={"Customize Package"}
+              // description={"The venue only for 15,000 EGP"}
+            />
+            {packageData?.customizePackage?.map((pack) => (
+              <CustomizeDetails
+                title={pack?.name}
+                key={pack?._id}
+                options={pack?.options}
+              />
+            ))}
+            {/* <CustomizeDetails title={"Capacity"} />
+            <CustomizeDetails title={"Capacity"} /> */}
+            <p className="total">
+              Total: <span className="price">{packageData?.price} EGP</span>
+            </p>
+            <div className="button">
+              <Button size="medium" type="submit" className="button">
+                Request Reservation
+              </Button>
+            </div>
+          </div>
+        </>
+      )}
     </Wrapper>
   );
 }
@@ -107,7 +67,11 @@ export default CustomizePackage;
 const Wrapper = styled.div`
   background-color: #fef9f0;
   min-height: 100vh;
+  padding-bottom: 3rem;
   .content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     padding: 0 4rem;
   }
 

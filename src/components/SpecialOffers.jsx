@@ -31,6 +31,7 @@ const Wrapper = styled.div`
   padding-bottom: 10px;
   .title {
     font-size: 23px;
+    color: #fff !important;
   }
   p {
     font-size: 17px;

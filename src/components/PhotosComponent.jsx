@@ -4,59 +4,79 @@ import { RiDeleteBin7Line } from "react-icons/ri";
 
 import styled from "styled-components";
 import { useServiceContext } from "../context/ServiceContext";
+import { showImages } from "../utils/showImages";
+import { useDeletePhotos } from "../features/serviceProfile/useDeletePhotos";
 
-const PhotosComponent = ({ images }) => {
+const PhotosComponent = ({ images, setChange }) => {
   const [selectedImages, setSelectedImages] = useState(images);
+  const { deletePhotos, isLoading: deletingPhotos } = useDeletePhotos();
+
   const {
     albumImages,
     setAlbumImages,
     albumPhotosFile,
-    setAlbumPhotosFile,
+    setNewPhotos,
+    setOldPhotos,
+    newPhotos,
+    oldPhotos,
+    noOldPhotos,
+    setNoOldPhotos,
+    setDeletedPhotos,
     register,
   } = useServiceContext();
-
-  () => setAlbumImages(images);
   useEffect(() => {
     const f = () => {
       setAlbumImages(images);
+      // setOldPhotos(images);
     };
 
     f();
   }, []);
 
-  const onSelectFile = (event) => {
-    const selectedFiles = event.target.files;
-    console.log(selectedFiles);
-    const selectedFilesArray = Array.from(selectedFiles);
+  const onSelectFile = (e) => {
+    const selectedFiles = e.target.files;
 
-    const imagesArray = selectedFilesArray.map((file) => {
-      return URL.createObjectURL(file);
-    });
-    setAlbumPhotosFile(selectedFiles);
-    setAlbumImages((previousImages) => previousImages.concat(imagesArray));
-    // setSelectedImages((previousImages) => previousImages.concat(imagesArray));
-    // setAlbumImages(selectedImages);
-
-    event.target.value = "";
+    // setOldPhotos(images);
+    setNewPhotos((images) => images.concat(...selectedFiles));
+    // setAlbumImages((previousImages) =>
+    //   // previousImages.concat(showImages(selectedFiles))
+    //   previousImages.concat(selectedFiles)
+    // );
   };
-
-  function deleteHandler(image) {
-    setSelectedImages(selectedImages.filter((e) => e !== image));
-    URL.revokeObjectURL(image);
-  }
-
+  const deleteImage = (image) => {
+    deletePhotos({ imageLink: image });
+  };
   const handleDeleteImage = (image) => {
+    console.log(image);
     const newImages = albumImages.filter((images) => images !== image);
+    const deletedNewPhotos = newPhotos.filter((images) => images !== image);
+    setNewPhotos(deletedNewPhotos);
     setAlbumImages(newImages);
+    // deletePhotos(image);
+    const oldImages = images.filter((photos) => photos !== image);
+    // if (oldImages.length === 0) setNoOldPhotos(true);
+    setOldPhotos(oldImages);
+
+    // !image.startsWith("blob") &&
+    //   setDeletedPhotos((previousImages) => previousImages.concat(image));
+    setChange(true);
   };
 
   return (
     <Section>
       <div className="album">
         {/* {selectedImages.map((image) => ( */}
-        {albumImages.map((image) => (
-          <div className="image" key={image}>
+        {albumImages?.map((image, i) => (
+          <div className="image" key={i}>
             <img src={image} />
+            <div className="delete-icon" onClick={() => deleteImage(image)}>
+              <RiDeleteBin7Line className="icon" />
+            </div>
+          </div>
+        ))}
+        {newPhotos?.map((image, i) => (
+          <div className="image" key={i}>
+            <img src={URL.createObjectURL(image)} />
             <div
               className="delete-icon"
               onClick={() => handleDeleteImage(image)}
@@ -65,55 +85,17 @@ const PhotosComponent = ({ images }) => {
             </div>
           </div>
         ))}
+        <label className="add-image">
+          +
+          <input
+            {...register("images")}
+            className="image-input"
+            type="file"
+            onChange={(e) => onSelectFile(e)}
+            multiple
+          />
+        </label>
       </div>
-      <label className="add-image">
-        +
-        <input
-          type="file"
-          name="images"
-          onChange={onSelectFile}
-          multiple
-          accept="image/png , image/jpeg, image/webp"
-        />
-      </label>
-      {/* <label>
-        + Add photos
-        <input
-          {...register("images")}
-          className="image-input"
-          type="file"
-          onChange={(e) => onSelectFile(e)}
-          multiple
-        />
-      </label> */}
-      {/* <br /> */}
-
-      {/* <Input type="file" multiple /> */}
-      {/* 
-      {selectedImages.length > 0 &&
-        (selectedImages.length > 10 ? (
-          <Error>
-            You can not upload more than 10 images! <br />
-            <ErrorSpan>
-              please delete <b>{selectedImages.length - 10}</b> of them{" "}
-            </ErrorSpan>
-          </Error>
-        ) : null)}
-
-      <Images>
-        {selectedImages &&
-          selectedImages.map((image, index) => {
-            return (
-              <ImageContainer key={image}>
-                <Image src={image} alt="uploaded" />
-                <Button onClick={() => deleteHandler(image)}>
-                  delete image
-                </Button>
-                <p>{index + 1}</p>
-              </ImageContainer>
-            );
-          })}
-      </Images> */}
     </Section>
   );
 };

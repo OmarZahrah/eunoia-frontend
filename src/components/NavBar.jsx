@@ -4,7 +4,11 @@ import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useUser } from "../features/userProfile/useUser";
+import { set } from "react-hook-form";
+import { useAuthContext } from "../context/AuthContext";
+import { useCheckAuth } from "../features/signup/useCheckAuth";
 
 function NavBar({
   showLoginButton = false,
@@ -13,6 +17,7 @@ function NavBar({
 }) {
   const [openNav, setOpenNav] = useState(false);
   const location = useLocation();
+  const { isAuthenticated, isLoading } = useCheckAuth();
 
   const checkIsActive = (path) => location.pathname === path;
 
@@ -31,21 +36,21 @@ function NavBar({
             <Link to="/categories">Categories</Link>
           </li>
           <li className={checkIsActive("/profile") ? "active" : ""}>
-            <Link to={`/profile`}>Profile</Link>
+            <Link to={"/profile"}>Profile</Link>
           </li>
-          <li>
-            <Link to="">Search</Link>
+          <li className={checkIsActive("/search") ? "active" : ""}>
+            <Link to="/search">Search</Link>
           </li>
         </ul>
         <div className="buttons">
-          {showLoginButton && (
+          {!isLoading && !isAuthenticated && (
             <Link to="/login">
               <Button color="pink" background="transparent" size="small">
                 Login
               </Button>
             </Link>
           )}
-          {showRegisterButton && (
+          {!isLoading && !isAuthenticated && (
             <Link to="/signup/user">
               <Button color="white" background="pink" size="small">
                 Register
@@ -71,10 +76,13 @@ const Wrapper = styled.div`
   padding: 1rem 4rem;
   border-bottom: 1px solid #ccc;
   align-items: center;
+  overflow: hidden;
+
   nav {
     display: flex;
     width: 100%;
     align-items: center;
+    overflow: hidden;
     /* position: fixed; */
   }
   .Hlogo {
@@ -116,6 +124,7 @@ const Wrapper = styled.div`
     height: 30px;
     margin-left: auto;
     z-index: 100;
+    cursor: pointer;
   }
   .close-icon {
     display: none;
@@ -126,6 +135,7 @@ const Wrapper = styled.div`
     position: absolute;
     top: 10px;
     right: 10px;
+    cursor: pointer;
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.mid}) {
@@ -165,22 +175,34 @@ const Wrapper = styled.div`
       /* padding-left: 1rem; */
     }
     nav {
-      display: none;
+      /* display: none; */
+      visibility: hidden;
+      /* transform: translateX(100%); */
+      transition: 0.4s ease;
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      opacity: 0;
     }
     .open-nav {
       /* display: none; */
+
       display: flex !important;
       /* display: block; */
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%;
+      height: 100vh;
       flex-direction: column;
       z-index: 10;
       background-color: #fff;
       align-items: center;
       justify-content: center;
+      /* transform: translateX(0); */
+      visibility: visible;
+      opacity: 0.98;
     }
     ul {
       flex-direction: column;
@@ -214,5 +236,6 @@ const Wrapper = styled.div`
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    padding: 1.5rem 2rem;
   }
 `;

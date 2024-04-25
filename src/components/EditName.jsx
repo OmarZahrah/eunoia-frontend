@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { LuPencilLine } from "react-icons/lu";
 import { useOutletContext } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import Select from "../components/Select";
+import { governorates } from "../data/data";
 
 function EditName({ register }) {
   const { user } = useOutletContext();
@@ -25,6 +27,21 @@ function EditName({ register }) {
         {...register("email")}
       />
       <LuPencilLine className="icons" />
+      {/* <label>Location</label> */}
+      {/* <input
+        type="text"
+        placeholder={user?.location || "add your location"}
+        // defaultValue={user?.email}
+        {...register("location")}
+      />
+      <LuPencilLine className="icons" /> */}
+      <Select
+        label="Location"
+        options={governorates}
+        name="location"
+        register={register}
+        placeholder={user.location}
+      />
     </Wrapper>
   );
 }
@@ -68,6 +85,12 @@ const Wrapper = styled.div`
     color: rgba(0, 0, 0, 0.593);
     width: 1.1rem;
     height: 1.1rem;
+  }
+  .select-box {
+    width: 70%;
+  }
+  select {
+    background-color: transparent;
   }
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
     width: 100%;

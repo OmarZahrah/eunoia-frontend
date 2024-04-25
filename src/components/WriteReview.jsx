@@ -1,26 +1,54 @@
 import styled from "styled-components";
 import Button from "./Button";
 import StarRating from "./StarRating";
+import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import { useAddReview } from "../features/review/useAddReview";
 
-function WriteReview() {
+function WriteReview({ serviceId, isOpenModal, setIsOpenModal }) {
+  const { handleSubmit, register } = useForm();
+  const [rating, setRating] = useState(0);
+  const { addReview, isLoading } = useAddReview();
+
+  useEffect(
+    function () {
+      console.log(isOpenModal);
+      if (isOpenModal && !isLoading) {
+        setIsOpenModal(false);
+      }
+    },
+    [setIsOpenModal, isOpenModal, isLoading]
+  );
+
+  const onSubmit = (formData) => {
+    const data = { ratings: rating, ...formData };
+    addReview({ serviceId: serviceId, data: data });
+  };
+
   return (
     <Wrapper>
-      <div className="content">
+      <form className="content" onSubmit={handleSubmit(onSubmit)}>
         <h4>Write a Review</h4>
         <p>Score:</p>
-        <StarRating />
+        <StarRating rating={rating} setRating={setRating} />
         <p>Review:</p>
-        <textarea />
-        <Button size="medium" type="submit" className="post-button">
-          Post
+        <textarea {...register("title")} />
+        <Button
+          size="medium"
+          type="submit"
+          className="post-button"
+          disabled={isLoading}
+        >
+          {isLoading ? "Posting..." : "Post"}
         </Button>
-      </div>
+      </form>
     </Wrapper>
   );
 }
 
 export default WriteReview;
 const Wrapper = styled.div`
+  z-index: 3;
   width: 35rem;
   height: 25rem;
   background-color: white;
@@ -65,6 +93,9 @@ const Wrapper = styled.div`
     width: 100%;
     height: 6rem;
     margin-bottom: 20px;
+  }
+  textarea:focus {
+    outline: none;
   }
   .post-button {
     width: 100%;

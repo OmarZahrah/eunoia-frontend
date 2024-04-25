@@ -2,8 +2,8 @@ import styled from "styled-components";
 import Star from "./Star";
 import { useState } from "react";
 
-function StarRating() {
-  const [rating, setRating] = useState(0);
+function StarRating({ rating, setRating }) {
+  // const [rating, setRating] = useState(0);
   const [tempRating, setTempRating] = useState(0);
 
   function handleRating(rating) {
