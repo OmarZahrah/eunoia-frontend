@@ -12,16 +12,12 @@ import WriteReview from "./WriteReview";
 function List({ user }) {
   const [logout, setLogout] = useState(false);
   const hasService = user?.hasService;
-  const [isOpenModal, setIsOpenModal] = useState(false);
 
   // const hasService = false;
   return (
     <Wrapper>
       {logout && (
         <div className="overlay" onClick={() => setLogout(false)}></div>
-      )}
-      {isOpenModal && (
-        <div className="overlay" onClick={() => setIsOpenModal(false)}></div>
       )}
 
       <ul>
@@ -65,14 +61,13 @@ function List({ user }) {
           </Link>
         </li>
         <li>
-          <Link onClick={() => setIsOpenModal(true)}>
+          <Link>
             <RiDownloadLine className="icons" />
             <span className="text">Download App</span>
           </Link>
         </li>
       </ul>
       {logout && <Logout setLogout={setLogout} />}
-      {isOpenModal && <WriteReview />}
     </Wrapper>
   );
 }
