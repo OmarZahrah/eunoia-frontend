@@ -112,6 +112,7 @@ const MaskImage = styled.img`
 `;
 
 function VenuePackages({ showRate, className, data }) {
+  console.log(data);
   return (
     <Link className="link" to={`/venueprofile/${data?._id}`}>
       <PackageWrapper>
@@ -129,7 +130,7 @@ function VenuePackages({ showRate, className, data }) {
             {showRate && (
               <div style={{ display: "flex", alignItems: "center" }}>
                 <FaStar style={{ color: "#FFF279", marginRight: "0.01rem" }} />
-                <p className="p">{showRate}</p>
+                <p className="p">{data?.ratingsAverage || ""}</p>
               </div>
             )}
           </div>

@@ -22,11 +22,13 @@ import table from "../images/table.png";
 import { LuPencilLine } from "react-icons/lu";
 import Reviews from "../components/Reviews";
 import ScrollSection from "../components/ScrollSection";
+import { useState } from "react";
+import WriteReview from "../components/WriteReview";
 
 function VenueProfile() {
   const { venuId } = useParams();
   const { service, isLoading } = useService(venuId);
-
+  const [isOpenModal, setIsOpenModal] = useState(false);
   console.log(service);
   return (
     <Wrapper>
@@ -48,7 +50,8 @@ function VenueProfile() {
             <div className="text">
               <p className="name-venue">{service?.businessName}</p>
               <p className="rate">
-                <FaStar style={{ color: "#FFF279" }} /> 3.8
+                <FaStar style={{ color: "#FFF279" }} />{" "}
+                {service?.ratingsAverage}
               </p>
             </div>
             <p className="pin">
@@ -142,60 +145,38 @@ function VenueProfile() {
             </p> */}
             {/* <div className="reviews-container"> */}
             <ScrollSection title={"Reviews"}>
-              <Reviews
-                profilePic={man}
-                name={"Sara Mohamed"}
-                rate={4.5}
-                review={
-                  "Very helpful and friendly, birthday memories beautifully captured!"
-                }
-              />
-              <Reviews
-                profilePic={man}
-                name={"Sara Mohamed"}
-                rate={4.5}
-                review={
-                  "Very helpful and friendly, birthday memories beautifully captured!"
-                }
-              />
-              <Reviews
-                profilePic={man}
-                name={"Sara Mohamed"}
-                rate={4.5}
-                review={"Very"}
-              />
-              <Reviews
-                profilePic={man}
-                name={"Sara Mohamed"}
-                rate={4.5}
-                review={
-                  "Very helpful and friendly, birthday memories beautifully captured!"
-                }
-              />
-              <Reviews
-                profilePic={man}
-                name={"Sara Mohamed"}
-                rate={4.5}
-                review={
-                  "Very helpful and friendly, birthday memories beautifully captured!"
-                }
-              />
-              <Reviews
-                profilePic={man}
-                name={"Sara Mohamed"}
-                rate={4.5}
-                review={
-                  "Very helpful and friendly, birthday memories beautifully captured!"
-                }
-              />
-              <Reviews
-                profilePic={man}
-                name={"Sara Mohamed"}
-                rate={4.5}
-                review={"Very "}
-              />
+              <span className="add-review" onClick={() => setIsOpenModal(true)}>
+                Add Review
+              </span>
+              {service?.reviews?.map((review) => (
+                <Reviews
+                  key={review._id}
+                  id={review._id}
+                  profilePic={review?.user?.avatar || man}
+                  name={review?.user?.name}
+                  rate={review?.ratings}
+                  review={review?.title}
+                />
+              ))}
             </ScrollSection>
           </div>
+          {isOpenModal && (
+            <div className="bottom">
+              {isOpenModal && (
+                <WriteReview
+                  serviceId={service._id}
+                  openModal={setIsOpenModal}
+                  setOpenModal={setIsOpenModal}
+                />
+              )}
+              {isOpenModal && (
+                <div
+                  className="overlay"
+                  onClick={() => setIsOpenModal(false)}
+                ></div>
+              )}
+            </div>
+          )}
         </div>
         // </div>
       )}
@@ -208,6 +189,27 @@ const Wrapper = styled.div`
   /* height: 100%; */
   min-height: 100vh;
   padding-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+  .bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* top: 0; */
+    width: 100vw;
+    height: 100vh;
+  }
+  .overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #00000040;
+  }
   .main {
     margin: 0 auto;
     width: 90%;
@@ -398,6 +400,13 @@ const Wrapper = styled.div`
   .reviews-container::-webkit-scrollbar-thumb {
     background-color: #d4d4d4;
     border-radius: 10px;
+    cursor: pointer;
+  }
+  .add-review {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #74ab70;
     cursor: pointer;
   }
   @media only screen and (max-width: ${({ theme }) => theme.mid}) {

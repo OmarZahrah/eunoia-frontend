@@ -144,42 +144,6 @@ function App() {
                   </Routes>
                 </BrowserRouter>
               </PackageProvider>
-              <GlobalStyles />
-              <BrowserRouter>
-                <Routes>
-                  {/* <Route element={<AppLayout />}> */}
-                  <Route path="welcome" element={<Welcome />} />
-                  <Route index element={<Navigate replace to="welcome" />} />
-                  <Route path="signup" element={<SignUp />}>
-                    <Route path="create" element={<CreateAccount />} />
-                    <Route path="user" element={<SignUpUser />} />
-                    <Route path="provider" element={<SignUpBusiness />} />
-                  </Route>
-                  <Route path="error" element={<Error />} />
-                  {/* </Route> */}
-                  <Route path="login" element={<Login />} />
-                  <Route path="forgotpassword" element={<ForgotPass />} />
-                  {/* <Route element={<AppLayout />}> */}
-                  <Route path="home" element={<Home />} />
-                  <Route path="profile" element={<Profile />}>
-                    <Route index element={<MainProfile />} />
-                    <Route path="editprofile" element={<EditProfile />} />
-                    <Route
-                      path=":userId/businessProfile"
-                      element={<BuisnessProfile />}
-                    />
-                    <Route path="createBusiness" element={<CreateBussAcc />} />
-                    <Route path="writeReview" element={<WriteReview />} />
-                  </Route>
-                  <Route path="categories" element={<Categories />} />
-                  <Route path="addpackage" element={<AddPackage />} />
-                  <Route
-                    path="venueprofile/:venuId"
-                    element={<VenueProfile />}
-                  />
-                  <Route path="customize" element={<CustomizePackage />} />
-                </Routes>
-              </BrowserRouter>
             </ServiceProvider>
           </UserProvider>
         </AuthProvider>
