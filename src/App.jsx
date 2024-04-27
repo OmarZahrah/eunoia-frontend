@@ -37,6 +37,7 @@ import HairStylest from "./pages/HairStylest";
 import OtherDetails from "./pages/OtherDetails";
 import Food from "./pages/Food";
 import SearchHistory from "./pages/SearchHistory";
+import Requests from "./pages/Requests";
 
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({
@@ -85,7 +86,7 @@ function App() {
                   <Route path="photographers" element={<Photographers />} />
 
                     </Route>
-                  <Route path="search" element={<Search/>} />
+                  <Route path="search" element={<SearchHistory/>} />
                   <Route path="favorites" element={<Favorites />} />
                   <Route path="photographers" element={<Photographers />} />
                   <Route path="eventplanners" element={<EventPlanners />} />
@@ -94,7 +95,8 @@ function App() {
                   <Route path="food" element={<Food />} />
                   <Route path="hairstylest" element={<HairStylest />} />
                   <Route path="otherdetails" element={<OtherDetails />} />
-                  <Route path="searchhistory" element={<SearchHistory />} />
+                  <Route path="searchresult" element={<Search />} />
+                  <Route path="requests" element={<Requests/>} />
 
                  
                   <Route path="addpackage" element={<AddPackage />} />
