@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { FaStar } from "react-icons/fa";
-import Slider from "../components/Slider";
+// import Slider from "../components/Slider";
 import coverImg from "../../public/images/Rectangle 9.svg";
 
 function CoverPhotoSlider({ businessName, location, rate, image }) {
