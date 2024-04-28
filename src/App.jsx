@@ -46,6 +46,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import PrivateRoute from "./components/PrivateRoute";
 // import Venus from "./pages/Venus";
 import WriteReview from "./components/WriteReview";
+import Requests from "./pages/Requests";
 
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({
@@ -84,6 +85,16 @@ function App() {
                     </Route>
                     <Route path="login" element={<Login />} />
                     <Route path="forgotpassword" element={<ForgotPass />} />
+                    <Route path="search" element={<SearchHistory />} />
+                    <Route path="favorites" element={<Favorites />} />
+                    <Route path="photographers" element={<Photographers />} />
+                    <Route path="eventplanners" element={<EventPlanners />} />
+                    <Route path="djs" element={<Djs />} />
+                    <Route path="makeupartist" element={<MakeupArtist />} />
+                    <Route path="food" element={<Food />} />
+                    <Route path="hairstylest" element={<HairStylest />} />
+                    <Route path="otherdetails" element={<OtherDetails />} />
+                    <Route path="searchresult" element={<Search />} />
 
                     <Route path="home" element={<Home />} />
                     <Route path="search" element={<Search />} />
@@ -140,6 +151,7 @@ function App() {
                         path="package/:packageId"
                         element={<CustomizePackage />}
                       />
+                      <Route path="requests" element={<Requests />} />
                     </Route>
                   </Routes>
                 </BrowserRouter>
