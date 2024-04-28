@@ -5,8 +5,8 @@ export const addRequest = async (data) => {
   await customFetch.post(`requests/${data.packageId}`, data.data);
 };
 
-export const getRequests = async () => {
-  const { data } = await customFetch.get(`requests/serviceProvider`);
-  console.log(data);
-  return data;
+export const getRequests = async (role) => {
+  console.log("role", role);
+  const { data } = await customFetch.get(`requests/${role}`);
+  return data.data;
 };

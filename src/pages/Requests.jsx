@@ -1,42 +1,44 @@
 import NavBar from "../components/NavBar";
 import styled from "styled-components";
 import RequestsComponent from "../components/RequestsComponent";
-
+import { useGetRequest } from "../features/requests/useGetRequest";
+import Loading from '../components/Loading'
 function Requests() {
+  const { isLoading:loadingUser , requests:requestsUser }=useGetRequest('user');
+  const { isLoading:loadingProvider , requests:requestsProvider }=useGetRequest('serviceProvider');
+console.log('user',requestsUser)
+console.log('provider',requestsProvider)
+if(loadingProvider||loadingUser)return <Loading/>
   return (
     <Wrapper>
       <NavBar />
       <div className="request-container">
         <p className="title">Requests</p>
         <div className="components">
-          <RequestsComponent
+
+          {/* <RequestsComponent
             dateNumber="29"
             dateMonth="Dec 2024"
             day="Tue"
             time="5:00 PM"
             noteText="Location will be in Ismailia in Mercure"
-          />
-          <RequestsComponent
-            dateNumber="18"
-            dateMonth="Dec 2024"
-            day="Tue"
-            time="5:00 PM"
-            noteText="Location will be in Ismailia in Mercure"
-          />
-          <RequestsComponent
-            dateNumber="5"
-            dateMonth="Dec 2024"
-            day="Tue"
-            time="5:00 PM"
-            noteText="Location will be in Ismailia in Mercure"
-          />
-          <RequestsComponent
-            dateNumber="22"
-            dateMonth="Dec 2024"
-            day="Tue"
-            time="5:00 PM"
-            noteText="Location will be in Ismailia in Mercure"
-          />
+          /> */}
+
+{requestsUser?.map((request) => (
+  <RequestsComponent
+    key={request._id} 
+    dateNumber="29"
+    dateMonth="Dec 2024"
+    day="Tue"
+    time={request.totalPriceAfterDiscount}
+    Notes={request.Notes}
+    role="user"
+    status={request.status}
+    // status='declined'
+  />
+))}
+
+         
         </div>
       </div>
     </Wrapper>
