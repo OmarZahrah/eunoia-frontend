@@ -77,6 +77,7 @@ const PackageWrapper = styled.div`
     z-index: 2;
   }
 
+  
   @media only screen and (max-width: ${({ theme }) => theme.mid}) {
   }
 

@@ -33,8 +33,8 @@ const Wrapper = styled.div`
   width: 25rem;
   height: 13rem;
   border-radius: 45px 45px 45px 0px;
-  padding: 20px;
-  margin: 10px 15px 15px 7px;
+  padding: 20px 10px;
+  margin: 10px 5px 5px 5px;
   box-shadow: 1px 1px 5px #0000002a;
 
   /* overflow-y: auto;
@@ -64,15 +64,16 @@ const Wrapper = styled.div`
   }
   img {
     border-radius: 50%;
-    width: 5rem;
-    height: 5rem;
-    object-fit: contain;
+    width: 3rem;
+    height: 3rem;
+    /* object-fit: contain; */
+    object-fit: cover;
   }
   .information {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    margin-left: 10px;
+    margin-left: 15px;
   }
   .name {
     color: #00000099;
@@ -87,6 +88,7 @@ const Wrapper = styled.div`
   .review {
     color: #00000099;
     margin-top: 10px;
+    padding-left: 19px;
   }
   .delete-icon {
     position: absolute;
@@ -96,5 +98,24 @@ const Wrapper = styled.div`
     width: 18px;
     height: 18px;
     cursor: pointer;
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mid}) {
+    width: 23rem;
+    height: 12rem;
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.small}) {
+    width: 23rem;
+    height: 11rem;
+  }
+  @media only screen and (max-width: 52.5em) {
+    height: 10rem;
+    /* .rate {
+      font-size: 1.1rem;
+    } */
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    /* width: 15rem; */
+    width: 100%;
+    height: 11rem;
   }
 `;

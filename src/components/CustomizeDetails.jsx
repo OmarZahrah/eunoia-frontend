@@ -1,17 +1,20 @@
 import styled from "styled-components";
 import RadioButton from "./RadioButton";
 
-function CustomizeDetails({ title, options }) {
-  console.log(options);
+function CustomizeDetails({ title, options, register }) {
+  // console.log(options);
   return (
     <Wrapper>
       <p>{title}</p>
       <div className="options">
         {options?.map((option, i) => (
           <RadioButton
+            id={option._id}
             head={option.title}
             details={`${option.price} EGP `}
+            register={register}
             key={i}
+            title={title}
           />
         ))}
         {/* <RadioButton head={"250"} details={"6000 EGP"} />
@@ -30,7 +33,9 @@ export default CustomizeDetails;
 const Wrapper = styled.div`
   p {
     color: #00000099;
-    font-size: 1.4rem;
+    /* font-size: 1.4rem; */
+    font-size: 1.6rem;
+
     font-weight: 600;
     margin-bottom: 15px;
     text-transform: capitalize;
@@ -43,7 +48,22 @@ const Wrapper = styled.div`
   }
   hr {
     width: 50%;
-    border-color: rgba(0, 0, 0, 0.2);
+    border-color: rgba(0, 0, 0, 0.086);
     margin: 2rem auto;
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mid}) {
+    p {
+      font-size: 1.4rem;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.small}) {
+    p {
+      font-size: 1.3rem;
+    }
+  }
+  @media only screen and (max-width: 52.5em) {
+    p {
+      font-size: 1.2rem;
+    }
   }
 `;

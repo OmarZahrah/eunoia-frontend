@@ -10,12 +10,47 @@ import man from "../images/man.png";
 import { useGetPackage } from "../features/package/useGetPackage";
 import { useNavigate, useParams } from "react-router-dom";
 import Loading from "../components/Loading";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useAddRequest } from "../features/requests/useAddRequest";
 function CustomizePackage(id) {
   const { packageId } = useParams();
   const { packageData, isLoading } = useGetPackage(packageId);
-  const navigate = useNavigate();
-  if (packageData === null) navigate("/login", { replace: true });
-  console.log(packageData);
+  const { register, handleSubmit } = useForm();
+  const { addRequest, isLoading: addingRequest } = useAddRequest();
+
+  const onSubmit = (formData) => {
+    // console.log(formData);
+    const optionIds = [];
+    Object.keys(formData).forEach(
+      (key) =>
+        key.startsWith("customize-package") && optionIds.push(formData[key])
+    );
+
+    const finalData = {
+      packageId: packageId,
+      data: {
+        bookingDate: formData.bookingDate,
+        Notes: formData.Notes,
+        optionIds: optionIds,
+      },
+    };
+    addRequest(finalData);
+  };
+
+  // console.log(packageData);
+  // console.log(packageData);
+
+  const [selectedDate, setSelectedDate] = useState("");
+  const [text, setText] = useState("");
+
+  const handleTextChange = (event) => {
+    setText(event.target.value);
+  };
+
+  const handleDateChange = (e) => {
+    setSelectedDate(e.target.value);
+  };
   return (
     <Wrapper>
       <NavBar />
@@ -23,9 +58,10 @@ function CustomizePackage(id) {
         <Loading />
       ) : (
         <>
-          <div className="content">
+          <form className="content" onSubmit={handleSubmit(onSubmit)}>
             <CoverPhotoSlider
               businessName={packageData?.packageName}
+              image={packageData.packagePhoto}
               // location={"Mercure Al-Forsan"}
               // rate={"4.5"}
             />
@@ -33,18 +69,39 @@ function CustomizePackage(id) {
               title={"Description"}
               description={packageData?.description}
             />
-
+            {/* 
             <TitleDesc
               title={"Customize Package"}
               // description={"The venue only for 15,000 EGP"}
-            />
+            /> */}
             {packageData?.customizePackage?.map((pack) => (
               <CustomizeDetails
                 title={pack?.name}
                 key={pack?._id}
                 options={pack?.options}
+                register={register}
               />
             ))}
+
+            <div>
+              <label htmlFor="dateInput">Select a Date:</label>
+              <input
+                type="date"
+                id="dateInput"
+                // value={selectedDate}
+                // onChange={handleDateChange}
+                {...register("bookingDate")}
+              />
+              <p>Selected Date: {selectedDate}</p>
+            </div>
+
+            <p>Add notes:</p>
+            <textarea
+              // value={text}
+              // onChange={handleTextChange}
+              {...register("Notes")}
+            />
+            <p>You typed: {text}</p>
             {/* <CustomizeDetails title={"Capacity"} />
             <CustomizeDetails title={"Capacity"} /> */}
             <p className="total">
@@ -55,7 +112,7 @@ function CustomizePackage(id) {
                 Request Reservation
               </Button>
             </div>
-          </div>
+          </form>
         </>
       )}
     </Wrapper>
@@ -74,12 +131,17 @@ const Wrapper = styled.div`
     gap: 20px;
     padding: 0 4rem;
   }
-
+  .date {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative;
+  }
   .total {
-    color: #00000099;
-    font-size: 1.6rem;
-    font-weight: 600;
     margin-bottom: 15px;
+    font-size: 1.6rem;
+    color: #00000099;
+    font-weight: 600;
     text-align: center;
   }
   .price {
@@ -119,5 +181,44 @@ const Wrapper = styled.div`
     background-color: #d4d4d4;
     border-radius: 10px;
     cursor: pointer;
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mid}) {
+    .total {
+      margin-bottom: 10px;
+      font-size: 1.4rem;
+    }
+    .price {
+      font-size: 1.3rem;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.small}) {
+    .total {
+      margin-bottom: 8px;
+      font-size: 1.3rem;
+    }
+    .price {
+      font-size: 1.2rem;
+    }
+  }
+  @media only screen and (max-width: 52.5em) {
+    .total {
+      margin-bottom: 0px;
+      font-size: 1.2rem;
+    }
+    .price {
+      font-size: 1.1rem;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    .content {
+      gap: 0px;
+      padding: 0 0.8rem;
+    }
+    .total {
+      margin-bottom: 10px;
+    }
+    .button {
+      width: 100%;
+    }
   }
 `;
