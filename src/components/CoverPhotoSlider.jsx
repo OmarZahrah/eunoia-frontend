@@ -1,21 +1,20 @@
 import styled from "styled-components";
 import { FaStar } from "react-icons/fa";
-import Slider from "../components/Slider";
-import coverimg from "../../public/images/Rectangle 9.svg";
+// import Slider from "../components/Slider";
+import coverImg from "../../public/images/Rectangle 9.svg";
 
-function CoverPhotoSlider({ businessName, location, rate }) {
+function CoverPhotoSlider({ businessName, location, rate, image }) {
   return (
     <Wrapper>
-      <div className="image">
-        <Slider photos={coverimg} cover={coverimg} />
-      </div>
+      {/* <Slider photos={coverImg} cover={coverImg} /> */}
+      <img src={image || coverImg} className="image" />
       <div className="text">
         <p className="title">{businessName}</p>
         <span className="rate">
-          <FaStar style={{ color: "#FFF279" }} /> {rate}
+          <FaStar style={{ color: "#FFF279" }} /> {rate || "4.5"}
         </span>
       </div>
-      <p className="description">{location}</p>
+      {/* <p className="description">{location}</p> */}
       <hr />
     </Wrapper>
   );
@@ -27,12 +26,15 @@ const Wrapper = styled.div`
   background-color: #fef9f0;
 
   .image {
-    margin-bottom: 0.7rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    height: 25rem;
+    object-fit: cover;
   }
 
-  .container {
+  /* .container {
     height: 25.5rem;
-  }
+  } */
 
   .text {
     display: flex;
@@ -47,7 +49,7 @@ const Wrapper = styled.div`
   .rate {
     color: #00000099;
     font-size: 1.5rem;
-    font-weight: 350;
+    font-weight: 400;
   }
 
   .description {
@@ -56,7 +58,51 @@ const Wrapper = styled.div`
 
   hr {
     width: 70%;
-    border-color: rgba(0, 0, 0, 0.2);
+    border-color: rgba(0, 0, 0, 0.086);
     margin: 2rem auto;
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mid}) {
+    .image {
+      height: 21.5rem;
+    }
+    .title {
+      font-size: 1.4rem;
+    }
+    .rate {
+      font-size: 1.3rem;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.small}) {
+    .image {
+      height: 20rem;
+    }
+    .title {
+      font-size: 1.3rem;
+    }
+    .rate {
+      font-size: 1.2rem;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.semi}) {
+    .image {
+      height: 18rem;
+    }
+  }
+  @media only screen and (max-width: 52.5em) {
+    .image {
+      height: 15rem;
+    } 
+    .title {
+      font-size: 1.2rem;
+    }
+    .rate {
+      font-size: 1.1rem;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    .image {
+      height: 12rem;
+    } 
+   
   }
 `;

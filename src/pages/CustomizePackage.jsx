@@ -26,6 +26,7 @@ function CustomizePackage(id) {
           <div className="content">
             <CoverPhotoSlider
               businessName={packageData?.packageName}
+              image={packageData.packagePhoto}
               // location={"Mercure Al-Forsan"}
               // rate={"4.5"}
             />
@@ -33,11 +34,11 @@ function CustomizePackage(id) {
               title={"Description"}
               description={packageData?.description}
             />
-
+            {/* 
             <TitleDesc
               title={"Customize Package"}
               // description={"The venue only for 15,000 EGP"}
-            />
+            /> */}
             {packageData?.customizePackage?.map((pack) => (
               <CustomizeDetails
                 title={pack?.name}
@@ -76,10 +77,10 @@ const Wrapper = styled.div`
   }
 
   .total {
-    color: #00000099;
-    font-size: 1.6rem;
-    font-weight: 600;
     margin-bottom: 15px;
+    font-size: 1.6rem;
+    color: #00000099;
+    font-weight: 600;
     text-align: center;
   }
   .price {
@@ -119,5 +120,44 @@ const Wrapper = styled.div`
     background-color: #d4d4d4;
     border-radius: 10px;
     cursor: pointer;
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mid}) {
+    .total {
+      margin-bottom: 10px;
+      font-size: 1.4rem;
+    }
+    .price {
+      font-size: 1.3rem;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.small}) {
+    .total {
+      margin-bottom: 8px;
+      font-size: 1.3rem;
+    }
+    .price {
+      font-size: 1.2rem;
+    }
+  }
+  @media only screen and (max-width: 52.5em) {
+    .total {
+      margin-bottom: 0px;
+      font-size: 1.2rem;
+    }
+    .price {
+      font-size: 1.1rem;
+    }
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    .content {
+      gap: 0px;
+      padding: 0 0.8rem;
+    }
+    .total {
+      margin-bottom: 10px;
+    }
+    .button {
+      width: 100%;
+    }
   }
 `;
