@@ -10,18 +10,47 @@ import man from "../images/man.png";
 import { useGetPackage } from "../features/package/useGetPackage";
 import { useNavigate, useParams } from "react-router-dom";
 import Loading from "../components/Loading";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useAddRequest } from "../features/requests/useAddRequest";
 function CustomizePackage(id) {
   const { packageId } = useParams();
   const { packageData, isLoading } = useGetPackage(packageId);
   const { register, handleSubmit } = useForm();
+  const { addRequest, isLoading: addingRequest } = useAddRequest();
 
   const onSubmit = (formData) => {
-    console.log(formData);
-    // const optionIds=[]
+    // console.log(formData);
+    const optionIds = [];
+    Object.keys(formData).forEach(
+      (key) =>
+        key.startsWith("customize-package") && optionIds.push(formData[key])
+    );
+
+    const finalData = {
+      packageId: packageId,
+      data: {
+        bookingDate: formData.bookingDate,
+        Notes: formData.Notes,
+        optionIds: optionIds,
+      },
+    };
+    addRequest(finalData);
   };
 
-  console.log(packageData);
+  // console.log(packageData);
+  // console.log(packageData);
+
+  const [selectedDate, setSelectedDate] = useState("");
+  const [text, setText] = useState("");
+
+  const handleTextChange = (event) => {
+    setText(event.target.value);
+  };
+
+  const handleDateChange = (e) => {
+    setSelectedDate(e.target.value);
+  };
   return (
     <Wrapper>
       <NavBar />
@@ -53,6 +82,26 @@ function CustomizePackage(id) {
                 register={register}
               />
             ))}
+
+            <div>
+              <label htmlFor="dateInput">Select a Date:</label>
+              <input
+                type="date"
+                id="dateInput"
+                // value={selectedDate}
+                // onChange={handleDateChange}
+                {...register("bookingDate")}
+              />
+              <p>Selected Date: {selectedDate}</p>
+            </div>
+
+            <p>Add notes:</p>
+            <textarea
+              // value={text}
+              // onChange={handleTextChange}
+              {...register("Notes")}
+            />
+            <p>You typed: {text}</p>
             {/* <CustomizeDetails title={"Capacity"} />
             <CustomizeDetails title={"Capacity"} /> */}
             <p className="total">
@@ -82,7 +131,12 @@ const Wrapper = styled.div`
     gap: 20px;
     padding: 0 4rem;
   }
-
+  .date {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative;
+  }
   .total {
     margin-bottom: 15px;
     font-size: 1.6rem;

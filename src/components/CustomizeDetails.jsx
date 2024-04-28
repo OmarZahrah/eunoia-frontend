@@ -2,7 +2,7 @@ import styled from "styled-components";
 import RadioButton from "./RadioButton";
 
 function CustomizeDetails({ title, options, register }) {
-  console.log(options);
+  // console.log(options);
   return (
     <Wrapper>
       <p>{title}</p>

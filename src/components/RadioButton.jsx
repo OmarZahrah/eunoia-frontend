@@ -3,7 +3,12 @@ import styled from "styled-components";
 function RadioButton({ id, head, details, title, register }) {
   return (
     <Wrapper>
-      <input type="radio" id={head} value={id} {...register(`${title}`)} />
+      <input
+        type="radio"
+        id={head}
+        value={id}
+        {...register(`customize-package-${title}`)}
+      />
       <label htmlFor={head}>
         {head}
         <br /> {details}
