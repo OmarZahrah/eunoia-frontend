@@ -111,7 +111,7 @@ const MaskImage = styled.img`
   }
 `;
 
-function VenuePackages({ showRate, className, data }) {
+function VenuePackages({ showRate, className, data, favorites }) {
   console.log(data);
   return (
     <Link className="link" to={`/venueprofile/${data?._id}`}>

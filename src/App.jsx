@@ -126,11 +126,11 @@ function App() {
                           path="createBusiness"
                           element={<CreateBussAcc />}
                         />
+                        <Route path="favorites" element={<Favorites />} />
                       </Route>
 
                       <Route path="addpackage" element={<AddPackage />} />
 
-                      <Route path="favorites" element={<Favorites />} />
                       <Route path="createPackage" element={<CreatePackage />} />
                       <Route
                         path="updatePackage/:packageId"

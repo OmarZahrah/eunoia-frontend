@@ -3,6 +3,8 @@ import NavBar from "../components/NavBar";
 import Category from "../components/Category";
 import { useGetServices } from "../features/categories/useGetServices";
 import Loading from "../components/Loading";
+import { FaRegHeart } from "react-icons/fa6";
+
 function Photographers() {
   const { allServices, isLoading } = useGetServices([
     { category: "photographers" },

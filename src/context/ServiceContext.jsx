@@ -14,6 +14,7 @@ const ServiceProvider = ({ children }) => {
   const [newPhotos, setNewPhotos] = useState([]);
   const [noOldPhotos, setNoOldPhotos] = useState(false);
   const [deletedPhotos, setDeletedPhotos] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
   return (
     <serviceContext.Provider
@@ -38,6 +39,8 @@ const ServiceProvider = ({ children }) => {
         setDeletedPhotos,
         register,
         handleSubmit,
+        favorites,
+        setFavorites,
       }}
     >
       {children}

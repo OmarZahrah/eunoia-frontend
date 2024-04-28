@@ -1,35 +1,62 @@
 import styled from "styled-components";
 import NavBar from "../components/NavBar";
-import image from "../../public/images/unsplash.jpeg";
 import { FaStar, FaMapPin } from "react-icons/fa";
-import LoveButton from "../components/LoveButton";
 import imgloc from "../../public/images/image 2.png";
-import VenuePackages from "../components/VenuePackages";
-import indoor from "../../public/images/indoor.jpeg";
 import outdoorr from "../../public/images/outdoor.jpeg";
-import firstpack from "../../public/images/firstpack.jpeg";
-import secondpack from "../../public/images/secondpack.jpeg";
-import thirdpack from "../../public/images/thirdpack.jpeg";
 import { useParams } from "react-router";
 import { useService } from "../features/serviceProfile/useService";
 import Loading from "../components/Loading";
-import CoverSlider from "../components/CoverSlider";
 import Slider from "../components/Slider";
 import coverimg from "../../public/images/Rectangle 9.svg";
 import DetailsCard from "../components/DetailsCard";
 import man from "../images/man.png";
 import table from "../images/table.png";
-import { LuPencilLine } from "react-icons/lu";
 import Reviews from "../components/Reviews";
 import ScrollSection from "../components/ScrollSection";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import WriteReview from "../components/WriteReview";
+import { FaHeart } from "react-icons/fa6";
+import { useAddToFavorite } from "../features/favourites/useAddtoFavorite";
+import { useUser } from "../features/userProfile/useUser";
+import { useDeleteFromFavorites } from "../features/favourites/useDeleteFromFavorites";
 
 function VenueProfile() {
   const { venuId } = useParams();
   const { service, isLoading } = useService(venuId);
+  const { user, isLoading: loadingUser } = useUser();
+  console.log(user);
+  const [isFavorite, setIsFavorite] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
-  console.log(service);
+  const { addToFavorites, isSuccess: successAdd } = useAddToFavorite();
+  const { deleteFromFavorites, isSuccess: successDelete } =
+    useDeleteFromFavorites();
+  // console.log(service);
+  // console.log(user.wishlist || "");
+  useEffect(
+    function () {
+      let exist;
+      if (!isLoading && !loadingUser) {
+        exist = user.wishlist.includes(service._id) || false;
+      }
+
+      if (exist) {
+        setIsFavorite(true);
+      } else {
+        setIsFavorite(false);
+      }
+    },
+    [user, isFavorite, setIsFavorite, service, isLoading, loadingUser]
+  );
+  console.log(isFavorite);
+  const handleFavorite = () => {
+    if (isFavorite) {
+      deleteFromFavorites(service._id);
+      successDelete && setIsFavorite(false);
+    } else {
+      addToFavorites(service._id);
+      successAdd && setIsFavorite(true);
+    }
+  };
   return (
     <Wrapper>
       <NavBar />
@@ -39,6 +66,10 @@ function VenueProfile() {
         <div className="main">
           <div className="first-section">
             <div className="images">
+              <FaHeart
+                className={`heart ${isFavorite ? "favorite" : ""}`}
+                onClick={handleFavorite}
+              />
               <Slider
                 photos={service?.images}
                 cover={service?.imageCover || coverimg}
@@ -50,7 +81,7 @@ function VenueProfile() {
             <div className="text">
               <p className="name-venue">{service?.businessName}</p>
               <p className="rate">
-                <FaStar style={{ color: "#FFF279" }} />{" "}
+                <FaStar style={{ color: "#FFF279" }} />
                 {service?.ratingsAverage}
               </p>
             </div>
@@ -208,7 +239,7 @@ const Wrapper = styled.div`
     right: 0;
     left: 0;
     bottom: 0;
-    background-color: #00000040;
+    background-color: #0000002f;
   }
   .main {
     margin: 0 auto;
@@ -244,6 +275,22 @@ const Wrapper = styled.div`
   .images {
     position: relative;
     margin-bottom: 2rem;
+  }
+  .heart {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 6;
+    width: 30px;
+    height: 30px;
+    color: #fffcfcdf;
+    cursor: pointer;
+  }
+  .heart:hover {
+    color: #c50c0c;
+  }
+  .favorite {
+    color: #c50c0c;
   }
   .profile {
     position: absolute;
@@ -431,6 +478,7 @@ const Wrapper = styled.div`
     .profile {
       width: 8rem;
       height: 8rem;
+      z-index: 6;
     }
   }
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {

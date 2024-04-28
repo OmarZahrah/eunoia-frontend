@@ -47,7 +47,9 @@ export const addPhotos = async (formData) => {
 export const deletePhotos = async (image) => {
   console.log(image);
 
-  const { data } = await customFetch.delete("services/remove-Photos", image);
+  const { data } = await customFetch.delete("services/remove-Photos", {
+    imageLink: image,
+  });
   console.log(data.data);
 };
 

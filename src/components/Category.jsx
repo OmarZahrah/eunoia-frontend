@@ -3,10 +3,13 @@ import SearchResults from "../components/SearchResults";
 import { useState } from "react";
 import SortSection from "./SortSection";
 import { Link } from "react-router-dom";
-
+import { useGetFavorites } from "../features/favourites/useGetFavorites";
+import Loading from "../components/Loading";
 function Category({ title, data }) {
   const [sortBy, setSortBy] = useState("");
   const [sortByRating, setSortByRating] = useState("");
+
+  const { favorites, isLoading } = useGetFavorites();
 
   // Function to handle sorting option change
   const handleSortChange = (event) => {
@@ -20,7 +23,7 @@ function Category({ title, data }) {
     // Implement sorting logic based on the selected option
     console.log("Sorting by rating: ", event.target.value);
   };
-
+  if (isLoading) return <Loading />;
   return (
     <Wrapper>
       <p className="title">{title}</p>
@@ -42,6 +45,7 @@ function Category({ title, data }) {
             showRate={4.5}
             data={card}
             key={card._id}
+            favorites={favorites}
           />
           // </Link>
         ))}

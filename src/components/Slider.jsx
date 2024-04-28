@@ -19,6 +19,7 @@ const AlbumSwiper = ({ photos, cover }) => {
   };
   return (
     <Wrapper>
+      <div className="overlay"></div>
       <div
         className="container"
         style={{
@@ -31,10 +32,10 @@ const AlbumSwiper = ({ photos, cover }) => {
           </div>
         ))}
       </div>
-      <button className="prev" onClick={prevSlide}>
+      <button className="prev arrow" onClick={prevSlide}>
         <FaArrowLeft />
       </button>
-      <button className="next" onClick={nextSlide}>
+      <button className="next arrow" onClick={nextSlide}>
         <FaArrowRight />
       </button>
     </Wrapper>
@@ -45,6 +46,17 @@ const Wrapper = styled.div`
   position: relative;
   width: 100%;
   overflow: hidden;
+  .overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #14141415;
+    z-index: 3;
+  }
   .container {
     display: flex;
     transition: transform 0.3s ease-in-out;
@@ -76,6 +88,9 @@ const Wrapper = styled.div`
     color: #74ab706b;
     background: transparent;
     transform: translateY(-50%);
+  }
+  .arrow {
+    z-index: 5;
   }
   .prev {
     top: 50%;

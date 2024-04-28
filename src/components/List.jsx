@@ -35,7 +35,7 @@ function List({ user }) {
           </Link>
         </li>
         <li>
-          <Link to="">
+          <Link to="favorites">
             <FaRegHeart className="icons" />
             <span className="text">Favorites</span>
           </Link>

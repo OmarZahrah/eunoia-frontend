@@ -11,6 +11,9 @@ import { useUser } from "../features/userProfile/useUser";
 import { useGetNearby } from "../features/homepage/useGetNearby";
 import ScrollSection from "../components/ScrollSection";
 import { nearbyServices } from "../services/apiServices";
+import { useGetFavorites } from "../features/favourites/useGetFavorites";
+import { useServiceContext } from "../context/ServiceContext";
+import { useEffect } from "react";
 const Home = () => {
   const { user, isLoading, isAuthenticated } = useUser();
   // const isLoading = false;

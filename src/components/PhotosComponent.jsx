@@ -44,7 +44,7 @@ const PhotosComponent = ({ images, setChange }) => {
     // );
   };
   const deleteImage = (image) => {
-    deletePhotos({ imageLink: image });
+    deletePhotos(image);
   };
   const handleDeleteImage = (image) => {
     console.log(image);

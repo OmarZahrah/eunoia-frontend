@@ -1,20 +1,33 @@
 import NavBar from "../components/NavBar";
 import styled from "styled-components";
 import SearchResults from "../components/SearchResults";
-
+import { useGetFavorites } from "../features/favourites/useGetFavorites";
+import Loading from "../components/Loading";
+import Category from "../components/Category";
 function Search() {
+  const { favorites, isLoading } = useGetFavorites();
+  console.log(favorites);
+  if (isLoading) return <Loading />;
   return (
     <Wrapper>
-      <NavBar />
-      <div className="container">
+      {/* <div className="container">
         <p className="title">Favorites</p>
         <div className="search-container">
-          <SearchResults showRate={4.5} />
-          <SearchResults showRate={4.5} />
-          <SearchResults showRate={4.5} />
-          <SearchResults showRate={4.5} />
+          {favorites?.map((card) => (
+            <SearchResults
+              className="result"
+              showRate={4.5}
+              data={card}
+              key={card._id}
+            />
+          ))}
         </div>
-      </div>
+      </div> */}
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <Category data={favorites} title="Favorites" />
+      )}{" "}
     </Wrapper>
   );
 }
