@@ -10,11 +10,17 @@ import man from "../images/man.png";
 import { useGetPackage } from "../features/package/useGetPackage";
 import { useNavigate, useParams } from "react-router-dom";
 import Loading from "../components/Loading";
+import { useForm } from "react-hook-form";
 function CustomizePackage(id) {
   const { packageId } = useParams();
   const { packageData, isLoading } = useGetPackage(packageId);
-  const navigate = useNavigate();
-  if (packageData === null) navigate("/login", { replace: true });
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (formData) => {
+    console.log(formData);
+    // const optionIds=[]
+  };
+
   console.log(packageData);
   return (
     <Wrapper>
@@ -23,7 +29,7 @@ function CustomizePackage(id) {
         <Loading />
       ) : (
         <>
-          <div className="content">
+          <form className="content" onSubmit={handleSubmit(onSubmit)}>
             <CoverPhotoSlider
               businessName={packageData?.packageName}
               image={packageData.packagePhoto}
@@ -44,6 +50,7 @@ function CustomizePackage(id) {
                 title={pack?.name}
                 key={pack?._id}
                 options={pack?.options}
+                register={register}
               />
             ))}
             {/* <CustomizeDetails title={"Capacity"} />
@@ -56,7 +63,7 @@ function CustomizePackage(id) {
                 Request Reservation
               </Button>
             </div>
-          </div>
+          </form>
         </>
       )}
     </Wrapper>

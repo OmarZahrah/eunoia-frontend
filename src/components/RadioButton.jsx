@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-function RadioButton({ head, details }) {
+function RadioButton({ id, head, details, title, register }) {
   return (
     <Wrapper>
-      <input type="radio" value="Price" />
-      <span>
+      <input type="radio" id={head} value={id} {...register(`${title}`)} />
+      <label htmlFor={head}>
         {head}
         <br /> {details}
-      </span>
+      </label>
     </Wrapper>
   );
 }
@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   align-items: center;
   color: #00000099;
 
-  span {
+  label {
     font-size: 0.9rem;
     margin-left: 0.5rem;
   }
