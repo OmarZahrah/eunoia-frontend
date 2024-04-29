@@ -93,6 +93,7 @@ const Wrapper = styled.div`
     width: 100%;
     height: 6rem;
     margin-bottom: 20px;
+    padding: 5px;
   }
   textarea:focus {
     outline: none;

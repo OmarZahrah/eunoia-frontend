@@ -4,15 +4,13 @@ import CoverPhotoSlider from "../components/CoverPhotoSlider";
 import TitleDesc from "../components/TitleDesc";
 import CustomizeDetails from "../components/CustomizeDetails";
 import Button from "../components/Button";
-import { LuPencilLine } from "react-icons/lu";
-import Reviews from "../components/Reviews";
-import man from "../images/man.png";
 import { useGetPackage } from "../features/package/useGetPackage";
 import { useNavigate, useParams } from "react-router-dom";
 import Loading from "../components/Loading";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAddRequest } from "../features/requests/useAddRequest";
+
 function CustomizePackage(id) {
   const { packageId } = useParams();
   const { packageData, isLoading } = useGetPackage(packageId);
@@ -79,9 +77,9 @@ function CustomizePackage(id) {
             />
             {/* 
             <TitleDesc
-              title={"Customize Package"}
-              // description={"The venue only for 15,000 EGP"}
-            /> */}
+            title={"Customize Package"}
+            // description={"The venue only for 15,000 EGP"}
+          /> */}
             {packageData?.customizePackage?.map((pack) => (
               <CustomizeDetails
                 title={pack?.name}
@@ -91,26 +89,21 @@ function CustomizePackage(id) {
                 setTotalPrice={setTotalPrice}
               />
             ))}
-
-            <div>
-              <label htmlFor="dateInput">Select a Date:</label>
-              <input
-                type="date"
-                id="dateInput"
-                // value={selectedDate}
-                // onChange={handleDateChange}
-                {...register("bookingDate")}
-              />
-              <p>Selected Date: {selectedDate}</p>
-            </div>
-
-            <p>Add notes:</p>
-            <textarea
-              // value={text}
-              // onChange={handleTextChange}
-              {...register("Notes")}
+            <label htmlFor="dateInput" className="titles">
+              Select a Date:
+            </label>
+            <input
+              className="date"
+              type="date"
+              id="dateInput"
+              {...register("bookingDate")}
             />
-            <p>You typed: {text}</p>
+
+            {/* <hr className="hr" /> */}
+
+            <p className="titles">Add notes:</p>
+            <textarea {...register("Notes")} />
+            <hr className="hr" />
             {/* <CustomizeDetails title={"Capacity"} />
             <CustomizeDetails title={"Capacity"} /> */}
             <p className="total">
@@ -140,12 +133,40 @@ const Wrapper = styled.div`
     gap: 20px;
     padding: 0 4rem;
   }
-  .date {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    position: relative;
+  .titles {
+    color: #00000099;
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-transform: capitalize;
   }
+  .date {
+    width: 30%;
+    background-color: transparent;
+    color: rgba(0, 0, 0, 0.656);
+    border-color: rgba(0, 0, 0, 0.2);
+    padding: 7px;
+    font-size: 16px;
+    text-transform: uppercase;
+    /* cursor: pointer; */
+  }
+  ::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+  }
+  textarea {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: transparent;
+    color: rgba(0, 0, 0, 0.656);
+    resize: none;
+    font-size: 16px;
+    width: 50%;
+    height: 7rem;
+    padding: 5px;
+  }
+  textarea:focus {
+    outline: none;
+  }
+
   .total {
     margin-bottom: 15px;
     font-size: 1.6rem;
@@ -163,33 +184,8 @@ const Wrapper = styled.div`
   }
   .hr {
     width: 70%;
-    border-color: rgba(0, 0, 0, 0.2);
+    border-color: rgba(0, 0, 0, 0.086);
     margin: 2rem auto;
-  }
-  .reviews {
-    color: #00000099;
-    font-size: 1.6rem;
-    font-weight: 600;
-  }
-  .icon {
-    color: #00000078;
-    width: 1.7rem;
-    height: 1.4rem;
-    margin-left: 5px;
-  }
-  .reviews-container {
-    display: flex;
-    overflow-x: auto;
-    /* width: 200rem; */
-  }
-  .reviews-container::-webkit-scrollbar {
-    height: 0.5rem;
-  }
-
-  .reviews-container::-webkit-scrollbar-thumb {
-    background-color: #d4d4d4;
-    border-radius: 10px;
-    cursor: pointer;
   }
   @media only screen and (max-width: ${({ theme }) => theme.mid}) {
     .total {
@@ -228,6 +224,18 @@ const Wrapper = styled.div`
     }
     .button {
       width: 100%;
+    }
+    .titles {
+      font-size: 1.2rem;
+      margin: 10px 0;
+    }
+    textarea {
+      width: 100%;
+      height: 5rem;
+      margin-bottom: 20px;
+    }
+    .date {
+      width: 50%;
     }
   }
 `;

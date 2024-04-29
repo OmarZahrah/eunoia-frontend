@@ -15,7 +15,10 @@ export default TitleDesc;
 const Wrapper = styled.div`
   p {
     color: #00000099;
-    font-size: 1.6rem;
+    /* font-size: 1.6rem; */
+    font-size: 1.4rem;
+    text-transform: capitalize;
+
     font-weight: 600;
   }
   span {

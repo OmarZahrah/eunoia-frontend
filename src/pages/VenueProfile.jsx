@@ -19,6 +19,7 @@ import { FaHeart } from "react-icons/fa6";
 import { useAddToFavorite } from "../features/favourites/useAddtoFavorite";
 import { useUser } from "../features/userProfile/useUser";
 import { useDeleteFromFavorites } from "../features/favourites/useDeleteFromFavorites";
+import Map from "../components/Map";
 
 function VenueProfile() {
   const { venuId } = useParams();
@@ -93,15 +94,16 @@ function VenueProfile() {
           </div>
           <div className="second-section">
             <p className="location">Location</p>
-            <img className="imgloc" src={imgloc} alt="map" />
-            <a
+            <Map />
+            {/* <img className="imgloc" src={imgloc} alt="map" /> */}
+            {/* <a
               href="https://www.google.com/maps/search/?api=1&query=30.59569736038205,32.270704449476916"
               target="_blank"
               rel="noopener noreferrer"
               className="google-maps-link"
             >
               Open in Google Maps
-            </a>
+            </a> */}
           </div>
           <div className="third-section">
             {Boolean(service?.packages?.length) && (
@@ -357,22 +359,9 @@ const Wrapper = styled.div`
     margin: 0 auto;
   }
 
-  .google-maps-link {
-    display: block;
-    margin-top: 0.5rem;
-    font-family: Literata;
-    color: #74ab70;
-    font-size: 1.3rem;
-    font-weight: 450;
-    text-decoration: none;
-    text-align: right;
-    /* width: 84%; */
-    padding-bottom: 1.5rem;
-    width: 95%;
-  }
   .second-section {
     position: relative;
-    /* max-width: 100%; */
+    /* width: 100%; */
   }
   .second-section::after {
     content: "";
