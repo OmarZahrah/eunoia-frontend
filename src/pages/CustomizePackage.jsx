@@ -10,7 +10,7 @@ import man from "../images/man.png";
 import { useGetPackage } from "../features/package/useGetPackage";
 import { useNavigate, useParams } from "react-router-dom";
 import Loading from "../components/Loading";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAddRequest } from "../features/requests/useAddRequest";
 function CustomizePackage(id) {
@@ -18,6 +18,14 @@ function CustomizePackage(id) {
   const { packageData, isLoading } = useGetPackage(packageId);
   const { register, handleSubmit } = useForm();
   const { addRequest, isLoading: addingRequest } = useAddRequest();
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(
+    function () {
+      if (!isLoading && packageData.price) setTotalPrice(packageData.price);
+    },
+    [packageData, setTotalPrice, isLoading]
+  );
 
   const onSubmit = (formData) => {
     // console.log(formData);
@@ -61,7 +69,7 @@ function CustomizePackage(id) {
           <form className="content" onSubmit={handleSubmit(onSubmit)}>
             <CoverPhotoSlider
               businessName={packageData?.packageName}
-              image={packageData.packagePhoto}
+              image={packageData?.packagePhoto}
               // location={"Mercure Al-Forsan"}
               // rate={"4.5"}
             />
@@ -80,6 +88,7 @@ function CustomizePackage(id) {
                 key={pack?._id}
                 options={pack?.options}
                 register={register}
+                setTotalPrice={setTotalPrice}
               />
             ))}
 
@@ -105,7 +114,7 @@ function CustomizePackage(id) {
             {/* <CustomizeDetails title={"Capacity"} />
             <CustomizeDetails title={"Capacity"} /> */}
             <p className="total">
-              Total: <span className="price">{packageData?.price} EGP</span>
+              Total: <span className="price">{totalPrice} EGP</span>
             </p>
             <div className="button">
               <Button size="medium" type="submit" className="button">

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import RadioButton from "./RadioButton";
 
-function CustomizeDetails({ title, options, register }) {
+function CustomizeDetails({ title, options, register, setTotalPrice }) {
   // console.log(options);
   return (
     <Wrapper>
@@ -11,10 +11,12 @@ function CustomizeDetails({ title, options, register }) {
           <RadioButton
             id={option._id}
             head={option.title}
+            price={option.price}
             details={`${option.price} EGP `}
             register={register}
             key={i}
             title={title}
+            setTotalPrice={setTotalPrice}
           />
         ))}
         {/* <RadioButton head={"250"} details={"6000 EGP"} />

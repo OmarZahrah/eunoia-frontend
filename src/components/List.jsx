@@ -49,7 +49,7 @@ function List({ user }) {
           </Link>
         </li>
         <li>
-          <Link to="">
+          <Link to="/requests">
             <FaRegEnvelope className="icons" />
             <span className="text">Requests</span>
           </Link>
