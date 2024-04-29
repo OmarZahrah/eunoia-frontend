@@ -2,16 +2,26 @@ import styled from "styled-components";
 import Button from "../components/Button";
 import { useState } from "react";
 
-function RequestsComponent({ dateNumber, dateMonth, day, time, noteText }) {
+function RequestsComponent({
+  dateNumber,
+  dateMonth,
+  day,
+  time,
+  Notes,
+  role,
+  status,
+}) {
   const [accepted, setAccepted] = useState(false);
   const [declined, setDeclined] = useState(false);
 
   const handleAccept = () => {
     setAccepted(true);
+    setDeclined(false); // Reset declined state if it was previously set
   };
 
   const handleDecline = () => {
     setDeclined(true);
+    setAccepted(false); // Reset accepted state if it was previously set
   };
 
   return (
@@ -27,34 +37,50 @@ function RequestsComponent({ dateNumber, dateMonth, day, time, noteText }) {
         <div className="white-dev-text">
           <p className="time">{time}</p>
           <p className="note">
-            Notes : <span>{noteText}</span>
+            Notes : <span>{Notes}</span>
           </p>
         </div>
-        {accepted ? (
-          <p className="accepted">Accepted</p>
-        ) : declined ? (
-          <p className="declined">Declined</p>
-        ) : (
+        {role !== "user" ? (
           <>
-            <Button
-              className="accept"
-              onClick={handleAccept}
-              size="small"
-              color="white"
-              background="rgba(116, 171, 112, 1)"
-            >
-              Accept
-            </Button>
-            <Button
-              className="decline"
-              onClick={handleDecline}
-              size="medium"
-              color="rgba(116, 171, 112, 1)"
-              background="transparent"
-            >
-              Decline
-            </Button>
+            {accepted ? (
+              <p className="accepted">Accepted</p>
+            ) : declined ? (
+              <p className="declined">Declined</p>
+            ) : (
+              <>
+                <Button
+                  className="accept"
+                  onClick={handleAccept}
+                  size="small"
+                  color="white"
+                  background="rgba(116, 171, 112, 1)"
+                >
+                  Accept
+                </Button>
+                <Button
+                  className="decline"
+                  onClick={handleDecline}
+                  size="medium"
+                  color="rgba(116, 171, 112, 1)"
+                  background="transparent"
+                >
+                  Decline
+                </Button>
+              </>
+            )}
           </>
+        ) : (
+          <p
+            className={`${
+              status === "accepted"
+                ? "accepted"
+                : status === "declined"
+                ? "declined"
+                : "pending"
+            } status`}
+          >
+            {status}
+          </p>
         )}
       </div>
     </RequestWrapper>
@@ -64,8 +90,17 @@ function RequestsComponent({ dateNumber, dateMonth, day, time, noteText }) {
 const RequestWrapper = styled.div`
   position: relative;
   min-width: 25%;
-  /* padding: 1rem 5rem; */
-
+  .status {
+    text-transform: capitalize;
+    position: absolute;
+    top: 75%;
+    left: 70%;
+    font-size: 20px;
+    font-family: Literata;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: -0.40799999237060547px;
+  }
   .white-div {
     width: 100%;
     position: relative;
@@ -165,28 +200,14 @@ const RequestWrapper = styled.div`
   }
 
   .accepted {
-    position: absolute;
-    top: 75%;
-    left: 70%;
-    font-size: 30px;
     color: rgba(63, 164, 55, 1);
-    font-family: Literata;
-    font-weight: 600;
-    line-height: 22px;
-    letter-spacing: -0.40799999237060547px;
   }
 
   .declined {
-    position: absolute;
-    top: 75%;
-    left: 70%;
-    font-size: 30px;
-    color: red;
-    font-family: Literata;
-    font-weight: 600;
-    line-height: 22px;
-    letter-spacing: -0.40799999237060547px;
     color: rgba(215, 80, 80, 1);
+  }
+  .pending {
+    color: rgba(0, 0, 0, 0.621);
   }
   button {
     display: flex;
