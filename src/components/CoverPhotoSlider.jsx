@@ -42,13 +42,16 @@ const Wrapper = styled.div`
   }
   .title {
     color: #00000099;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
+    /* font-size: 1.6rem; */
     font-weight: 600;
+    text-transform: capitalize;
+
   }
 
   .rate {
     color: #00000099;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 400;
   }
 
@@ -91,7 +94,7 @@ const Wrapper = styled.div`
   @media only screen and (max-width: 52.5em) {
     .image {
       height: 15rem;
-    } 
+    }
     .title {
       font-size: 1.2rem;
     }
@@ -102,7 +105,6 @@ const Wrapper = styled.div`
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
     .image {
       height: 12rem;
-    } 
-   
+    }
   }
 `;

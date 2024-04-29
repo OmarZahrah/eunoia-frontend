@@ -30,9 +30,8 @@ export default CustomizeDetails;
 const Wrapper = styled.div`
   p {
     color: #00000099;
-    /* font-size: 1.4rem; */
-    font-size: 1.6rem;
-
+    font-size: 1.4rem;
+    /* font-size: 1.6rem; */
     font-weight: 600;
     margin-bottom: 15px;
     text-transform: capitalize;
