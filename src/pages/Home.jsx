@@ -4,22 +4,30 @@ import SpecialOffers from "../components/SpecialOffers";
 import ring from "../images/ring.png";
 import DetailsCard from "../components/DetailsCard";
 import man from "../images/man.png";
-import table from "../images/table.png";
-import { useGetServices } from "../features/categories/useGetServices";
 import Loading from "../components/Loading";
 import { useUser } from "../features/userProfile/useUser";
 import { useGetNearby } from "../features/homepage/useGetNearby";
 import ScrollSection from "../components/ScrollSection";
-import { nearbyServices } from "../services/apiServices";
-import { useGetFavorites } from "../features/favourites/useGetFavorites";
-import { useServiceContext } from "../context/ServiceContext";
-import { useEffect } from "react";
-const Home = () => {
-  const { user, isLoading, isAuthenticated } = useUser();
-  // const isLoading = false;
-  // console.log(user);
-  const { nearbyServices } = useGetNearby();
+import { useGetServices } from "../features/categories/useGetServices";
 
+const Home = () => {
+  const { user, isLoading } = useUser();
+  const { nearbyServices } = useGetNearby();
+  const { allServices: topPhotographers } = useGetServices([
+    { category: "photographers" },
+    { limit: 10 },
+    { sort: "-ratingsAverage" },
+  ]);
+  const { allServices: topVenues } = useGetServices([
+    { category: "Venues" },
+    { limit: 10 },
+    { sort: "-ratingsAverage" },
+  ]);
+  const { allServices: topMakeupArtists } = useGetServices([
+    { category: "Makeup Artists" },
+    { limit: 10 },
+    { sort: "-ratingsAverage" },
+  ]);
   return (
     <Wrapper>
       {isLoading ? (
@@ -28,9 +36,7 @@ const Home = () => {
         <>
           <NavBar />
           <div className="container">
-            {/* <h1>Hey, Name!</h1> */}
             <p className="titles">Special Offers</p>
-            {/* <div className="packages-container"> */}
             <ScrollSection>
               <SpecialOffers
                 backgroundImage={ring}
@@ -67,10 +73,8 @@ const Home = () => {
                 category={"Photographer"}
                 link={"/"}
               />
-              {/* </div> */}
             </ScrollSection>
             <p className="titles">Popular</p>
-            {/* <div className="packages-container"> */}
             <ScrollSection>
               <DetailsCard
                 image={man}
@@ -135,7 +139,6 @@ const Home = () => {
                 width={185}
                 height={160}
               />
-              {/* </div> */}
             </ScrollSection>
             {nearbyServices?.length && user?.location ? (
               <>
@@ -145,7 +148,6 @@ const Home = () => {
                     ({nearbyServices[0]?.location})
                   </span>
                 </p>
-                {/* <div className="packages-container"> */}
                 <ScrollSection>
                   {nearbyServices?.map((nearbyService) => (
                     <DetailsCard
@@ -155,6 +157,73 @@ const Home = () => {
                       image={nearbyService.imageCover}
                       title={nearbyService.businessName}
                       description={nearbyService.businessCategory}
+                      width={330}
+                      height={180}
+                    />
+                  ))}
+                </ScrollSection>
+              </>
+            ) : (
+              ""
+            )}
+
+            {topVenues?.length ? (
+              <>
+                <p className="titles">Top Venues</p>
+                <ScrollSection>
+                  {topVenues?.map((card) => (
+                    <DetailsCard
+                      key={card._id}
+                      id={card._id}
+                      link="venueprofile"
+                      image={card.imageCover}
+                      title={card.businessName}
+                      description={card.businessCategory}
+                      width={330}
+                      height={180}
+                      rate={card.ratingsAverage}
+                    />
+                  ))}
+                </ScrollSection>
+                {/* </div> */}
+              </>
+            ) : (
+              ""
+            )}
+            {topPhotographers?.length ? (
+              <>
+                <p className="titles">Top Photographers</p>
+                <ScrollSection>
+                  {topPhotographers?.map((card) => (
+                    <DetailsCard
+                      key={card._id}
+                      id={card._id}
+                      link="venueprofile"
+                      image={card.imageCover}
+                      title={card.businessName}
+                      description={card.businessCategory}
+                      width={330}
+                      height={180}
+                    />
+                  ))}
+                </ScrollSection>
+                {/* </div> */}
+              </>
+            ) : (
+              ""
+            )}
+            {topMakeupArtists?.length ? (
+              <>
+                <p className="titles">Top Makeup Artists</p>
+                <ScrollSection>
+                  {topMakeupArtists?.map((card) => (
+                    <DetailsCard
+                      key={card._id}
+                      id={card._id}
+                      link="venueprofile"
+                      image={card.imageCover}
+                      title={card.businessName}
+                      description={card.businessCategory}
                       width={330}
                       height={180}
                     />

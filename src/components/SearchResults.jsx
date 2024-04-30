@@ -77,7 +77,6 @@ const PackageWrapper = styled.div`
     z-index: 2;
   }
 
-  
   @media only screen and (max-width: ${({ theme }) => theme.mid}) {
   }
 
@@ -113,7 +112,6 @@ const MaskImage = styled.img`
 `;
 
 function VenuePackages({ showRate, className, data, favorites }) {
-  console.log(data);
   return (
     <Link className="link" to={`/venueprofile/${data?._id}`}>
       <PackageWrapper>

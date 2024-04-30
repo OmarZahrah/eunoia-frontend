@@ -14,7 +14,7 @@ export const useLogin = () => {
       toast.success("Welcome :)");
       () => setIsAuthenticated(true);
       queryClient.setQueryData(["user"], user);
-      queryClient.invalidateQueries({ queryKey: ["isAuthenticated", "user"] });
+      queryClient.invalidateQueries({ queryKey: ["isAuthenticated"] });
       navigate("/home", { replace: true });
     },
     onError: (err) => {

@@ -35,11 +35,6 @@ function Category({ title, data }) {
       />
       <div className="search-container">
         {data?.map((card) => (
-          // <Link
-          //   to={`/venueprofile/${card._id}`}
-          //   key={card._id}
-          //   className="link"
-          // >
           <SearchResults
             className="result"
             showRate={4.5}

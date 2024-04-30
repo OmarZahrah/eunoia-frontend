@@ -1,14 +1,30 @@
+import { FaStar } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-function DetailsCard({ image, title, description, width, height, id, link }) {
+function DetailsCard({
+  image,
+  title,
+  description,
+  width,
+  height,
+  id,
+  link,
+  rate,
+}) {
   return (
     <Link to={`/${link}/${id}`}>
       <Wrapper width={width} height={height}>
         <img src={image} alt={title} />
         <div>
           <p>{title}</p>
-          <span>{description}</span>
+          <div className="description">
+            <span>{description}</span>
+            <span className="rate">
+              <FaStar style={{ color: "#FFF279", marginRight: "0.01rem" }} />{" "}
+              {rate}
+            </span>
+          </div>
         </div>
       </Wrapper>
     </Link>
@@ -48,11 +64,18 @@ const Wrapper = styled.div`
     font-size: 1.3rem;
     font-weight: 600;
   }
+  .description {
+    padding: 0;
+    width: 100%;
+    display: flex;
+  }
   span {
     font-size: 1rem;
     font-weight: 500;
   }
-
+  .rate {
+    margin-left: auto;
+  }
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
     /* width: ${(props) => props.width * 0.8}px;
     height: ${(props) => props.height * 0.8}px; */
