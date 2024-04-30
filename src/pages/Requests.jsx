@@ -1,21 +1,24 @@
 import NavBar from "../components/NavBar";
 import styled from "styled-components";
 import RequestsComponent from "../components/RequestsComponent";
-import { useGetRequest } from "../features/requests/useGetRequest";
-import Loading from '../components/Loading'
+import { useGetUserRequest } from "../features/requests/useGetUserRequest";
+import Loading from "../components/Loading";
+import { useGetProviderRequests } from "../features/requests/useGetProviderRequests";
+
 function Requests() {
-  const { isLoading:loadingUser , requests:requestsUser }=useGetRequest('user');
-  const { isLoading:loadingProvider , requests:requestsProvider }=useGetRequest('serviceProvider');
-console.log('user',requestsUser)
-console.log('provider',requestsProvider)
-if(loadingProvider||loadingUser)return <Loading/>
+  const { isLoading: loadingUser, userRequests } = useGetUserRequest();
+  const { isLoading: loadingProvider, providerRequests } =
+    useGetProviderRequests("serviceProvider");
+  console.log("user", userRequests);
+  console.log("provider", providerRequests);
+
+  if (loadingProvider || loadingUser) return <Loading />;
   return (
     <Wrapper>
       <NavBar />
       <div className="request-container">
         <p className="title">Requests</p>
         <div className="components">
-
           {/* <RequestsComponent
             dateNumber="29"
             dateMonth="Dec 2024"
@@ -23,22 +26,30 @@ if(loadingProvider||loadingUser)return <Loading/>
             time="5:00 PM"
             noteText="Location will be in Ismailia in Mercure"
           /> */}
-
-{requestsUser?.map((request) => (
-  <RequestsComponent
-    key={request._id} 
-    dateNumber="29"
-    dateMonth="Dec 2024"
-    day="Tue"
-    time={request.totalPriceAfterDiscount}
-    Notes={request.Notes}
-    role="user"
-    status={request.status}
-    // status='declined'
-  />
-))}
-
-         
+          {providerRequests?.map((request) => (
+            <RequestsComponent
+              key={request._id}
+              id={request._id}
+              date={request.bookingDate}
+              price={request.totalPriceAfterDiscount}
+              Notes={request.Notes}
+              role="provider"
+              status={request.status}
+              // status='declined'
+            />
+          ))}
+          {userRequests?.map((request) => (
+            <RequestsComponent
+              key={request._id}
+              id={request._id}
+              price={request.totalPriceAfterDiscount}
+              Notes={request.Notes}
+              role="user"
+              status={request.status}
+              date={request.bookingDate}
+              // status='declined'
+            />
+          ))}
         </div>
       </div>
     </Wrapper>
@@ -49,6 +60,7 @@ const Wrapper = styled.div`
   background-color: #fef9f0;
   min-height: 100vh;
   overflow-x: hidden;
+  padding: 0 2rem;
 
   .title {
     font-family: Literata;
@@ -65,8 +77,9 @@ const Wrapper = styled.div`
   .components {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 3rem;
+    justify-content: start;
+    margin: 0 auto;
+    gap: 2rem;
   }
 
   .components > * {
@@ -82,24 +95,14 @@ const Wrapper = styled.div`
       font-size: 2.1rem;
     }
   }
-  @media only screen and (max-width: ${({ theme }) => theme.avg}) {
-    .components > * {
-      width: calc(70% - 10px);
-    }
-  }
+
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
-    .components > * {
-      /* width: calc(85% - 5px); */
-      width: 100%;
-    }
     .title {
       font-size: 2rem;
     }
   }
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
-    .components > * {
-      /* width: calc(100% - 5px); */
-    }
+    padding: 0;
     .title {
       font-size: 2rem;
     }

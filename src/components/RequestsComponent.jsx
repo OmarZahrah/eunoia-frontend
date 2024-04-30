@@ -1,98 +1,91 @@
 import styled from "styled-components";
 import Button from "../components/Button";
 import { useState } from "react";
+import { months } from "../data/data";
+import { useHandleRequest } from "../features/requests/useHandleRequest";
 
-function RequestsComponent({
-  dateNumber,
-  dateMonth,
-  day,
-  time,
-  Notes,
-  role,
-  status,
-}) {
-  const [accepted, setAccepted] = useState(false);
-  const [declined, setDeclined] = useState(false);
-
-  const handleAccept = () => {
-    setAccepted(true);
-    setDeclined(false); // Reset declined state if it was previously set
+function RequestsComponent({ id, price, Notes, role, status, date }) {
+  const { handleRequest, isLoading } = useHandleRequest();
+  const handleDecision = (decision) => {
+    console.log(decision);
+    handleRequest({ id: id, decision: decision });
   };
-
-  const handleDecline = () => {
-    setDeclined(true);
-    setAccepted(false); // Reset accepted state if it was previously set
-  };
-
   return (
     <RequestWrapper>
-      <div className="white-div">
-        <div className="rose-div">
-          <div className="text">
-            <p className="date-number">{dateNumber}</p>
-            <p className="date-month">{dateMonth}</p>
-            <p className="day">{day}</p>
-          </div>
+      {/* <div className="white-div"> */}
+      <div className="rose-div">
+        <div className="text">
+          <p className="date-number">{date?.split("-")[2]}</p>
+          <p className="date-month">{months[date?.split("-")[1]]}</p>
+          <p className="day">{date?.split("-")[0]}</p>
         </div>
-        <div className="white-dev-text">
-          <p className="time">{time}</p>
-          <p className="note">
-            Notes : <span>{Notes}</span>
-          </p>
-        </div>
-        {role !== "user" ? (
-          <>
-            {accepted ? (
-              <p className="accepted">Accepted</p>
-            ) : declined ? (
-              <p className="declined">Declined</p>
-            ) : (
-              <>
-                <Button
-                  className="accept"
-                  onClick={handleAccept}
-                  size="small"
-                  color="white"
-                  background="rgba(116, 171, 112, 1)"
-                >
-                  Accept
-                </Button>
-                <Button
-                  className="decline"
-                  onClick={handleDecline}
-                  size="medium"
-                  color="rgba(116, 171, 112, 1)"
-                  background="transparent"
-                >
-                  Decline
-                </Button>
-              </>
-            )}
-          </>
-        ) : (
-          <p
-            className={`${
-              status === "accepted"
-                ? "accepted"
-                : status === "declined"
-                ? "declined"
-                : "pending"
-            } status`}
-          >
-            {status}
-          </p>
-        )}
       </div>
+      <div className="white-dev-text">
+        <div className="top">
+          <p className="price">{price} EGP</p>
+          <p className="sent-received">
+            {role == "user" ? "Sent" : "Received"}
+          </p>
+        </div>
+        <p className="note">
+          Notes : <span>{Notes || "There is no notes."}</span>
+        </p>
+        <div className="buttons">
+          {role == "provider" && status == "Pending" ? (
+            <>
+              <Button
+                className="button decline"
+                size="medium"
+                color=" rgba(215, 80, 80, 1)"
+                background="transparent"
+                onClick={() => handleDecision("decline-request")}
+              >
+                {isLoading ? "Loading..." : "Decline"}
+              </Button>
+              <Button
+                className="button accept"
+                size="small"
+                color="white"
+                background="rgba(116, 171, 112, 1)"
+                onClick={() => handleDecision("accept-request")}
+              >
+                {isLoading ? "Loading..." : "Accept"}
+              </Button>
+            </>
+          ) : (
+            <p
+              className={`${
+                status === "Accepted"
+                  ? "accepted"
+                  : status === "Declined"
+                  ? "declined"
+                  : "pending"
+              } status`}
+            >
+              {status}
+            </p>
+          )}
+        </div>
+      </div>
+      {/* </div> */}
     </RequestWrapper>
   );
 }
 
 const RequestWrapper = styled.div`
-  position: relative;
   min-width: 25%;
+  width: 45%;
+  height: 265px;
+  position: relative;
+  background-color: #fff;
+  display: flex;
+  gap: 1rem;
+  /* justify-content: space-between; */
+  align-items: center;
+  box-shadow: -5px 2px 10px 0px #0000001a;
   .status {
     text-transform: capitalize;
-    position: absolute;
+    /* position: absolute; */
     top: 75%;
     left: 70%;
     font-size: 20px;
@@ -101,7 +94,7 @@ const RequestWrapper = styled.div`
     line-height: 22px;
     letter-spacing: -0.40799999237060547px;
   }
-  .white-div {
+  /* .white-div {
     width: 100%;
     position: relative;
     background-color: #ffffff;
@@ -115,21 +108,29 @@ const RequestWrapper = styled.div`
     z-index: 1;
     box-shadow: -5px 2px 10px 0px #0000001a;
     position: relative;
-  }
+  } */
 
   .rose-div {
     width: 120px;
-    height: 248px;
+    height: 90%;
     background-color: rgba(245, 185, 167, 0.24);
-    position: absolute;
-    top: 50%;
-    left: 10.3%;
-    transform: translate(-50%, -50%);
+    margin: auto 0;
+    padding: 2rem 1rem;
+    /* position: absolute; */
+    /* top: 50%;
+    left: 10.3%; */
+    /* transform: translate(-50%, -50%); */
+  }
+  .white-dev-text {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1rem;
   }
 
   .date-number {
-    padding-top: 2.4rem;
-    font-family: Literata;
+    font-family: "Literata";
     font-size: 50px;
     font-weight: 400;
     letter-spacing: 1px;
@@ -153,8 +154,12 @@ const RequestWrapper = styled.div`
     text-align: center;
     color: rgba(75, 75, 75, 1);
   }
-
-  .time {
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .price {
     font-family: Literata;
     font-size: 26px;
     font-weight: 400;
@@ -162,8 +167,19 @@ const RequestWrapper = styled.div`
     letter-spacing: -0.40799999237060547px;
     text-align: left;
     color: rgba(0, 0, 0, 0.6);
-    position: absolute;
+    /* position: absolute; */
     left: 23%;
+  }
+  .sent-received {
+    font-family: Literata;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: -0.40799999237060547px;
+    text-align: left;
+    color: rgba(0, 0, 0, 0.6);
+    /* position: absolute; */
+    right: 5px;
   }
 
   .note {
@@ -174,9 +190,7 @@ const RequestWrapper = styled.div`
     letter-spacing: -0.40799999237060547px;
     text-align: left;
     color: rgba(0, 0, 0, 0.6);
-    position: absolute;
-    left: 23%;
-    top: 30%;
+    margin-top: 2rem;
   }
 
   .note span {
@@ -187,15 +201,23 @@ const RequestWrapper = styled.div`
     letter-spacing: -0.40799999237060547px;
     text-align: left;
   }
+  .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: auto;
+    margin-left: auto;
+  }
   .decline {
-    position: absolute;
-    top: 70%;
+    /* position: absolute; */
+    /* top: 70%; */
     font-size: 25px;
   }
   .accept {
-    position: absolute;
-    top: 75%;
-    left: 70%;
+    /* position: absolute; */
+    /* top: 75%;
+    left: 70%; */
     font-size: 21px;
   }
 
@@ -213,26 +235,14 @@ const RequestWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    width: fit-content;
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.mid}) {
     /* padding-left: 3rem; */
-    .white-div {
-      width: 560px;
-    }
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.small}) {
-    .white-div {
-      width: 520px;
-      height: 235px;
-    }
-    .rose-div {
-      width: 100px;
-      height: 220px;
-      top: 50%;
-      left: 9.7%;
-    }
     .date-number {
       font-size: 40px;
     }
@@ -242,16 +252,6 @@ const RequestWrapper = styled.div`
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.semi}) {
-    padding: 1rem 1rem;
-
-    .white-div {
-      width: 570px;
-    }
-    .rose-div {
-      height: 217px;
-      left: 8.9%;
-    }
-
     .accepted {
       font-size: 28px;
     }
@@ -262,17 +262,12 @@ const RequestWrapper = styled.div`
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.avg}) {
+    width: 80%;
+    margin: 0 auto !important;
   }
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
-    .white-div {
-      /* width: 570px; */
-      width: 100%;
-    }
-    .rose-div {
-      height: 217px;
-      left: 8.9%;
-    }
-
+    height: 13.75rem;
+    width: 100%;
     .accepted {
       font-size: 28px;
     }
@@ -283,17 +278,9 @@ const RequestWrapper = styled.div`
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
-    .white-div {
-      /* width: 350px; */
-      height: 200px;
-      padding-left: 0;
-    }
-    .rose-div {
-      height: 90%;
-      width: 56px;
-      left: 0;
-      transform: translatey(-50%);
-    }
+    padding: 0;
+    width: 100%;
+    gap: 0;
     .date-number {
       padding-top: 1rem;
       font-size: 25px;
@@ -306,8 +293,8 @@ const RequestWrapper = styled.div`
       font-size: 20px;
     }
 
-    .time {
-      font-size: 20px;
+    .price {
+      font-size: 16px;
       left: 20%;
     }
 
@@ -321,14 +308,10 @@ const RequestWrapper = styled.div`
       line-height: 38.55px;
     }
     .decline {
-      right: 5%;
       font-size: 20px;
     }
     .accept {
-      left: 65%;
       font-size: 18px;
-      width: 100px;
-      height: 37px;
     }
 
     .accepted {
@@ -337,6 +320,12 @@ const RequestWrapper = styled.div`
 
     .declined {
       font-size: 20px;
+    }
+    .sent-received {
+      font-size: 18px;
+    }
+    .buttons {
+      justify-content: space-between;
     }
   }
 `;

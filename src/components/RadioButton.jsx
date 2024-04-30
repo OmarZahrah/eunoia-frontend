@@ -2,26 +2,26 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 function RadioButton({
+  packId,
   id,
   head,
   details,
   title,
   price,
   register,
-  setTotalPrice,
+  selectedOptions,
+  setSelectedOptions,
 }) {
-  const [optionPrice, setOptionPrice] = useState(0);
-  const [selectedPrice, setSelectedPrice] = useState(0);
   const handleChange = () => {
-    setOptionPrice(selectedPrice);
-    setSelectedPrice(price);
+    setSelectedOptions({ ...selectedOptions, [packId]: price });
   };
-  useEffect(
-    function () {
-      setTotalPrice((p) => p - optionPrice + selectedPrice);
-    },
-    [optionPrice, setTotalPrice, selectedPrice]
-  );
+  // useEffect(
+  //   function () {
+  //     const oldPrice = optionPrice;
+  //     setTotalPrice((p) => p - optionPrice + selectedPrice);
+  //   },
+  //   [optionPrice, setTotalPrice, selectedPrice]
+  // );
 
   return (
     <Wrapper>

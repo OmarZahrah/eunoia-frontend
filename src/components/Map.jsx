@@ -7,6 +7,7 @@ const defaultPosition = [30.033333, 31.233334]; //Egypt
 
 function Map() {
   const [position, setPosition] = useState(defaultPosition);
+  console.log(position);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {

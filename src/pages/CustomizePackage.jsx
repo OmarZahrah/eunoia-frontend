@@ -17,12 +17,18 @@ function CustomizePackage(id) {
   const { register, handleSubmit } = useForm();
   const { addRequest, isLoading: addingRequest } = useAddRequest();
   const [totalPrice, setTotalPrice] = useState(0);
+  const [selectedOptions, setSelectedOptions] = useState({ 1: 0 });
 
   useEffect(
     function () {
-      if (!isLoading && packageData.price) setTotalPrice(packageData.price);
+      if (!isLoading && packageData.price) {
+        const optionsPrice = Object.values(selectedOptions).reduce(
+          (val, acc) => (acc += val)
+        );
+        setTotalPrice(packageData.price + optionsPrice);
+      }
     },
-    [packageData, setTotalPrice, isLoading]
+    [packageData, setTotalPrice, isLoading, selectedOptions]
   );
 
   const onSubmit = (formData) => {
@@ -44,18 +50,8 @@ function CustomizePackage(id) {
     addRequest(finalData);
   };
 
-  // console.log(packageData);
-  // console.log(packageData);
-
-  const [selectedDate, setSelectedDate] = useState("");
-  const [text, setText] = useState("");
-
-  const handleTextChange = (event) => {
-    setText(event.target.value);
-  };
-
-  const handleDateChange = (e) => {
-    setSelectedDate(e.target.value);
+  const onChange = (formData) => {
+    console.log(formData);
   };
   return (
     <Wrapper>
@@ -82,11 +78,13 @@ function CustomizePackage(id) {
           /> */}
             {packageData?.customizePackage?.map((pack) => (
               <CustomizeDetails
+                packId={pack._id}
                 title={pack?.name}
                 key={pack?._id}
                 options={pack?.options}
                 register={register}
-                setTotalPrice={setTotalPrice}
+                selectedOptions={selectedOptions}
+                setSelectedOption={setSelectedOptions}
               />
             ))}
             <label htmlFor="dateInput" className="titles">
@@ -107,7 +105,11 @@ function CustomizePackage(id) {
             {/* <CustomizeDetails title={"Capacity"} />
             <CustomizeDetails title={"Capacity"} /> */}
             <p className="total">
-              Total: <span className="price">{totalPrice} EGP</span>
+              Total:{" "}
+              <span className="price">
+                {totalPrice}
+                EGP
+              </span>
             </p>
             <div className="button">
               <Button size="medium" type="submit" className="button">

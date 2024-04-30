@@ -10,6 +10,7 @@ export function useCheckAuth() {
   } = useQuery({
     queryKey: ["isAuthenticated"],
     queryFn: checkAuth,
+    staleTime: 60 * 1000,
   });
 
   return { isLoading, isAuthenticated: isAuthenticated?.isAuthenticated };

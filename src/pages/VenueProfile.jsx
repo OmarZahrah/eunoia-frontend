@@ -25,7 +25,7 @@ function VenueProfile() {
   const { venuId } = useParams();
   const { service, isLoading } = useService(venuId);
   const { user, isLoading: loadingUser } = useUser();
-  console.log(user);
+  // console.log(user);
   const [isFavorite, setIsFavorite] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const { addToFavorites, isSuccess: successAdd } = useAddToFavorite();
@@ -48,7 +48,6 @@ function VenueProfile() {
     },
     [user, isFavorite, setIsFavorite, service, isLoading, loadingUser]
   );
-  console.log(isFavorite);
   const handleFavorite = () => {
     if (isFavorite) {
       deleteFromFavorites(service._id);
@@ -95,15 +94,6 @@ function VenueProfile() {
           <div className="second-section">
             <p className="location">Location</p>
             <Map />
-            {/* <img className="imgloc" src={imgloc} alt="map" /> */}
-            {/* <a
-              href="https://www.google.com/maps/search/?api=1&query=30.59569736038205,32.270704449476916"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="google-maps-link"
-            >
-              Open in Google Maps
-            </a> */}
           </div>
           <div className="third-section">
             {Boolean(service?.packages?.length) && (

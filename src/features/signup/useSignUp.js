@@ -12,6 +12,7 @@ export function useSignup() {
     onSuccess: (user) => {
       queryClient.setQueryData(["user"], user);
       toast.success("Signup Successfully :)");
+      queryClient.invalidateQueries({ queryKey: ["isAuthenticated", "user"] });
       navigate("/signup/create", { replace: true });
     },
     onError: (err) => {
