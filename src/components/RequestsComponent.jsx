@@ -1,15 +1,37 @@
 import styled from "styled-components";
 import Button from "../components/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { months } from "../data/data";
 import { useHandleRequest } from "../features/requests/useHandleRequest";
+import { usePayment } from "../features/payment/usePayment";
+import { redirect, useNavigate } from "react-router-dom";
 
-function RequestsComponent({ id, price, Notes, role, status, date }) {
+function RequestsComponent({ request, id, price, Notes, role, status, date }) {
+  // console.log("request", request);
+  const { payment, isLoading: loadingPayment, isSuccess, data } = usePayment();
   const { handleRequest, isLoading } = useHandleRequest();
+  const [paymentRequest, setPaymentRequest] = useState("");
+
   const handleDecision = (decision) => {
     console.log(decision);
     handleRequest({ id: id, decision: decision });
   };
+  const navigate = useNavigate();
+  let link = "";
+  const handlePayment = () => {};
+  useEffect(
+    function () {
+      if (paymentRequest) {
+        link = payment(paymentRequest);
+        setPaymentRequest("");
+      }
+      if (data) {
+        window.location.replace(data);
+      }
+    },
+    [paymentRequest, payment, isSuccess]
+  );
+
   return (
     <RequestWrapper>
       {/* <div className="white-div"> */}
@@ -50,6 +72,29 @@ function RequestsComponent({ id, price, Notes, role, status, date }) {
                 onClick={() => handleDecision("accept-request")}
               >
                 {isLoading ? "Loading..." : "Accept"}
+              </Button>
+            </>
+          ) : role == "user" && status == "Accepted" ? (
+            <>
+              <p
+                className={`${
+                  status === "Accepted"
+                    ? "accepted"
+                    : status === "Declined"
+                    ? "declined"
+                    : "pending"
+                } status`}
+              >
+                {status}
+              </p>
+              <Button
+                className="button accept"
+                size="small"
+                color="white"
+                background="rgba(116, 171, 112, 1)"
+                onClick={() => setPaymentRequest(id)}
+              >
+                {loadingPayment ? "Loading..." : "Complete Payment"}
               </Button>
             </>
           ) : (

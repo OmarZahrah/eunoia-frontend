@@ -6,11 +6,7 @@ import Loading from "../components/Loading";
 
 function MakeupArtist() {
   // const { allServices, isLoading } = useGetServices([{ category: "Venues" }]);
-  const { allServices, isLoading } = useGetServices([
-    { category: "Venues" },
-    { limit: 1 },
-    { sort: "-ratingsAverage" },
-  ]);
+  const { allServices, isLoading } = useGetServices([{ category: "Venues" }]);
   return (
     <Wrapper>
       <NavBar />

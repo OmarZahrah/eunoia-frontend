@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 function WelcomeSection({ img, welcomeText, header, imgsize, className }) {
   return (
     <Wrapper className={className} imgsize={imgsize}>

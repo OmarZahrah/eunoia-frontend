@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { FaSort } from "react-icons/fa";
+import { governorates } from "../data/data";
 
 function SortSection({
   sortBy,
@@ -26,6 +27,12 @@ function SortSection({
         <option value="">Rating</option>
         <option value="LowToHigh">Rating: Low to High</option>
         <option value="HighToLow">Rating: High to Low</option>
+      </select>
+      <select value={sortByRating} onChange={handleRatingSortChange}>
+        <option value="">Location</option>
+        {governorates.map((governorate) => (
+          <option key={governorate.value}>{governorate.option}</option>
+        ))}
       </select>
     </Wrapper>
   );

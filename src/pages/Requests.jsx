@@ -40,6 +40,7 @@ function Requests() {
           ))}
           {userRequests?.map((request) => (
             <RequestsComponent
+              request={request}
               key={request._id}
               id={request._id}
               price={request.totalPriceAfterDiscount}
