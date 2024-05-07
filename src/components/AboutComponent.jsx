@@ -5,12 +5,16 @@ import { businessCategories, governorates } from "../data/data";
 import FormInput from "./FormInput";
 import Input from "./Input";
 import { useServiceContext } from "../context/ServiceContext";
+import Button from "./Button";
+import SelectLocation from "../components/SelectLocation";
+import { Link } from "react-router-dom";
 
 function AboutComponent({ service }) {
   const [category, setCategory] = useState("");
   const [mobileNumber, setMobileNumber] = useState("+20 1234567890");
   const [location, setLocation] = useState("");
   const { register } = useServiceContext();
+  const [addLocation, setAddLocation] = useState(false);
 
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
@@ -26,6 +30,9 @@ function AboutComponent({ service }) {
 
   return (
     <AboutWrapper>
+      {addLocation && (
+        <div className="overlay" onClick={() => setAddLocation(false)}></div>
+      )}
       <Select
         label="Category"
         options={businessCategories}
@@ -42,13 +49,26 @@ function AboutComponent({ service }) {
           {...register("phoneNumber")}
         />
       </FormInput>
-      <Select
-        label="Location"
-        options={governorates}
-        name="location"
-        placeholder={service?.location}
-        register={register}
-      />
+      <div className="location-field">
+        <span className="add-location" onClick={() => setAddLocation(true)}>
+          Add Location
+        </span>
+        <Select
+          label="governorate"
+          options={governorates}
+          name="location"
+          placeholder={service?.location}
+          register={register}
+        />
+        {/* <Link to={"/selectlocation"}> */}
+        {/* <Link onClick={() => setAddLocation(true)}>
+          <Button className="location-button" size="small" type="button">
+            Add Location
+          </Button>
+        </Link> */}
+
+        {/* <button>Add Location</button> */}
+      </div>
       <div className="about-box">
         <label htmlFor="">About</label>
         <textarea
@@ -57,6 +77,7 @@ function AboutComponent({ service }) {
           placeholder={service?.about}
         ></textarea>
       </div>
+      {addLocation && <SelectLocation />}
     </AboutWrapper>
   );
 }
@@ -70,6 +91,16 @@ const AboutWrapper = styled.div`
 
   .select-box {
     width: 100%;
+  }
+  .overlay {
+    position: absolute;
+    height: 195%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #00000040;
   }
   label {
     font-size: 1.5rem;
@@ -92,6 +123,13 @@ const AboutWrapper = styled.div`
     background-color: transparent;
     border-bottom: 0.2px solid #ccc;
     width: 100%;
+  }
+  .add-location {
+    color: #74ab70;
+    cursor: pointer;
+    position: absolute;
+    right: 70px;
+    /* top: 0; */
   }
   .about-box {
     display: flex;

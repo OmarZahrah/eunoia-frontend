@@ -43,6 +43,7 @@ import CreatePackage from "./features/package/CreatePackage";
 import UpdatePackage from "./features/package/updatePackage";
 import SearchHistory from "./pages/SearchHistory";
 import ProtectedRoute from "./components/ProtectedRoute";
+import SelectLocation from "./components/SelectLocation";
 import PrivateRoute from "./components/PrivateRoute";
 // import Venus from "./pages/Venus";
 import WriteReview from "./components/WriteReview";
@@ -129,6 +130,10 @@ function App() {
                       </Route>
 
                       <Route path="addpackage" element={<AddPackage />} />
+                      {/* <Route
+                        path="selectlocation"
+                        element={<SelectLocation />}
+                      /> */}
 
                       <Route path="favorites" element={<Favorites />} />
                       <Route path="createPackage" element={<CreatePackage />} />
