@@ -94,6 +94,15 @@ function VenueProfile() {
           <div className="second-section">
             <p className="location">Location</p>
             <Map />
+            {/* <img className="imgloc" src={imgloc} alt="map" />  */}
+            {/* <a
+              href="https://www.google.com/maps/search/?api=1&query=30.59569736038205,32.270704449476916"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="google-maps-link"
+            >
+              Open in Google Maps
+            </a> */}
           </div>
           <div className="third-section">
             {Boolean(service?.packages?.length) && (
