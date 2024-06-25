@@ -47,6 +47,7 @@ import SelectLocation from "./components/SelectLocation";
 import PrivateRoute from "./components/PrivateRoute";
 // import Venus from "./pages/Venus";
 import WriteReview from "./components/WriteReview";
+import ChatBot from "./pages/ChatBot";
 
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({
@@ -128,6 +129,7 @@ function App() {
                           element={<CreateBussAcc />}
                         />
                       </Route>
+                      <Route path="chat" element={<ChatBot />} />
 
                       <Route path="addpackage" element={<AddPackage />} />
                       {/* <Route
