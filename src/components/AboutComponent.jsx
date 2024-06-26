@@ -15,6 +15,7 @@ function AboutComponent({ service }) {
   const [location, setLocation] = useState("");
   const { register } = useServiceContext();
   const [addLocation, setAddLocation] = useState(false);
+  console.log("service", service);
 
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
@@ -77,7 +78,11 @@ function AboutComponent({ service }) {
           placeholder={service?.about}
         ></textarea>
       </div>
-      {addLocation && <SelectLocation />}
+      {addLocation && (
+        <SelectLocation
+          defaultPosition={[service.latitude, service.longitude]}
+        />
+      )}
     </AboutWrapper>
   );
 }

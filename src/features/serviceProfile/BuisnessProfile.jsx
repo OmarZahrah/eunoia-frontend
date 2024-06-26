@@ -5,33 +5,28 @@ import changephoto from "../../../public/images/Group 47.svg";
 import { useState } from "react";
 import AboutComponent from "../../components/AboutComponent";
 import PackagesComponent from "../../components/PackagesComponent";
-import Cover from "../../components/Cover";
 import PhotosComponent from "../../components/PhotosComponent";
 import { useServiceContext } from "../../context/ServiceContext";
-import { IoImageOutline } from "react-icons/io5";
-import { MdAdd } from "react-icons/md";
-import { useOutletContext, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Loading from "../../components/Loading";
 import Button from "../../components/Button";
 import { useEditService } from "../serviceProfile/useEditService";
 import { useGetMyService } from "../serviceProfile/useGetMyService";
 import { CiEdit } from "react-icons/ci";
-import FormInput from "../../components/FormInput";
 import { filterData } from "../../utils/filterData";
 import { createFormData } from "../../utils/createFormData";
 import { useAddPhotos } from "./useAddPhotos";
-import { deletePhotos } from "../../services/apiServices";
-import { useDeletePhotos } from "./useDeletePhotos";
 import { usePackageContext } from "../../context/PackageContext";
 
 function BuisnessProfile() {
-  const { userId } = useParams();
   const { myService: service, isLoading } = useGetMyService();
   const [activeItem, setActiveItem] = useState("About");
-  const [change, setChange] = useState(false);
+  // const [change, setChange] = useState(false);
+  const { change, setChange } = useServiceContext();
   const { editService, isLoading: editing } = useEditService();
   const [changeName, setChangeName] = useState(false);
   const { addPhotos, isLoading: addingPhotos } = useAddPhotos();
+
   // console.log("service", service);
   const { editPackage, setEditPackage } = usePackageContext();
   const {
@@ -46,13 +41,15 @@ function BuisnessProfile() {
     profilePhotoFile,
     coverPhotoFile,
     deletedPhotos,
-    noOldPhotos,
+    newPosition,
     register,
     handleSubmit,
   } = useServiceContext();
   const handleItemClick = (item) => {
     setActiveItem(item);
   };
+
+  console.log("new position", Boolean(newPosition.length));
 
   const onSelectFile = (e, type) => {
     const selectedFiles = e.target.files;
@@ -74,6 +71,8 @@ function BuisnessProfile() {
       imageCover: coverPhotoFile && coverPhotoFile,
       // images: oldPhotos && [...oldPhotos],
       images: "",
+      latitude: newPosition[0],
+      longitude: newPosition[1],
     };
     const serviceData =
       profilePhotoFile ||
@@ -83,7 +82,8 @@ function BuisnessProfile() {
       data.about ||
       data.location ||
       data.phoneNumber ||
-      data.images;
+      data.images ||
+      newPosition.length;
 
     // =========================================
     // filter the empty data an create form data
@@ -95,7 +95,7 @@ function BuisnessProfile() {
     // Add the old photos to form data if exist
     // ========================================
     oldPhotos &&
-      oldPhotos.forEach((photo, index) => {
+      oldPhotos.forEach((photo) => {
         finalData.append(`images`, photo);
       });
     // if (noOldPhotos) {

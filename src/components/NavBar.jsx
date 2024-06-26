@@ -123,7 +123,7 @@ const Wrapper = styled.div`
     width: 30px;
     height: 30px;
     margin-left: auto;
-    z-index: 100;
+    z-index: 1000;
     cursor: pointer;
   }
   .close-icon {
@@ -131,7 +131,7 @@ const Wrapper = styled.div`
     width: 30px;
     height: 30px;
     margin-left: auto;
-    z-index: 100;
+    z-index: 1000;
     position: absolute;
     top: 10px;
     right: 10px;
@@ -196,7 +196,7 @@ const Wrapper = styled.div`
       width: 100%;
       height: 100vh;
       flex-direction: column;
-      z-index: 10;
+      z-index: 100;
       background-color: #fff;
       align-items: center;
       justify-content: center;
@@ -206,7 +206,7 @@ const Wrapper = styled.div`
     }
     ul {
       flex-direction: column;
-      z-index: 11;
+      z-index: 100;
       align-items: center;
       justify-content: center;
     }

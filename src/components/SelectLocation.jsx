@@ -3,11 +3,17 @@ import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import styled from "styled-components";
 import NavBar from "./NavBar";
+import { useServiceContext } from "../context/ServiceContext";
 
-const defaultPosition = [30.033333, 31.233334]; // Egypt
+// const defaultPosition = [30.033333, 31.233334]; // Egypt
 
-function Map() {
-  const [position, setPosition] = useState(defaultPosition);
+function Map({ defaultPosition }) {
+  const [position, setPosition] = useState([
+    defaultPosition[0] || 30.033333,
+    defaultPosition[1] || 31.233334,
+  ]);
+  const { setChange, setNewPosition } = useServiceContext();
+  console.log("position", position);
 
   return (
     <Wrapper>
@@ -19,7 +25,11 @@ function Map() {
           scrollWheelZoom={true}
           className="map"
         >
-          <MyComponent setPosition={setPosition} />
+          <MyComponent
+            setPosition={setPosition}
+            setNewPosition={setNewPosition}
+            setChange={setChange}
+          />
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           <Marker position={position} />
         </MapContainer>
@@ -36,12 +46,14 @@ function Map() {
   );
 }
 
-function MyComponent({ setPosition }) {
+function MyComponent({ setPosition, setNewPosition, setChange }) {
   useMapEvents({
     click: (e) => {
       const { lat, lng } = e.latlng;
-      console.log("Clicked Location:", [lat, lng]);
+      // console.log("Clicked Location:", [lat, lng]);
       setPosition([lat, lng]);
+      setNewPosition([lat, lng]);
+      setChange(true);
     },
   });
   return null;

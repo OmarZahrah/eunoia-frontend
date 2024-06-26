@@ -86,7 +86,6 @@ function App() {
                     </Route>
                     <Route path="login" element={<Login />} />
                     <Route path="forgotpassword" element={<ForgotPass />} />
-                    <Route path="search" element={<SearchHistory />} />
                     <Route path="favorites" element={<Favorites />} />
                     <Route path="photographers" element={<Photographers />} />
                     <Route path="eventplanners" element={<EventPlanners />} />

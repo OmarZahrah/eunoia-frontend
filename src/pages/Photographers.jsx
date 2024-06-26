@@ -4,10 +4,17 @@ import Category from "../components/Category";
 import { useGetServices } from "../features/categories/useGetServices";
 import Loading from "../components/Loading";
 import { FaRegHeart } from "react-icons/fa6";
+import { useServiceContext } from "../context/ServiceContext";
+import { useEffect } from "react";
 
 function Photographers() {
+  const { location, rating } = useServiceContext();
+  useEffect(() => {}, []);
+
   const { allServices, isLoading } = useGetServices([
     { category: "photographers" },
+    { location: location },
+    { sort: rating },
   ]);
   return (
     <Wrapper>

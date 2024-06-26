@@ -29,6 +29,7 @@ function VenueProfile() {
   const [isFavorite, setIsFavorite] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const { addToFavorites, isSuccess: successAdd } = useAddToFavorite();
+  console.log("service", service);
   const { deleteFromFavorites, isSuccess: successDelete } =
     useDeleteFromFavorites();
   // console.log(service);
@@ -93,7 +94,12 @@ function VenueProfile() {
           </div>
           <div className="second-section">
             <p className="location">Location</p>
-            <Map />
+            <Map
+              newPosition={[
+                service?.latitude || 30.033333,
+                service?.longitude || 31.233334,
+              ]}
+            />
             {/* <img className="imgloc" src={imgloc} alt="map" />  */}
             {/* <a
               href="https://www.google.com/maps/search/?api=1&query=30.59569736038205,32.270704449476916"

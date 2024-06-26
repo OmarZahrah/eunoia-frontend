@@ -10,12 +10,11 @@ export const addService = async (formData) => {
   return data;
 };
 
-// http://127.0.0.1:3000/api/v1/services?limit=10&sort=-ratingsAverage&businessCategory=DJs
-
 export const getAllServices = async (filters) => {
   const str = filters
     .map((filter) => `&${Object.keys(filter)}=${Object.values(filter)}`)
     .join("");
+  console.log(str);
   const { data } = await customFetch.get(`/services?${str && str}`);
   return data.data;
 };

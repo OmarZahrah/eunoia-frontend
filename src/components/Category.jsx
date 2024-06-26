@@ -8,6 +8,7 @@ import Loading from "../components/Loading";
 function Category({ title, data }) {
   const [sortBy, setSortBy] = useState("");
   const [sortByRating, setSortByRating] = useState("");
+  const [location, setLocation] = useState("");
 
   const { favorites, isLoading } = useGetFavorites();
 
@@ -28,6 +29,8 @@ function Category({ title, data }) {
     <Wrapper>
       <p className="title">{title}</p>
       <SortSection
+        location={location}
+        setLocation={setLocation}
         sortBy={sortBy}
         sortByRating={sortByRating}
         handleSortChange={handleSortChange}

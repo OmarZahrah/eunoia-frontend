@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { FaSort } from "react-icons/fa";
 import { governorates } from "../data/data";
+import { useServiceContext } from "../context/ServiceContext";
 
 function SortSection({
   sortBy,
@@ -8,6 +9,7 @@ function SortSection({
   handleSortChange,
   handleRatingSortChange,
 }) {
+  const { location, setLocation, rating, setRating } = useServiceContext();
   return (
     <Wrapper>
       <div className="sort">
@@ -23,12 +25,12 @@ function SortSection({
         <option value="priceHighToLow">Price: High to Low</option>
         {/* <FaAngleDown className="dropdown-icon" /> */}
       </select>
-      <select value={sortByRating} onChange={handleRatingSortChange}>
+      <select value={rating} onChange={(e) => setRating(e.target.value)}>
         <option value="">Rating</option>
-        <option value="LowToHigh">Rating: Low to High</option>
-        <option value="HighToLow">Rating: High to Low</option>
+        <option value="ratingsAverage">Rating: Low to High</option>
+        <option value="-ratingsAverage">Rating: High to Low</option>
       </select>
-      <select value={sortByRating} onChange={handleRatingSortChange}>
+      <select value={location} onChange={(e) => setLocation(e.target.value)}>
         <option value="">Location</option>
         {governorates.map((governorate) => (
           <option key={governorate.value}>{governorate.option}</option>
