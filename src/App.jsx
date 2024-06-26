@@ -48,6 +48,7 @@ import PrivateRoute from "./components/PrivateRoute";
 // import Venus from "./pages/Venus";
 import WriteReview from "./components/WriteReview";
 import Requests from "./pages/Requests";
+import ChatBot from "./pages/ChatBot";
 
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({
@@ -139,6 +140,7 @@ function App() {
                         />
                         <Route path="favorites" element={<Favorites />} />
                       </Route>
+                      <Route path="chat" element={<ChatBot />} />
 
                       <Route path="addpackage" element={<AddPackage />} />
                       {/* <Route
