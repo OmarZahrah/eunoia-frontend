@@ -1,12 +1,13 @@
 import NavBar from "../components/NavBar";
 import styled from "styled-components";
+import ForgotPassword from "../components/ForgotPassword";
+
 
 function ForgotPass() {
   return (
     <Wrapper>
-      <div>
-        <NavBar />
-      </div>
+     <NavBar/>
+        <ForgotPassword/>
     </Wrapper>
   );
 }
