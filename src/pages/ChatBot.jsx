@@ -8,6 +8,7 @@ import man from "../images/man.png";
 import Choice from "../components/Choice";
 // import { FiSend } from "react-icons/fi";
 import { LuSendHorizonal } from "react-icons/lu";
+import { sendChatMessage } from "../services/apiChatBot";
 
 function ChatBot() {
   const initialMessages = [
@@ -75,6 +76,8 @@ function ChatBot() {
 
       setMessages((prevMessages) => [...prevMessages, userMessage]);
       setInputValue("");
+      console.log(inputValue);
+      sendChatMessage(inputValue);
     }
   };
 
