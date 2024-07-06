@@ -11,6 +11,7 @@ export const useAddPackage = () => {
     mutationFn: addPackageApi,
     onSuccess: (packages) => {
       queryClient.setQueryData(["package"], packages);
+
       navigate(-1);
       toast.success("package Added Successfully");
     },

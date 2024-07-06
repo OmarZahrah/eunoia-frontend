@@ -72,32 +72,36 @@ function VenueProfile() {
                 onClick={handleFavorite}
               />
               <Slider
-                photos={service?.images}
-                cover={service?.imageCover || coverimg}
+                photos={service?.document?.images}
+                cover={service?.document?.imageCover || coverimg}
               />
-              <img className="profile" src={service?.avatar} alt="profile" />
+              <img
+                className="profile"
+                src={service?.document?.avatar}
+                alt="profile"
+              />
             </div>
 
             {/* <CoverSlider photos={service.images} /> */}
             <div className="text">
-              <p className="name-venue">{service?.businessName}</p>
+              <p className="name-venue">{service?.document?.businessName}</p>
               <p className="rate">
                 <FaStar style={{ color: "#FFF279" }} />
-                {service?.ratingsAverage}
+                {service?.document?.ratingsAverage}
               </p>
             </div>
             <p className="pin">
-              <FaMapPin /> {service?.location}
+              <FaMapPin /> {service?.document?.location}
             </p>
-            <p className="pin">{service?.phoneNumber}</p>
-            <div className="about">{service?.about}</div>
+            <p className="pin">{service?.document?.phoneNumber}</p>
+            <div className="about">{service?.document?.about}</div>
           </div>
           <div className="second-section">
             <p className="location">Location</p>
             <Map
               newPosition={[
-                service?.latitude || 30.033333,
-                service?.longitude || 31.233334,
+                service?.document?.latitude || 30.033333,
+                service?.document?.longitude || 31.233334,
               ]}
             />
             {/* <img className="imgloc" src={imgloc} alt="map" />  */}
@@ -111,7 +115,7 @@ function VenueProfile() {
             </a> */}
           </div>
           <div className="third-section">
-            {Boolean(service?.packages?.length) && (
+            {Boolean(service?.document?.packages?.length) && (
               // <div className="third-section">
               //   <p className="location">Packages</p>
               //   <div className="packages-container">
@@ -129,12 +133,13 @@ function VenueProfile() {
               //   </div>
               // </div>
               <ScrollSection title="Packages">
-                {service.packages?.map((pack) => (
+                {service?.document?.packages?.map((pack) => (
                   <DetailsCard
                     key={pack._id}
                     id={pack._id}
                     link="package"
                     image={pack.packagePhoto || outdoorr}
+                    price={pack.price}
                     title={pack.packageName}
                     width={330}
                     height={180}
@@ -146,34 +151,16 @@ function VenueProfile() {
             {/* <p className="location">Similar</p> */}
             {/* <div className="packages-container"> */}
             <ScrollSection title="Similar">
-              <DetailsCard
-                image={table}
-                title="The Garden"
-                description="Photographers"
-                width={330}
-                height={180}
-              />
-              <DetailsCard
-                image={table}
-                title="The Garden"
-                description="Photographers"
-                width={330}
-                height={180}
-              />
-              <DetailsCard
-                image={table}
-                title="The Garden"
-                description="Photographers"
-                width={330}
-                height={180}
-              />
-              <DetailsCard
-                image={table}
-                title="The Garden"
-                description="Photographers"
-                width={330}
-                height={180}
-              />
+              {service?.similar.map((similarService) => (
+                <DetailsCard
+                  key={similarService?._id}
+                  image={similarService?.imageCover || table}
+                  title={similarService?.businessName}
+                  description={similarService?.businessCategory}
+                  width={330}
+                  height={180}
+                />
+              ))}
             </ScrollSection>
 
             {/* </div> */}
@@ -186,7 +173,7 @@ function VenueProfile() {
               <span className="add-review" onClick={() => setIsOpenModal(true)}>
                 Add Review
               </span>
-              {service?.reviews?.map((review) => (
+              {service?.document?.reviews?.map((review) => (
                 <Reviews
                   key={review._id}
                   id={review._id}

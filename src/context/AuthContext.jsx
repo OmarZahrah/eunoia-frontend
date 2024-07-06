@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
-import Step1 from "../features/signup/step1";
-import Step2 from "../features/signup/step2";
-import Step3 from "../features/signup/Step3";
+import Step1 from "../features/Auth/step1";
+import Step2 from "../features/Auth/step2";
+import Step3 from "../features/Auth/Step3";
 // import Step4 from "../features/signup/Step3";
 import { useForm } from "react-hook-form";
 const AuthContext = createContext();

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Outlet, redirect, useNavigate } from "react-router-dom";
 import { useUser } from "../features/userProfile/useUser";
 import { useAuthContext } from "../context/AuthContext";
-import { useCheckAuth } from "../features/signup/useCheckAuth";
+import { useCheckAuth } from "../features/Auth/useCheckAuth";
 
 const PrivateRoute = () => {
   // const { user, isAuthenticated, isLoading } = useUser();

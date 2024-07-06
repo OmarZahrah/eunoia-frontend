@@ -1,6 +1,7 @@
 import { FaStar } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import outdoorr from "../../public/images/outdoor.jpeg";
 
 function DetailsCard({
   image,
@@ -11,15 +12,19 @@ function DetailsCard({
   id,
   link,
   rate,
+  price,
+  location,
 }) {
   return (
     <Link to={`/${link}/${id}`}>
       <Wrapper width={width} height={height}>
-        <img src={image} alt={title} />
+        <img src={image || outdoorr} alt={title} />
         <div>
           <p>{title}</p>
           <div className="description">
-            <span>{description}</span>
+            {description && <span className="price">{description}</span>}
+            {price && <span className="price">{price} EGP</span>}
+            {location && <span className="price">{location} </span>}
             <span className="rate">
               <FaStar style={{ color: "#FFF279", marginRight: "0.01rem" }} />{" "}
               {rate}
@@ -69,9 +74,11 @@ const Wrapper = styled.div`
     width: 100%;
     display: flex;
   }
-  span {
-    font-size: 1rem;
-    font-weight: 500;
+  .price {
+    color: gray;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    font-weight: 400;
   }
   .rate {
     margin-left: auto;

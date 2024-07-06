@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
 import Loading from "../components/Loading";
-import { useCheckAuth } from "../features/signup/useCheckAuth";
+import { useCheckAuth } from "../features/Auth/useCheckAuth";
 
 const ProtectedRoute = () => {
   const { isAuthenticated, isLoading } = useCheckAuth();

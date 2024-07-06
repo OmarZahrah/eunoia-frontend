@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useLogout } from "../features/signup/useLogout";
+import { useLogout } from "../features/Auth/useLogout";
 
 const Logout = ({ setLogout }) => {
   const { logout, isLoading } = useLogout();

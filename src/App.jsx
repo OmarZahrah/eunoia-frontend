@@ -1,14 +1,10 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import AppLayout from "./components/AppLayout";
-import SignUp from "./pages/SignUp";
-import Login from "./pages/Login";
-import Home from "./pages/Home";
 import Welcome from "./pages/Welcome";
 import GlobalStyles from "./assets/styles/GlobalStyles";
-import SignUpUser from "./features/signup/SignUpUser";
-import SignUpBusiness from "./features/signup/SignUpBusiness";
-import CreateAccount from "./features/signup/CreatAccount";
-import ForgotPass from "./pages/ForgotPass";
+import SignUpUser from "./features/Auth/SignUpUser";
+import SignUpBusiness from "./features/Auth/SignUpBusiness";
+import CreateAccount from "./features/Auth/CreatAccount";
+import ForgotPass from "./features/Auth/ForgotPass";
 import { AuthProvider } from "./context/AuthContext";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./assets/styles/responsive";
@@ -19,42 +15,41 @@ import { Toaster } from "react-hot-toast";
 import MainProfile from "./features/userProfile/MainProfile";
 import EditProfile from "./features/userProfile/EditProfile";
 import CreateBussAcc from "./features/userProfile/CreateBussAcc";
-import AddPackage from "./pages/AddPackage";
+import AddPackage from "./features/package/AddPackage";
 import BuisnessProfile from "././features/serviceProfile/BuisnessProfile";
 import { UserProvider } from "./context/UserContext";
-import Profile from "./pages/Profile";
+import Profile from "./features/userProfile/Profile";
 import { ServiceProvider } from "./context/ServiceContext";
 import { PackageProvider } from "./context/PackageContext";
 import VenueProfile from "./pages/VenueProfile";
-import Categories from "./pages/Categories";
+import Categories from "./features/categories/Categories";
 import Error from "./pages/Error";
-import CustomizePackage from "./pages/CustomizePackage";
-import Search from "./pages/Search";
-import Favorites from "./pages/Favorites";
-import Photographers from "./pages/Photographers";
-import EventPlanners from "./pages/EventPlanners";
-import Djs from "./pages/Djs";
-import MakeupArtist from "./pages/MakeupArtist";
-import HairStylest from "./pages/HairStylest";
-import OtherDetails from "./pages/OtherDetails";
-import Food from "./pages/Food";
-import Venues from "./pages/Venues";
+import CustomizePackage from "./features/package/CustomizePackage";
+import Search from "./features/homepage/Search";
+import Favorites from "./features/categories/Favorites";
+import Photographers from "./features/categories/Photographers";
+import EventPlanners from "./features/categories/EventPlanners";
+import Djs from "./features/categories/Djs";
+import MakeupArtist from "./features/categories/MakeupArtist";
+import HairStylest from "./features/categories/HairStylest";
+import OtherDetails from "./features/categories/OtherDetails";
+import Food from "./features/categories/Food";
+import Venues from "./features/categories/Venues";
 import CreatePackage from "./features/package/CreatePackage";
 import UpdatePackage from "./features/package/updatePackage";
-import SearchHistory from "./pages/SearchHistory";
 import ProtectedRoute from "./components/ProtectedRoute";
-import SelectLocation from "./components/SelectLocation";
-import PrivateRoute from "./components/PrivateRoute";
 // import Venus from "./pages/Venus";
-import WriteReview from "./components/WriteReview";
-import Requests from "./pages/Requests";
-import ChatBot from "./pages/ChatBot";
+import Requests from "./features/requests/Requests";
+import ChatBot from "./features/Ai Chat/ChatBot";
+import SignUp from "./features/Auth/SignUp";
+import Login from "./features/Auth/Login";
+import Home from "./features/homepage/Home";
 
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      // staleTime: 60 * 1000,
+      // staleTime: 5 * 60 * 1000,
       staleTime: 0,
     },
   },
@@ -63,7 +58,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
-        <ReactQueryDevtools />
+        {/* <ReactQueryDevtools /> */}
         <AuthProvider>
           <UserProvider>
             <ServiceProvider>

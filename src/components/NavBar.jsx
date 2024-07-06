@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { useUser } from "../features/userProfile/useUser";
 import { set } from "react-hook-form";
 import { useAuthContext } from "../context/AuthContext";
-import { useCheckAuth } from "../features/signup/useCheckAuth";
+import { useCheckAuth } from "../features/Auth/useCheckAuth";
 
 function NavBar({
   showLoginButton = false,
