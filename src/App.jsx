@@ -44,6 +44,9 @@ import ChatBot from "./features/Ai Chat/ChatBot";
 import SignUp from "./features/Auth/SignUp";
 import Login from "./features/Auth/Login";
 import Home from "./features/homepage/Home";
+import WriteReview from "./components/WriteReview";
+import ConfirmationCode from "./pages/ConfirmationCode";
+import SetNewPass from "./pages/SetNewPass";
 
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({
@@ -82,6 +85,11 @@ function App() {
                     </Route>
                     <Route path="login" element={<Login />} />
                     <Route path="forgotpassword" element={<ForgotPass />} />
+                    <Route
+                      path="confirmationcode"
+                      element={<ConfirmationCode />}
+                    />
+
                     <Route path="favorites" element={<Favorites />} />
                     <Route path="photographers" element={<Photographers />} />
                     <Route path="eventplanners" element={<EventPlanners />} />
@@ -104,6 +112,7 @@ function App() {
                     <Route path="food" element={<Food />} />
                     <Route path="hairstylest" element={<HairStylest />} />
                     <Route path="otherdetails" element={<OtherDetails />} />
+                    <Route path="setnewpass" element={<SetNewPass />} />
 
                     <Route
                       path="venueprofile/:venuId"

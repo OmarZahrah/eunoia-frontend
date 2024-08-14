@@ -9,7 +9,6 @@ const PrivateRoute = () => {
   const { isAuthenticated, isLoading } = useCheckAuth();
   // const { isAuthenticated } = useAuthContext();
   // const isLoading = false;
-  console.log(isAuthenticated);
   const navigate = useNavigate();
   useEffect(
     function () {

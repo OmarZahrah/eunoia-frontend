@@ -12,7 +12,6 @@ function WriteReview({ serviceId, isOpenModal, setIsOpenModal }) {
 
   useEffect(
     function () {
-      console.log(isOpenModal);
       if (isOpenModal && !isLoading) {
         setIsOpenModal(false);
       }

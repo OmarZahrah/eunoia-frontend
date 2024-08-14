@@ -14,7 +14,6 @@ function ProfilePic({ form, register }) {
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     setAvatar(file);
-    // console.log(file);
     if (file) {
       setImageSrc(URL.createObjectURL(file)); // Create a temporary URL for the file
     }

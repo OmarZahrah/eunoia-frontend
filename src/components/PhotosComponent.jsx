@@ -47,7 +47,6 @@ const PhotosComponent = ({ images, setChange }) => {
     deletePhotos(image);
   };
   const handleDeleteImage = (image) => {
-    console.log(image);
     const newImages = albumImages.filter((images) => images !== image);
     const deletedNewPhotos = newPhotos.filter((images) => images !== image);
     setNewPhotos(deletedNewPhotos);

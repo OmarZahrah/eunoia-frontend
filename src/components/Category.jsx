@@ -16,7 +16,6 @@ function Category({ title, data }) {
   const handleSortChange = (event) => {
     setSortBy(event.target.value);
     // Implement sorting logic based on the selected option
-    console.log("Sorting by: ", event.target.value);
   };
 
   const handleRatingSortChange = (event) => {

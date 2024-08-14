@@ -13,7 +13,6 @@ function Map({ defaultPosition }) {
     defaultPosition[1] || 31.233334,
   ]);
   const { setChange, setNewPosition } = useServiceContext();
-  console.log("position", position);
 
   return (
     <Wrapper>
@@ -50,7 +49,6 @@ function MyComponent({ setPosition, setNewPosition, setChange }) {
   useMapEvents({
     click: (e) => {
       const { lat, lng } = e.latlng;
-      // console.log("Clicked Location:", [lat, lng]);
       setPosition([lat, lng]);
       setNewPosition([lat, lng]);
       setChange(true);

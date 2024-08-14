@@ -13,7 +13,6 @@ function RequestsComponent({ request, id, price, Notes, role, status, date }) {
   const [paymentRequest, setPaymentRequest] = useState("");
 
   const handleDecision = (decision) => {
-    console.log(decision);
     handleRequest({ id: id, decision: decision });
   };
   const navigate = useNavigate();

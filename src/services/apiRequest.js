@@ -1,6 +1,8 @@
 import customFetch from "../utils/customFetch";
 
 export const addRequest = async (data) => {
+  // console.log(data);
+  // console.log(data.packageId);
   await customFetch.post(`requests/${data.packageId}`, data.data);
 };
 
@@ -12,6 +14,7 @@ export const getUserRequests = async () => {
 export const getProviderRequests = async () => {
   try {
     const { data } = await customFetch.get("requests/serviceProvider");
+    console.log(data);
     return data.data;
   } catch (error) {
     return [];

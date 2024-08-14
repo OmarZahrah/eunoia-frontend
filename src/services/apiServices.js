@@ -27,7 +27,7 @@ export const getMyService = async () => {
 export const getCurrentService = async (id) => {
   // const { data } = await customFetch.get(`services/${id}/serviceProfile`);
   const { data } = await customFetch.get(`services/${id}`);
-  return data.data;
+  return data.data.document;
 };
 
 export const editService = async (formData) => {

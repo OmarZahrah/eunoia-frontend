@@ -123,7 +123,7 @@ const CreatePackage = ({ pack }) => {
         </div>
         <div className="customized-package">
           <h2>Customized Package:</h2>
-          {packages.map((miniPackage, i) => (
+          {packages?.map((miniPackage, i) => (
             <MiniPackage key={i} data={miniPackage} />
           ))}
           <span className="add" onClick={() => setOpenPackage(true)}>

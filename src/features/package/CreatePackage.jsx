@@ -47,7 +47,6 @@ const CreatePackage = () => {
     // const photo = createFormData({ packagePhoto: packagePhoto });
     // const link = photoLink(photo);
     // if(photo)
-    // console.log(link);
     addPackage(filteredData);
   };
   return (

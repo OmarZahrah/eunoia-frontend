@@ -15,7 +15,6 @@ function AboutComponent({ service }) {
   const [location, setLocation] = useState("");
   const { register } = useServiceContext();
   const [addLocation, setAddLocation] = useState(false);
-  console.log("service", service);
 
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
