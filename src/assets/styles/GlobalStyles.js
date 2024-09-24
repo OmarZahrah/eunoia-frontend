@@ -1,4 +1,4 @@
-import { createGlobalStyle, css } from "styled-components";
+import { createGlobalStyle } from "styled-components";
 const GlobalStyles = createGlobalStyle`
 :root{
     *,
@@ -7,15 +7,10 @@ const GlobalStyles = createGlobalStyle`
   box-sizing: border-box;
   margin: 0;
 }
-html{
-  /* height: 100%; */
-  /* background-color: #fef9f0; */
-}
+
 body {
-/* font-family: 'Limelight', sans-serif; */
 font-family: 'Literata', sans-serif;  
-/* min-height: 100vh; */
-/* min-height: 100vh; */
+
   line-height: 1.5;
   overflow-x:hidden ;
 

@@ -1,113 +1,30 @@
-// import styled from "styled-components";
-// import { useState } from "react";
-// import { VscEye, VscEyeClosed } from "react-icons/vsc";
-// import { useAuthContext } from "../context/AuthContext";
-// const FormInput = ({
-//   label,
-//   type,
-//   name,
-//   placeholder,
-//   defaultValue,
-//   required,
-// }) => {
-//   const [showPassword, setShowPassword] = useState(false);
-//   const { register } = useAuthContext();
-//   const togglePasswordVisibility = () => {
-//     setShowPassword((prevState) => !prevState);
-//   };
-
-//   return (
-//     <Wrapper>
-//       <label htmlFor={name}>
-//         {label} {required && label && <span className="required">*</span>}
-//       </label>
-//       <div className="row">
-//         {type === "password" ? (
-//           <>
-//             <input
-//               {...register(name)}
-//               type={showPassword ? "text" : "password"}
-//               placeholder={placeholder}
-//               required={required}
-//               defaultValue={defaultValue}
-//             />
-//             <TogglePasswordButton onClick={togglePasswordVisibility}>
-//               {showPassword ? (
-//                 <VscEye size="0.95rem" />
-//               ) : (
-//                 <VscEyeClosed size="0.95rem" />
-//               )}
-//             </TogglePasswordButton>
-//           </>
-//         ) : (
-//           <input
-//             type={type}
-//             {...register(name)}
-//             placeholder={placeholder}
-//             required={required}
-//             defaultValue={defaultValue}
-//           />
-//         )}
-//       </div>
-//     </Wrapper>
-//   );
-// };
-
-// const TogglePasswordButton = styled.button`
-//   background: none;
-//   border: none;
-//   cursor: pointer;
-//   margin-left: -1.563rem !important;
-// `;
-
-// const Wrapper = styled.div`
-//   label {
-//     display: block;
-//     text-transform: capitalize;
-//     font-size: 1rem;
-//     color: var(--color-black-dark);
-//   }
-//   .required {
-//     color: red;
-//   }
-//   .row {
-//     display: flex;
-//     align-items: center;
-//   }
-
-//   input {
-//     width: 70%;
-//     border: none;
-//     border-bottom: 1px solid #00000080;
-//     color: var(--color-black-light);
-//     padding: 5px;
-//     font-size: 0.85rem;
-//     outline: none;
-//     margin-top: 5px;
-//   }
-//   input:focus {
-//     border-bottom: 2px solid var(--color-brand-green);
-//   }
-// `;
-
-// export default FormInput;
-
 import styled from "styled-components";
-import { useState } from "react";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
-import { useAuthContext } from "../context/AuthContext";
+import { useEffect, useRef, useState } from "react";
+
 const FormInput = ({ children, label, required, error, type, icon }) => {
-  // const [showPassword, setShowPassword] = useState(false);
-  // const togglePasswordVisibility = () => {
-  //   setShowPassword((prevState) => !prevState);
-  // };
-  const { showPassword, togglePasswordVisibility } = useAuthContext();
+  const [showPassword, setShowPassword] = useState(false);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const inputs = containerRef.current.querySelectorAll("input");
+
+    inputs.forEach((input) => {
+      if (type === "password") {
+        input.type = showPassword ? "text" : "password";
+      }
+    });
+  }, [children, showPassword, type]);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((s) => !s);
+  };
   return (
     <Wrapper>
       <label htmlFor={children.props.id}>
         {label} {required && label && <span className="required">*</span>}
       </label>
-      <div className="input">
+      <InputRow ref={containerRef} className="input" icon={icon}>
         {icon && icon}
         {children}
         {type === "password" && (
@@ -122,7 +39,7 @@ const FormInput = ({ children, label, required, error, type, icon }) => {
             )}
           </TogglePasswordButton>
         )}
-      </div>
+      </InputRow>
       {error && <span className="error">{error}</span>}
     </Wrapper>
   );
@@ -136,6 +53,7 @@ const TogglePasswordButton = styled.span`
 `;
 
 const Wrapper = styled.div`
+  width: 100%;
   /* position: relative; */
   label {
     display: block;
@@ -155,18 +73,15 @@ const Wrapper = styled.div`
     color: red;
     /* display: block; */
   }
-  .input {
-    position: relative;
-  }
+
   .icon {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    /* margin: 2.313rem 0; */
     width: 30px;
     height: 30px;
     padding-right: 8px;
-    border-right: 1px solid green;
+    border-right: 1px solid black;
   }
   .passIcon {
     position: absolute;
@@ -174,19 +89,12 @@ const Wrapper = styled.div`
     top: 50%;
     transform: translateY(-50%);
   }
-  /* input {
-    width: 70%;
-    border: none;
-    border-bottom: 1px solid #00000080;
-    color: var(--color-black-light);
-    padding: 5px;
-    font-size: 0.85rem;
-    outline: none;
-    margin-top: 5px;
+`;
+const InputRow = styled.div`
+  position: relative;
+  input {
+    padding-left: ${({ icon }) => (icon ? "3rem" : "0")};
   }
-  input:focus {
-    border-bottom: 2px solid var(--color-brand-green);
-  } */
 `;
 
 export default FormInput;

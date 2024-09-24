@@ -14,11 +14,9 @@ const AppLayout = () => {
 };
 
 const Wrapper = styled.div`
-  max-width: 1366px;
-  margin: 0 auto !important;
-  padding: 0 20px;
+  min-height: 100vh;
   .content {
-    min-height: calc(100vh - 5rem);
+    min-height: calc(100vh - 6rem);
   }
 `;
 

@@ -294,7 +294,7 @@ export default Home;
 
 const Wrapper = styled.div`
   background-color: #fef9f0;
-  min-height: 100vh;
+  min-height: 100%;
   .container {
     margin: 0 1.5rem;
   }
