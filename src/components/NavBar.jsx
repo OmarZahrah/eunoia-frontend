@@ -1,25 +1,13 @@
 import logo from "../../public/images/png-wordmark-1.png";
 import Button from "../components/Button";
 import styled from "styled-components";
-import { Link, useLocation } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
-import { useEffect, useState } from "react";
-import { useUser } from "../features/userProfile/useUser";
-import { set } from "react-hook-form";
-import { useAuthContext } from "../context/AuthContext";
-import { useCheckAuth } from "../features/Auth/useCheckAuth";
+import { useState } from "react";
 
-function NavBar({
-  showLoginButton = false,
-  showRegisterButton = false,
-  userId,
-}) {
+function NavBar() {
   const [openNav, setOpenNav] = useState(false);
-  const location = useLocation();
-  const { isAuthenticated, isLoading } = useCheckAuth();
-
-  const checkIsActive = (path) => location.pathname === path;
 
   const toggleNav = () => {
     setOpenNav((s) => !s);
@@ -28,41 +16,50 @@ function NavBar({
   return (
     <Wrapper>
       <Link to="/home">
-        <img className="Hlogo" src={logo} alt="logo" />
+        <img className="logo" src={logo} alt="logo" />
       </Link>
-      <nav className={openNav ? "open-nav" : ""}>
-        <ul>
-          <li className={checkIsActive("/categories") ? "active" : ""}>
-            <Link to="/categories">Categories</Link>
-          </li>
-          <li className={checkIsActive("/profile") ? "active" : ""}>
-            <Link to={"/profile"}>Profile</Link>
-          </li>
-          <li className={checkIsActive("/search") ? "active" : ""}>
-            <Link to="/search">Search</Link>
-          </li>
-        </ul>
-        <div className="buttons">
-          {!isLoading && !isAuthenticated && (
-            <Link to="/login">
-              <Button color="pink" background="transparent" size="small">
-                Login
-              </Button>
-            </Link>
-          )}
-          {!isLoading && !isAuthenticated && (
-            <Link to="/signup/user">
-              <Button color="white" background="pink" size="small">
-                Register
-              </Button>
-            </Link>
-          )}
-        </div>
-      </nav>
+      <ul>
+        <li>
+          <NavLink to="/categories">Categories</NavLink>
+        </li>
+        <li>
+          <NavLink to={"/profile"}>Profile</NavLink>
+        </li>
+        <li>
+          <NavLink to="/search">Search</NavLink>
+        </li>
+      </ul>
+      <div className="buttons">
+        <NavLink to="/login">
+          <Button color="pink" background="transparent" size="small">
+            Login
+          </Button>
+        </NavLink>
+        <NavLink to="/signup/user">
+          <Button color="white" background="pink" size="small">
+            Register
+          </Button>
+        </NavLink>
+      </div>
+      <div className={`menu ${openNav ? "openNav" : ""}`}>
+        <NavLink to="/categories">Categories</NavLink>
+        <NavLink to={"/profile"}>Profile</NavLink>
+        <NavLink to="/search">Search</NavLink>
+        <NavLink to="/login">
+          <Button color="pink" background="transparent" size="small">
+            Login
+          </Button>
+        </NavLink>
+        <NavLink to="/signup/user">
+          <Button color="white" background="pink" size="small">
+            Register
+          </Button>
+        </NavLink>
+      </div>
       {openNav ? (
-        <IoClose className="close-icon" onClick={toggleNav} />
+        <IoClose className="close-icon toggle-icon" onClick={toggleNav} />
       ) : (
-        <IoMenu className="menu-icon" onClick={toggleNav} />
+        <IoMenu className="menu-icon toggle-icon" onClick={toggleNav} />
       )}
     </Wrapper>
   );
@@ -70,172 +67,72 @@ function NavBar({
 
 export default NavBar;
 
-const Wrapper = styled.div`
+const Wrapper = styled.nav`
+  height: 5rem;
   display: flex;
-  /* height: 6rem; */
-  padding: 1rem 4rem;
-  border-bottom: 1px solid #ccc;
   align-items: center;
-  overflow: hidden;
-
-  nav {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    overflow: hidden;
-    /* position: fixed; */
-  }
-  .Hlogo {
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  position: relative;
+  .logo {
     width: 10rem;
-    height: auto;
   }
+
   ul {
     display: flex;
-    width: 100%;
-    gap: 6rem;
-    color: rgba(0, 0, 0, 0.5);
     justify-content: center;
-    padding: 0;
-    /* padding-left: 9rem; */
+    gap: 6rem;
+    color: #222;
   }
   .active {
     color: #f5b9a7;
   }
+
   li {
     font-size: 1.2rem;
     transition: transform 0.3s ease;
-    display: flex;
-    align-items: center;
+    color: #949494;
   }
-
   li:hover {
     transform: scale(1.1);
     color: #f5b9a7;
   }
-  .buttons {
+
+  .toggle-icon {
+    width: 30px;
+    height: 30px;
+    z-index: 999;
+    cursor: pointer;
+    display: none;
+  }
+  .menu {
+    height: 100vh;
+    width: 70%;
+    /* border-left: 1px solid; */
+    box-shadow: var(--shadow-lg);
+    position: absolute;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* width: 50%; */
-  }
-  .menu-icon {
-    display: none;
-    width: 30px;
-    height: 30px;
-    margin-left: auto;
-    z-index: 1000;
-    cursor: pointer;
-  }
-  .close-icon {
-    display: none;
-    width: 30px;
-    height: 30px;
-    margin-left: auto;
-    z-index: 1000;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-  }
-
-  @media only screen and (max-width: ${({ theme }) => theme.mid}) {
-    ul {
-      gap: 9rem;
-      /* padding-left: 5rem; */
-    }
-    li {
-      font-size: 1.1rem;
-    }
-  }
-  @media only screen and (max-width: ${({ theme }) => theme.small}) {
-    ul {
-      gap: 8rem;
-      /* padding-left: 4rem; */
-    }
-  }
-  @media only screen and (max-width: ${({ theme }) => theme.semi}) {
-    ul {
-      gap: 7rem;
-      /* padding-left: 3rem; */
+    gap: 3rem;
+    right: -100%;
+    top: 0;
+    z-index: 900;
+    background-color: #fff;
+    transition: all 0.4s ease;
+    &.openNav {
+      right: 0;
     }
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
-    ul {
-      gap: 5rem;
-      /* padding-left: 1rem; */
-    }
-  }
-  @media only screen and (max-width: 52.5em) {
-    width: 100%;
-    justify-content: space-between;
-    overflow: hidden;
-    ul {
-      gap: 5rem;
-      /* padding-left: 1rem; */
-    }
-    nav {
-      /* display: none; */
-      visibility: hidden;
-      /* transform: translateX(100%); */
-      transition: 0.4s ease;
-      position: absolute;
-      overflow: hidden;
-      top: 0;
-      left: 0;
-      opacity: 0;
-    }
-    .open-nav {
-      /* display: none; */
-
-      display: flex !important;
-      /* display: block; */
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      flex-direction: column;
-      z-index: 100;
-      background-color: #fff;
-      align-items: center;
-      justify-content: center;
-      /* transform: translateX(0); */
-      visibility: visible;
-      opacity: 0.98;
-    }
-    ul {
-      flex-direction: column;
-      z-index: 100;
-      align-items: center;
-      justify-content: center;
-    }
-    li {
-      font-size: 2.4rem;
-    }
-    .menu-icon {
-      display: block;
-      width: 30px;
-      height: 30px;
-      margin-left: auto;
-    }
-    .close-icon {
-      display: block;
-    }
+    ul,
     .buttons {
-      margin-top: 2rem;
-      flex-direction: column;
-      gap: 5px;
+      display: none;
     }
-    .buttons button {
-      font-size: 2.2rem;
-      width: 100%;
-      /* background: transparent; */
-      /* color: #f5b9a7; */
+    .toggle-icon {
+      display: inline;
     }
-  }
-
-  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
-    padding: 1.5rem 2rem;
   }
 `;

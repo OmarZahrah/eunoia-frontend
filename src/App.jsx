@@ -47,6 +47,7 @@ import Home from "./features/homepage/Home";
 import WriteReview from "./components/WriteReview";
 import ConfirmationCode from "./pages/ConfirmationCode";
 import SetNewPass from "./pages/SetNewPass";
+import AppLayout from "./pages/AppLayout";
 
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({
@@ -74,94 +75,102 @@ function App() {
                                  Public Routes
                   ===========================================
                   */}
-                    <Route path="welcome" element={<Welcome />} />
-                    <Route index element={<Navigate replace to="welcome" />} />
-                    <Route path="error" element={<Error />} />
+                    <Route path="/" element={<AppLayout />}>
+                      <Route index path="welcome" element={<Welcome />} />
+                      <Route
+                        index
+                        element={<Navigate replace to="welcome" />}
+                      />
+                      <Route path="error" element={<Error />} />
 
-                    <Route path="signup" element={<SignUp />}>
-                      <Route path="create" element={<CreateAccount />} />
-                      <Route path="user" element={<SignUpUser />} />
-                      <Route path="provider" element={<SignUpBusiness />} />
-                    </Route>
-                    <Route path="login" element={<Login />} />
-                    <Route path="forgotpassword" element={<ForgotPass />} />
-                    <Route
-                      path="confirmationcode"
-                      element={<ConfirmationCode />}
-                    />
+                      <Route path="signup" element={<SignUp />}>
+                        <Route path="create" element={<CreateAccount />} />
+                        <Route path="user" element={<SignUpUser />} />
+                        <Route path="provider" element={<SignUpBusiness />} />
+                      </Route>
+                      <Route path="login" element={<Login />} />
+                      <Route path="forgotpassword" element={<ForgotPass />} />
+                      <Route
+                        path="confirmationcode"
+                        element={<ConfirmationCode />}
+                      />
 
-                    <Route path="favorites" element={<Favorites />} />
-                    <Route path="photographers" element={<Photographers />} />
-                    <Route path="eventplanners" element={<EventPlanners />} />
-                    <Route path="djs" element={<Djs />} />
-                    <Route path="makeupartist" element={<MakeupArtist />} />
-                    <Route path="food" element={<Food />} />
-                    <Route path="hairstylest" element={<HairStylest />} />
-                    <Route path="otherdetails" element={<OtherDetails />} />
-                    <Route path="searchresult" element={<Search />} />
+                      <Route path="favorites" element={<Favorites />} />
+                      <Route path="photographers" element={<Photographers />} />
+                      <Route path="eventplanners" element={<EventPlanners />} />
+                      <Route path="djs" element={<Djs />} />
+                      <Route path="makeupartist" element={<MakeupArtist />} />
+                      <Route path="food" element={<Food />} />
+                      <Route path="hairstylest" element={<HairStylest />} />
+                      <Route path="otherdetails" element={<OtherDetails />} />
+                      <Route path="searchresult" element={<Search />} />
 
-                    <Route path="home" element={<Home />} />
-                    <Route path="search" element={<Search />} />
+                      <Route path="home" element={<Home />} />
+                      <Route path="search" element={<Search />} />
 
-                    <Route path="categories" element={<Categories />} />
-                    <Route path="venues" element={<Venues />} />
-                    <Route path="photographers" element={<Photographers />} />
-                    <Route path="eventplanners" element={<EventPlanners />} />
-                    <Route path="djs" element={<Djs />} />
-                    <Route path="makeupartist" element={<MakeupArtist />} />
-                    <Route path="food" element={<Food />} />
-                    <Route path="hairstylest" element={<HairStylest />} />
-                    <Route path="otherdetails" element={<OtherDetails />} />
-                    <Route path="setnewpass" element={<SetNewPass />} />
+                      <Route path="categories" element={<Categories />} />
+                      <Route path="venues" element={<Venues />} />
+                      <Route path="photographers" element={<Photographers />} />
+                      <Route path="eventplanners" element={<EventPlanners />} />
+                      <Route path="djs" element={<Djs />} />
+                      <Route path="makeupartist" element={<MakeupArtist />} />
+                      <Route path="food" element={<Food />} />
+                      <Route path="hairstylest" element={<HairStylest />} />
+                      <Route path="otherdetails" element={<OtherDetails />} />
+                      <Route path="setnewpass" element={<SetNewPass />} />
 
-                    <Route
-                      path="venueprofile/:venuId"
-                      element={<VenueProfile />}
-                    />
-                    {/*
+                      <Route
+                        path="venueprofile/:venuId"
+                        element={<VenueProfile />}
+                      />
+                      {/*
                   ===========================================
                                  Private Routes
                   ===========================================
                   */}
-                    {/* <Route
+                      {/* <Route
                       element={
                         <ProtectedRoute>
                           <PrivateRoute />
                         </ProtectedRoute>
                       }
                     > */}
-                    <Route element={<ProtectedRoute />}>
-                      <Route path="profile" element={<Profile />}>
-                        <Route index element={<MainProfile />} />
-                        <Route path="editprofile" element={<EditProfile />} />
-                        <Route
-                          path=":userId/businessProfile"
-                          element={<BuisnessProfile />}
-                        />
-                        <Route
-                          path="createBusiness"
-                          element={<CreateBussAcc />}
-                        />
-                        <Route path="favorites" element={<Favorites />} />
-                      </Route>
-                      <Route path="chat" element={<ChatBot />} />
+                      <Route element={<ProtectedRoute />}>
+                        <Route path="profile" element={<Profile />}>
+                          <Route index element={<MainProfile />} />
+                          <Route path="editprofile" element={<EditProfile />} />
+                          <Route
+                            path=":userId/businessProfile"
+                            element={<BuisnessProfile />}
+                          />
+                          <Route
+                            path="createBusiness"
+                            element={<CreateBussAcc />}
+                          />
+                          <Route path="favorites" element={<Favorites />} />
+                        </Route>
+                        <Route path="chat" element={<ChatBot />} />
 
-                      <Route path="addpackage" element={<AddPackage />} />
-                      {/* <Route
+                        <Route path="addpackage" element={<AddPackage />} />
+                        {/* <Route
                         path="selectlocation"
                         element={<SelectLocation />}
                       /> */}
 
-                      <Route path="createPackage" element={<CreatePackage />} />
-                      <Route
-                        path="updatePackage/:packageId"
-                        element={<UpdatePackage />}
-                      />
-                      <Route
-                        path="package/:packageId"
-                        element={<CustomizePackage />}
-                      />
-                      <Route path="requests" element={<Requests />} />
+                        <Route
+                          path="createPackage"
+                          element={<CreatePackage />}
+                        />
+                        <Route
+                          path="updatePackage/:packageId"
+                          element={<UpdatePackage />}
+                        />
+                        <Route
+                          path="package/:packageId"
+                          element={<CustomizePackage />}
+                        />
+                        <Route path="requests" element={<Requests />} />
+                      </Route>
                     </Route>
                   </Routes>
                 </BrowserRouter>

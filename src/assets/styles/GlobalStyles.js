@@ -15,8 +15,9 @@ body {
 /* font-family: 'Limelight', sans-serif; */
 font-family: 'Literata', sans-serif;  
 /* min-height: 100vh; */
-min-height: 100vh;
+/* min-height: 100vh; */
   line-height: 1.5;
+  overflow-x:hidden ;
 
 }
 a {

@@ -7,24 +7,18 @@ import NavBar from "../components/NavBar";
 const Welcome = () => {
   return (
     <Wrapper>
-      {/* <div className="container"> */}
-      <NavBar />
-      <div className="container">
-        <div className="images">
-          <img src={image1} />
-          <img src={image2} className="mobile-img" />
-          <img src={image3} />
-        </div>
+      <div className="images">
+        <img src={image1} />
+        <img src={image2} className="mobile-img" />
+        <img src={image3} />
+      </div>
 
-        <div className="text">
-          <p className="h">Your Event, Perfected Here.</p>
-
-          <p>
-            Empower your event dreams with our comprehensive platform, your
-            ultimate guide to seamless and unforgettable gatherings.
-          </p>
-        </div>
-        {/* </div> */}
+      <div className="text">
+        <h1>Your Event, Perfected Here.</h1>
+        <p>
+          Empower your event dreams with our comprehensive platform, your
+          ultimate guide to seamless and unforgettable gatherings.
+        </p>
       </div>
     </Wrapper>
   );
@@ -32,52 +26,46 @@ const Welcome = () => {
 export default Welcome;
 
 const Wrapper = styled.div`
-  height: 100vh;
+  height: 100% !important;
   background: linear-gradient(to top, #fef9f0 55%, #fff 45%);
   display: flex;
   flex-direction: column;
-
-  .container {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
+  align-items: center;
+  justify-content: center;
+  /* gap: 30px; */
 
   .images {
     display: flex;
-    width: 80%;
-    margin: 0 auto;
-    gap: 1rem;
-    justify-content: center;
-  }
-  .images img {
-    width: 30%; /* */
-    padding: 17px;
+    gap: 30px;
+    margin-top: 30px;
+    img {
+      width: 20rem;
+    }
   }
 
-  .h {
-    color: var(--text, rgba(0, 0, 0, 0.6));
-    font-size: 2.5rem;
-    font-family: "literata", serif;
-    font-weight: 510;
-    font-style: italic;
-    letter-spacing: 0.0625rem;
-    width: 50%;
-  }
-
-  p {
-    color: var(--text, rgba(0, 0, 0, 0.6));
-    text-align: center;
-    font-size: 1.2rem; /* */
-    font-weight: 300;
-    letter-spacing: 0.0625rem;
-    width: 55%;
-  }
   .text {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 5px;
+    h1 {
+      color: var(--text, rgba(0, 0, 0, 0.6));
+      font-size: 2.5rem;
+      font-family: "literata", serif;
+      font-weight: 510;
+      font-style: italic;
+      letter-spacing: 0.0625rem;
+      width: 50%;
+    }
+
+    p {
+      color: var(--text, rgba(0, 0, 0, 0.6));
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 300;
+      letter-spacing: 0.0625rem;
+      width: 55%;
+    }
   }
   @media only screen and (max-width: ${({ theme }) => theme.mid}) {
     .images {
@@ -159,24 +147,10 @@ const Wrapper = styled.div`
       letter-spacing: 0.0625rem;
       width: 60%;
     }
-    .container {
-      /* gap: 6rem; */
-      height: 100%;
-    }
-    .text {
-      /* gap: 1rem; */
-    }
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
     background-color: var(--color-brand-beige);
-    .container {
-      /* background-color: var(--color-brand-beige); */
-      justify-content: start;
-
-      /* align-items: flex-start; */
-      transform: translateY(0);
-    }
 
     .images img {
       display: none;
@@ -184,7 +158,6 @@ const Wrapper = styled.div`
     .images .mobile-img {
       display: block;
       width: 90%;
-      /* border: 8px solid var(--color-brand-pink); */
     }
     p {
       width: 80%;
