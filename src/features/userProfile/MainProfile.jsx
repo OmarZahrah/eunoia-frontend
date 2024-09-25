@@ -27,7 +27,7 @@ const Wrapper = styled.div`
   /* position: relative; */
   .container {
     display: flex;
-    margin-top: 20px;
+    padding-top: 20px;
     /* padding: 20px; */
   }
 

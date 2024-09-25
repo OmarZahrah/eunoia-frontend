@@ -37,7 +37,6 @@ function Search() {
 
   return (
     <Wrapper>
-      <NavBar />
       <p className="title">Find what you&apos;re looking for</p>.
       <div className="container">
         <div className="search-container">

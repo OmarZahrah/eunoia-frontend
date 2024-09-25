@@ -15,7 +15,6 @@ function Requests() {
   if (loadingProvider || loadingUser) return <Loading />;
   return (
     <Wrapper>
-      <NavBar />
       <div className="request-container">
         <p className="title">Requests</p>
         <div className="components">

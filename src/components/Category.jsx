@@ -67,7 +67,7 @@ const Wrapper = styled.div`
     font-size: 2rem;
     font-weight: 700;
     letter-spacing: 0.25rem;
-    margin: 2rem 0 1rem 0;
+    padding: 2rem 0 1rem 0;
     text-align: center;
     color: #00000099;
     position: relative;

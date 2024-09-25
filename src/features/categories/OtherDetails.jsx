@@ -5,7 +5,6 @@ import Category from "../../components/Category";
 function OtherDetails() {
   return (
     <Wrapper>
-      <NavBar />
       <Category title="Other Details" />
     </Wrapper>
   );

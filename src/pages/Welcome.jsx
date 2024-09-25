@@ -3,6 +3,7 @@ import image1 from "/images/welcome/unsplash-ebv-cs-rypmx-m.png";
 import image2 from "/images/welcome/unsplash-fn-0-xxl-9-szc-u.png";
 import image3 from "/images/welcome/unsplash-azod-v-2-d-0-g-lc.png";
 import { device } from "..//assets/styles/breakpoints";
+import NavBar from "../components/NavBar";
 
 const Welcome = () => {
   return (
@@ -27,13 +28,14 @@ export default Welcome;
 
 const Wrapper = styled.div`
   width: 100%;
-  min-height: 100%;
+  min-height: 100vh;
   background: linear-gradient(to top, #fef9f0 55%, #fff 45%);
   display: flex;
   flex-direction: column;
+  gap: 2rem;
   align-items: center;
   justify-content: center;
-  padding: 2rem 0;
+  padding: 0 0 2rem 0;
 `;
 
 const ImageContainer = styled.div`

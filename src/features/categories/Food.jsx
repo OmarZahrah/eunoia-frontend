@@ -8,12 +8,7 @@ function MakeupArtist() {
   const { allServices, isLoading } = useGetServices([{ category: "Food" }]);
   return (
     <Wrapper>
-      <NavBar />
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <Category data={allServices} title=" Food" />
-      )}{" "}
+      {isLoading ? <Loading /> : <Category data={allServices} title=" Food" />}{" "}
     </Wrapper>
   );
 }

@@ -18,7 +18,6 @@ function Photographers() {
   ]);
   return (
     <Wrapper>
-      <NavBar />
       {isLoading ? (
         <Loading />
       ) : (

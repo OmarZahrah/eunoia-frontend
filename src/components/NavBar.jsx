@@ -1,12 +1,14 @@
 import logo from "/images/png-wordmark-1.png";
 import Button from "../components/Button";
 import styled from "styled-components";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { IoMenu, IoClose } from "react-icons/io5";
 import { useState } from "react";
 import { device } from "../assets/styles/breakpoints";
 
 function NavBar() {
+  const route = useLocation()?.pathname;
+
   const [openNav, setOpenNav] = useState(false);
 
   const toggleNav = () => {
@@ -14,7 +16,7 @@ function NavBar() {
   };
 
   return (
-    <NavWrapper>
+    <NavWrapper route={route}>
       <Link to="/home">
         <Logo src={logo} alt="logo" />
       </Link>
@@ -30,16 +32,16 @@ function NavBar() {
         </NavItem>
       </NavList>
       <NavButtons>
-        <NavLink to="/login">
+        <Link to="/login">
           <Button color="pink" background="transparent" size="small">
             Login
           </Button>
-        </NavLink>
-        <NavLink to="/signup/user">
+        </Link>
+        <Link to="/signup/user">
           <Button color="white" background="pink" size="small">
             Register
           </Button>
-        </NavLink>
+        </Link>
       </NavButtons>
       <ResponsiveNavList openNav={openNav}>
         <NavItem>
@@ -52,18 +54,18 @@ function NavBar() {
           <NavLink to="/search">Search</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink to="/login">
+          <Link to="/login">
             <Button color="pink" background="transparent" size="small">
               Login
             </Button>
-          </NavLink>
+          </Link>
         </NavItem>
         <NavItem>
-          <NavLink to="/signup/user">
+          <Link to="/signup/user">
             <Button color="white" background="pink" size="small">
               Register
             </Button>
-          </NavLink>
+          </Link>
         </NavItem>
       </ResponsiveNavList>
       <ToggleIcon onClick={toggleNav}>
@@ -80,6 +82,9 @@ function NavBar() {
 export default NavBar;
 
 const NavWrapper = styled.nav`
+  background-color: ${({ route }) =>
+    route === "/welcome" ? "#fff" : "var(--color-brand-beige)"};
+
   height: 6rem;
   display: flex;
   align-items: center;
@@ -103,17 +108,6 @@ const NavList = styled.ul`
 
   @media ${device.tablet} {
     display: none;
-    /* position: absolute;
-    right: ${({ openNav }) => (openNav ? "0" : "-100%")};
-    width: 100%;
-    height: 100%;
-    flex-direction: column;
-    position: absolute;
-    top: 5rem;
-    background-color: #fff;
-    width: 100%;
-    box-shadow: var(--shadow-lg);
-    z-index: 999; */
   }
 `;
 
@@ -129,6 +123,10 @@ const NavItem = styled.li`
 
   @media ${device.tablet} {
     margin: 1rem 0;
+  }
+
+  & > .active {
+    color: var(--color-brand-pink);
   }
 `;
 

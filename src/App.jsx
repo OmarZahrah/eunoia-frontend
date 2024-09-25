@@ -47,6 +47,7 @@ import ConfirmationCode from "./pages/ConfirmationCode";
 import SetNewPass from "./pages/SetNewPass";
 import AppLayout from "./pages/AppLayout";
 import Welcome from "./pages/Welcome";
+import ProtectedRoute from "./components/ProtectedRoutes";
 
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({
@@ -122,33 +123,50 @@ function App() {
                         path="venueprofile/:venuId"
                         element={<VenueProfile />}
                       />
-                      <Route path="profile" element={<Profile />}>
-                        <Route index element={<MainProfile />} />
-                        <Route path="editprofile" element={<EditProfile />} />
+                      {/*
+                  ===========================================
+                                 Private Routes
+                  ===========================================
+                  */}
+                      {/* <Route
+                      element={
+                        <ProtectedRoute>
+                          <PrivateRoute />
+                        </ProtectedRoute>
+                      }
+                    > */}
+                      <Route element={<ProtectedRoute />}>
+                        <Route path="profile" element={<Profile />}>
+                          <Route index element={<MainProfile />} />
+                          <Route path="editprofile" element={<EditProfile />} />
+                          <Route
+                            path=":userId/businessProfile"
+                            element={<BuisnessProfile />}
+                          />
+                          <Route
+                            path="createBusiness"
+                            element={<CreateBussAcc />}
+                          />
+                          <Route path="favorites" element={<Favorites />} />
+                        </Route>
+                        <Route path="chat" element={<ChatBot />} />
+
+                        <Route path="addpackage" element={<AddPackage />} />
+
                         <Route
-                          path=":userId/businessProfile"
-                          element={<BuisnessProfile />}
+                          path="createPackage"
+                          element={<CreatePackage />}
                         />
                         <Route
-                          path="createBusiness"
-                          element={<CreateBussAcc />}
+                          path="updatePackage/:packageId"
+                          element={<UpdatePackage />}
                         />
-                        <Route path="favorites" element={<Favorites />} />
+                        <Route
+                          path="package/:packageId"
+                          element={<CustomizePackage />}
+                        />
+                        <Route path="requests" element={<Requests />} />
                       </Route>
-                      <Route path="chat" element={<ChatBot />} />
-
-                      <Route path="addpackage" element={<AddPackage />} />
-
-                      <Route path="createPackage" element={<CreatePackage />} />
-                      <Route
-                        path="updatePackage/:packageId"
-                        element={<UpdatePackage />}
-                      />
-                      <Route
-                        path="package/:packageId"
-                        element={<CustomizePackage />}
-                      />
-                      <Route path="requests" element={<Requests />} />
                     </Route>
                   </Routes>
                 </BrowserRouter>

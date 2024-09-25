@@ -65,7 +65,7 @@ const Wrapper = styled.div`
   background: #fef9f0;
   .container {
     display: flex;
-    margin-top: 20px;
+    padding-top: 20px;
     /* padding: 20px; */
   }
   .submit {

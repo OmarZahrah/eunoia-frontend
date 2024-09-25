@@ -303,7 +303,7 @@ const Wrapper = styled.div`
     font-weight: 600;
     letter-spacing: 0.5px;
     color: rgba(0, 0, 0, 0.677);
-    margin: 15px 0;
+    padding: 15px 0;
   }
   .packages-container {
     display: flex;

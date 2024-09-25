@@ -13,7 +13,6 @@ import otherDetails from "../../images/OtherDetails.png";
 function Categories() {
   return (
     <Wrapper>
-      <NavBar />
       <h1>Discover Your Essentials</h1>
       <div className="container">
         <CategoriesDiv

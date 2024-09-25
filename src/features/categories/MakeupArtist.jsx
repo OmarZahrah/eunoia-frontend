@@ -10,7 +10,6 @@ function MakeupArtist() {
   ]);
   return (
     <Wrapper>
-      <NavBar />
       {isLoading ? (
         <Loading />
       ) : (

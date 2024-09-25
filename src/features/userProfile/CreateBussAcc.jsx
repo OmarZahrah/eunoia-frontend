@@ -33,8 +33,8 @@ const Wrapper = styled.div`
 
   .container {
     display: flex;
-    margin-top: 20px;
-    /* padding: 0 20px; */
+    /* margin-top: 20px; */
+    padding: 0 20px;
   }
 
   .left {

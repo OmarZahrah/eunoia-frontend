@@ -17,6 +17,8 @@ const Wrapper = styled.div`
   min-height: 100vh;
   .content {
     min-height: calc(100vh - 6rem);
+    margin: 0;
+    padding: 0;
   }
 `;
 
