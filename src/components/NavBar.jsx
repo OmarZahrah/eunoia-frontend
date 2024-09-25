@@ -1,12 +1,16 @@
 import logo from "/images/png-wordmark-1.png";
 import Button from "../components/Button";
 import styled from "styled-components";
+import { useCheckAuth } from "../features/Auth/useCheckAuth";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { IoMenu, IoClose } from "react-icons/io5";
 import { useState } from "react";
 import { device } from "../assets/styles/breakpoints";
 
 function NavBar() {
+  const { isAuthenticated, isLoading } = useCheckAuth();
+  console.log(isAuthenticated);
+
   const route = useLocation()?.pathname;
 
   const [openNav, setOpenNav] = useState(false);
@@ -16,7 +20,7 @@ function NavBar() {
   };
 
   return (
-    <NavWrapper route={route}>
+    <NavWrapper route={route} isAuthenticated={isAuthenticated || false}>
       <Link to="/home">
         <Logo src={logo} alt="logo" />
       </Link>
@@ -31,17 +35,19 @@ function NavBar() {
           <NavLink to="/search">Search</NavLink>
         </NavItem>
       </NavList>
-      <NavButtons>
+      <NavButtons className="button">
         <Link to="/login">
           <Button color="pink" background="transparent" size="small">
             Login
           </Button>
         </Link>
-        <Link to="/signup/user">
-          <Button color="white" background="pink" size="small">
-            Register
-          </Button>
-        </Link>
+        {!isLoading && !isAuthenticated && (
+          <Link to="/signup/user">
+            <Button color="white" background="pink" size="small">
+              Register
+            </Button>
+          </Link>
+        )}
       </NavButtons>
       <ResponsiveNavList openNav={openNav}>
         <NavItem>
@@ -53,14 +59,14 @@ function NavBar() {
         <NavItem>
           <NavLink to="/search">Search</NavLink>
         </NavItem>
-        <NavItem>
+        <NavItem className="button">
           <Link to="/login">
             <Button color="pink" background="transparent" size="small">
               Login
             </Button>
           </Link>
         </NavItem>
-        <NavItem>
+        <NavItem className="button">
           <Link to="/signup/user">
             <Button color="white" background="pink" size="small">
               Register
@@ -91,6 +97,11 @@ const NavWrapper = styled.nav`
   justify-content: space-between;
   border-bottom: 1px solid #ccc;
   padding: 0 2rem;
+
+  .button {
+    visibility: ${({ isAuthenticated }) =>
+      !isAuthenticated ? "visible" : "hidden"};
+  }
 `;
 
 const Logo = styled.img`
@@ -152,6 +163,9 @@ const ToggleIcon = styled.div`
 `;
 
 const ResponsiveNavList = styled.ul`
+  background-color: ${({ route }) =>
+    route === "/welcome" ? "#fff" : "var(--color-brand-beige)"};
+
   position: absolute;
   top: 5rem;
   right: ${({ openNav }) => (openNav ? "0" : "-100%")};
@@ -166,7 +180,6 @@ const ResponsiveNavList = styled.ul`
   color: #222;
   transition: all 0.4s ease;
 
-  background-color: #fff;
   box-shadow: var(--shadow-lg);
   z-index: 999;
 `;
