@@ -1,28 +1,37 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import GlobalStyles from "./assets/styles/GlobalStyles";
-import SignUpUser from "./features/Auth/SignUpUser";
-import SignUpBusiness from "./features/Auth/SignUpBusiness";
-import CreateAccount from "./features/Auth/CreatAccount";
-import ForgotPass from "./features/Auth/ForgotPass";
-import { AuthProvider } from "./context/AuthContext";
+import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./assets/styles/responsive";
 import { QueryClient } from "@tanstack/query-core";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { Toaster } from "react-hot-toast";
+// Context
+import { ServiceProvider } from "./context/ServiceContext";
+import { PackageProvider } from "./context/PackageContext";
+import { AuthProvider } from "./context/AuthContext";
+import { UserProvider } from "./context/UserContext";
+// Pages
+import SignUpUser from "./pages/SignUpUser";
+import Login from "./pages/Login";
+import ConfirmationCode from "./pages/ConfirmationCode";
+import SetNewPass from "./pages/SetNewPass";
+import AppLayout from "./pages/AppLayout";
+import Welcome from "./pages/Welcome";
+import ProtectedRoute from "./components/ProtectedRoutes";
+import VenueProfile from "./pages/VenueProfile";
+import Error from "./pages/Error";
+
+// Features
+import SignUpBusiness from "./pages/SignUpBusiness";
+import CreateAccount from "./features/Auth/CreatAccount";
+import ForgotPass from "./features/Auth/ForgotPass";
 import MainProfile from "./features/userProfile/MainProfile";
 import EditProfile from "./features/userProfile/EditProfile";
 import CreateBussAcc from "./features/userProfile/CreateBussAcc";
 import AddPackage from "./features/package/AddPackage";
 import BuisnessProfile from "././features/serviceProfile/BuisnessProfile";
-import { UserProvider } from "./context/UserContext";
 import Profile from "./features/userProfile/Profile";
-import { ServiceProvider } from "./context/ServiceContext";
-import { PackageProvider } from "./context/PackageContext";
-import VenueProfile from "./pages/VenueProfile";
 import Categories from "./features/categories/Categories";
-import Error from "./pages/Error";
 import CustomizePackage from "./features/package/CustomizePackage";
 import Search from "./features/homepage/Search";
 import Favorites from "./features/categories/Favorites";
@@ -36,18 +45,10 @@ import Food from "./features/categories/Food";
 import Venues from "./features/categories/Venues";
 import CreatePackage from "./features/package/CreatePackage";
 import UpdatePackage from "./features/package/updatePackage";
-// import Venus from "./pages/Venus";
 import Requests from "./features/requests/Requests";
 import ChatBot from "./features/Ai Chat/ChatBot";
 import SignUp from "./features/Auth/SignUp";
-import Login from "./features/Auth/Login";
 import Home from "./features/homepage/Home";
-import WriteReview from "./components/WriteReview";
-import ConfirmationCode from "./pages/ConfirmationCode";
-import SetNewPass from "./pages/SetNewPass";
-import AppLayout from "./pages/AppLayout";
-import Welcome from "./pages/Welcome";
-import ProtectedRoute from "./components/ProtectedRoutes";
 
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({

@@ -1,19 +1,19 @@
 import styled from "styled-components";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { device } from "../../assets/styles/breakpoints";
-import Button from "../../components/Button";
-import Input from "../../components/Input";
-import FormInput from "../../components/FormInput";
+import { device } from "../assets/styles/breakpoints";
+import { useLogin } from "../features/Auth/useLogin";
+import { useAuthContext } from "../context/AuthContext";
 
+import loginImage from "/images/auth/login.png";
 import { LuUser } from "react-icons/lu";
 import { VscLock } from "react-icons/vsc";
-import loginImage from "/images/auth/login.png";
 
-import { useForm } from "react-hook-form";
-import { useAuthContext } from "../../context/AuthContext";
-import { useLogin } from "./useLogin";
-import AuthForm from "../../components/Auth/AuthForm";
-import PhotoComponent from "../../components/Auth/PhotoComponent";
+import AuthForm from "../components/Auth/AuthForm";
+import PhotoComponent from "../components/Auth/PhotoComponent";
+import Button from "../components/Button";
+import Input from "../components/Input";
+import FormInput from "../components/FormInput";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();

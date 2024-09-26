@@ -1,20 +1,15 @@
 import styled from "styled-components";
-import FormInput from "../../components/FormInput";
+import { useAuthContext } from "../../context/AuthContext";
 import { IoImageOutline } from "react-icons/io5";
 import { MdAdd } from "react-icons/md";
-import { useAuthContext } from "../../context/AuthContext";
+import FormInput from "../../components/FormInput";
 import Input from "../../components/Input";
 
 const Step2 = () => {
-  const {
-    profilePhoto,
-    profilePhotoFile,
-    setProfilePhoto,
-    setProfilePhotoFile,
-  } = useAuthContext();
+  const { profilePhoto, setProfilePhoto, setProfilePhotoFile } =
+    useAuthContext();
   const { register } = useAuthContext();
 
-  // const [profilePhoto, setProfilePhoto] = useState("");
   const onSelectFile = (e) => {
     const selectedFiles = e.target.files;
     setProfilePhotoFile(selectedFiles[0]);
@@ -22,9 +17,9 @@ const Step2 = () => {
     setProfilePhoto(photo);
   };
   return (
-    <Wrapper>
-      <div className="image-box">
-        <div className="image">
+    <>
+      <ImageBox className="image-box">
+        <ImageBox className="image">
           <label className="image-uploader">
             {!profilePhoto && <IoImageOutline className="image-icon" />}
             {profilePhoto && (
@@ -38,12 +33,10 @@ const Step2 = () => {
             />
             <MdAdd className="add-icon" />
           </label>
-        </div>
-        <div className="image-text">
-          <h3>Upload Your Profile Picture</h3>
-          <p>Preferably Your Personal Photo</p>
-        </div>
-      </div>
+        </ImageBox>
+
+        <h3>Upload Your Business Profile Picture</h3>
+      </ImageBox>
 
       <FormInput label="Mobile Number">
         <Input
@@ -53,29 +46,24 @@ const Step2 = () => {
           {...register("phoneNumber")}
         />
       </FormInput>
-      <div className="about-box">
+      <AboutBox className="about-box">
         <label htmlFor="">About</label>
         <textarea
           {...register("about")}
           // value="test test test"
           placeholder="Describe Your Business"
         ></textarea>
-      </div>
-    </Wrapper>
+      </AboutBox>
+    </>
   );
 };
 export default Step2;
 
-const Wrapper = styled.div`
+const ImageBox = styled.div`
   display: flex;
-  flex-direction: column;
-  /* justify-content: space-between; */
-  gap: 1rem;
-  .image-box {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-  }
+  align-items: center;
+  gap: 2rem;
+
   .image-uploader {
     width: 7rem;
     height: 7rem;
@@ -116,30 +104,18 @@ const Wrapper = styled.div`
   .image-text {
     color: var(--color-black-light);
   }
-  .about-box {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
+`;
+
+const AboutBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
   textarea {
     border: none;
-    width: 60%;
     height: 5rem;
     box-shadow: 0px 2px 11px -5px rgba(0, 0, 0, 0.5);
     padding: 5px 10px;
-  }
-  @media only screen and (max-width: ${({ theme }) => theme.mid}) {
-  }
-  @media only screen and (max-width: ${({ theme }) => theme.small}) {
-    font-size: 1rem;
-  }
-
-  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
-    textarea {
-      width: 100%;
-      height: 8rem;
-    }
-  }
-  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+    outline: none;
   }
 `;

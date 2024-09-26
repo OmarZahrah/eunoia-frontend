@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useAuthContext } from "../context/AuthContext";
+import { device } from "../assets/styles/breakpoints";
 
 const Stepper = () => {
   const { steps, currentStep } = useAuthContext();
@@ -25,12 +26,9 @@ export default Stepper;
 const Wrapper = styled.div`
   padding: 0.5rem 2rem;
   height: 25rem;
-  /* border-right: 2px solid #ddd; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* position: sticky; */
-  /* top: 5rem; */
   position: relative;
   .step {
     display: flex;
@@ -60,9 +58,7 @@ const Wrapper = styled.div`
     width: 3px;
     height: calc(100% - 34px);
     background-color: var(--color-brand-pink);
-    /* top: 100%; */
     top: 17px;
-    /* right: 50%; */
     right: calc(2rem + 17px);
   }
   .step:last-of-type .step-num::after {
@@ -75,10 +71,6 @@ const Wrapper = styled.div`
   }
   .step-title {
     color: var(--color-black-light);
-  }
-  @media only screen and (max-width: ${({ theme }) => theme.mid}) {
-  }
-  @media only screen and (max-width: ${({ theme }) => theme.small}) {
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.semi}) {
@@ -97,7 +89,7 @@ const Wrapper = styled.div`
     }
   }
 
-  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
+  @media ${device.tablet} {
     flex-direction: row;
     height: 20%;
     padding: 0.5rem 2rem;
@@ -106,7 +98,6 @@ const Wrapper = styled.div`
       height: 3px;
       width: calc(100% - 8rem);
       top: calc(0.5rem + 17px);
-      /* right: 50%; */
       right: 0;
       transform: translateX(-4rem);
     }
@@ -126,7 +117,7 @@ const Wrapper = styled.div`
       font-size: 0.9rem;
     }
   }
-  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+  @media ${device.mobile} {
     padding: 0.5rem 1rem;
     &::after {
       width: calc(100% - 4rem);

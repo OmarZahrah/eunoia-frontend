@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useSignup } from "./useSignUp";
+import { useSignup } from "../features/Auth/useSignUp";
 
 import registerPhoto from "/images/auth/register.png";
-import AuthForm from "../../components/Auth/AuthForm";
-import PhotoComponent from "../../components/Auth/PhotoComponent";
-import FormInput from "../../components/FormInput";
-import Button from "../../components/Button";
-import Input from "../../components/Input";
+import AuthForm from "../components/Auth/AuthForm";
+import PhotoComponent from "../components/Auth/PhotoComponent";
+import FormInput from "../components/FormInput";
+import Button from "../components/Button";
+import Input from "../components/Input";
 
 const SignUpUser = () => {
   const { register, formState, getValues, handleSubmit } = useForm();
