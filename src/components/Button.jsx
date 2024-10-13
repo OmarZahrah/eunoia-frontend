@@ -1,29 +1,3 @@
-// import styled from "styled-components";
-
-// const Button = ({ children, type, background, color, onClick }) => {
-//   return (
-//     <StyledButton
-//       type={type}
-//       color={color}
-//       background={background}
-//       onClick={onClick}
-//     >
-//       {children}
-//     </StyledButton>
-//   );
-// };
-// export default Button;
-
-// const primary = {};
-
-// const StyledButton = styled.button`
-//   border: none;
-//   padding: 0.5rem 1.5rem;
-//   border-radius: 100px;
-//   font-size: 1.1rem;
-//   background-color: ${({ background }) => background || "transparent"};
-//   color: ${({ color }) => color || "#fff"};
-// `;
 import styled, { css } from "styled-components";
 
 const sizes = {

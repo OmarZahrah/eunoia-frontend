@@ -13,7 +13,7 @@ function CreateBussAcc() {
             You don’t have a business account
             <br /> Create business account?
           </p>
-          <Link to="/signup/provider">
+          <Link to="/businessForm">
             <Button size="large">Create Business Account</Button>
           </Link>
         </div>

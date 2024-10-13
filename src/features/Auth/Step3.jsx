@@ -1,8 +1,10 @@
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { useAuthContext } from "../../context/AuthContext";
 import { IoImageOutline } from "react-icons/io5";
 import { TiDeleteOutline } from "react-icons/ti";
 import { MdAdd } from "react-icons/md";
+import useImageUploader from "../../hooks/useImageUploader";
 
 const Step3 = () => {
   const {
@@ -13,29 +15,46 @@ const Step3 = () => {
     setAlbumImages,
     setCoverPhotoFile,
     setAlbumPhotosFile,
-    albumPhotosFile,
   } = useAuthContext();
 
-  const onSelectFile = (e, type) => {
-    const selectedFiles = e.target.files;
-    const selectedFilesArray = Array.from(selectedFiles);
-    const imagesArray = selectedFilesArray.map((file) => {
-      return URL.createObjectURL(file);
-    });
+  const {
+    previewImages: previewCover,
+    imageFiles: coverFile,
+    handleSelectFiles: selectCover,
+  } = useImageUploader("image");
 
-    if (type === "album") {
-      setAlbumPhotosFile((images) => images.concat(...selectedFiles));
-    } else if (type === "cover") {
-      setCoverPhotoFile(selectedFiles[0]);
-      setCoverPhoto(imagesArray);
+  const {
+    previewImages: previewAlbum,
+    imageFiles: albumFiles,
+    handleSelectFiles: selectAlbum,
+    handleDeleteImage: deleteAlbumImage,
+  } = useImageUploader("album");
+
+  const isFirstRender = useRef(true);
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
     }
-  };
-
-  const handleDeleteImage = (image) => {
-    const newImages = albumPhotosFile.filter((images) => images !== image);
-    setAlbumImages(newImages);
-    setAlbumPhotosFile(newImages);
-  };
+    if (previewCover.length > 0) {
+      setCoverPhoto(previewCover);
+      setCoverPhotoFile(coverFile);
+    }
+    if (previewAlbum.length > 0) {
+      setAlbumImages(previewAlbum);
+      setAlbumPhotosFile(albumFiles);
+    }
+  }, [
+    albumImages,
+    coverFile,
+    setCoverPhotoFile,
+    previewCover,
+    setCoverPhoto,
+    setAlbumImages,
+    previewAlbum,
+    setAlbumPhotosFile,
+    albumFiles,
+  ]);
 
   return (
     <>
@@ -49,7 +68,7 @@ const Step3 = () => {
           {...register("imageCover")}
           className="image-input"
           type="file"
-          onChange={(e) => onSelectFile(e, "cover")}
+          onChange={(e) => selectCover(e)}
         />
         <AddIcon />
       </ImageUploader>
@@ -61,17 +80,17 @@ const Step3 = () => {
           <input
             {...register("images")}
             type="file"
-            onChange={(e) => onSelectFile(e, "album")}
+            onChange={(e) => selectAlbum(e)}
             multiple
           />
         </label>
       </AlbumUploader>
       <AlbumContainer>
         {albumImages &&
-          albumPhotosFile.map((image) => (
-            <div className="image" key={image.name}>
-              <img src={URL.createObjectURL(image)} />
-              <DeleteIcon onClick={() => handleDeleteImage(image)} />
+          albumImages.map((image, index) => (
+            <div className="image" key={image}>
+              <img src={image} />
+              <DeleteIcon onClick={() => deleteAlbumImage(index)} />
             </div>
           ))}
       </AlbumContainer>

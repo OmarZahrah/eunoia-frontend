@@ -1,35 +1,56 @@
 import styled from "styled-components";
+import { useEffect, useRef } from "react";
 import { useAuthContext } from "../../context/AuthContext";
 import { IoImageOutline } from "react-icons/io5";
 import { MdAdd } from "react-icons/md";
 import FormInput from "../../components/FormInput";
 import Input from "../../components/Input";
+import useImageUploader from "../../hooks/useImageUploader";
 
 const Step2 = () => {
-  const { profilePhoto, setProfilePhoto, setProfilePhotoFile } =
+  const { profilePhoto, setProfilePhoto, setProfilePhotoFile, register } =
     useAuthContext();
-  const { register } = useAuthContext();
+  const {
+    imageFiles: profileFile,
+    previewImages: previewProfile,
+    handleSelectFiles: selectProfilePicture,
+  } = useImageUploader();
 
-  const onSelectFile = (e) => {
-    const selectedFiles = e.target.files;
-    setProfilePhotoFile(selectedFiles[0]);
-    const photo = URL.createObjectURL(...selectedFiles);
-    setProfilePhoto(photo);
-  };
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    if (previewProfile.length > 0 || profileFile.length > 0) {
+      setProfilePhoto(previewProfile);
+      setProfilePhotoFile(profileFile);
+    }
+  }, [
+    previewProfile,
+    setProfilePhoto,
+    profileFile,
+    setProfilePhotoFile,
+    profilePhoto,
+  ]);
+
   return (
     <>
       <ImageBox className="image-box">
         <ImageBox className="image">
           <label className="image-uploader">
-            {!profilePhoto && <IoImageOutline className="image-icon" />}
-            {profilePhoto && (
+            {profilePhoto.length === 0 && (
+              <IoImageOutline className="image-icon" />
+            )}
+            {profilePhoto.length > 0 && (
               <img className="profile-photo" src={profilePhoto} />
             )}
             <input
               {...register("avatar")}
               className="image-input"
               type="file"
-              onChange={onSelectFile}
+              onChange={(e) => selectProfilePicture(e)}
             />
             <MdAdd className="add-icon" />
           </label>

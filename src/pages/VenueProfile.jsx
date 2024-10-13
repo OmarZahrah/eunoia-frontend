@@ -61,7 +61,6 @@ function VenueProfile() {
   };
   return (
     <Wrapper>
-      <NavBar />
       {isLoading ? (
         <Loading />
       ) : (

@@ -1,19 +1,18 @@
 import { createContext, useContext, useState } from "react";
 import Step1 from "../features/Auth/step1";
-import Step2 from "../features/Auth/step2";
+import Step2 from "../features/Auth/Step2";
 import Step3 from "../features/Auth/Step3";
-// import Step4 from "../features/signup/Step3";
 import { useForm } from "react-hook-form";
 const AuthContext = createContext();
 
-const steps = [
-  { stepNum: 1, stepTitle: "Business Type", stepForm: <Step1 /> },
-  { stepNum: 2, stepTitle: "Business Info", stepForm: <Step2 /> },
-  { stepNum: 3, stepTitle: "More Details", stepForm: <Step3 /> },
-];
+// const steps = [
+//   { stepNum: 1, stepTitle: "Business Type", stepForm: <Step1 /> },
+//   { stepNum: 2, stepTitle: "Business Info", stepForm: <Step2 /> },
+//   { stepNum: 3, stepTitle: "More Details", stepForm: <Step3 /> },
+// ];
 
 const AuthProvider = ({ children }) => {
-  const [currentStep, setCurrentStep] = useState(1);
+  // const [currentStep, setCurrentStep] = useState(1);
   const [profilePhoto, setProfilePhoto] = useState("");
   const [coverPhoto, setCoverPhoto] = useState([]);
   const [albumImages, setAlbumImages] = useState([]);
@@ -31,9 +30,9 @@ const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        steps,
-        currentStep,
-        setCurrentStep,
+        // steps,
+        // currentStep,
+        // setCurrentStep,
         register,
         handleSubmit,
         // getValues,

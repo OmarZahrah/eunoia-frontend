@@ -1,8 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { MdOutlineCameraAlt, MdOutlineImagesearchRoller } from "react-icons/md";
+import { MdOutlineCameraAlt } from "react-icons/md";
 import { useOutletContext } from "react-router-dom";
-import { useForm } from "react-hook-form";
 import { useUserContext } from "../context/UserContext";
 import defaultProfile from "../../public/images/defaultProfile.jpg";
 
@@ -15,14 +14,13 @@ function ProfilePic({ form, register }) {
     const file = event.target.files[0];
     setAvatar(file);
     if (file) {
-      setImageSrc(URL.createObjectURL(file)); // Create a temporary URL for the file
+      setImageSrc(URL.createObjectURL(file));
     }
   };
   return (
     <Wrapper>
       {form ? (
         <>
-          {/* <img src={defaultProfile} alt="" /> */}
           <div className="photo">
             <label>
               <img

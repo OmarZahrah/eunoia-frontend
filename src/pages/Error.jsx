@@ -4,9 +4,8 @@ import error from "../../public/images/error.svg";
 const Error = () => {
   return (
     <Wrapper>
-      <NavBar showLoginButton={true} showRegisterButton={true} />
       <div className="container">
-        <p>Something went Wrong!</p>
+        <p>This Page Not Found!</p>
         <img src={error} alt="error" />
       </div>
     </Wrapper>
@@ -18,10 +17,9 @@ const Wrapper = styled.div`
   min-height: 100vh;
   .container {
     margin: auto;
-    margin-top: 2rem;
+
     width: 30rem;
-    /* width: fit-content; */
-    padding: 0 3rem;
+    padding: 2rem 3rem 0 3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,6 +29,7 @@ const Wrapper = styled.div`
     /* width: 20rem; */
   }
   p {
+    color: var(--color-black-mid);
     font-size: 1.25rem;
   }
 `;

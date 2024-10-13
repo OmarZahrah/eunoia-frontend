@@ -53,9 +53,7 @@ function ChatBot() {
 
   return (
     <Wrapper>
-      <div className="nav">
-        <NavBar />
-      </div>
+      <div className="nav"></div>
       <div className="left-right">
         <div className="left-section">
           <ChatSection />

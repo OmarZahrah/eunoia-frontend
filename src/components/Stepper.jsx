@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { useAuthContext } from "../context/AuthContext";
 import { device } from "../assets/styles/breakpoints";
 
-const Stepper = () => {
-  const { steps, currentStep } = useAuthContext();
+const Stepper = ({ steps, currentStep }) => {
+  // const { steps, currentStep } = useAuthContext();
   return (
     <Wrapper>
       {steps.map((step, i) => {

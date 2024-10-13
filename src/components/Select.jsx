@@ -13,8 +13,8 @@ const Select = ({
   return (
     <Wrapper color={color}>
       <Label htmlFor={name}>{label}</Label>
-      <SelectItem {...register(name)} multiple={multiple}>
-        <option value="" disabled selected hidden>
+      <SelectItem {...register(name)} multiple={multiple} defaultValue="">
+        <option value="" disabled hidden>
           {placeholder || "Select"}
         </option>
         {options?.map((option) => (
@@ -39,7 +39,7 @@ const Label = styled.label`
   display: block;
   font-size: 1.2rem;
   font-weight: 500;
-  margin-bottom: 1rem;
+  margin-bottom: 1rem !important;
   color: ${({ color }) => color || "var(--color-black-mid)"};
 `;
 

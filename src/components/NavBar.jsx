@@ -9,7 +9,6 @@ import { device } from "../assets/styles/breakpoints";
 
 function NavBar() {
   const { isAuthenticated, isLoading } = useCheckAuth();
-  console.log(isAuthenticated);
 
   const route = useLocation()?.pathname;
 
@@ -21,16 +20,21 @@ function NavBar() {
 
   return (
     <NavWrapper route={route} isAuthenticated={isAuthenticated || false}>
-      <Link to="/home">
+      <Link to="/">
         <Logo src={logo} alt="logo" />
       </Link>
       <NavList>
         <NavItem>
-          <NavLink to="/categories">Categories</NavLink>
+          <NavLink to="/home">Home</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink to="/profile">Profile</NavLink>
+          <NavLink to="/categories">Categories</NavLink>
         </NavItem>
+        {isAuthenticated && (
+          <NavItem>
+            <NavLink to="/profile">Profile</NavLink>
+          </NavItem>
+        )}
         <NavItem>
           <NavLink to="/search">Search</NavLink>
         </NavItem>
@@ -53,9 +57,11 @@ function NavBar() {
         <NavItem>
           <NavLink to="/categories">Categories</NavLink>
         </NavItem>
-        <NavItem>
-          <NavLink to="/profile">Profile</NavLink>
-        </NavItem>
+        {isAuthenticated && (
+          <NavItem>
+            <NavLink to="/profile">Profile</NavLink>
+          </NavItem>
+        )}
         <NavItem>
           <NavLink to="/search">Search</NavLink>
         </NavItem>
@@ -112,7 +118,7 @@ const NavList = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 6rem;
+  gap: 5rem;
   color: #222;
   transition: all 0.4s ease;
   padding: 0;

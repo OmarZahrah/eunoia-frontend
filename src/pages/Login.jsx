@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { device } from "../assets/styles/breakpoints";
 import { useLogin } from "../features/Auth/useLogin";
-import { useAuthContext } from "../context/AuthContext";
 
 import loginImage from "/images/auth/login.png";
 import { LuUser } from "react-icons/lu";
@@ -17,7 +16,7 @@ import FormInput from "../components/FormInput";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
-  const { showPassword } = useAuthContext();
+  // const { showPassword } = useAuthContext();
   const { login, isLoading } = useLogin();
 
   const onSubmit = async (formData) => {
@@ -45,7 +44,7 @@ const Login = () => {
             </FormInput>
             <FormInput type="password" icon={<VscLock className="icon" />}>
               <Input
-                type={showPassword ? "text" : "password"}
+                type="password"
                 id="password"
                 placeholder="Your Password"
                 {...register("password", {

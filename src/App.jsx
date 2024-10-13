@@ -5,6 +5,8 @@ import { ThemeProvider } from "styled-components";
 import { theme } from "./assets/styles/responsive";
 import { QueryClient } from "@tanstack/query-core";
 import { QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
 // Context
 import { ServiceProvider } from "./context/ServiceContext";
 import { PackageProvider } from "./context/PackageContext";
@@ -76,11 +78,9 @@ function App() {
                                  Public Routes
                   ===========================================
                   */}
-                    <Route path="signup" element={<SignUp />}>
-                      <Route path="create" element={<CreateAccount />} />
-                      <Route path="user" element={<SignUpUser />} />
-                      <Route path="provider" element={<SignUpBusiness />} />
-                    </Route>
+                    <Route path="role" element={<CreateAccount />} />
+                    <Route path="signup" element={<SignUpUser />} />
+                    <Route path="businessForm" element={<SignUpBusiness />} />
                     <Route path="login" element={<Login />} />
                     <Route path="forgotpassword" element={<ForgotPass />} />
                     <Route
@@ -175,6 +175,7 @@ function App() {
             </ServiceProvider>
           </UserProvider>
         </AuthProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
         <Toaster
           position="top-center"
           gutter={12}

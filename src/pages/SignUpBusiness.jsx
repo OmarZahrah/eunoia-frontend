@@ -4,22 +4,24 @@ import { useAuthContext } from "../context/AuthContext";
 import { useAddService } from "../features/serviceProfile/useAddService";
 import Stepper from "../components/Stepper";
 import Button from "../components/Button";
+import Step1 from "../features/Auth/step1";
+import Step2 from "../features/Auth/Step2";
+import Step3 from "../features/Auth/Step3";
+import { useState } from "react";
+
+const steps = [
+  { stepNum: 1, stepTitle: "Business Type", stepForm: <Step1 /> },
+  { stepNum: 2, stepTitle: "Business Info", stepForm: <Step2 /> },
+  { stepNum: 3, stepTitle: "More Details", stepForm: <Step3 /> },
+];
 
 const SignUpBusiness = () => {
-  const {
-    currentStep,
-    setCurrentStep,
-    steps,
-    handleSubmit,
-    profilePhotoFile,
-    coverPhotoFile,
-    albumPhotosFile,
-  } = useAuthContext();
+  const [currentStep, setCurrentStep] = useState(1);
+  const lastStep = currentStep === steps.length;
+  const { handleSubmit, profilePhotoFile, coverPhotoFile, albumPhotosFile } =
+    useAuthContext();
 
   const { addService, isLoading } = useAddService();
-
-  const lastStep = currentStep === steps.length;
-  const firstStep = currentStep === 1;
 
   const handleNext = () => {
     if (!lastStep) setCurrentStep((s) => s + 1);
@@ -49,7 +51,7 @@ const SignUpBusiness = () => {
     );
 
     albumPhotosFile?.forEach((file) => finalData.append("images", file));
-
+    console.log(Object.fromEntries(finalData));
     addService(finalData);
   };
 
@@ -57,7 +59,7 @@ const SignUpBusiness = () => {
     <Form onSubmit={handleSubmit(onSubmit)}>
       <h2>JOIN US TODAY</h2>
       <hr />
-      <Stepper />
+      <Stepper steps={steps} currentStep={currentStep} />
       <FormStep>
         <header>
           <h2 className="form-title">{steps[currentStep - 1]?.stepTitle}</h2>
@@ -76,7 +78,7 @@ const SignUpBusiness = () => {
           &lt; Back
         </Button>
 
-        {!lastStep ? (
+        {!lastStep && (
           <Button
             type="button"
             onClick={handleNext}
@@ -85,7 +87,8 @@ const SignUpBusiness = () => {
           >
             Next &gt;
           </Button>
-        ) : (
+        )}
+        {lastStep && (
           <Button
             type="submit"
             background="green"

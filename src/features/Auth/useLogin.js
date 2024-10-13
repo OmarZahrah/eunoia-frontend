@@ -10,7 +10,7 @@ export const useLogin = () => {
   const { setIsAuthenticated } = useAuthContext();
   const { mutate: login, isPending: isLoading } = useMutation({
     mutationFn: ({ email, password }) => loginApi({ email, password }),
-    onSuccess: (user) => {
+    onSuccess: () => {
       toast.success("Welcome :)");
       () => setIsAuthenticated(true);
       queryClient.invalidateQueries({ queryKey: ["isAuthenticated"] });
