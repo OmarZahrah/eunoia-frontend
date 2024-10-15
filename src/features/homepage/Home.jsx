@@ -1,18 +1,16 @@
-import NavBar from "../../components/NavBar";
 import styled from "styled-components";
 import SpecialOffers from "../../components/SpecialOffers";
 import ring from "../../images/ring.png";
 import DetailsCard from "../../components/DetailsCard";
-import man from "../../images/man.png";
 import wedding1 from "../../images/wedding1.jpg";
 import wedding2 from "../../images/wedding2.jpg";
 import wedding3 from "../../images/wedding3.jpg";
 import mirage from "../../images/mirage.jpg";
 import Loading from "../../components/Loading";
-import { useUser } from "../userProfile/useUser";
-import { useGetNearby } from "./useGetNearby";
+import { useUser } from "../../features/userProfile/useUser";
+import { useGetNearby } from "../../features/homepage/useGetNearby";
 import ScrollSection from "../../components/ScrollSection";
-import { useGetServices } from "../categories/useGetServices";
+import { useGetServices } from "../../features/categories/useGetServices";
 import ChatIcon from "../../components/ChatIcon";
 const Home = () => {
   const { user, isLoading } = useUser();

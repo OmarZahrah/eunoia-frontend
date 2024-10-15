@@ -27,12 +27,11 @@ import Error from "./pages/Error";
 import SignUpBusiness from "./pages/SignUpBusiness";
 import CreateAccount from "./features/Auth/CreatAccount";
 import ForgotPass from "./features/Auth/ForgotPass";
-import MainProfile from "./features/userProfile/MainProfile";
 import EditProfile from "./features/userProfile/EditProfile";
 import CreateBussAcc from "./features/userProfile/CreateBussAcc";
 import AddPackage from "./features/package/AddPackage";
 import BuisnessProfile from "././features/serviceProfile/BuisnessProfile";
-import Profile from "./features/userProfile/Profile";
+import Profile from "./pages/Profile";
 import Categories from "./features/categories/Categories";
 import CustomizePackage from "./features/package/CustomizePackage";
 import Search from "./features/homepage/Search";
@@ -49,7 +48,6 @@ import CreatePackage from "./features/package/CreatePackage";
 import UpdatePackage from "./features/package/updatePackage";
 import Requests from "./features/requests/Requests";
 import ChatBot from "./features/Ai Chat/ChatBot";
-import SignUp from "./features/Auth/SignUp";
 import Home from "./features/homepage/Home";
 
 // import theme from "./assets/styles/responsive";
@@ -137,19 +135,17 @@ function App() {
                       }
                     > */}
                       <Route element={<ProtectedRoute />}>
-                        <Route path="profile" element={<Profile />}>
-                          <Route index element={<MainProfile />} />
-                          <Route path="editprofile" element={<EditProfile />} />
-                          <Route
-                            path=":userId/businessProfile"
-                            element={<BuisnessProfile />}
-                          />
-                          <Route
-                            path="createBusiness"
-                            element={<CreateBussAcc />}
-                          />
-                          <Route path="favorites" element={<Favorites />} />
-                        </Route>
+                        <Route path="profile" element={<Profile />} />
+                        <Route path="editprofile" element={<EditProfile />} />
+                        <Route
+                          path="createBusiness"
+                          element={<CreateBussAcc />}
+                        />
+                        <Route
+                          path="businessProfile/:userId"
+                          element={<BuisnessProfile />}
+                        />
+                        <Route path="favorites" element={<Favorites />} />
                         <Route path="chat" element={<ChatBot />} />
 
                         <Route path="addpackage" element={<AddPackage />} />

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { device } from "../assets/styles/breakpoints";
 import { useAuthContext } from "../context/AuthContext";
 import { useAddService } from "../features/serviceProfile/useAddService";
-import Stepper from "../components/Stepper";
+import Stepper from "../components/Auth/Stepper";
 import Button from "../components/Button";
 import Step1 from "../features/Auth/step1";
 import Step2 from "../features/Auth/Step2";

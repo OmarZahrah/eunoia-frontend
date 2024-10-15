@@ -1,17 +1,22 @@
 import styled from "styled-components";
-import image1 from "/images/welcome/unsplash-ebv-cs-rypmx-m.png";
-import image2 from "/images/welcome/unsplash-fn-0-xxl-9-szc-u.png";
-import image3 from "/images/welcome/unsplash-azod-v-2-d-0-g-lc.png";
 import { device } from "..//assets/styles/breakpoints";
-import NavBar from "../components/NavBar";
 
 const Welcome = () => {
   return (
     <Wrapper>
       <ImageContainer>
-        <img src={image1} alt="welcome-image" />
-        <img src={image2} className="mobile-img" />
-        <img src={image3} alt="welcome-img" />
+        <img
+          src="/images/welcome/unsplash-ebv-cs-rypmx-m.png"
+          alt="welcome-image"
+        />
+        <img
+          src="/images/welcome/unsplash-fn-0-xxl-9-szc-u.png"
+          className="mobile-img"
+        />
+        <img
+          src="/images/welcome/unsplash-azod-v-2-d-0-g-lc.png"
+          alt="welcome-img"
+        />
       </ImageContainer>
       <TextContainer>
         <h1>Your Event, Perfected Here.</h1>

@@ -17,6 +17,14 @@ function NavBar() {
   const toggleNav = () => {
     setOpenNav((prevState) => !prevState);
   };
+  const handleNavClick = (e) => {
+    if (
+      e.target.classList.contains("responsive-link") ||
+      e.target.closest(".responsive-link")
+    ) {
+      setOpenNav(false);
+    }
+  };
 
   return (
     <NavWrapper route={route} isAuthenticated={isAuthenticated || false}>
@@ -53,33 +61,45 @@ function NavBar() {
           </Link>
         )}
       </NavButtons>
-      <ResponsiveNavList openNav={openNav}>
+      <ResponsiveNavList openNav={openNav} onClick={handleNavClick}>
         <NavItem>
-          <NavLink to="/categories">Categories</NavLink>
+          <NavLink to="/home" className="responsive-link">
+            Home
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink to="/categories" className="responsive-link">
+            Categories
+          </NavLink>
         </NavItem>
         {isAuthenticated && (
           <NavItem>
-            <NavLink to="/profile">Profile</NavLink>
+            <NavLink to="/profile" className="responsive-link">
+              Profile
+            </NavLink>
           </NavItem>
         )}
         <NavItem>
-          <NavLink to="/search">Search</NavLink>
+          <NavLink to="/search" className="responsive-link">
+            Search
+          </NavLink>
         </NavItem>
         <NavItem className="button">
-          <Link to="/login">
+          <Link to="/login" className="responsive-link">
             <Button color="pink" background="transparent" size="small">
               Login
             </Button>
           </Link>
         </NavItem>
         <NavItem className="button">
-          <Link to="/signup/user">
+          <Link to="/signup/user" className="responsive-link">
             <Button color="white" background="pink" size="small">
               Register
             </Button>
           </Link>
         </NavItem>
       </ResponsiveNavList>
+
       <ToggleIcon onClick={toggleNav}>
         {openNav ? (
           <IoClose style={{ width: "30px", height: "30px" }} />

@@ -15,8 +15,9 @@ import Input from "../components/Input";
 import FormInput from "../components/FormInput";
 
 const Login = () => {
-  const { register, handleSubmit } = useForm();
-  // const { showPassword } = useAuthContext();
+  const { register, formState, handleSubmit } = useForm();
+  const { errors } = formState;
+
   const { login, isLoading } = useLogin();
 
   const onSubmit = async (formData) => {
@@ -28,7 +29,10 @@ const Login = () => {
       <AuthForm title="Login">
         <Form onSubmit={handleSubmit(onSubmit)}>
           <InputsContainer>
-            <FormInput icon={<LuUser className="icon" />}>
+            <FormInput
+              icon={<LuUser className="icon" />}
+              error={errors?.email?.message}
+            >
               <Input
                 type="email"
                 id="email"
@@ -42,7 +46,11 @@ const Login = () => {
                 })}
               />
             </FormInput>
-            <FormInput type="password" icon={<VscLock className="icon" />}>
+            <FormInput
+              type="password"
+              icon={<VscLock className="icon" />}
+              error={errors?.password?.message}
+            >
               <Input
                 type="password"
                 id="password"

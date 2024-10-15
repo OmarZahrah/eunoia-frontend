@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import NavBar from "../components/NavBar";
 import error from "../../public/images/error.svg";
 const Error = () => {
   return (
@@ -24,9 +23,6 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-  }
-  img {
-    /* width: 20rem; */
   }
   p {
     color: var(--color-black-mid);

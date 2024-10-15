@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { useAuthContext } from "../context/AuthContext";
-import { device } from "../assets/styles/breakpoints";
+import { device } from "../../assets/styles/breakpoints";
 
 const Stepper = ({ steps, currentStep }) => {
   // const { steps, currentStep } = useAuthContext();

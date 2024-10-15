@@ -19,6 +19,7 @@ const Wrapper = styled.div`
     min-height: calc(100vh - 6rem);
     margin: 0;
     padding: 0;
+    background-color: var(--color-brand-beige);
   }
 `;
 
