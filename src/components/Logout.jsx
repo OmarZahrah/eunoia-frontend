@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useLogout } from "../features/Auth/useLogout";
+import { device } from "../assets/styles/breakpoints";
 
 const StyledBox = styled.div`
   width: 40rem;
@@ -8,6 +9,10 @@ const StyledBox = styled.div`
   gap: 1.2rem;
   background-color: #fef9f0;
   padding: 3.2rem 4rem;
+
+  @media ${device.mobile} {
+    width: 100%;
+  }
 
   h3 {
     color: var(--color-black-mid);
