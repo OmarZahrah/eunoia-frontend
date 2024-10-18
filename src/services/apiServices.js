@@ -14,7 +14,7 @@ export const getAllServices = async (filters) => {
   const str = filters
     .map((filter) => `&${Object.keys(filter)}=${Object.values(filter)}`)
     .join("");
-  console.log(str);
+  // console.log(str);
   const { data } = await customFetch.get(`/services?${str && str}`);
   return data.data;
 };
@@ -37,19 +37,19 @@ export const editService = async (formData) => {
 };
 
 export const addPhotos = async (formData) => {
-  console.log(Object.fromEntries(formData));
+  // console.log(Object.fromEntries(formData));
   const { data } = await customFetch.patch("services/add-Photos", formData);
   return data.data;
 };
 
 export const deletePhotos = async (image) => {
   const imageLinks = { imageLinks: image };
-  console.log(imageLinks);
+  // console.log(imageLinks);
   const { data } = await customFetch.patch(
     "services/remove-Photos",
     imageLinks
   );
-  console.log(data.data);
+  // console.log(data.data);
 };
 
 export const nearbyServices = async () => {

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { login as loginApi } from "../../services/apiAuth";
 import toast from "react-hot-toast";
 import { useAuthContext } from "../../context/AuthContext";
+import Cookies from "js-cookie";
 
 export const useLogin = () => {
   const queryClient = useQueryClient();
@@ -10,7 +11,9 @@ export const useLogin = () => {
   const { setIsAuthenticated } = useAuthContext();
   const { mutate: login, isPending: isLoading } = useMutation({
     mutationFn: ({ email, password }) => loginApi({ email, password }),
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log(data);
+      Cookies.set("eunoia-jwt", data.token);
       toast.success("Welcome :)");
       () => setIsAuthenticated(true);
       queryClient.invalidateQueries({ queryKey: ["isAuthenticated"] });

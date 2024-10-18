@@ -19,7 +19,6 @@ import ConfirmationCode from "./pages/ConfirmationCode";
 import SetNewPass from "./pages/SetNewPass";
 import AppLayout from "./pages/AppLayout";
 import Welcome from "./pages/Welcome";
-import ProtectedRoute from "./components/ProtectedRoutes";
 import VenueProfile from "./pages/VenueProfile";
 import Error from "./pages/Error";
 
@@ -49,6 +48,7 @@ import UpdatePackage from "./features/package/updatePackage";
 import Requests from "./features/requests/Requests";
 import ChatBot from "./features/Ai Chat/ChatBot";
 import Home from "./features/homepage/Home";
+import PrivateRoute from "./components/PrivateRoute";
 
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({
@@ -127,43 +127,97 @@ function App() {
                                  Private Routes
                   ===========================================
                   */}
-                      {/* <Route
-                      element={
-                        <ProtectedRoute>
-                          <PrivateRoute />
-                        </ProtectedRoute>
-                      }
-                    > */}
-                      <Route element={<ProtectedRoute />}>
-                        <Route path="profile" element={<Profile />} />
-                        <Route path="editprofile" element={<EditProfile />} />
-                        <Route
-                          path="createBusiness"
-                          element={<CreateBussAcc />}
-                        />
-                        <Route
-                          path="businessProfile/:userId"
-                          element={<BuisnessProfile />}
-                        />
-                        <Route path="favorites" element={<Favorites />} />
-                        <Route path="chat" element={<ChatBot />} />
 
-                        <Route path="addpackage" element={<AddPackage />} />
+                      <Route
+                        path="profile"
+                        element={
+                          <PrivateRoute>
+                            <Profile />
+                          </PrivateRoute>
+                        }
+                      />
+                      <Route
+                        path="editprofile"
+                        element={
+                          <PrivateRoute>
+                            <EditProfile />
+                          </PrivateRoute>
+                        }
+                      />
+                      <Route
+                        path="createBusiness"
+                        element={
+                          <PrivateRoute>
+                            <CreateBussAcc />
+                          </PrivateRoute>
+                        }
+                      />
+                      <Route
+                        path="businessProfile/:userId"
+                        element={
+                          <PrivateRoute>
+                            <BuisnessProfile />
+                          </PrivateRoute>
+                        }
+                      />
+                      <Route
+                        path="favorites"
+                        element={
+                          <PrivateRoute>
+                            <Favorites />
+                          </PrivateRoute>
+                        }
+                      />
+                      <Route
+                        path="chat"
+                        element={
+                          <PrivateRoute>
+                            <ChatBot />
+                          </PrivateRoute>
+                        }
+                      />
 
-                        <Route
-                          path="createPackage"
-                          element={<CreatePackage />}
-                        />
-                        <Route
-                          path="updatePackage/:packageId"
-                          element={<UpdatePackage />}
-                        />
-                        <Route
-                          path="package/:packageId"
-                          element={<CustomizePackage />}
-                        />
-                        <Route path="requests" element={<Requests />} />
-                      </Route>
+                      <Route
+                        path="addpackage"
+                        element={
+                          <PrivateRoute>
+                            <AddPackage />
+                          </PrivateRoute>
+                        }
+                      />
+
+                      <Route
+                        path="createPackage"
+                        element={
+                          <PrivateRoute>
+                            <CreatePackage />
+                          </PrivateRoute>
+                        }
+                      />
+                      <Route
+                        path="updatePackage/:packageId"
+                        element={
+                          <PrivateRoute>
+                            <UpdatePackage />
+                          </PrivateRoute>
+                        }
+                      />
+                      <Route
+                        path="package/:packageId"
+                        element={
+                          <PrivateRoute>
+                            <CustomizePackage />
+                          </PrivateRoute>
+                        }
+                      />
+                      <Route
+                        path="requests"
+                        element={
+                          <PrivateRoute>
+                            <Requests />
+                          </PrivateRoute>
+                        }
+                      />
                     </Route>
                   </Routes>
                 </BrowserRouter>

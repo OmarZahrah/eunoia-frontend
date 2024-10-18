@@ -1,4 +1,3 @@
-import { useAuthContext } from "../context/AuthContext";
 import customFetch from "../utils/customFetch";
 
 export const signup = async (formData) => {
@@ -9,7 +8,7 @@ export const signup = async (formData) => {
 
 export const login = async (formData) => {
   const { data } = await customFetch.post("/auth/login", formData);
-
+  // console.log(data);
   return data;
 };
 

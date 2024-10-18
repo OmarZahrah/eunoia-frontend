@@ -1,15 +1,13 @@
 import logo from "/images/png-wordmark-1.png";
 import Button from "../components/Button";
 import styled from "styled-components";
-import { useCheckAuth } from "../features/Auth/useCheckAuth";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { IoMenu, IoClose } from "react-icons/io5";
 import { useState } from "react";
 import { device } from "../assets/styles/breakpoints";
+import { isAuthenticated } from "../utils/auth";
 
 function NavBar() {
-  const { isAuthenticated, isLoading } = useCheckAuth();
-
   const route = useLocation()?.pathname;
 
   const [openNav, setOpenNav] = useState(false);
@@ -38,7 +36,7 @@ function NavBar() {
         <NavItem>
           <NavLink to="/categories">Categories</NavLink>
         </NavItem>
-        {isAuthenticated && (
+        {isAuthenticated() && (
           <NavItem>
             <NavLink to="/profile">Profile</NavLink>
           </NavItem>
@@ -53,7 +51,7 @@ function NavBar() {
             Login
           </Button>
         </Link>
-        {!isLoading && !isAuthenticated && (
+        {!isAuthenticated && (
           <Link to="/signup/user">
             <Button color="white" background="pink" size="small">
               Register
