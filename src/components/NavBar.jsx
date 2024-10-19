@@ -9,9 +9,7 @@ import { isAuthenticated } from "../utils/auth";
 
 function NavBar() {
   const route = useLocation()?.pathname;
-
   const [openNav, setOpenNav] = useState(false);
-
   const toggleNav = () => {
     setOpenNav((prevState) => !prevState);
   };
@@ -25,7 +23,7 @@ function NavBar() {
   };
 
   return (
-    <NavWrapper route={route} isAuthenticated={isAuthenticated || false}>
+    <NavWrapper route={route}>
       <Link to="/">
         <Logo src={logo} alt="logo" />
       </Link>
@@ -46,17 +44,19 @@ function NavBar() {
         </NavItem>
       </NavList>
       <NavButtons className="button">
-        <Link to="/login">
-          <Button color="pink" background="transparent" size="small">
-            Login
-          </Button>
-        </Link>
-        {!isAuthenticated && (
-          <Link to="/signup/user">
-            <Button color="white" background="pink" size="small">
-              Register
-            </Button>
-          </Link>
+        {!isAuthenticated() && (
+          <>
+            <Link to="/login">
+              <Button color="pink" background="transparent" size="small">
+                Login
+              </Button>
+            </Link>
+            <Link to="/signup/user">
+              <Button color="white" background="pink" size="small">
+                Register
+              </Button>
+            </Link>
+          </>
         )}
       </NavButtons>
       <ResponsiveNavList openNav={openNav} onClick={handleNavClick}>
@@ -70,7 +70,7 @@ function NavBar() {
             Categories
           </NavLink>
         </NavItem>
-        {isAuthenticated && (
+        {isAuthenticated() && (
           <NavItem>
             <NavLink to="/profile" className="responsive-link">
               Profile
@@ -82,20 +82,24 @@ function NavBar() {
             Search
           </NavLink>
         </NavItem>
-        <NavItem className="button">
-          <Link to="/login" className="responsive-link">
-            <Button color="pink" background="transparent" size="small">
-              Login
-            </Button>
-          </Link>
-        </NavItem>
-        <NavItem className="button">
-          <Link to="/signup/user" className="responsive-link">
-            <Button color="white" background="pink" size="small">
-              Register
-            </Button>
-          </Link>
-        </NavItem>
+        {!isAuthenticated() && (
+          <>
+            <NavItem className="button">
+              <Link to="/login" className="responsive-link">
+                <Button color="pink" background="transparent" size="small">
+                  Login
+                </Button>
+              </Link>
+            </NavItem>
+            <NavItem className="button">
+              <Link to="/signup/user" className="responsive-link">
+                <Button color="white" background="pink" size="small">
+                  Register
+                </Button>
+              </Link>
+            </NavItem>
+          </>
+        )}
       </ResponsiveNavList>
 
       <ToggleIcon onClick={toggleNav}>
