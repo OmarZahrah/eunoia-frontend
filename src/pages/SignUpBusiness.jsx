@@ -16,7 +16,7 @@ const steps = [
 ];
 
 const SignUpBusiness = () => {
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(2);
   const lastStep = currentStep === steps.length;
   const { handleSubmit, profilePhotoFile, coverPhotoFile, albumPhotosFile } =
     useAuthContext();

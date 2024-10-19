@@ -6,6 +6,7 @@ import { MdAdd } from "react-icons/md";
 import FormInput from "../../components/FormInput";
 import Input from "../../components/Input";
 import useImageUploader from "../../hooks/useImageUploader";
+import BusinessProfilePic from "../../components/businessProfile/businessProfilePic";
 
 const Step2 = () => {
   const { profilePhoto, setProfilePhoto, setProfilePhotoFile, register } =
@@ -38,14 +39,8 @@ const Step2 = () => {
   return (
     <>
       <ImageBox className="image-box">
-        <ImageBox className="image">
+        <div className="image-container">
           <label className="image-uploader">
-            {profilePhoto.length === 0 && (
-              <IoImageOutline className="image-icon" />
-            )}
-            {profilePhoto.length > 0 && (
-              <img className="profile-photo" src={profilePhoto} />
-            )}
             <input
               {...register("avatar")}
               className="image-input"
@@ -54,7 +49,8 @@ const Step2 = () => {
             />
             <MdAdd className="add-icon" />
           </label>
-        </ImageBox>
+          <BusinessProfilePic photo={profilePhoto} />
+        </div>
 
         <h3>Upload Your Business Profile Picture</h3>
       </ImageBox>
@@ -85,23 +81,12 @@ const ImageBox = styled.div`
   align-items: center;
   gap: 2rem;
 
-  .image-uploader {
+  .image-container {
     width: 7rem;
     height: 7rem;
-    border: 1px solid var(--color-grey-500);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
     position: relative;
   }
-  .profile-photo {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-  }
+
   .image-input {
     display: none;
   }
@@ -110,10 +95,13 @@ const ImageBox = styled.div`
     height: 2rem;
     color: var(--color-grey-500);
   }
-  .add-icon {
+  .image-uploader {
     position: absolute;
     bottom: 0;
     left: 60%;
+    cursor: pointer;
+  }
+  .add-icon {
     color: #fff;
     border-radius: 50%;
     background-color: var(--color-brand-pink);
