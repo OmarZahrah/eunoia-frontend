@@ -6,28 +6,24 @@ import defaultProfile from "/images/defaultProfile.jpg";
 import { MdOutlineCameraAlt } from "react-icons/md";
 
 function ProfilePic({ type, picture, name, register }) {
-  const { previewImages: previewImage, handleSelectFiles: selectImage } =
+  const { previewImage: previewImage, handleSelectFiles: selectImage } =
     useImageUploader();
 
   return (
     <Wrapper>
       {type === "form" ? (
         <FileInputPhoto>
+          <img src={previewImage || picture || defaultProfile} alt="Upload" />
           <label>
-            <img
-              src={previewImage[0] || picture || defaultProfile}
-              alt="Upload"
-            />
-
             <input
               id="image-upload"
               type="file"
               {...register("avatar", { onChange: selectImage })}
             />
+            <div className="camera">
+              <MdOutlineCameraAlt className="camera-icon" />
+            </div>
           </label>
-          <div className="camera">
-            <MdOutlineCameraAlt className="camera-icon" />
-          </div>
         </FileInputPhoto>
       ) : (
         <img src={picture || defaultProfile} alt="user-profile-picture" />
