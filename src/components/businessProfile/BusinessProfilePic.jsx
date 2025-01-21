@@ -29,10 +29,5 @@ const Image = styled.div`
     object-fit: cover;
   }
 `;
-// .image-uploader {
-//     width: 7rem;
-//     height: 7rem;
-//     position: relative;
-//   }
 
 export default BusinessProfilePic;

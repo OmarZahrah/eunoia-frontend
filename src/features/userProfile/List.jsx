@@ -13,6 +13,7 @@ import { RiDownloadLine } from "react-icons/ri";
 
 function List({ user }) {
   const hasService = user?.hasService;
+  console.log(user);
 
   return (
     <Wrapper>

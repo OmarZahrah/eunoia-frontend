@@ -1,13 +1,10 @@
 import styled from "styled-components";
-import coverimg from "../../../public/images/Rectangle 9.svg";
-import photo from "../../../public/images/Mask group.svg";
-import changephoto from "../../../public/images/Group 47.svg";
+import defaultPhoto from "../../../public/images/Group 47.svg";
 import { useState } from "react";
 import AboutComponent from "../../components/AboutComponent";
 import PackagesComponent from "../../components/PackagesComponent";
 import PhotosComponent from "../../components/PhotosComponent";
 import { useServiceContext } from "../../context/ServiceContext";
-import { useParams } from "react-router-dom";
 import Loading from "../../components/Loading";
 import Button from "../../components/Button";
 import { useEditService } from "../serviceProfile/useEditService";
@@ -17,11 +14,15 @@ import { filterData } from "../../utils/filterData";
 import { createFormData } from "../../utils/createFormData";
 import { useAddPhotos } from "./useAddPhotos";
 import { usePackageContext } from "../../context/PackageContext";
+import useImageUploader from "../../hooks/useImageUploader";
+import Slider from "../../components/Slider";
+import BusinessProfilePic from "../../components/businessProfile/businessProfilePic";
+import defaultProfile from "/images/defaults/defaultProfile.jpg";
+import { device } from "../../assets/styles/breakpoints";
 
-function BuisnessProfile() {
+function BusinessProfile() {
   const { myService: service, isLoading } = useGetMyService();
   const [activeItem, setActiveItem] = useState("About");
-  // const [change, setChange] = useState(false);
   const { change, setChange } = useServiceContext();
   const { editService, isLoading: editing } = useEditService();
   const [changeName, setChangeName] = useState(false);
@@ -30,16 +31,8 @@ function BuisnessProfile() {
   // console.log("service", service);
   const { editPackage, setEditPackage } = usePackageContext();
   const {
-    coverPhoto,
-    setCoverPhoto,
-    profilePhoto,
-    setProfilePhoto,
-    setProfilePhotoFile,
-    setCoverPhotoFile,
     oldPhotos,
     newPhotos,
-    profilePhotoFile,
-    coverPhotoFile,
     deletedPhotos,
     newPosition,
     register,
@@ -49,34 +42,29 @@ function BuisnessProfile() {
     setActiveItem(item);
   };
 
-  console.log("new position", Boolean(newPosition.length));
-
-  const onSelectFile = (e, type) => {
-    const selectedFiles = e.target.files;
-    if (type == "avatar") {
-      setProfilePhotoFile(selectedFiles[0]);
-      const photo = URL.createObjectURL(...selectedFiles);
-      setProfilePhoto(photo);
-    } else if (type == "cover") {
-      setCoverPhotoFile(selectedFiles[0]);
-      const photo = URL.createObjectURL(...selectedFiles);
-      setCoverPhoto(photo);
-    }
-  };
+  const {
+    previewImage: previewProfile,
+    imageFile: profileFile,
+    handleSelectFiles: selectProfile,
+  } = useImageUploader("image");
+  const {
+    previewImage: previewCover,
+    imageFile: coverFile,
+    handleSelectFiles: selectCover,
+  } = useImageUploader("image");
 
   const onSubmit = (data) => {
     const allData = {
       ...data,
-      avatar: profilePhotoFile && profilePhotoFile,
-      imageCover: coverPhotoFile && coverPhotoFile,
-      // images: oldPhotos && [...oldPhotos],
+      avatar: profileFile && profileFile,
+      imageCover: coverFile && coverFile,
       images: "",
       latitude: newPosition[0],
       longitude: newPosition[1],
     };
     const serviceData =
-      profilePhotoFile ||
-      coverPhotoFile ||
+      profileFile ||
+      coverFile ||
       data.businessName ||
       data.businessCategory ||
       data.about ||
@@ -90,6 +78,7 @@ function BuisnessProfile() {
     // =========================================
     const filteredData = filterData(allData);
     let finalData = createFormData(filteredData);
+    console.log(filteredData);
 
     // ========================================
     // Add the old photos to form data if exist
@@ -98,9 +87,6 @@ function BuisnessProfile() {
       oldPhotos.forEach((photo) => {
         finalData.append(`images`, photo);
       });
-    // if (noOldPhotos) {
-    //   finalData.append(`images`, "");
-    // }
 
     // ========================================
     // Add the new photos to form data if exist
@@ -109,7 +95,6 @@ function BuisnessProfile() {
     const newPhotosFormData = new FormData();
 
     for (let i = 0; i < newPhotos.length; i++) {
-      // finalData.append("newPhoto", newPhotos[i]);
       newPhotosFormData.append("newImages", newPhotos[i]);
     }
 
@@ -140,64 +125,63 @@ function BuisnessProfile() {
           className="section"
           onChange={() => setChange(true)}
         >
-          <div className="section1">
-            {/* <div className="cover-container"> */}
-            <label className="cover-container">
-              <img
-                className="cover"
-                src={coverPhoto || service?.imageCover || coverimg}
-                alt="cover"
+          <Section1 className="section1">
+            <CoverContainer className="cover-container">
+              <Slider
+                cover={previewCover || service?.imageCover}
+                photos={service?.images || []}
               />
-              <input
-                {...register("imageCover")}
-                className="image-input"
-                type="file"
-                onChange={(e) => onSelectFile(e, "cover")}
-              />
-              <img className="change" src={changephoto} alt="change photo" />
-            </label>
-            {/* </div> */}
-            {/* <Cover/> */}
-            <label className="profile-container">
-              <img
-                className="profile"
-                src={profilePhoto || service?.avatar || photo}
-                alt="profile"
-              />
-              <input
-                {...register("avatar")}
-                className="image-input"
-                type="file"
-                onChange={(e) => onSelectFile(e, "avatar")}
-              />
-            </label>
-            {/* <input
-              id="fileInput"
-              type="file"
-              accept="image/*"
-              onChange={handlePhotoChange}
-              style={{ display: "none" }}
-            /> */}
-          </div>
-          <div className="name-container">
+              <label className="cover-upload">
+                <img
+                  className="cover-upload-icon"
+                  src={defaultPhoto}
+                  alt="change photo"
+                />
+                <input
+                  {...register("imageCover", { onChange: selectCover })}
+                  className="cover-input"
+                  type="file"
+                />
+              </label>
+            </CoverContainer>
+            <ProfilerContainer>
+              <div className="profile-image">
+                <BusinessProfilePic
+                  photo={previewProfile || service?.avatar}
+                  defaultPhoto={defaultProfile}
+                />
+                <label className="profile-uploader">
+                  <input
+                    // {...register("avatar")}
+                    {...register("avatar", { onChange: selectProfile })}
+                    className="profile-input"
+                    type="file"
+                  />
+                  <CiEdit className="profile-icon" />
+                </label>
+              </div>
+            </ProfilerContainer>
+          </Section1>
+          <BusinessName>
             {changeName ? (
               <input
                 type="text"
                 {...register("businessName")}
                 defaultValue={service?.businessName}
-                className="name name-input"
+                className="name-text name-input"
                 autoFocus
               />
             ) : (
-              <p className="name">{service?.businessName}</p>
+              <p className="name-text">{service?.businessName}</p>
             )}
             <CiEdit
               className="edit-icon"
               onClick={() => setChangeName((e) => !e)}
             />
-          </div>
-          <div className="section2">
-            <ul className="list">
+          </BusinessName>
+
+          <Section2 className="section2">
+            <Nav className="list">
               <li>
                 <button
                   className={`button ${activeItem === "About" ? "active" : ""}`}
@@ -226,13 +210,18 @@ function BuisnessProfile() {
                   Photos
                 </button>
               </li>
-            </ul>
-            {activeItem && SelectedItem(activeItem, service, setChange)}
-          </div>
+            </Nav>
+            {activeItem === "About" && <AboutComponent service={service} />}
+            {activeItem === "Packages" && (
+              <PackagesComponent packages={service.packages} />
+            )}
+            {activeItem === "Photos" && (
+              <PhotosComponent images={service.images} setChange={setChange} />
+            )}
+          </Section2>
           {change && (
             <Button
               type="submit"
-              // type="button"
               background="green"
               size="small"
               disabled={editing || addingPhotos}
@@ -248,31 +237,10 @@ function BuisnessProfile() {
   );
 }
 
-function SelectedItem(
-  activeItem,
-  service,
-  setChange,
-  editPackage,
-  setEditPackage
-) {
-  switch (activeItem) {
-    case "About":
-      return <AboutComponent service={service} />;
-    case "Packages":
-      return <PackagesComponent packages={service.packages} />;
-    case "Photos":
-      return <PhotosComponent images={service.images} setChange={setChange} />;
-    default:
-      return null;
-  }
-}
-
 const Wrapper = styled.div`
   min-height: 100vh;
   background-color: #fef9f0;
   padding-bottom: 2rem;
-  /* padding-bottom: auto; */
-  /* height: 100vh; */
   .submit {
     display: block;
     margin-left: auto;
@@ -280,68 +248,29 @@ const Wrapper = styled.div`
   }
 
   .section {
-    /* background-color: #fef9f0; */
     width: 90%;
-    /* height: 100vh; */
     margin: 0 auto;
-    /* height: 100%; */
   }
-  .section1 {
-    position: relative;
-    /* width: 90%; */
-    /* margin-bottom: 3rem; */
-    margin: 0 auto 7rem auto;
+  @media ${device.tablet} {
+    .section {
+      width: 100%;
+    }
   }
-  .cover-container {
-    min-width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f8f1e6;
-    border-bottom-right-radius: 3rem;
-    border-bottom-left-radius: 3rem;
-    cursor: pointer;
-  }
-  .cover {
-    /* max-height: 30rem; */
-    width: 100%;
-    height: 35rem;
-    /* display: block; */
-    /* margin: 0 auto;/ */
-    object-fit: cover;
-  }
-  .add-icon {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    color: #fff;
-    border-radius: 50%;
-    background-color: var(--color-brand-pink);
-    transform: translate(50%, 50%);
-    width: 24px;
-    height: 24px;
-  }
-  .image-input {
-    display: none;
-  }
-  .image-icon {
-    width: 2rem;
-    height: 2rem;
-    color: var(--color-grey-500);
-  }
+`;
+
+const Section1 = styled.div`
+  position: relative;
+
+  margin: 0 auto 7rem auto !important;
 
   .profile-container {
     max-width: 20%;
-    /* max-height: 20%; */
-    /* width: 20%; */
-    /* height: 20%; */
+
     width: 10rem;
     height: 10rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* height: 5rem; */
     position: absolute;
     bottom: 0;
     left: 50%;
@@ -356,62 +285,113 @@ const Wrapper = styled.div`
     height: 100%;
     object-fit: cover;
   }
-  .change {
+`;
+
+const ProfilerContainer = styled.div`
+  width: 9rem;
+  height: 9rem;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 50%);
+  box-shadow: var(--shadow-md);
+  border-radius: 50%;
+  @media ${device.mobile} {
+    width: 7rem;
+    height: 7rem;
+  }
+  .profile-image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    .profile-uploader {
+      width: 24px;
+      height: 24px;
+      background-color: var(--color-brand-green);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      bottom: 0;
+      transform: translateY(-50%);
+      left: 80%;
+      cursor: pointer;
+
+      .profile-input {
+        display: none;
+      }
+    }
+  }
+`;
+const CoverContainer = styled.div`
+  position: relative;
+  .cover-upload {
     position: absolute;
+    right: 3%;
+    bottom: 3%;
     width: 3rem;
     height: 3rem;
-    bottom: 5%;
-    right: 5%;
-    /* transform: translate(-100%); */
     cursor: pointer;
   }
-  .name-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
+  .cover-input {
+    display: none;
+  }
+
+  .cover-upload-icon {
+    width: 100%;
+  }
+`;
+
+const BusinessName = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 4rem;
+  margin-bottom: 1rem;
+  @media ${device.mobile} {
+    margin-top: 3rem;
   }
   .edit-icon {
     width: 24px;
     height: 24px;
   }
-  .name {
+  .name-text {
     font-family: Literata;
-    font-size: 2rem;
-    font-weight: 400;
-    line-height: 5rem;
+    font-size: 1.5rem;
+    font-weight: 500;
     letter-spacing: 0.0625rem;
     text-align: center;
-    color: #00000099;
+    color: var(--color-black-mid);
     background: transparent;
     border: none;
-    /* margin: 0 auto; */
-    /* border-bottom: 0.2px solid #ccc; */
   }
   .name-input {
-    height: auto;
-    width: auto;
-    background: #f8f1e6;
+    background: none;
     outline: none;
     border-bottom: 1px solid #74ab70;
   }
-  .section2 {
-    width: 100%;
-    margin: 0 auto;
-  }
-  .list {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    font-size: 1.5rem;
-    font-weight: 370;
-    border-bottom: 0.2px solid #ccc;
-    border-top: 0.2px solid #ccc;
-    /* width: 90%; */
-    margin: 0 auto 1rem auto;
-    padding: 2px;
-  }
+`;
 
+const Section2 = styled.div`
+  min-height: 50vh;
+  @media ${device.tablet} {
+    padding: 0 1rem;
+  }
+`;
+const Nav = styled.ul`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  font-weight: 370;
+  border-bottom: 0.2px solid #ccc;
+  border-top: 0.2px solid #ccc;
+  margin: 0 auto 1rem auto;
+  padding: 2px;
   button:hover {
     transform: scale(1.1);
     font-weight: 450;
@@ -431,77 +411,6 @@ const Wrapper = styled.div`
     padding: 0;
     color: rgba(0, 0, 0, 0.5);
   }
-  @media only screen and (max-width: ${({ theme }) => theme.mid}) {
-    .cover {
-      max-height: 23rem;
-    }
-    .section1 {
-      margin: 0 auto 5rem auto;
-    }
-  }
-
-  @media only screen and (max-width: ${({ theme }) => theme.small}) {
-    .section1 {
-      margin-bottom: 5rem;
-    }
-  }
-
-  @media only screen and (max-width: ${({ theme }) => theme.semi}) {
-    /* height: 100vh; */
-    .name {
-      font-size: 2.1875rem;
-    }
-  }
-
-  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
-    /* .profile {
-      top: 32%;
-      width: 150px;
-      height: 150px;
-    } */
-    .section {
-      width: 100%;
-    }
-    .section1 {
-      /* width: 100%; */
-      margin-bottom: 2rem;
-    }
-    .cover {
-      max-height: 15rem;
-    }
-    .profile-container {
-      width: 7rem;
-      height: 7rem;
-      /* margin-bottom: 32px; */
-    }
-
-    .name {
-      font-size: 2.1rem;
-    }
-    .section2 {
-      width: 95%;
-    }
-    .list {
-      font-size: 1.8rem;
-    }
-  }
-
-  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
-    .profile {
-      top: 27%;
-      width: 7rem;
-      height: 7rem;
-      margin-bottom: 1rem;
-    }
-
-    .name {
-      font-size: 1.8rem;
-    }
-
-    .list {
-      font-size: 1.24rem;
-    }
-  }
 `;
 
-export default BuisnessProfile;
+export default BusinessProfile;

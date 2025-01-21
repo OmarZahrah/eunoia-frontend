@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { FaArrowRight } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
+import defaultCover from "/images/defaults/default-cover.png";
 
-const AlbumSwiper = ({ photos, cover }) => {
+const AlbumSwiper = ({ photos = [], cover }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const album = [cover, ...photos];
+  const album = [cover || defaultCover, ...photos];
   const nextSlide = () => {
     setCurrentIndex(
       currentIndex === album.length - 1 ? 0 : (prevIndex) => prevIndex + 1
@@ -19,14 +20,14 @@ const AlbumSwiper = ({ photos, cover }) => {
   };
   return (
     <Wrapper>
-      <div className="overlay"></div>
+      {/* <div className="overlay"></div> */}
       <div
         className="container"
         style={{
           transform: `translateX(-${currentIndex * 100}%)`,
         }}
       >
-        {album.map((photo, index) => (
+        {album?.map((photo, index) => (
           <div key={index} className="img-container">
             <img className="album-image" src={photo} alt={`photo-${index}`} />
           </div>
@@ -84,7 +85,6 @@ const Wrapper = styled.div`
     position: absolute;
     border: none;
     font-size: 2.5rem;
-    /* color: var(--color-brand-green); */
     color: #74ab706b;
     background: transparent;
     transform: translateY(-50%);
