@@ -351,7 +351,7 @@ const BusinessName = styled.div`
   justify-content: center;
   margin: 0 auto;
   margin-top: 4rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   @media ${device.mobile} {
     margin-top: 3rem;
   }
