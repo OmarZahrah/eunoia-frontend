@@ -1,9 +1,10 @@
+<div align="center">
+
 ![Logo](./public/Screenshots/logo.svg)
 
-  <br/>
-  <br/>
-  <p> <b>Eunoia</b><br/> is a comprehensive event planning platform designed to bring all event-related services under one roof. Whether you're planning a wedding, birthday, corporate event, or any special occasion, Eunoia connects you with the right service providers to make your event unforgettable. From venues, photographers, and DJs to event planners and caterers, users can effortlessly discover, compare, and book services tailored to their needs. Service providers, in turn, can showcase their offerings, customize packages, and manage customer interactions—all in one place. </p>
+<p><b>Eunoia</b></p>
 </div>
+  <p> is a comprehensive event planning platform designed to bring all event-related services under one roof. Whether you're planning a wedding, birthday, corporate event, or any special occasion, Eunoia connects you with the right service providers to make your event unforgettable. From venues, photographers, and DJs to event planners and caterers, users can effortlessly discover, compare, and book services tailored to their needs. Service providers, in turn, can showcase their offerings, customize packages, and manage customer interactions—all in one place. </p>
 </br>
 
 ## 💻 Technology Used
