@@ -3,7 +3,6 @@ import { cloneElement, createContext, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import { HiXMark } from "react-icons/hi2";
 import { useOutsideClick } from "../hooks/useOutsideClick";
-import { device } from "../assets/styles/breakpoints";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -12,7 +11,6 @@ const StyledModal = styled.div`
   transform: translate(-50%, -50%);
   box-shadow: var(--shadow-lg);
   transition: all 0.5s;
-  background-color: blue;
 `;
 
 const Overlay = styled.div`
@@ -39,9 +37,6 @@ const Button = styled.button`
   & svg {
     width: 2.4rem;
     height: 2.4rem;
-    /* Sometimes we need both */
-    /* fill: var(--color-grey-500);
-    stroke: var(--color-grey-500); */
     color: var(--color-grey-500);
   }
 `;
@@ -57,24 +52,31 @@ function useModalContext() {
 
 function Modal({ children }) {
   const [openName, setOpenName] = useState("");
+  const [id, setId] = useState(null);
   const close = () => setOpenName("");
   const open = setOpenName;
+
   return (
-    <ModalContext.Provider value={{ openName, open, close }}>
+    <ModalContext.Provider value={{ openName, open, close, id, setId }}>
       {children}
     </ModalContext.Provider>
   );
 }
 
-function Open({ children, opens: opensWindowName }) {
-  const { open } = useModalContext();
-  return cloneElement(children, { onClick: () => open(opensWindowName) });
+function Open({ children, opens: opensWindowName, id }) {
+  const { open, setId } = useModalContext();
+
+  return cloneElement(children, {
+    onClick: () => {
+      open(opensWindowName);
+      setId(id);
+    },
+  });
 }
 
 function Window({ children, name }) {
-  const { openName, close } = useModalContext();
+  const { openName, close, id } = useModalContext();
   const ref = useOutsideClick(close);
-
   if (openName !== name) return null;
   return createPortal(
     <Overlay>
@@ -82,7 +84,7 @@ function Window({ children, name }) {
         <Button onClick={close}>
           <HiXMark />
         </Button>
-        <div>{cloneElement(children, { onCloseModal: close })}</div>
+        <div>{cloneElement(children, { onCloseModal: close, id: id })}</div>
       </StyledModal>
     </Overlay>,
     document.body

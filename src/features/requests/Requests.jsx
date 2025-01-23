@@ -1,45 +1,21 @@
 import NavBar from "../../components/NavBar";
 import styled from "styled-components";
-import RequestsComponent from "../../components/RequestsComponent";
+import RequestsComponent from "../../components/businessProfile/RequestsComponent";
 import { useGetUserRequest } from "./useGetUserRequest";
 import Loading from "../../components/Loading";
 import { useGetProviderRequests } from "./useGetProviderRequests";
 
 function Requests() {
   const { isLoading: loadingUser, userRequests } = useGetUserRequest();
-  const { isLoading: loadingProvider, providerRequests } =
-    useGetProviderRequests("serviceProvider");
-  // console.log("user", userRequests);
-  // console.log("provider", providerRequests);
-
-  if (loadingProvider || loadingUser) return <Loading />;
+  if (loadingUser) return <Loading />;
   return (
     <Wrapper>
       <div className="request-container">
         <p className="title">Requests</p>
         <div className="components">
-          {/* <RequestsComponent
-            dateNumber="29"
-            dateMonth="Dec 2024"
-            day="Tue"
-            time="5:00 PM"
-            noteText="Location will be in Ismailia in Mercure"
-          /> */}
-          {providerRequests?.map((request) => (
-            <RequestsComponent
-              key={request._id}
-              id={request._id}
-              date={request.bookingDate}
-              price={request.totalPriceAfterDiscount}
-              Notes={request.Notes}
-              role="provider"
-              status={request.status}
-              // status='declined'
-            />
-          ))}
           {userRequests?.map((request) => (
             <RequestsComponent
-              request={request}
+              request={userRequests}
               key={request._id}
               id={request._id}
               price={request.totalPriceAfterDiscount}

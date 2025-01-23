@@ -10,10 +10,9 @@ const ScrollSection = ({ children, title }) => {
 };
 
 const Wrapper = styled.div`
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   position: relative;
   .title {
-    /* padding-top: 1rem; */
     font-family: Literata;
     color: #00000099;
     font-size: 2.1rem;

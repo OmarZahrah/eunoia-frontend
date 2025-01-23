@@ -15,24 +15,19 @@ import { UserProvider } from "./context/UserContext";
 // Pages
 import SignUpUser from "./pages/SignUpUser";
 import Login from "./pages/Login";
-import ConfirmationCode from "./pages/ConfirmationCode";
-import SetNewPass from "./pages/SetNewPass";
 import AppLayout from "./pages/AppLayout";
 import Welcome from "./pages/Welcome";
-import VenueProfile from "./pages/VenueProfile";
+import ServiceProfile from "./pages/ServiceProfile";
 import Error from "./pages/Error";
 
 // Features
 import SignUpBusiness from "./pages/SignUpBusiness";
 import CreateAccount from "./features/Auth/CreatAccount";
-import ForgotPass from "./features/Auth/ForgotPass";
 import EditProfile from "./features/userProfile/EditProfile";
 import CreateBussAcc from "./features/userProfile/CreateBussAcc";
-import AddPackage from "./features/package/AddPackage";
-import BuisnessProfile from "././features/serviceProfile/BuisnessProfile";
+import BuisnessProfile from "./pages/BuisnessProfile";
 import Profile from "./pages/Profile";
 import Categories from "./features/categories/Categories";
-import CustomizePackage from "./features/package/CustomizePackage";
 import Search from "./features/homepage/Search";
 import Favorites from "./features/categories/Favorites";
 import Photographers from "./features/categories/Photographers";
@@ -43,12 +38,11 @@ import HairStylest from "./features/categories/HairStylest";
 import OtherDetails from "./features/categories/OtherDetails";
 import Food from "./features/categories/Food";
 import Venues from "./features/categories/Venues";
-import CreatePackage from "./features/package/CreatePackage";
-import UpdatePackage from "./features/package/updatePackage";
 import Requests from "./features/requests/Requests";
-import ChatBot from "./features/Ai Chat/ChatBot";
-import Home from "./features/homepage/Home";
+import ChatBot from "./features/Chat/ChatBot";
+import Home from "./pages/Home";
 import PrivateRoute from "./components/PrivateRoute";
+import CustomizePackage from "./components/serviceProfile/CustomizePackage";
 
 // import theme from "./assets/styles/responsive";
 const queryClient = new QueryClient({
@@ -79,14 +73,7 @@ function App() {
                     <Route path="role" element={<CreateAccount />} />
                     <Route path="signup" element={<SignUpUser />} />
                     <Route path="businessForm" element={<SignUpBusiness />} />
-                    <Route path="login" element={<Login />} />
-                    <Route path="forgotpassword" element={<ForgotPass />} />
-                    <Route
-                      path="confirmationcode"
-                      element={<ConfirmationCode />}
-                    />
-                    <Route path="setnewpass" element={<SetNewPass />} />
-
+                    <Route path="login" element={<Login />} />]
                     <Route path="/" element={<AppLayout />}>
                       <Route index path="welcome" element={<Welcome />} />
                       <Route
@@ -119,8 +106,8 @@ function App() {
                       <Route path="otherdetails" element={<OtherDetails />} />
 
                       <Route
-                        path="venueprofile/:venuId"
-                        element={<VenueProfile />}
+                        path="serviceProfile/:serviceId"
+                        element={<ServiceProfile />}
                       />
                       {/*
                   ===========================================
@@ -176,32 +163,6 @@ function App() {
                           </PrivateRoute>
                         }
                       />
-
-                      <Route
-                        path="addpackage"
-                        element={
-                          <PrivateRoute>
-                            <AddPackage />
-                          </PrivateRoute>
-                        }
-                      />
-
-                      <Route
-                        path="createPackage"
-                        element={
-                          <PrivateRoute>
-                            <CreatePackage />
-                          </PrivateRoute>
-                        }
-                      />
-                      <Route
-                        path="updatePackage/:packageId"
-                        element={
-                          <PrivateRoute>
-                            <UpdatePackage />
-                          </PrivateRoute>
-                        }
-                      />
                       <Route
                         path="package/:packageId"
                         element={
@@ -210,6 +171,7 @@ function App() {
                           </PrivateRoute>
                         }
                       />
+
                       <Route
                         path="requests"
                         element={
@@ -225,7 +187,7 @@ function App() {
             </ServiceProvider>
           </UserProvider>
         </AuthProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
         <Toaster
           position="top-center"
           gutter={12}
