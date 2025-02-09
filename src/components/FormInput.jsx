@@ -7,13 +7,10 @@ const FormInput = ({ children, label, required, error, type, icon }) => {
   const containerRef = useRef(null);
 
   useEffect(() => {
-    const inputs = containerRef.current.querySelectorAll("input");
-
-    inputs.forEach((input) => {
-      if (type === "password") {
-        input.type = showPassword ? "text" : "password";
-      }
-    });
+    const input = containerRef.current.querySelector("input");
+    if (type === "password") {
+      input.type = showPassword ? "text" : "password";
+    }
   }, [children, showPassword, type]);
 
   const togglePasswordVisibility = () => {

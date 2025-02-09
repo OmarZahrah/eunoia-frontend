@@ -71,7 +71,7 @@ function App() {
                   ===========================================
                   */}
                     <Route path="role" element={<CreateAccount />} />
-                    <Route path="signup" element={<SignUpUser />} />
+                    <Route path="signup/user" element={<SignUpUser />} />
                     <Route path="businessForm" element={<SignUpBusiness />} />
                     <Route path="login" element={<Login />} />]
                     <Route path="/" element={<AppLayout />}>
