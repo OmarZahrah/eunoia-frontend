@@ -97,6 +97,9 @@
 ![businessProfile Screenshot](./public/Screenshots/businessProfile.jpg)
 </br>
 </br>
+![businessProfile Screenshot](./public/Screenshots/map.jpg)
+</br>
+</br>
 ![createPackage Screenshot](./public/Screenshots/createPackage.jpg)
 </br>
 </br>

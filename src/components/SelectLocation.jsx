@@ -9,7 +9,6 @@ function Map({ defaultPosition, setChange, setNewPosition }) {
     defaultPosition[0] || 30.033333,
     defaultPosition[1] || 31.233334,
   ]);
-  // const { setNewPosition } = useServiceContext();
 
   return (
     <Wrapper>
@@ -55,8 +54,8 @@ function MyComponent({ setPosition, setNewPosition, setChange }) {
 export default Map;
 
 const Wrapper = styled.div`
-  width: 80vw;
-  height: 90vh;
+  width: 60vw;
+  height: 60vh;
   background-color: #fef9f0;
   display: flex;
   flex-direction: column;

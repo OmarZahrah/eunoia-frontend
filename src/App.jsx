@@ -187,7 +187,7 @@ function App() {
             </ServiceProvider>
           </UserProvider>
         </AuthProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
         <Toaster
           position="top-center"
           gutter={12}

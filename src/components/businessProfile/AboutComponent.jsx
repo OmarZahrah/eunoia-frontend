@@ -3,7 +3,6 @@ import Select from "../Select";
 import { businessCategories, governorates } from "../../data/data";
 import FormInput from "../FormInput";
 import Input from "../Input";
-import { useServiceContext } from "../../context/ServiceContext";
 import SelectLocation from "../../components/SelectLocation";
 import { device } from "../../assets/styles/breakpoints";
 import Modal from "../Modal";
@@ -37,6 +36,7 @@ function AboutComponent({ service }) {
     };
     let formData = createFormData(filterData(finalData));
     editService(formData);
+    setChange(false);
   }
 
   return (
@@ -101,7 +101,6 @@ function AboutComponent({ service }) {
 }
 
 const AboutWrapper = styled.form`
-  display: flex;
   gap: 1rem;
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
     flex-direction: column;
