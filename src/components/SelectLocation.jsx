@@ -4,12 +4,12 @@ import "leaflet/dist/leaflet.css";
 import styled from "styled-components";
 import { useServiceContext } from "../context/ServiceContext";
 
-function Map({ defaultPosition }) {
+function Map({ defaultPosition, setChange, setNewPosition }) {
   const [position, setPosition] = useState([
     defaultPosition[0] || 30.033333,
     defaultPosition[1] || 31.233334,
   ]);
-  const { setChange, setNewPosition } = useServiceContext();
+  // const { setNewPosition } = useServiceContext();
 
   return (
     <Wrapper>
@@ -55,8 +55,8 @@ function MyComponent({ setPosition, setNewPosition, setChange }) {
 export default Map;
 
 const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
+  width: 80vw;
+  height: 90vh;
   background-color: #fef9f0;
   display: flex;
   flex-direction: column;

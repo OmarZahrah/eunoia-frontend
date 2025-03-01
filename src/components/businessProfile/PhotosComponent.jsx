@@ -1,81 +1,103 @@
-import { useEffect } from "react";
 import { RiDeleteBin7Line } from "react-icons/ri";
-
+import { ImSpinner } from "react-icons/im";
 import styled from "styled-components";
-import { useServiceContext } from "../../context/ServiceContext";
 import { useDeletePhotos } from "../../features/serviceProfile/useDeletePhotos";
+import { useState } from "react";
+import Button from "../Button";
+import useImageUploader from "../../hooks/useImageUploader";
+import { useAddPhotos } from "../../features/serviceProfile/useAddPhotos";
 
-const PhotosComponent = ({ images, setChange }) => {
+const PhotosComponent = ({ images }) => {
+  const [change, setChange] = useState(false);
+  const { addPhotos, isLoading: addingPhotos } = useAddPhotos();
+
   const { deletePhotos, isLoading: deletingPhotos } = useDeletePhotos();
 
   const {
-    albumImages,
-    setAlbumImages,
-    setNewPhotos,
-    setOldPhotos,
-    newPhotos,
-    register,
-  } = useServiceContext();
-  useEffect(() => {
-    const f = () => {
-      setAlbumImages(images);
-    };
+    previewImages,
+    imageFiles,
+    handleSelectFiles,
+    handleDeleteImage,
+    clear,
+  } = useImageUploader("album");
 
-    f();
-  }, []);
-
-  const onSelectFile = (e) => {
-    const selectedFiles = e.target.files;
-
-    setNewPhotos((images) => images.concat(...selectedFiles));
-  };
   const deleteImage = (image) => {
     deletePhotos(image);
   };
-  const handleDeleteImage = (image) => {
-    const newImages = albumImages.filter((images) => images !== image);
-    const deletedNewPhotos = newPhotos.filter((images) => images !== image);
-    setNewPhotos(deletedNewPhotos);
-    setAlbumImages(newImages);
-    const oldImages = images.filter((photos) => photos !== image);
-    setOldPhotos(oldImages);
+
+  function onSelectFile(e) {
     setChange(true);
-  };
+    handleSelectFiles(e);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const newPhotosFormData = new FormData();
+
+    for (let i = 0; i < imageFiles.length; i++) {
+      newPhotosFormData.append("newImages", imageFiles[i]);
+    }
+    // console.log(imageFiles);
+    console.log(Object.fromEntries(newPhotosFormData));
+    addPhotos(newPhotosFormData, {
+      onSuccess: () => {
+        clear();
+      },
+    });
+  }
 
   return (
-    <Section>
-      <div className="album">
-        {albumImages?.map((image, i) => (
-          <div className="image" key={i}>
-            <img src={image} />
-            <div className="delete-icon" onClick={() => deleteImage(image)}>
-              <RiDeleteBin7Line className="icon" />
+    <form onSubmit={handleSubmit}>
+      <Section>
+        <div className="album">
+          {images?.map((image) => (
+            <div className="image" key={image}>
+              <img src={image} />
+              <div className="delete-icon" onClick={() => deleteImage(image)}>
+                {deletingPhotos ? (
+                  <ImSpinner className="icon" />
+                ) : (
+                  <RiDeleteBin7Line className="icon" />
+                )}
+              </div>
             </div>
-          </div>
-        ))}
-        {newPhotos?.map((image, i) => (
-          <div className="image" key={i}>
-            <img src={URL.createObjectURL(image)} />
-            <div
-              className="delete-icon"
-              onClick={() => handleDeleteImage(image)}
-            >
-              <RiDeleteBin7Line className="icon" />
+          ))}
+          {previewImages?.map((image, i) => (
+            <div className="image" key={i}>
+              <img src={image} />
+              <div className="delete-icon" onClick={() => handleDeleteImage(i)}>
+                {deletingPhotos ? (
+                  <ImSpinner className="icon" />
+                ) : (
+                  <RiDeleteBin7Line className="icon" />
+                )}
+              </div>
             </div>
-          </div>
-        ))}
-        <label className="add-image">
-          +
-          <input
-            {...register("images")}
-            className="image-input"
-            type="file"
-            onChange={(e) => onSelectFile(e)}
-            multiple
-          />
-        </label>
-      </div>
-    </Section>
+          ))}
+          <label className="add-image">
+            +
+            <input
+              className="image-input"
+              type="file"
+              onChange={(e) => onSelectFile(e)}
+              multiple
+            />
+          </label>
+        </div>
+      </Section>
+      {change && (
+        <Button
+          type="submit"
+          background="green"
+          size="small"
+          disabled={addingPhotos}
+          className="submit"
+        >
+          {addingPhotos ? "Saving..." : "Save "}
+        </Button>
+      )}
+    </form>
   );
 };
 

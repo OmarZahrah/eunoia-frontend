@@ -9,9 +9,9 @@ export const useAddPhotos = () => {
   const { mutate: addPhotos, isPending: isLoading } = useMutation({
     mutationFn: addPhotosApi,
     onSuccess: () => {
-      // queryClient.setQueryData(["service"], service);
-      //   navigate("/home", { replace: true });
-      queryClient.invalidateQueries({ queryKey: ["service"] });
+      toast.success("Photos added successfully");
+
+      queryClient.invalidateQueries({ queryKey: ["myService"] });
     },
     onError: (err) => {
       console.log(err?.response?.data?.message);

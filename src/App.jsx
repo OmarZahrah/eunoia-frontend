@@ -73,7 +73,7 @@ function App() {
                     <Route path="role" element={<CreateAccount />} />
                     <Route path="signup/user" element={<SignUpUser />} />
                     <Route path="businessForm" element={<SignUpBusiness />} />
-                    <Route path="login" element={<Login />} />]
+                    <Route path="login" element={<Login />} />
                     <Route path="/" element={<AppLayout />}>
                       <Route index path="welcome" element={<Welcome />} />
                       <Route
@@ -187,7 +187,7 @@ function App() {
             </ServiceProvider>
           </UserProvider>
         </AuthProvider>
-        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+        <ReactQueryDevtools initialIsOpen={false} />
         <Toaster
           position="top-center"
           gutter={12}

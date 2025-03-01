@@ -27,6 +27,13 @@ const useImageUploader = (type = "image") => {
     setImageFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
   };
 
+  const clear = () => {
+    setPreviewImages([]);
+    setPreviewImage("");
+    setImageFiles([]);
+    setImageFile("");
+  };
+
   return {
     previewImages,
     previewImage,
@@ -34,6 +41,7 @@ const useImageUploader = (type = "image") => {
     imageFile,
     handleSelectFiles,
     handleDeleteImage,
+    clear,
   };
 };
 

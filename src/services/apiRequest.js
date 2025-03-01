@@ -14,7 +14,7 @@ export const getUserRequests = async () => {
 export const getProviderRequests = async () => {
   try {
     const { data } = await customFetch.get("requests/serviceProvider");
-    console.log(data);
+    // console.log(data);
     return data.data;
   } catch (error) {
     return [];

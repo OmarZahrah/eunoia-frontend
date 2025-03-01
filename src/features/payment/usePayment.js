@@ -1,10 +1,6 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { payment as paymentApi } from "../../services/apiPayment";
-import toast from "react-hot-toast";
-
 export const usePayment = () => {
-  const queryClient = useQueryClient();
-
   const {
     mutate: payment,
     isPending: isLoading,
@@ -12,7 +8,9 @@ export const usePayment = () => {
     data,
   } = useMutation({
     mutationFn: paymentApi,
-    onSuccess: () => {},
+    onSuccess: () => {
+      window.location.replace(data);
+    },
     onError: (err) => {
       console.log(err?.response?.data?.message);
     },

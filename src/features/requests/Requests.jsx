@@ -1,9 +1,8 @@
-import NavBar from "../../components/NavBar";
 import styled from "styled-components";
-import RequestsComponent from "../../components/businessProfile/RequestsComponent";
 import { useGetUserRequest } from "./useGetUserRequest";
 import Loading from "../../components/Loading";
-import { useGetProviderRequests } from "./useGetProviderRequests";
+import RequestCard from "../../components/RequestCard";
+import { device } from "../../assets/styles/breakpoints";
 
 function Requests() {
   const { isLoading: loadingUser, userRequests } = useGetUserRequest();
@@ -14,17 +13,7 @@ function Requests() {
         <p className="title">Requests</p>
         <div className="components">
           {userRequests?.map((request) => (
-            <RequestsComponent
-              request={userRequests}
-              key={request._id}
-              id={request._id}
-              price={request.totalPriceAfterDiscount}
-              Notes={request.Notes}
-              role="user"
-              status={request.status}
-              date={request.bookingDate}
-              // status='declined'
-            />
+            <RequestCard key={request._id} data={request} role={"user"} />
           ))}
         </div>
       </div>
@@ -39,13 +28,12 @@ const Wrapper = styled.div`
   padding: 0 2rem;
 
   .title {
-    font-family: Literata;
     font-size: 2.4rem;
     font-weight: 700;
     line-height: 7.016rem;
     letter-spacing: 0.25rem;
     text-align: center;
-    color: #00000099;
+    color: var(--color-black-mid);
     padding: 0 2rem;
     position: relative;
   }
@@ -58,30 +46,13 @@ const Wrapper = styled.div`
     gap: 2rem;
   }
 
-  .components > * {
-    /* width: calc(50% - 20px); */
-    /* margin: 5px; */
-  }
-
-  @media only screen and (max-width: ${({ theme }) => theme.semi}) {
-    .components > * {
-      /* width: calc(60% - 20px); */
-    }
-    .title {
-      font-size: 2.1rem;
-    }
-  }
-
-  @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
+  @media ${device.tablet} {
     .title {
       font-size: 2rem;
     }
   }
-  @media only screen and (max-width: ${({ theme }) => theme.mobile}) {
+  @media ${device.mobile} {
     padding: 0;
-    .title {
-      font-size: 2rem;
-    }
   }
 `;
 

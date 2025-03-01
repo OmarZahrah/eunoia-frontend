@@ -10,36 +10,31 @@ import Button from "../components/Button";
 import { useEditService } from "../features/serviceProfile/useEditService";
 import { useGetMyService } from "../features/serviceProfile/useGetMyService";
 import { CiEdit } from "react-icons/ci";
-import { filterData } from "../utils/filterData";
 import { createFormData } from "../utils/createFormData";
-import { useAddPhotos } from "../features/serviceProfile/useAddPhotos";
 import { usePackageContext } from "../context/PackageContext";
 import useImageUploader from "../hooks/useImageUploader";
 import Slider from "../components/Slider";
 import BusinessProfilePic from "../components/businessProfile/businessProfilePic";
 import defaultProfile from "/images/defaults/defaultProfile.jpg";
 import { device } from "../assets/styles/breakpoints";
-import RequestsComponent from "../components/businessProfile/RequestsComponent";
-import RecievedRequests from "../components/businessProfile/RecievedRequests";
+import { useForm } from "react-hook-form";
+import { filterData } from "../utils/filterData";
+import ReceivedRequests from "../components/businessProfile/ReceivedRequests";
 
 function BusinessProfile() {
   const { myService: service, isLoading } = useGetMyService();
   const [activeItem, setActiveItem] = useState("About");
   const { change, setChange } = useServiceContext();
   const { editService, isLoading: editing } = useEditService();
-  const [changeName, setChangeName] = useState(false);
-  const { addPhotos, isLoading: addingPhotos } = useAddPhotos();
 
-  // console.log("service", service);
+  // console.log(service);
+
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      BusinessName: service?.businessName,
+    },
+  });
   const { editPackage, setEditPackage } = usePackageContext();
-  const {
-    oldPhotos,
-    newPhotos,
-    deletedPhotos,
-    newPosition,
-    register,
-    handleSubmit,
-  } = useServiceContext();
   const handleItemClick = (item) => {
     setActiveItem(item);
   };
@@ -55,60 +50,18 @@ function BusinessProfile() {
     handleSelectFiles: selectCover,
   } = useImageUploader("image");
 
-  const onSubmit = (data) => {
-    const allData = {
+  function onSubmit(data) {
+    const finalData = filterData({
       ...data,
-      avatar: profileFile && profileFile,
-      imageCover: coverFile && coverFile,
-      images: "",
-      latitude: newPosition[0],
-      longitude: newPosition[1],
-    };
-    const serviceData =
-      profileFile ||
-      coverFile ||
-      data.businessName ||
-      data.businessCategory ||
-      data.about ||
-      data.location ||
-      data.phoneNumber ||
-      data.images ||
-      newPosition.length;
+      avatar: profileFile,
+      imageCover: coverFile,
+    });
 
-    // =========================================
-    // filter the empty data an create form data
-    // =========================================
-    const filteredData = filterData(allData);
-    let finalData = createFormData(filteredData);
-    console.log(filteredData);
-
-    // ========================================
-    // Add the old photos to form data if exist
-    // ========================================
-    oldPhotos &&
-      oldPhotos.forEach((photo) => {
-        finalData.append(`images`, photo);
-      });
-
-    // ========================================
-    // Add the new photos to form data if exist
-    // ========================================
-
-    const newPhotosFormData = new FormData();
-
-    for (let i = 0; i < newPhotos.length; i++) {
-      newPhotosFormData.append("newImages", newPhotos[i]);
-    }
-
-    const deletedPhotosFormData = new FormData();
-    deletedPhotos.forEach((photo) =>
-      deletedPhotosFormData.append("imageLinks", photo)
-    );
-    serviceData && editService(finalData);
-    newPhotos.length && addPhotos(newPhotosFormData);
-
-    setChangeName(false);
-  };
+    const formData = createFormData(finalData);
+    editService(formData, {
+      onSuccess: setChange(false),
+    });
+  }
 
   return (
     <Wrapper
@@ -119,68 +72,56 @@ function BusinessProfile() {
       {isLoading ? (
         <Loading />
       ) : (
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSubmit(onSubmit);
-          }}
-          className="section"
-          onChange={() => setChange(true)}
-        >
-          <Section1 className="section1">
-            <CoverContainer className="cover-container">
-              <Slider
-                cover={previewCover || service?.imageCover}
-                photos={service?.images || []}
-              />
-              <label className="cover-upload">
-                <img
-                  className="cover-upload-icon"
-                  src={defaultPhoto}
-                  alt="change photo"
+        <div className="section">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            onChange={() => setChange(true)}
+          >
+            <Section1 className="section1">
+              <CoverContainer className="cover-container">
+                <Slider
+                  cover={previewCover || service?.imageCover}
+                  photos={service?.images || []}
                 />
-                <input
-                  {...register("imageCover", { onChange: selectCover })}
-                  className="cover-input"
-                  type="file"
-                />
-              </label>
-            </CoverContainer>
-            <ProfilerContainer>
-              <div className="profile-image">
-                <BusinessProfilePic
-                  photo={previewProfile || service?.avatar}
-                  defaultPhoto={defaultProfile}
-                />
-                <label className="profile-uploader">
+                <label className="cover-upload">
+                  <img
+                    className="cover-upload-icon"
+                    src={defaultPhoto}
+                    alt="change photo"
+                  />
                   <input
-                    // {...register("avatar")}
-                    {...register("avatar", { onChange: selectProfile })}
-                    className="profile-input"
+                    {...register("imageCover", { onChange: selectCover })}
+                    className="cover-input"
                     type="file"
                   />
-                  <CiEdit className="profile-icon" />
                 </label>
-              </div>
-            </ProfilerContainer>
-          </Section1>
-          <BusinessName>
-            {changeName ? (
+              </CoverContainer>
+              <ProfilerContainer>
+                <div className="profile-image">
+                  <BusinessProfilePic
+                    photo={previewProfile || service?.avatar}
+                    defaultPhoto={defaultProfile}
+                  />
+                  <label className="profile-uploader">
+                    <input
+                      {...register("avatar", { onChange: selectProfile })}
+                      className="profile-input"
+                      type="file"
+                    />
+                    <CiEdit className="profile-icon" />
+                  </label>
+                </div>
+              </ProfilerContainer>
+            </Section1>
+            <BusinessName>
               <input
                 type="text"
                 {...register("businessName")}
                 defaultValue={service?.businessName}
                 className="name-text name-input"
-                autoFocus
               />
-            ) : (
-              <p className="name-text">{service?.businessName}</p>
-            )}
-            <CiEdit
-              className="edit-icon"
-              onClick={() => setChangeName((e) => !e)}
-            />
-          </BusinessName>
+            </BusinessName>
+          </form>
 
           <Section2 className="section2">
             <Nav className="list">
@@ -231,7 +172,7 @@ function BusinessProfile() {
               <PhotosComponent images={service.images} setChange={setChange} />
             )}
             {activeItem === "requests" && (
-              <RecievedRequests setChange={setChange} />
+              <ReceivedRequests setChange={setChange} />
             )}
           </Section2>
           {change && (
@@ -239,14 +180,14 @@ function BusinessProfile() {
               type="submit"
               background="green"
               size="small"
-              disabled={editing || addingPhotos}
+              disabled={editing}
               className="submit"
               onClick={handleSubmit(onSubmit)}
             >
-              {editing || addingPhotos ? "Saving..." : "Save "}
+              {editing ? "Saving..." : "Save "}
             </Button>
           )}
-        </form>
+        </div>
       )}
     </Wrapper>
   );

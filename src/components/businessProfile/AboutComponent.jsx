@@ -6,57 +6,101 @@ import Input from "../Input";
 import { useServiceContext } from "../../context/ServiceContext";
 import SelectLocation from "../../components/SelectLocation";
 import { device } from "../../assets/styles/breakpoints";
+import Modal from "../Modal";
+import { useForm } from "react-hook-form";
+import Button from "../Button";
+import { useEditService } from "../../features/serviceProfile/useEditService";
+import { useState } from "react";
+import { createFormData } from "../../utils/createFormData";
+import { filterData } from "../../utils/filterData";
 
 function AboutComponent({ service }) {
-  const { register } = useServiceContext();
+  const [change, setChange] = useState(false);
+  const [newPosition, setNewPosition] = useState([]);
+
+  const { editService, isLoading: editing } = useEditService();
+
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      businessCategory: service?.businessCategory,
+      phoneNumber: service?.phoneNumber,
+      location: service?.location,
+      about: service?.about,
+    },
+  });
+
+  function onSubmit(data) {
+    const finalData = {
+      ...data,
+      latitude: newPosition[0],
+      longitude: newPosition[1],
+    };
+    let formData = createFormData(filterData(finalData));
+    editService(formData);
+  }
 
   return (
-    <AboutWrapper>
-      <Details>
-        <Select
-          label="Category"
-          options={businessCategories}
-          name="businessCategory"
-          placeholder={service?.businessCategory}
-          register={register}
-        />
-        <FormInput label="Mobile Number">
-          <Input
-            type="text"
-            id="mobile"
-            // placeholder="+20 1234567890"
-            placeholder={service?.phoneNumber}
-            {...register("phoneNumber")}
-          />
-        </FormInput>
-        <div className="location-field">
+    <AboutWrapper
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit(onSubmit);
+      }}
+      onChange={() => setChange(true)}
+    >
+      <Modal>
+        <Details>
           <Select
-            label="governorate"
-            options={governorates}
-            name="location"
-            placeholder={service?.location}
+            label="Category"
+            options={businessCategories}
+            name="businessCategory"
             register={register}
           />
-        </div>
-        <div className="about-box">
-          <label htmlFor="">About</label>
-          <textarea
-            {...register("about")}
-            // value="test test test"
-            placeholder={service?.about}
-          ></textarea>
-        </div>
-      </Details>
-      <Map>
-        <SelectLocation
-          defaultPosition={[service.latitude, service.longitude]}
-        />
-      </Map>
+          <FormInput label="Mobile Number">
+            <Input type="text" id="mobile" {...register("phoneNumber")} />
+          </FormInput>
+          <div className="location-field">
+            <Select
+              label="governorate"
+              options={governorates}
+              name="location"
+              register={register}
+            />
+            <Modal.Open opens="map">
+              <span>Location</span>
+            </Modal.Open>
+          </div>
+          <div className="about-box">
+            <label htmlFor="">About</label>
+            <textarea {...register("about")}></textarea>
+          </div>
+        </Details>
+        <Modal.Window name="map">
+          <Map>
+            <SelectLocation
+              defaultPosition={[service.latitude, service.longitude]}
+              setChange={setChange}
+              setNewPosition={setNewPosition}
+            />
+          </Map>
+        </Modal.Window>
+      </Modal>
+      {change && (
+        <Button
+          type="submit"
+          background="green"
+          size="small"
+          disabled={editing}
+          className="submit"
+          onClick={handleSubmit(onSubmit)}
+        >
+          {editing ? "Saving..." : "Save "}
+        </Button>
+      )}
     </AboutWrapper>
   );
 }
 
-const AboutWrapper = styled.div`
+const AboutWrapper = styled.form`
   display: flex;
   gap: 1rem;
   @media only screen and (max-width: ${({ theme }) => theme.tablet}) {
@@ -84,6 +128,17 @@ const Details = styled.div`
     border-bottom: 0.2px solid #ccc;
     padding-left: 0;
   }
+  .location-field {
+    position: relative;
+    span {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 1.2rem;
+      color: var(--color-brand-green);
+      cursor: pointer;
+    }
+  }
   input {
     box-shadow: none;
     border-radius: 0;
@@ -109,8 +164,7 @@ const Details = styled.div`
   }
 `;
 const Map = styled.div`
-  flex: 1;
-  padding-top: 1rem !important;
+  padding-top: 1.5rem;
 `;
 
 export default AboutComponent;
