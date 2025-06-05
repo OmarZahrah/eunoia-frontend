@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import Step1 from "../features/Auth/step1";
+import Step1 from "../features/Auth/Step1";
 import Step2 from "../features/Auth/Step2";
 import Step3 from "../features/Auth/Step3";
 import { useForm } from "react-hook-form";
